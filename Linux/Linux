@@ -1,0 +1,212 @@
+Date :- 19/08/2019
+
+Linux Command Line
+1) pwd  => the pwd command will allow you to know in which directory you are located (pwd stands for "print working directory")
+
+2)ls =>the ls command will show you ("list") the files in your current directory
+
+$ls ~ will show you the files that are in your home directory
+
+
+3)cd: the cd command will allow you to change directories (when we open terminal you will be in your home directory)
+to move around the file system use:-
+
+3.1) to navigate into the root directory use "cd /"
+3.2) to navigate to your home directory use "cd" or "cd ~"
+3.3) to navigate up one directory level use "cd .."
+3.4) to navigate to the previous directory(or back) use "cd -"
+
+4) to navigate through multiple level of directory at once, specify the full directory path that you want to go to
+	use "cd Desktop/sk/sk1"
+	that will navigate you to the sk1 directory.
+
+5) cp => the cp command will make a copy of a file for you.
+Example: "cp file_name foo" will make an exact copy of "file_name" and name it "foo" but the "file_name" will still be there
+
+5.1) if you are copying a directory you must use "cp -r directory_name foo" (copy recursively) recursively means think of it this what to copy the directory and all its files and subdirectories and all their files and subdirectories of the subdirectories and all theirs fiels and on and on recursively.(copy a directory into different folder)
+
+6) mv: the mv command will move a file to a different  location or will rename a file
+Example=> "mv file_name foo" will rename the file "file_name" to "foo"
+
+Example => "mv file_name ~/Desktop" will move the file to your Desktop directory but it will not rename it.
+
+
+7) rm => use this command to remove or delete a file in your directory.
+
+7.1) rmdir => this rmdir command will delete an empty directory/folder.
+
+7.2) to delete a directory and all of its contents recursively use rm -r instead. of rmdir
+
+7.3) rm *.txt => used to delete all txt file in current directory
+
+7.4) rm -i test.txt => used to ask for confirmation delate a file or not to confirm answer in y/n 
+
+7.5) rm index*	=> to delete all files(only file not folder) in the current directory that begins with the index
+
+
+
+8) mkdir => the mkdir command will allow you to create directories
+
+9) touch => the touch command is a standard program for unix/linux operating system that is used to create change and modify timestamp of a file.
+
+Touch command option
+=> touch -a index.html
+this change the access time only
+
+=> touch -c index8.html
+if file doesn't exist do not create 
+if exist than recreate it
+
+=> touch -m index8.html
+change the modification time only
+
+
+10) stat command
+stat command displays the detailed status of a particular file or file system.
+
+11) Files and Directory :-
+To list the files and directories stored in the current directory
+
+ls 	=> list down files and directories
+ls-l	=> list files / directory with all information like creation file type user owner/size
+
+metacharacter have a special meaning in unix that matches with the character.
+
+ls ch*.doc		=> all the files the names of which start with ch and ends with .doc
+
+ls *.doc 		=> here * works to display all files ending with just .doc then you can use the following command
+
+
+
+VI Editor =>
+the VI editor is the most popular and classic text editor in the linux family
+Nowadays there are advaced version of the vi editor available and the most popular one is VIM which is Vi Improved. Some of the otherones are Elvis, Nvi,Nano and Vile.it is wise to learn vi because it is feature-rich and offer endless possibilities to edit a file.
+
+=> Starting vi editor
+to launch the VI Editor open terminal and type 
+
+$ vi <file_name>
+if you specify an existing file the editor would open it for you to edit else you can create a new file
+
+
+=> Insert Mode
+this mode is for inserting text in the file 
+you can switch to the insert mode from the command mode by pressing "i" on the keyboard
+
+once you are in insert mode and key would be taken as an input for the file on which you are currently working
+
+=>Return to the command mode
+to return to command mode press Esc
+
+=>to save the text
+press :w to save the text in vi editor
+
+=> to quit the text
+press :q to quit the text without save the file
+
+=> save and quit
+press :wq to save the text and quit
+
+
+
+
+
+
+
+
+Keystrokes	Action
+i			Insert at cursor (goes into insert mode)
+a			Write after cursor (goes into insert mode)
+A			Write at the end of line (goes into insert mode)
+ESC			Terminate insert mode
+u			Undo last change
+U			Undo all changes to the entire line
+o			Open a new line (goes into insert mode)
+dd			Delete line
+3dd			Delete 3 line
+D			Delete contents of line after the cursor
+C			Delete contents of a line after the cursor and insert new text. Press ESC key to end insertion.
+
+dw			Delete word
+4dw			Delete 4 words	
+
+cw			Change word
+x			Delete character at the cursor
+r			Replace character
+R			Overwrite characters from cursor onward
+s			Substitute one character under cursor continue to insert
+S			Substitute entire line and begin to insert at the beginning of the line
+~	Change case of individual character
+
+
+Moving within a file
+You need to be in the command mode to move within a file. The default keys for navigation are mentioned below else; You can also use the arrow keys on the keyboard.
+
+
+Keystroke			Use
+k				Move cursor up
+j				Move cursor down
+h				Move cursor left
+l				Move cursor right
+
+
+
+
+
+Saving and Closing the file
+You should be in the command mode to exit the editor and save changes to the file.
+
+Keystroke			Use
+Shift+zz			Save the file and quit
+:w				Save the file but keep it open
+:q				Quit without saving
+:wq				Save the file and quit
+
+
+
+chmod => to change access permission changes mode
+
+chmod [option].. Mode[,Mode].. file..
+chmod [Option]... Numeric_Mode file...
+chmod [Options]... --reference=RFile file ...
+
+chmod changes the permission of each given file accordingly to mode where mode describes the permission to modify Mode can be specified with octal numbers or with letters.
+
+
+
+
+
+
+
+
+
+
+=>Save on typing
+1) Up Arrow or strl+P    scrolls through the commands you've entered previouslt
+2) Down Arrow or ctrl+N  takes you back to more recent command
+3) Enter		when you have the command you want
+4) tab		a very useful feature it autocomplate any commands or filenames, if there is only one option or else gives you a list of options
+
+5)ctrl+R		searchs for comand you've already types when you have entered a very long complex command and need to repeat it using this key combination and then typing a portion of command will search through your command history when you find it simply press enter
+
+6)history		the history command shows a very long of command that you have types . Each command is displayed next to a number . you can types !x to execute a previously typed command from the list(replace the X with a number). if you hisroty output is too long then use history | less for scrolling list.
+
+7) ctrl+A or Home		moves the cursor to the start of a line
+8) ctrl+E or End 		moves the cursor to the end of a line
+9) ctrl+K 				deletes from the current cursor position to the end of the line
+10) ctrl+U			deletes from the start of the line to the current cursor position
+
+
+
+
+
+
+Date :- 20/08/2019
+What is Pull Request on git?
+On github owner can share the code to other
+Other person can make code changes and send a request to owner to pull/merge his code changes into owner's repository.
+this request is called pull request.
+
+
+
+
