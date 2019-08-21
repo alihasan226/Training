@@ -1,0 +1,489 @@
+About Andriod :-
+
+Andriod is a mobile operating system developed by google. It is based on a modified version of the linux kernel and other open source software and is designed primarily for touchscreen mobile devices such as smartphone and tablets.
+
+Version of Andriod :-
+1) Andriod 1.5 Andriod cupcake
+2) Andriod 1.6 Andriod Donut
+3) Andriod 2.0 Andriod Eclair
+4) Andriod 2.2 Andriod Froyo
+5) Andriod 2.3 Andriod Gingerbread
+6) Andriod 3.0 Andriod Honeycomb
+7) Andriod 4.0 Andriod Ice Cream Sandwich
+8) Andriod 4.1 to 4.3.1 Andriod Jelly Bean
+9) Andriod 4.4 to 4.4.4 Andriod kitKat
+10) Andriod 5.0 to 5.1.1 Andriod Lollipop
+11) Andriod 6.0 to 6.0.1 Andriod Marshmallow
+12) Andriod 7.0 to 7.1 Andriod Nougat
+13) Andriod 8.0 to 8.1 Andriod Oreo
+14) Andriod 9.0 Andriod Pie
+
+
+Andriod is written in Java(UI) , C (core), C++ and other
+
+Tools needs to develop the Andriod Application:-
+1) Java JDK5 or later version
+2) Java Runtime Environment(JRE 6)
+3) Andriod Studio
+
+
+overview :-
+Andriod Studio is the official IDE for Andrioc application development.
+It works based on IntelliJ IDEA
+
+Installation Andriod Studio :-
+Before installing Andriod Studio make sure the machine should required installed Java JDK.
+
+
+once you launched Andriod Studio . its time to mention JDK7 path or later version in andriod studio installer.
+
+
+1) launched Andriod Studio.exe (make sure machine should requied installed java JDK)
+
+2) mention JDK path or latest version in andriod studio
+
+3) initiating JDK to Andriod Studio
+
+4) check the component which are required to create application (selected Andriod Studio, Andriod SDK, Andriod Virtual Machine and performance intelchip)
+
+5) specify the location of local machine path for Andriod studio and Andriod SDK
+
+6) specify the ram space for Andriod emulator by default it would take 512 MB of local machine
+
+7) final stage it would extract SDK
+
+after finishing installation 
+
+1)open andriod studio project with clicking start a new andriod studio project
+
+2) it will ask for application name, package information and location of project
+
+3) select minimum device your application run on 
+
+4) select the default layout for application
+
+after that it will open development tool
+1) to test your andriod application you will need a virtual andriod device
+
+2) to create a Andriod Virtual device Launched Andriod AVD Manager clicking AVD_Manager icon
+
+3) now it will show the default virtual device which are present on your SDK
+ or click on Create new Virtual device
+
+ 
+4) to run the application click Run app or enter shift+f10
+
+Helloworld Example=>
+Before writing a hello world code you must know about XML tags . to write hello world code you should redirect to App>res>layout>Activity_main.xml
+
+to show hello world we need to call text view with layout  (about text view and layout you must take reference at Relative Layout and Text View)
+
+
+Xml stands for Extensible Markup Language. XML tags are not predefined in XML (we must define our own tags).
+
+In Andriod we use xml for designing our layout because xml is lightweight languages so it doesn't make our layout heavy.
+
+
+
+User Interface :-
+The whole concept of Android User Interface (define using View and ViewGroup) 
+A view group is an individual container that organised child views.
+one view group can have another view group as an child element.
+
+viewgroup (Linear Layout) contains one Viewgroup (Relative Layout) and two View( Button and TextView) further two more view (EditText) are nested inside
+
+
+Different XML files Used in Andriod :--
+1) Layout XML files
+it is used to define the actual UI(User Interface) of out application
+It holds all the element(views) or the tools that we want to use in our application like textView Button and other UI
+
+
+2) Manifest XML file (Manifest.xml)		app>manifest.xml
+this xml is used to define all the components of our application.it includes the names of our application packages, our activities, recievers, services and permissions that our application need.
+For Example – Suppose we need to use internet in our app then we need to define Internet permission in this file.
+
+
+3) String xml File(strings.xml)		app>res>values
+this xml file is used to replace the Hard-coded string with  a single string.
+we define all the string in this xml file then access them in our add(Activity or in Layout XML files)
+
+4)Style xml Files (style.xml)		app>res>values
+this xml is used to define different styles and looks for the UI(User Interface) of application
+
+5) Drawable xml files
+these are those xml files that are used to provide various graphics to the elements or views of application
+is we need to define a gradient color in the background of Buttom or any custom shape for a view then we create a Drawable sml file and set in the background of views.
+
+6) color sml file(colors.xml)
+this files are used to define color codes that we used in our app.
+
+
+
+Andriod Architecture :-
+Andriod operating system is a stack of software component which is roughly divided into five sections and four main layers.
+
+layer1 Linux Kernal
+At the bottom of the layers in Linux- Linux 3.6 
+this provides a level of abstraction between the device hardware and it contains all the essential hardware drivers like cameras, keyboard, display
+the kernal handles all the things that linux is really good at such as networking and a vast array of device drivers which take the pain out of interfacing to perifheral hardware.
+
+layer 2 Libraries
+On top of Linux kernel there is a set of libraries including open-source Web browser engine WebKit, well known library libc, SQLite database which is a useful repository for storage and sharing of application data, libraries to play and record audio and video, SSL libraries responsible for Internet security etc.
+
+Android Runtime
+This is the third section of the architecture and available on the second layer from the bottom. This section provides a key component called Dalvik Virtual Machine which is a kind of Java Virtual Machine specially designed and optimized for Android.
+
+The Dalvik VM makes use of Linux core features like memory management and multi-threading, which is intrinsic in the Java language. The Dalvik VM enables every Android application to run in its own process, with its own instance of the Dalvik virtual machine.
+
+
+layer 3 Application Framework
+appplication framework layer provides many higher-level services to application in the form of java classes.
+Andriod framwork includes the following :-
+
+Activity Manager − Controls all aspects of the application lifecycle and activity stack.
+
+Content Providers − Allows applications to publish and share data with other applications.
+
+Resource Manager − Provides access to non-code embedded resources such as strings, color settings and user interface layouts.
+
+Notifications Manager − Allows applications to display alerts and notifications to the user.
+
+View System − An extensible set of views used to create application user interfaces.
+
+
+layer 4 Applications
+You will find all the Android application at the top layer. You will write your application to be installed on this layer only. Examples of such applications are Contacts Books, Browser, Games etc.
+
+
+
+
+Andriod Application Components:-
+
+Application components are the essential building blocks of an Android application. These components are loosely coupled by the application manifest file AndroidManifest.xml that describes each component of the application and how they interact.
+
+
+There are following four main components that can be used within Andriod application
+
+1)Activities
+They dictate the UI and Handle the User interaction to the smart phone screen 
+An activity represent a single screen with a user interface in-short Activity performs actions on the screen.
+
+2)Services
+they handle background processing associated with an application
+
+3)Broadcast Receivers
+they handle communication between Andriod OS and applications.
+=>For example, applications can also initiate broadcasts to let other applications know that some data has been downloaded to the device and is available for them to use, so this is broadcast receiver who will intercept this communication and will initiate appropriate action.
+
+
+4) Content Providers
+they handle data and database management issues
+a content provider component supplies data from one application to other on request.
+
+
+Additional Components 
+1) Fragment
+represent a portion of user interface in an activity
+
+2)view
+ui interface that are drawn on-screen including buttonslists forms
+
+3) layout
+view hierarchies that controls screen format and appearance of the views
+
+4)Intents
+Messages writing component together
+
+5) Resources 
+external elements such as string constants and drawable pictures
+
+6) Manifest
+configuration file for the application
+
+
+Before you run your app you should be aware of a few directories and files in the Andriod project-
+
+1) Java
+This contains the .java source files for your project. By default, it includes an MainActivity.java source file having an activity class that runs when your app is launched using the app icon.
+This is the actual application file which ultimately gets converted to a Dalvik executable and runs the application.
+
+
+
+2) res/drawable-hdpi
+
+This is a directory for drawable objects that are designed for high-density screens.
+
+3) res/layout
+
+This is a directory for files that define your app's user interface.
+
+4) res/values
+
+This is a directory for other various XML files that contain a collection of resources, such as strings and colours definitions
+
+5) AndroidManifest.xml
+
+This is the manifest file which describes the fundamental characteristics of the app and defines each of its components
+
+Whatever component you develop as a part of your application, you must declare all its components in a manifest.xml which resides at the root of the application project directory. This file works as an interface between Android OS and your application
+
+
+Following is the list of tags which you will use in your manifest file to specify different Android application components −
+
+<activity>elements for activities
+
+<service> elements for services
+
+<receiver> elements for broadcast receivers
+
+<provider> elements for content providers
+
+4) value
+The strings.xml file is located in the res/values folder and it contains all the text that your application uses. For example, the names of buttons, labels, default text, and similar types of strings go into this file. This file is responsible for their textual content.
+
+<resources>
+   <string name="app_name">HelloWorld</string>
+   <string name="hello_world">Hello world!</string>
+   <string name="menu_settings">Settings</string>
+   <string name="title_activity_main">MainActivity</string>
+</resources>
+
+
+5) The Layout File
+The activity_main.xml is a layout file available in res/layout directory, that is referenced by your application when building its interface. You will modify this file very frequently to change the layout of your application. For your "Hello World!" application, this file will have following content related to default layout 
+
+
+6) Build.gradle
+
+This is an auto generated file which contains compileSdkVersion, buildToolsVersion, applicationId, minSdkVersion, targetSdkVersion, versionCode and versionName
+
+
+
+
+
+Accessing Resources Organizing & Accessing :-
+
+Apart from coding for the application you take care of various other resources like static content that your code uses such as bitmaps,colors , layout definitions, user interface string, snimation instructions and more. These resources are always maintained separately in various sub-directoris under res/ directory of the project.
+
+
+Directory & Resource Type :-
+
+1) anim/
+XML file that define property animations. They are saved in res/anim folder and accessed from the R.anim class.
+
+2) color/
+XML files that define a state list of colors.
+
+3) drawable/
+Image files like .png, .jpg, .gif or XML files that are compiled into bitmaps, state lists, shapes, animation drawable. They are saved in res/drawable/ and accessed from the R.drawable class.
+
+4) layout/
+
+XML files that define a user interface layout. They are saved in res/layout/ and accessed from the R.layout class.
+
+5) menu/
+
+XML files that define application menus, such as an Options Menu, Context Menu, or Sub Menu. They are saved in res/menu/ and accessed from the R.menu class.
+
+6) raw/
+
+Arbitrary files to save in their raw form. You need to call Resources.openRawResource() with the resource ID, which is R.raw.filename to open such raw files.
+
+7) values/
+
+XML files that contain simple values, such as strings, integers, and colors. For example, here are some filename conventions for resources you can create in this directory −
+
+arrays.xml for resource arrays, and accessed from the R.array class.
+
+integers.xml for resource integers, and accessed from the R.integer class.
+
+bools.xml for resource boolean, and accessed from the R.bool class.
+
+colors.xml for color values, and accessed from the R.color class.
+
+dimens.xml for dimension values, and accessed from the R.dimen class.
+
+strings.xml for string values, and accessed from the R.string class.
+
+styles.xml for styles, and accessed from the R.style class.
+
+
+
+
+Accessing Resources :-----
+During your application development you will need to access defined resources either in your code, or in your layout XML files.
+
+1) Accessing Resources in Code
+
+When your Android application is compiled, a R class gets generated, which contains resource IDs for all the resources available in your res/ directory. You can use R class to access that resource using sub-directory and resource name or directly resource ID.
+
+To access res/drawable/myimage.png and set an ImageView you will use following code −
+
+ImageView imageView = (ImageView) findViewById(R.id.myimageview);
+imageView.setImageResource(R.drawable.myimage);
+Here first line of the code make use of R.id.myimageview to get ImageView defined with id myimageview in a Layout file. Second line of code makes use of R.drawable.myimage to get an image with name myimage available in drawable sub-directory under /res.
+
+
+2) Accessing Resource in xml file
+Consider the following resource XML res/values/strings.xml file that includes a color resource and a string resource −
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <color name="opaque_red">#f00</color>
+   <string name="hello">Hello!</string>
+</resources>
+Now you can use these resources in the following layout file to set the text color and text string as follows −
+
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   android:textColor="@color/opaque_red"
+   android:text="@string/hello" />
+
+
+
+
+Android - Activities 
+
+Android system initiates its program with in an Activity starting with a call on onCreate() callback method. There is a sequence of callback methods that start up an activity and a sequence of callback methods that tear down an activity as shown in the below Activity life cycle diagram.
+
+
+
+callback and description :-
+
+1) onCreate()
+
+This is the first callback and called when the activity is first created.
+
+2) onStart()
+
+This callback is called when the activity becomes visible to the user.
+
+3) onResume()
+
+This is called when the user starts interacting with the application.
+
+4) onPause()
+
+The paused activity does not receive user input and cannot execute any code and called when the current activity is being paused and the previous activity is being resumed.
+
+5) onStop()
+
+This callback is called when the activity is no longer visible.
+
+6) onDestroy()
+
+This callback is called before the activity is destroyed by the system.
+
+7) onRestart()
+
+This callback is called when the activity restarts after stopping it.
+
+Example=>
+This file includes each of the fundamental life cycle methods. The Log.d() method has been used to generate log messages −
+
+package com.example.helloworld;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.util.Log;
+
+public class MainActivity extends Activity {
+   String msg = "Android : ";
+   
+   /** Called when the activity is first created. */
+   @Override
+   public void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_main);
+      Log.d(msg, "The onCreate() event");
+   }
+
+   /** Called when the activity is about to become visible. */
+   @Override
+   protected void onStart() {
+      super.onStart();
+      Log.d(msg, "The onStart() event");
+   }
+
+   /** Called when the activity has become visible. */
+   @Override
+   protected void onResume() {
+      super.onResume();
+      Log.d(msg, "The onResume() event");
+   }
+
+   /** Called when another activity is taking focus. */
+
+   @Override
+   protected void onPause() {
+      super.onPause();
+      Log.d(msg, "The onPause() event");
+   }
+
+   /** Called when the activity is no longer visible. */
+   @Override
+   protected void onStop() {
+      super.onStop();
+      Log.d(msg, "The onStop() event");
+   }
+
+   /** Called just before the activity is destroyed. */
+   @Override
+   public void onDestroy() {
+      super.onDestroy();
+      Log.d(msg, "The onDestroy() event");
+   }
+}
+
+
+
+
+
+
+
+Android - Services :-----
+
+A service is a component that runs in the background to perform long-running operations without needing to interact with the user and it works even if application is destroyed. A service can essentially take two states
+
+1) Started
+
+A service is started when an application component, such as an activity, starts it by calling startService(). Once started, a service can run in the background indefinitely, even if the component that started it is destroyed.
+
+
+2) Bound
+
+A service is bound when an application component binds to it by calling bindService(). A bound service offers a client-server interface that allows components to interact with the service, send requests, get results, and even do so across processes with interprocess communication (IPC)
+
+
+
+The following diagram on the left shows the life cycle when the service is created with startService() and the diagram on the right shows the life cycle when the service is created with bindService():
+
+
+Callback & Description :--
+1) onStartCommand()
+
+The system calls this method when another component, such as an activity, requests that the service be started, by calling startService(). If you implement this method, it is your responsibility to stop the service when its work is done, by calling stopSelf() or stopService() methods.
+
+2) onBind()
+
+The system calls this method when another component wants to bind with the service by calling bindService(). If you implement this method, you must provide an interface that clients use to communicate with the service, by returning an IBinder object. You must always implement this method, but if you don't want to allow binding, then you should return null
+
+3) onUnbind()
+
+The system calls this method when all clients have disconnected from a particular interface published by the service.
+
+4) onRebind()
+
+The system calls this method when new clients have connected to the service, after it had previously been notified that all had disconnected in its onUnbind(Intent).
+
+5) onCreate()
+
+The system calls this method when the service is first created using onStartCommand() or onBind(). This call is required to perform one-time set-up.
+
+6) onDestroy()
+
+The system calls this method when the service is no longer used and is being destroyed. Your service should implement this to clean up any resources such as threads, registered listeners, receivers, etc.
+
