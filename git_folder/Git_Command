@@ -1,0 +1,39 @@
+Git Command
+
+=> to check the version of git
+$git --version
+
+=> to install git on ubunto
+$sudo apt-get install git
+
+=> to configure git
+$ git config --global user.name		/ to set username  $git config --global user.name "user_name"
+
+$git config --global user.email		/ to set useremail  $git config --global user.email "user_email"
+
+=> to show the details of username and email 
+$git config --list
+
+=> list all files including hidden folder
+$ls -al
+
+=> to open a file
+$gedit filename
+
+=> to make a directory as git repository
+$git init
+
+=> to captured and build up file and directory locally
+$git commit -m "comment" 
+
+=> to pushed /upload the file or folder to a remote server
+$git push -u origin master
+
+to push force fully
+
+$git push -u origin master -f
+
+=> to add a directory to git repository
+$git add file_name
+
+
