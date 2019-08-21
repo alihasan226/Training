@@ -7,7 +7,14 @@ Linux Command Line
 
 $ls ~ will show you the files that are in your home directory
 
-
+ls -r		list long listing directories
+ls -ltr	will show latest modification in file or folder
+ls -ls		display file size in order will display big in size first
+ls --version show the version of ls command
+ls -r		reverse order
+ls -ls		ending character with /
+ls -a		show all hidden file
+ls -l		show all detailes of file like file size modification data owner
 3)cd: the cd command will allow you to change directories (when we open terminal you will be in your home directory)
 to move around the file system use:-
 
