@@ -1,4 +1,4 @@
-About Andriod :-
+﻿About Andriod :-
 
 Andriod is a mobile operating system developed by google. It is based on a modified version of the linux kernel and other open source software and is designed primarily for touchscreen mobile devices such as smartphone and tablets.
 
@@ -82,6 +82,89 @@ to show hello world we need to call text view with layout  (about text view and 
 Xml stands for Extensible Markup Language. XML tags are not predefined in XML (we must define our own tags).
 
 In Andriod we use xml for designing our layout because xml is lightweight languages so it doesn't make our layout heavy.
+
+
+what is Andriod Emulator :---------------
+An ANdriod Emulator is an ANdriod virtual Device(AVD) that represents a specific Andriod device. You can use an Andriod emulator as a target platform to run and test your Andriod application on your PC.
+The emulator lets you prototypes , develop and test Andriod applications without using a physical device.
+
+The Andriod SDK includes a virtual mobile device emulator that runs on your computer.The emulator lets you prototype, develop and test Andriod application without using Physical device.
+
+=> Creating AVD
+if you want to emulate a real device first create an AVD with the same device configuration as real device then launched this AVD from AVD manager.
+
+=> Changing Orientation.
+usually by default when you launched the emulator its orientation is vertical but you can change it orientation by pressing Ctrl+F11 key from the keyboarcd
+
+
+Emulator Commands:-----
+Apart from just orientation command there are other very useful commands of emulator that you should keep in mind while using emulator.
+
+HOME		shifts to main screen
+
+F2		Toggles context sensitive menu
+
+F3 		Bring call log		
+
+F4		End call
+
+F5		search
+
+F6 		Toggle trackball mode
+
+F7		Power Button
+
+Ctrl+F5		Ring volume up
+
+Ctrl+F6		Ring Volume down
+
+
+Emulator Sending SMS :----
+You can emulate sending SMS to your emulator.
+There are two ways to do that. You can do that from DDNS which can be found in ANdriod Studio, or from Telnet (Network utility found in windows).
+
+sending SMS through Telnet.
+Telnet is not enabled by default in windows. You have to enable it to use it. Once enabled you can go to command prompt and start telnet by typing telnet.
+
+In order to send SMS , note down the AVD number which can be found on the title bar of the emulator. It could be like this 5554 e.t.c. Once noted , type this command in command prompt.telnet localhost 5554
+You will see that you are now connected to your emulator. Now type this command to send message.
+sms send 1234 "hello"
+Once you type this command , hit enter. Now look at the AVD. You will receive a notification displaying that you got a new text message
+
+
+Emulator - Making Call
+You can easily make phone calls to your emulator using telent client. You need to connect to your emulator from telnet. It is discussed in the sending sms topic above.
+
+After that you will type this command in the telent window to make a call. Its syntax is given below −
+
+gsm call 1234
+Once you type this command , hit enter. Now look at the AVD. You will receive a call from the number your put in the command.
+
+Emulator - Transferring files
+You can easily transfer files into the emulator and vice versa. In order to do that, you need to select the DDMS utility in Android studio. After that select the file explorer tab.
+
+
+
+What are the Feature of Andriod :-------------
+Andriod is a powerful operating system competing with apple 4GS and support great features. Few of them are listed below :-
+1) Beautiful UI
+2) Connectivity
+3) Storage (SQLite a lightweight relational database is used for data storage purpose)
+4) Media Support
+5) Messaging
+6) Web browser
+7) Multi-Touch
+8) Multi-Tasking
+
+What is Widget:------------
+A widget is an element of graphics of a graphical user interface(GUI) that display information or provides a specific way for a user to interact with the operating system or an application.
+
+Andriod application are usually developed in the java language using Andriod Software Development Kit.
+Once developed Andriod application can be packages easily and sold out through a stor such as Google Play Store, Amazon Play Store , Opera Mobile Store.
+
+
+What is API level?
+API Level is an integer value that uniquely identifies the framework API version offered by a version of the Andriod plateform.
 
 
 
