@@ -1,6 +1,17 @@
 ﻿About Andriod :-
 
 Andriod is a mobile operating system developed by google. It is based on a modified version of the linux kernel and other open source software and is designed primarily for touchscreen mobile devices such as smartphone and tablets.
+It is developed by Google and later the OHA(Open Handset Alliance)
+OHA => it is consortium of 84 companies such as Google,Samsung, AKM, synaptics, KDDI, Germin ,Teleca, Ebay, Intel etc.
+It was established on 5th November 2007 led by google. It is committed to advanced open standards provides services and deploy handset using the Andriod Plateform.
+
+
+The key employyes of Andriod Incorporation are Andy Rubin, Rich Miner, Chris White and Nick Sears
+Originally intended for ca,era but shifted to smart phones later because of low market for camera only.
+Andriod is the nick name of Andy Rubin given by the coworkers because of his love to robots.
+In 2007 Google announces the development of Andriod OS
+In 2008 HTC launched the first Andriod mobile.
+ 
 
 Version of Andriod :-
 1) Andriod 1.5 Andriod cupcake
@@ -120,6 +131,7 @@ Ctrl+F6		Ring Volume down
 
 
 Emulator Sending SMS :----
+
 You can emulate sending SMS to your emulator.
 There are two ways to do that. You can do that from DDNS which can be found in ANdriod Studio, or from Telnet (Network utility found in windows).
 
@@ -146,6 +158,7 @@ You can easily transfer files into the emulator and vice versa. In order to do t
 
 
 What are the Feature of Andriod :-------------
+
 Andriod is a powerful operating system competing with apple 4GS and support great features. Few of them are listed below :-
 1) Beautiful UI
 2) Connectivity
@@ -157,13 +170,16 @@ Andriod is a powerful operating system competing with apple 4GS and support grea
 8) Multi-Tasking
 
 What is Widget:------------
+
 A widget is an element of graphics of a graphical user interface(GUI) that display information or provides a specific way for a user to interact with the operating system or an application.
 
 Andriod application are usually developed in the java language using Andriod Software Development Kit.
 Once developed Andriod application can be packages easily and sold out through a stor such as Google Play Store, Amazon Play Store , Opera Mobile Store.
 
 
+
 What is API level?
+
 API Level is an integer value that uniquely identifies the framework API version offered by a version of the Andriod plateform.
 
 
@@ -204,23 +220,28 @@ this files are used to define color codes that we used in our app.
 
 
 Andriod Architecture :-
+
 Andriod operating system is a stack of software component which is roughly divided into five sections and four main layers.
 
 layer1 Linux Kernal
+
 At the bottom of the layers in Linux- Linux 3.6 
 this provides a level of abstraction between the device hardware and it contains all the essential hardware drivers like cameras, keyboard, display
 the kernal handles all the things that linux is really good at such as networking and a vast array of device drivers which take the pain out of interfacing to perifheral hardware.
 
 layer 2 Libraries
+
 On top of Linux kernel there is a set of libraries including open-source Web browser engine WebKit, well known library libc, SQLite database which is a useful repository for storage and sharing of application data, libraries to play and record audio and video, SSL libraries responsible for Internet security etc.
 
-Android Runtime
-This is the third section of the architecture and available on the second layer from the bottom. This section provides a key component called Dalvik Virtual Machine which is a kind of Java Virtual Machine specially designed and optimized for Android.
+=> Android Runtime
 
-The Dalvik VM makes use of Linux core features like memory management and multi-threading, which is intrinsic in the Java language. The Dalvik VM enables every Android application to run in its own process, with its own instance of the Dalvik virtual machine.
-
+In Andriod Runtime , there are core libraries and DVM(Dalvik Virtual Machine) which is responsible to run andriod application.
+DVM is like JVM it is optimized for mobile device.
+It consume less memory and provides fast performance.
+ 
 
 layer 3 Application Framework
+
 appplication framework layer provides many higher-level services to application in the form of java classes.
 Andriod framwork includes the following :-
 
@@ -252,8 +273,19 @@ There are following four main components that can be used within Andriod applica
 They dictate the UI and Handle the User interaction to the smart phone screen 
 An activity represent a single screen with a user interface in-short Activity performs actions on the screen.
 
+View => A view is the ui element such as button label text field etc Anything that you see is a view.
+
+Intent => Intent is a message object you can use to request an action from another app component.
+
 2)Services
 they handle background processing associated with an application
+Servive is background process that can run for a long time.
+
+There are two types of services local and Remote
+
+Local => local service is accessed from within the application
+
+Remote => remote service is accessed remotly from other application running on the same device.
 
 3)Broadcast Receivers
 they handle communication between Andriod OS and applications.
@@ -261,12 +293,15 @@ they handle communication between Andriod OS and applications.
 
 
 4) Content Providers
+Content Provides are used to share data between the applications.
 they handle data and database management issues
 a content provider component supplies data from one application to other on request.
 
 
+
 Additional Components 
 1) Fragment
+Fragment are like parts of activiy. An activity can display one or more fragments on the screen at the same time.
 represent a portion of user interface in an activity
 
 2)view
@@ -283,9 +318,11 @@ external elements such as string constants and drawable pictures
 
 6) Manifest
 configuration file for the application
+It contains information about activities content provides permission etc. It is like the web.xml file Java EE.
 
 
-Before you run your app you should be aware of a few directories and files in the Andriod project-
+
+=> Before you run your app you should be aware of a few directories and files in the Andriod project-
 
 1) Java
 This contains the .java source files for your project. By default, it includes an MainActivity.java source file having an activity class that runs when your app is launched using the app icon.
