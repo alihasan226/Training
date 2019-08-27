@@ -607,3 +607,850 @@ The system calls this method when the service is first created using onStartComm
 
 The system calls this method when the service is no longer used and is being destroyed. Your service should implement this to clean up any resources such as threads, registered listeners, receivers, etc.
 
+
+
+
+	=> Broadcast Receiver :------------
+Broadcast Receiver simply respond to broadcast message from other applications or from the system itself.These message are sometime called events or intents.For example application can also initied broadcast to let other application know that
+some data has been downloaded to th device and is avialable for them to use,so this is broadcast receiver who will intercept this communication and will 
+initiate appropriate action.
+
+There are following two important steps to make BroadcastReceiver works for the system broadcasted intents −
+
+1) Creating the Broadcast Receiver.
+
+2) Registering Broadcast Receiver
+
+=> Creating the Broadcast Receiver
+A broadcast receiver is implemented as a subclass of BroadcastReceiver class and overriding the onReceive() method where each message is received as a Intent object parameter.
+
+public class MyReceiver extends BroadcastReceiver {
+   @Override
+   public void onReceive(Context context, Intent intent) {
+      Toast.makeText(context, "Intent Detected.", Toast.LENGTH_LONG).show();
+   }
+}
+
+
+
+=> Registering Broadcast Receiver
+
+An application listens for specific broadcast intents by registering a broadcast receiver in AndroidManifest.xml file. Consider we are going to register MyReceiver
+for system generated event ACTION_BOOT_COMPLETED which is fired by the system once the Android system has completed the boot process.
+
+Now whenever your Android device gets booted, it will be intercepted by BroadcastReceiver MyReceiver and implemented logic inside onReceive() will be
+executed.
+
+=> Broadcasting Custom Intents
+If you want your application itself should generate and send custom intents then you will have to create and send those intents by using the sendBroadcast() method inside your activity class. If you use the sendStickyBroadcast(Intent) method,
+ the Intent is sticky, meaning the Intent you are sending stays around after the broadcast is complete.
+
+public void broadcastIntent(View view) {
+   Intent intent = new Intent();
+   intent.setAction("com.tutorialspoint.CUSTOM_INTENT");
+   sendBroadcast(intent);
+}
+
+This intent com.tutorialspoint.CUSTOM_INTENT can also be registered in similar way as we have regsitered system generated intent.
+<application
+   android:icon="@drawable/ic_launcher"
+   android:label="@string/app_name"
+   android:theme="@style/AppTheme" >
+   <receiver android:name="MyReceiver">
+   
+      <intent-filter>
+         <action android:name="com.tutorialspoint.CUSTOM_INTENT">
+         </action>
+      </intent-filter>
+   
+   </receiver>
+</application>
+
+
+
+
+	Android Widgets :-------------
+There are given a lot of Android widgets with simplified examples such as Buton, EditText, AutoCompleteTextView,ToggleButton, DataPicker,TimePicker,ProgressBar etc.
+
+Android Button =>
+Let's learn hoe to perform event handling on button click
+
+Android Toast =>
+Display information for short duration of time
+
+Custom Toast =>
+we are able to customize the toast such as we can display image on the toast
+
+ToggleButton =>
+It has two states ON/OFF
+
+checkBox =>
+
+AlertDialog =>
+it display a alert dialog  containing the message with ok and cancelbutton.
+
+Spinner =>
+display multiple option but only one can selected at a time.
+
+AutoCompleteTextView =>
+
+RatingBar =>display a rating bar
+
+DatePicker =>
+display the datepicker dialog that can be used to pick the date.
+
+timePicker =>
+display the timepicker dialog that can be used to pick the time.
+
+Progressbar =>
+display progress task.
+
+
+	AndroidButton :-------------
+Android Button represents a push-button. The android.widget.Button is subclass of TextView class and CompoundButton is the subclass of Button class.
+
+There are different types of buttons in android such as RadioButton, ToggleButton, CompoundButton etc.
+
+We can perform action on button using different types such as calling listener on button or adding onClick property of button in activity's xml file.
+
+1)
+button.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View view) {  
+               //code  
+            }  
+}); 
+
+
+
+2)
+<Button  
+        android:onClick="methodName"  
+/>  
+
+
+
+
+	=> Android Toast :--------------------------
+Toast class is used to show notification for a particular interval of time. After sometime it disappers. It doesn't bloack the user interaction.
+
+Constants of Toast class :-
+There are only 2 constant of toast class which are given below.
+
+public statis final int LENGTH_LONG		display view for the long duration of time
+public static final int LENGTH_SHORT		display view for the short duation of time.
+
+
+Methods of Toast class :------------
+
+The widely used methods of Toast class are given below.
+
+Method	Description
+public static Toast makeText(Context context, CharSequence text, int duration)			makes the toast containing text and duration.
+public void show()										displays toast.
+public void setMargin (float horizontalMargin, float verticalMargin)				changes the horizontal and vertical margin difference.
+
+
+
+Android Toast Example :--------------
+
+Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();  
+
+Another code:
+
+Toast toast=Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT);  
+toast.setMargin(50,50);  
+toast.show();  
+
+Example=>
+package example.javatpoint.com.toast;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.widget.Toast;  
+  
+public class MainActivity extends AppCompatActivity {  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+  
+        //Displaying Toast with Hello Javatpoint message  
+        Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();  
+    }  
+}  
+
+
+	
+	=> Android Custom Toast Example :-----------------------
+
+you are able to create toast custom toast in android.So you can display some image like congratulation or loss the toast. i means you are able to
+customize the toast now.
+
+
+customtoast.xml
+create another xml file inside the layout directory. Here we are having ImageView and TextView in this xml file.
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:id="@+id/custom_toast_layout"  
+    android:orientation="vertical"  
+    android:background="#F14E23"  
+    >  
+  
+    <ImageView  
+        android:id="@+id/custom_toast_image"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:contentDescription="Hello world"  
+        android:src="@drawable/jtp_logo"/>  
+  
+    <TextView  
+        android:id="@+id/custom_toast_message"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:contentDescription="To"  
+        android:text="JavaTpoint custom Toast" />  
+</LinearLayout>  
+
+
+	In Activity class MainActivity.java :--------------------------
+
+package example.javatpoint.com.customtoast;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.Gravity;  
+import android.view.LayoutInflater;  
+import android.view.View;  
+import android.view.ViewGroup;  
+import android.widget.Toast;  
+  
+public class MainActivity extends AppCompatActivity {  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+  
+        //Creating the LayoutInflater instance  
+        LayoutInflater li = getLayoutInflater();  
+        //Getting the View object as defined in the customtoast.xml file  
+        View layout = li.inflate(R.layout.customtoast,(ViewGroup) findViewById(R.id.custom_toast_layout));  
+  
+        //Creating the Toast object  
+        Toast toast = new Toast(getApplicationContext());  
+        toast.setDuration(Toast.LENGTH_SHORT);  
+        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);  
+        toast.setView(layout);//setting the view of custom toast layout  
+        toast.show();  
+    }  
+}
+
+
+
+
+
+	Android ToggleButton Example :----------------------
+Android toggle Button can be used to display checked/unchecked (on/off) state on the button.
+It is beneficial if user have to change the setting between two state. It can be used to on/off sund,Wifi,Bluetooth etc.
+SInce Andriod 4.0 there is another type of toggle button called switch that provides slider control.
+
+
+ => Android ToggleButton class
+ToggleButton class provides the facility of creating the toggle button.
+
+
+XML Attributes of ToggleButton class
+
+The 3 XML attributes of ToggleButton class.
+
+XML Attribute			Description
+
+android:disabledAlpha		The alpha to apply to the indicator when disabled.
+android:textOff			The text for the button when it is not checked.
+android:textOn			The text for the button when it is checked.
+
+
+=> Methods of ToggleButton class
+
+The widely used methods of ToggleButton class are given below.
+
+Method	Description
+CharSequence getTextOff()		Returns the text when button is not in the checked state.
+CharSequence getTextOn()		Returns the text for when button is in the checked state.
+void setChecked(boolean checked)	Changes the checked state of this button.
+
+
+Example=>
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>  
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:app="http://schemas.android.com/apk/res-auto"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    tools:context="example.javatpoint.com.togglebutton.MainActivity">  
+  
+    <ToggleButton  
+        android:id="@+id/toggleButton"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginLeft="8dp"  
+        android:layout_marginTop="80dp"  
+        android:text="ToggleButton"  
+        android:textOff="Off"  
+        android:textOn="On"  
+        app:layout_constraintEnd_toStartOf="@+id/toggleButton2"  
+        app:layout_constraintStart_toStartOf="parent"  
+        app:layout_constraintTop_toTopOf="parent" />  
+  
+    <ToggleButton  
+        android:id="@+id/toggleButton2"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginRight="60dp"  
+        android:layout_marginTop="80dp"  
+        android:text="ToggleButton"  
+        android:textOff="Off"  
+        android:textOn="On"  
+        app:layout_constraintEnd_toEndOf="parent"  
+        app:layout_constraintTop_toTopOf="parent" />  
+  
+    <Button  
+        android:id="@+id/button"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginBottom="144dp"  
+        android:layout_marginLeft="148dp"  
+        android:text="Submit"  
+        app:layout_constraintBottom_toBottomOf="parent"  
+        app:layout_constraintStart_toStartOf="parent" />  
+</android.support.constraint.ConstraintLayout>  
+
+
+
+
+MainActivity.java
+package example.javatpoint.com.togglebutton;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.Toast;  
+import android.widget.ToggleButton;  
+  
+public class MainActivity extends AppCompatActivity {  
+    private ToggleButton toggleButton1, toggleButton2;  
+    private Button buttonSubmit;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+  
+        addListenerOnButtonClick();  
+    }  
+  
+    public void addListenerOnButtonClick(){  
+        //Getting the ToggleButton and Button instance from the layout xml file  
+        toggleButton1=(ToggleButton)findViewById(R.id.toggleButton);  
+        toggleButton2=(ToggleButton)findViewById(R.id.toggleButton2);  
+        buttonSubmit=(Button)findViewById(R.id.button);  
+  
+        //Performing action on button click  
+        buttonSubmit.setOnClickListener(new View.OnClickListener(){  
+  
+            @Override  
+            public void onClick(View view) {  
+                StringBuilder result = new StringBuilder();  
+                result.append("ToggleButton1 : ").append(toggleButton1.getText());  
+                result.append("\nToggleButton2 : ").append(toggleButton2.getText());  
+                //Displaying the message in toast  
+                Toast.makeText(getApplicationContext(), result.toString(),Toast.LENGTH_LONG).show();  
+            }  
+  
+        });  
+  
+    }  
+} 
+
+
+
+
+
+	Android CheckBox :--------------------------
+Android CheckBox is a type of two state button either checked or unchecked.
+
+There can be a lot of usage of checkboxes. For example, it can be used to know the hobby of the user, activate/deactivate the specific action etc.
+
+Android CheckBox class is the subclass of CompoundButton class
+
+
+=> Methods of CheckBox class
+There are many inherited methods of View, TextView, and Button classes in the CheckBox class. Some of them are as follows:
+
+Method						Description
+public boolean isChecked()			Returns true if it is checked otherwise false.
+public void setChecked(boolean status)		Changes the state of the CheckBox.
+
+
+
+In activity_main.xml file we can add checkbox tag to use
+<CheckBox  
+        android:id="@+id/checkBox"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:layout_marginLeft="144dp"  
+        android:layout_marginTop="68dp"  
+        android:text="Pizza"  
+        app:layout_constraintStart_toStartOf="parent"  
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+we can use it MainActivity.java
+
+package example.javatpoint.com.checkbox;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.CheckBox;  
+import android.widget.Toast;  
+  
+public class MainActivity extends AppCompatActivity {  
+    CheckBox pizza,coffe,burger;  
+    Button buttonOrder;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        addListenerOnButtonClick();  
+    }  
+    public void addListenerOnButtonClick(){  
+        //Getting instance of CheckBoxes and Button from the activty_main.xml file  
+        pizza=(CheckBox)findViewById(R.id.checkBox);  
+        coffe=(CheckBox)findViewById(R.id.checkBox2);  
+        burger=(CheckBox)findViewById(R.id.checkBox3);  
+        buttonOrder=(Button)findViewById(R.id.button);  
+  
+        //Applying the Listener on the Button click  
+        buttonOrder.setOnClickListener(new View.OnClickListener(){  
+  
+            @Override  
+            public void onClick(View view) {  
+                int totalamount=0;  
+                StringBuilder result=new StringBuilder();  
+                result.append("Selected Items:");  
+                if(pizza.isChecked()){  
+                    result.append("\nPizza 100Rs");  
+                    totalamount+=100;  
+                }  
+                if(coffe.isChecked()){  
+                    result.append("\nCoffe 50Rs");  
+                    totalamount+=50;  
+                }  
+                if(burger.isChecked()){  
+                    result.append("\nBurger 120Rs");  
+                    totalamount+=120;  
+                }  
+                result.append("\nTotal: "+totalamount+"Rs");  
+                //Displaying the message on the toast  
+                Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_LONG).show();  
+            }  
+  
+        });  
+    }  
+}  
+
+
+
+
+
+
+	Android Custom CheckBox :----------------
+
+Android provides facility to customize the UI of view element rather than default.
+you are able to create custom checkbox in android so you can add somw different images of checkbox on the layout.
+
+Example of Custom CheckBox
+In this example, we create both default as well as custom checkbox. Add the following code in activity_main.xml file.
+
+in activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>  
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:app="http://schemas.android.com/apk/res-auto"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    tools:context="example.javatpoint.com.customcheckbox.MainActivity">  
+  
+  
+    <TextView  
+        android:id="@+id/textView1"  
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"  
+        android:gravity="center_horizontal"  
+        android:textSize="25dp"  
+        android:text="Default Check Box"  
+        android:layout_alignParentTop="true"  
+        android:layout_alignParentLeft="true"  
+        android:layout_alignParentStart="true" />  
+  
+    <CheckBox  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:text="New CheckBox"  
+        android:id="@+id/checkBox"  
+        android:layout_below="@+id/textView1"  
+        android:layout_centerHorizontal="true"  
+        android:layout_marginTop="46dp" />  
+  
+    <CheckBox  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:text="New CheckBox"  
+        android:id="@+id/checkBox2"  
+        android:layout_below="@+id/checkBox"  
+        android:layout_alignLeft="@+id/checkBox"  
+        android:layout_alignStart="@+id/checkBox" />  
+  
+    <View  
+        android:layout_width="fill_parent"  
+        android:layout_height="1dp"  
+        android:layout_marginTop="200dp"  
+        android:background="#B8B894"  
+        android:id="@+id/viewStub" />  
+  
+    <CheckBox  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:text="CheckBox 1"  
+        android:id="@+id/checkBox3"  
+        android:button="@drawable/customcheckbox"  
+        android:layout_below="@+id/viewStub"  
+        android:layout_centerHorizontal="true"  
+        android:layout_marginTop="58dp" />  
+  
+    <CheckBox  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:text="CheckBox 2"  
+        android:id="@+id/checkBox4"  
+        android:button="@drawable/customcheckbox"  
+        android:layout_below="@+id/checkBox3"  
+        android:layout_alignLeft="@+id/checkBox3"  
+        android:layout_alignStart="@+id/checkBox3" />  
+  
+    <TextView  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:textAppearance="?android:attr/textAppearanceSmall"  
+        android:textSize="25dp"  
+        android:text="Custom Check Box"  
+        android:id="@+id/textView"  
+        android:layout_alignTop="@+id/viewStub"  
+        android:layout_centerHorizontal="true" />  
+  
+    <Button  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:text="Show Checked"  
+        android:id="@+id/button"  
+        android:layout_alignParentBottom="true"  
+        android:layout_centerHorizontal="true" />  
+  
+</RelativeLayout>
+
+
+	Now implement a selector in another file (checkbox.xml) under drawable folder which customizes the checkbox.
+
+ checkbox.xml
+
+<?xml version="1.0" encoding="utf-8"?>  
+<selector xmlns:android="http://schemas.android.com/apk/res/android">  
+    <item android:state_checked="true" android:drawable="@drawable/checked" />  
+    <item android:state_checked="false" android:drawable="@drawable/unchecked"/>  
+</selector>  
+
+
+	In MainActivity.java
+
+MainActivity.java
+
+package example.javatpoint.com.customcheckbox;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.CheckBox;  
+import android.widget.Toast;  
+  
+public class MainActivity extends AppCompatActivity {  
+    CheckBox cb1,cb2;  
+    Button button;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        cb1=(CheckBox)findViewById(R.id.checkBox3);  
+        cb2=(CheckBox)findViewById(R.id.checkBox4);  
+        button=(Button)findViewById(R.id.button);  
+  
+        button.setOnClickListener(new View.OnClickListener() {  
+            @Override  
+            public void onClick(View v) {  
+                StringBuilder sb=new StringBuilder("");  
+  
+                if(cb1.isChecked()){  
+                    String s1=cb1.getText().toString();  
+                    sb.append(s1);  
+                }  
+  
+                if(cb2.isChecked()){  
+                    String s2=cb2.getText().toString();  
+                    sb.append("\n"+s2);  
+  
+                }  
+                if(sb!=null && !sb.toString().equals("")){  
+                    Toast.makeText(getApplicationContext(), sb, Toast.LENGTH_LONG).show();  
+  
+                }  
+                else{  
+                    Toast.makeText(getApplicationContext(),"Nothing Selected", Toast.LENGTH_LONG).show();  
+                }  
+  
+            }  
+  
+        });  
+    }  
+} 
+
+
+
+
+
+	=> Android RadioButton
+
+RadioButton is a two states button which is either checked or unchecked. If a single radio button is unchecked, we can click it to make checked radio
+button. Once a radio button is checked, it cannot be marked as unchecked by user.
+
+
+<?xml version="1.0" encoding="utf-8"?>  
+<LinearLayout  
+    xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:orientation="vertical"  
+    tools:context="example.javatpoint.com.radiobutton.MainActivity">  
+  
+    <TextView  
+        android:id="@+id/textView1"  
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"  
+        android:layout_marginTop="30dp"  
+        android:gravity="center_horizontal"  
+        android:textSize="22dp"  
+        android:text="Single Radio Buttons" />  
+  
+  
+  
+    <!--   Default RadioButtons  -->  
+  
+    <RadioButton  
+        android:id="@+id/radioButton1"  
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"  
+        android:layout_gravity="center_horizontal"  
+        android:text="Radio Button 1"  
+        android:layout_marginTop="20dp"  
+  
+        android:textSize="20dp" />  
+    <RadioButton  
+        android:id="@+id/radioButton2"  
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"  
+        android:text="Radio Button 2"  
+        android:layout_marginTop="10dp"  
+  
+        android:textSize="20dp" />  
+  
+  
+    <View  
+        android:layout_width="fill_parent"  
+        android:layout_height="1dp"  
+        android:layout_marginTop="20dp"  
+        android:background="#B8B894" />  
+  
+    <TextView  
+        android:id="@+id/textView2"  
+        android:layout_width="fill_parent"  
+        android:layout_height="wrap_content"  
+        android:layout_marginTop="30dp"  
+        android:gravity="center_horizontal"  
+        android:textSize="22dp"  
+        android:text="Radio button inside RadioGroup" />  
+  
+  
+    <!--   Customized RadioButtons  -->  
+  
+  
+    <RadioGroup  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:id="@+id/radioGroup">  
+  
+        <RadioButton  
+            android:id="@+id/radioMale"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"  
+            android:text="  Male"  
+            android:layout_marginTop="10dp"  
+            android:checked="false"  
+            android:textSize="20dp" />  
+  
+        <RadioButton  
+            android:id="@+id/radioFemale"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"  
+            android:text="   Female"  
+            android:layout_marginTop="20dp"  
+            android:checked="false"  
+  
+            android:textSize="20dp" />  
+    </RadioGroup>  
+  
+    <Button  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:text="Show Selected"  
+        android:id="@+id/button"  
+        android:onClick="onclickbuttonMethod"  
+        android:layout_gravity="center_horizontal" />  
+  
+  
+</LinearLayout>  
+
+
+
+=> In java MainActivity.java
+RadioButton is generally used with RadioGroup. RadioGroup contains several radio buttons, 
+marking one radio button as checked makes all other radio buttons as unchecked
+
+
+package example.javatpoint.com.radiobutton;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.view.View;  
+import android.widget.Button;  
+import android.widget.RadioButton;  
+import android.widget.RadioGroup;  
+import android.widget.Toast;  
+  
+public class MainActivity extends AppCompatActivity {  
+    Button button;  
+    RadioButton genderradioButton;  
+    RadioGroup radioGroup;  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+        radioGroup=(RadioGroup)findViewById(R.id.radioGroup);  
+    }  
+    public void onclickbuttonMethod(View v){  
+        int selectedId = radioGroup.getCheckedRadioButtonId();  
+        genderradioButton = (RadioButton) findViewById(selectedId);  
+        if(selectedId==-1){  
+            Toast.makeText(MainActivity.this,"Nothing selected", Toast.LENGTH_SHORT).show();  
+        }  
+        else{  
+            Toast.makeText(MainActivity.this,genderradioButton.getText(), Toast.LENGTH_SHORT).show();  
+        }  
+  
+    }  
+}  
+
+
+
+
+	Android Dynamic RadioButton :--------------------
+Instead of creating RadioButton through drag and drop from palette, android also facilitates you to create it programmatically (dynamically). For creating dynamic RadioButton, we need to use android.view.ViewGroup.
+LayoutParams which configures the width and height of views and implements setOnCheckedChangeListener() method of RadioGroup class
+
+
+ => activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>  
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="match_parent"  
+    android:layout_height="match_parent"  
+    android:paddingBottom="@dimen/activity_vertical_margin"  
+    android:paddingLeft="@dimen/activity_horizontal_margin"  
+    android:paddingRight="@dimen/activity_horizontal_margin"  
+    android:paddingTop="@dimen/activity_vertical_margin"  
+    android:id="@+id/relativeLayout"  
+    tools:context="com.example.test.dynamicradiobutton.MainActivity">  
+  
+</RelativeLayout>  
+
+
+
+Example=>
+package com.example.test.dynamicradiobutton;  
+  
+import android.support.v7.app.AppCompatActivity;  
+import android.os.Bundle;  
+import android.widget.RadioButton;  
+import android.widget.RadioGroup;  
+import android.widget.RelativeLayout;  
+  
+import android.widget.RelativeLayout.LayoutParams;  
+import android.widget.Toast;  
+  
+public class MainActivity extends AppCompatActivity {  
+    RadioGroup rg;  
+    RelativeLayout rl;  
+    RadioButton rb1,rb2;  
+  
+    @Override  
+    protected void onCreate(Bundle savedInstanceState) {  
+        super.onCreate(savedInstanceState);  
+        setContentView(R.layout.activity_main);  
+  
+        rg = new RadioGroup(this);  
+        rl = (RelativeLayout) findViewById(R.id.relativeLayout);  
+        rb1 = new RadioButton(this);  
+        rb2 = new RadioButton(this);  
+  
+        rb1.setText("Male");  
+        rb2.setText("Female");  
+        rg.addView(rb1);  
+        rg.addView(rb2);  
+        rg.setOrientation(RadioGroup.HORIZONTAL);  
+  
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams((int) LayoutParams.WRAP_CONTENT,(int)LayoutParams.WRAP_CONTENT);  
+        params.leftMargin =150;  
+        params.topMargin = 100;  
+  
+        rg.setLayoutParams(params);  
+        rl.addView(rg);  
+  
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {  
+            @Override  
+            public void onCheckedChanged(RadioGroup group, int checkedId) {  
+                RadioButton radioButton = (RadioButton) findViewById(checkedId);  
+                Toast.makeText(getApplicationContext(),radioButton.getText(),Toast.LENGTH_LONG).show();  
+            }  
+        });  
+    }  
+}  
+
+
