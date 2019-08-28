@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ToggleButton</string>
+    <string name="submit">Submit</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="on1">ON</string>
+    <string name="off1">OFF</string>
+    <string name="togglebutton1">ToggleButton</string>
+</resources>
