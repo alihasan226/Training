@@ -731,6 +731,29 @@ button.setOnClickListener(new View.OnClickListener() {
 
 
 
+	==> Android title Bar
+
+In this example we are going to explain how to hide the title bar and how to display content in full screen mode
+
+Each activity has an associated window (on which the whole UI draws).
+This window has default way of being drawn (whether toolbar , actionbar, icon are drawn or not).
+however you can use requestWindowFeature to ask system to include or exclude some of windows features (toolbar,actionbar and so on).
+
+
+requestWindowFeature(Window.FEATURE_NO_TITLE) method of activity must be called to hide the title
+But it must be coded before the setContentView method.
+
+getSupportActionBar() method is used to reterive the instance of ActionBar class. (calling the hide() method of ActionBar class hides the title bar)
+
+=> setFlag() method of Window class is used to display content in full screen mode
+you need to pass the WindowManager.LayoutParams.Flag_FullSCREEN contant in the setFlag method.
+
+
+
+
+
+
+
 	=> Android Toast :--------------------------
 Toast class is used to show notification for a particular interval of time. After sometime it disappers. It doesn't bloack the user interaction.
 
@@ -749,6 +772,55 @@ Method	Description
 public static Toast makeText(Context context, CharSequence text, int duration)			makes the toast containing text and duration.
 public void show()										displays toast.
 public void setMargin (float horizontalMargin, float verticalMargin)				changes the horizontal and vertical margin difference.
+
+
+
+
+
+
+The Basic=====>
+First instantiate a Toast object with one of the makeText() methods.
+these methods takes three parameter 1)the application Context,2)the text message 3) duration for the toast
+you can display a toast  notification with show() methods
+	
+	Toast toast = Toast.makeText(context, text, duration);
+	toast.show();
+
+
+we can also chain the methods and avoid holding on to the Toast object like this:
+
+	Toast.makeText(context, text, duration).show();
+
+we can change the position of the notification with setGravity(int,int,int) method. these accept three parameter
+Gravity constant x position offset and y-position offset.
+
+
+
+
+
+=> to create a custome layout define a view layout in XML or in application code and pass the root View object to the setView(View) methods.
+
+LayoutInflater inflater = getLayoutInflater();
+View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.custom_toast_container));
+
+TextView text = (TextView) layout.findViewById(R.id.text);
+text.setText("This is a custom toast");
+
+Toast toast = new Toast(getApplicationContext());
+toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+toast.setDuration(Toast.LENGTH_LONG);
+toast.setView(layout);
+toast.show();
+
+First, retrieve the LayoutInflater with getLayoutInflater() (or getSystemService()), and then inflate the layout from XML using inflate(int, ViewGroup). 
+The first parameter is the layout resource ID and the second is the root View. You can use this inflated layout to find more View objects in the layout, 
+so now capture and define the content for the ImageView and TextView elements. Finally, create a new Toast with Toast(Context) and set some properties of the toast, 
+such as the gravity and duration. Then call setView(View) and pass it the inflated layout. You can now display the toast with your custom layout by calling show()
+
+
+
+
 
 
 
@@ -853,9 +925,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-	Android ToggleButton Example :----------------------
+
+
+
+
+
+	====> Android ToggleButton Example :----------------------
+
 Android toggle Button can be used to display checked/unchecked (on/off) state on the button.
+
 It is beneficial if user have to change the setting between two state. It can be used to on/off sund,Wifi,Bluetooth etc.
+
 SInce Andriod 4.0 there is another type of toggle button called switch that provides slider control.
 
 
@@ -1453,4 +1533,21 @@ public class MainActivity extends AppCompatActivity {
     }  
 }  
 
+	
+
+
+
+	===> Some Important Points :------------------------
+
+1) android:textColor="hexadecimalcode"  => that is used to change the color of text
+
+2) textSize 
+	px => Pixels corresponding to actual pixels on the screen
+	in => inches based on the physicalsize of the scrren
+	mm => milimeter based on physical size of the screen
+	pt => points 1/72 of an inch based on the physical size of the screen
+	dp or dip => independent pixels 
+
+3) android:text="name"	it defines the name of the component
+4) android:contentdescription="contentof
 
