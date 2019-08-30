@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AndroidServices</string>
+    <string name="services">Services!</string>
+    <string name="button1">Start Service</string>
+    <string name="button2">Stop Service</string>
+</resources>

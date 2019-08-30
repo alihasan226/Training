@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RelativeLayout</string>
+    <string name="remainder">Enter Your Name</string>
+    <string name="autofill">Ali Hasan</string>
+</resources>

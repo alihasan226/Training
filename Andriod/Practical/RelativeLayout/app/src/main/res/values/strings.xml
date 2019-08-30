@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RelativeLayout</string>
+    <string name="reminder">Enter your Name</string>
+</resources>
