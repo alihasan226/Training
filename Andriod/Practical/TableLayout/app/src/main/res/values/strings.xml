@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TableLayout</string>
+    <string name="table_layout_4_open">Open</string>
+    <string name="table_layout_4_open_shortcut">Ctrl-O</string>
+    <string name="table_layout_4_save">Save As...</string>
+    <string name="table_layout_4_save_shortcut">Ctrl-Shift-S</string>
+</resources>

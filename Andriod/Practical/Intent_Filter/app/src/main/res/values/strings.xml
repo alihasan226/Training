@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Intent_Filter</string>
+    <string name="button1">START BROWSER</string>
+    <string name="button2">START BROWSER WITH LAUNCH ACTION</string>
+    <string name="button3">EXCEPTIONAL CONDITION</string>
+    <string name="intent_filter">Intent Filter</string>
+</resources>

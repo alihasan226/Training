@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="1"
+    tools:context=".MainActivity">
+
+    <TableRow>
+        <TextView
+            android:text="@string/table_layout_4_open"
+            android:padding="10dip"
+            />
+
+        <TextView
+            android:text="Ali"
+            android:gravity="center"
+            android:padding="10dip"/>
+        <TextView
+            android:text="@string/table_layout_4_open_shortcut"
+            android:gravity="right"
+            android:padding="10dip"
+            />
+    </TableRow>
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+        <TextView
+            android:text="@string/table_layout_4_save"
+            android:padding="10dip"
+            />
+        <TextView
+            android:text="@string/table_layout_4_save_shortcut"
+            android:gravity="right"
+            android:padding="10dip"/>
+    </TableRow>
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" /><!-- this is used to make a horizontal line-->
+
+</TableLayout>

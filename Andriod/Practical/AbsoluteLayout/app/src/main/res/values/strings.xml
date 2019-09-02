@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AbsoluteLayout</string>
+    <string name="button1">Open</string>
+    <string name="button2">Save</string>
+</resources>
