@@ -1,4 +1,7 @@
-﻿About Andriod :-
+﻿(Home Network password :----------  F24qj3Pl1a) Nokia 6.1
+
+
+About Andriod :-
 
 Andriod is a mobile operating system developed by google. It is based on a modified version of the linux kernel and other open source software and is designed primarily for touchscreen mobile devices such as smartphone and tablets.
 It is developed by Google and later the OHA(Open Handset Alliance)
@@ -1673,6 +1676,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
 	==> Android Fragments :--------------
 
 A Fragment is a piece of an activity which enable modular activity design.
@@ -1750,7 +1755,9 @@ You can override any of the functions based on your requirements.
 
 
 
+
 	=> Types of Fragments
+
 Basically fragments are divided as three stages as shown below.
 
 Single frame fragments − Single frame fragments are using for hand hold devices like mobiles, here we can show only one fragment as a view.
@@ -1758,6 +1765,17 @@ Single frame fragments − Single frame fragments are using for hand hold device
 List fragments − fragments having special list view is called as list fragment
 
 Fragments transaction − Using with fragment transaction. we can move one fragment to another fragment
+
+
+
+	Single Frame Fragment :-----------------
+Single frame fragment is designed for small screen device such as hand hold device(mobiles) andit should be above android 3.0 version.
+
+Here we will create two fragment and one of them will be used when device is in landscape mode and another fragment will be used in case of portrait mode.
+
+
+
+
 
 
 
@@ -1867,6 +1885,48 @@ Implicit intent are often used to activate components in other application.
 
 
 
+	Intent-Filter :-------------------
+You will use <intent-filter> element in the manifest file to list down actions, categories and data types associated with any activity, service, 
+or broadcast receiver.
+
+
+Example of a part of AndroidManifest.xml
+
+<activity android:name=".CustomActivity"
+   android:label="@string/app_name">
+   
+   <intent-filter>
+      <action android:name="android.intent.action.VIEW" />
+      <action android:name="com.example.My Application.LAUNCH" />
+      <category android:name="android.intent.category.DEFAULT" />
+      <data android:scheme="http" />
+   </intent-filter>
+   
+</activity>
+
+
+Once this activity is defined along with above mentioned filters, other activities will be able to invoke this activity using either
+the android.intent.action.VIEW, or using the com.example.My Application.LAUNCH action provided their category is android.intent.category.DEFAULT.
+
+
+The <data> element specifies the data type expected by the activity to be called and for above example our custom activity expects the data to 
+start with the "http://"
+
+
+There are following test Android checks before invoking an activity −
+
+1) A filter <intent-filter> may list more than one action as shown above but this list cannot be empty; a filter must contain at least one <action> 
+element, otherwise it will block all intents. If more than one actions are mentioned then Android tries to match one of the mentioned actions before 
+invoking the activity.
+
+2) A filter <intent-filter> may list zero, one or more than one categories. if there is no category mentioned then Android always pass this test but 
+if more than one categories are mentioned then for an intent to pass the category test, every category in the Intent object must match a category in 
+the filter.
+
+3) Each <data> element can specify a URI and a data type (MIME media type). There are separate attributes like scheme, host, port, and path for each 
+part of the URI. An Intent object that contains both a URI and a data type passes the data type part of the test only if its type matches a type listed 
+in the filter.
+
 
 
 
@@ -1900,6 +1960,7 @@ Android LinearLayout is a view group that aligns all children in either vertical
 
 
 	=> LinearLayout Attributes
+
 android:id 			:--- this is the ID which uniquely identifies the layout
 android:baselineAligned		:--- This must be a boolean value, either "true" or "false" and prevents the layout from aligning its children's baselines
 android:divider			:--- this is drawable to use as a vertical divider between button you use a color value in the form of #rgb #argb #rrggbb
@@ -1911,3 +1972,361 @@ android:orientation		:--- specifies the direction of arrangement
 Android TableLayout going to be arrange groups of views into rows and columns.
 You will use the <TableRow> element to build a row in the table.
 Each row has zero or more cells each cell hold one view object.
+
+
+10:56 AM 9/2/2019
+
+TableLayout Attributes
+Following are the important attributes specific to TableLayout −
+
+	Attribute & Description
+
+1) android:id
+
+This is the ID which uniquely identifies the layout.
+
+2) android:collapseColumns
+
+This specifies the zero-based index of the columns to collapse. The column indices must be separated by a comma: 1, 2, 5.
+
+3) android:shrinkColumns
+
+The zero-based index of the columns to shrink. The column indices must be separated by a comma: 1, 2, 5.
+
+4) android:stretchColumns
+
+The zero-based index of the columns to stretch. The column indices must be separated by a comma: 1, 2, 5.
+
+
+
+	Absolute Layout :--------------------
+An Absolute Layout lets you specify exact locations (x/y coordinates) of its children. Absolute layouts are less flexible and harder to maintain than other types of 
+layouts without absolute positioning.
+
+
+Some of the attributes: -----------
+
+AbsoluteLayout Attributes
+Following are the important attributes specific to AbsoluteLayout −
+
+	Attribute & Description
+
+1)android:id
+This is the ID which uniquely identifies the layout.
+
+2) android:layout_x
+This specifies the x-coordinate of the view.
+
+
+3) android:layout_y
+This specifies the y-coordinate of the view.
+
+
+
+	Android List :-----------------
+Android LsitView is a view which groups several items and display them in vertical scrollable list. the list items are automatically inserted to the list ueing an Adapter 
+that pulls content from a source as an array database.
+
+
+An adaptor actually bridges between UI component and the data source that fill data into UI component.
+Adaptor holds the data and send the data to adaptor view the view can takes the data from adaptor view and showws the data on different views like as
+spinner list view grid view .
+
+Listview and gridView are subclasses of AdaptorView and they can be populated by
+brigding them to an Adaptor which reterives data from an external source and create a View that represent each data entry.
+
+Android provides several subclasses of Adapter that are useful for retrieving different kinds of data and building views for an AdapterView ( i.e. ListView or GridView).
+The common adapters are ArrayAdapter,Base Adapter, CursorAdapter, SimpleCursorAdapter,SpinnerAdapter and WrapperListAdapter. We will see separate examples for both the adapters
+
+
+
+	ArrayAdapter adapter = new ArrayAdapter<String>(this,R.layout.ListView,StringArray);
+
+Here are arguments for this constructor −
+
+First argument this is the application context. Most of the case, keep it this.
+
+Second argument will be layout defined in XML file and having TextView for each string in the array.
+
+Final argument is an array of strings which will be populated in the text view.
+
+
+ListView listView = (ListView) findViewById(R.id.listview);
+listView.setAdapter(adapter);
+
+Android ListView is a view which groups several items and display them in vertical scrollable list. The list items are automatically inserted to the 
+list using an Adapter that pulls content from a source such as an array or database
+
+
+
+
+
+
+	Android Progress Bar using ProgressDialog :-------------------
+Progress bars are used to show progress show progress of a task.
+Example when you are downloading or uploading something from the internet it is better t show the progress or download/upload to the user
+
+In android there is a class called ProgressDialog that allows you to create progress bar.
+
+
+
+	ProgressDialog progress=new ProgressDialog(this);
+
+Now you can set more properties of this dialog such as its style its text
+
+
+progress.setMessage("Downloading Music :) ");
+progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+progress.setIndeterminate(true);				//It basically just means you're unsure how long the action will take
+
+	title & description
+1
+getMax()
+
+This method returns the maximum value of the progress.
+
+2	
+incrementProgressBy(int diff)
+
+This method increments the progress bar by the difference of value passed as a parameter.
+
+3	
+setIndeterminate(boolean indeterminate)
+
+This method sets the progress indicator as determinate or indeterminate.
+
+4	
+setMax(int max)
+
+This method sets the maximum value of the progress dialog.
+
+5	
+setProgress(int value)
+
+This method is used to update the progress dialog with some specific value.
+
+6	
+show(Context context, CharSequence title, CharSequence message)
+
+This is a static method, used to display progress dialog.
+
+
+
+
+
+	Android Event Handling :-------------------
+Events are useful way to collect data about a user's interaction with interative component of Application. Like Button press or screen touch etc.
+Android framework maintain an event queue as first in first out basis.
+
+There are following three concept related to Android Event Management ----------
+
+1) Event Lsitener
+An event listener is an interface of View class that contains a single callback method.These methods will be called by the Android framework wheh the View 
+to which the listener has been registered is triggered by user interaction with the item in the UI.
+
+2)Event Lsitener Registration
+Event registration is the process by which an Event Handler gets registered with an Event Lsitener so that the handler is called when the Event Listener
+fires the event.
+
+3) Event Handler
+When an Event happens and we have registered an event listener for the event the event listener calls the Event handlers, which is the method actually handles the event.
+
+
+
+	Event Listener & Event Handlers :-----------------------
+
+1) Onclick()		OnClickListener()
+			This is called when the user either clicks or touches or focuses upon any widget like button, text, image etc.You will use onClick() event handler to handler such event
+
+2) onLongClick()	OnLongClickListener()
+			this is called when the user either clicks or touches or focuses upon any widget like button text,image etc for one more second
+			you will use onLongClick() event handler to handle such event.
+
+
+3) onFocusChange()	OnFocusChangeListener()
+			This is called when the widget looses its focus ie. user goes away from the view item. You will use onFocusChange() event 
+			handler to handle such event.
+
+4) onKey()		OnFocusChangeListener()
+
+			This is called when the user is focused on the item and presses or releases a hardware key on the device. You will use onKey() event handler to handle 
+			such event.
+
+5) onTouch()		OnTouchListener()
+
+			This is called when the user presses the key, releases the key, or any movement gesture on the screen. You will use onTouch() 
+			event handler  to handle such event.
+
+6) onMenuItemClick	OnMenuItemClickListener()
+			This is called when the user selects a menu item. You will use onMenuItemClick() event handler to handle such event
+
+7) onCreateContextMenu() onCreateContextMenuListener()
+			  This is called when the content menu is called being built(as the result of a sustained long click)
+
+
+
+
+	Event Listeners Registration :-------------------
+
+Event Registration is the process by which an Event Handler gets registered with an Event Listener so that the handler is called when the Event Listener
+fires the event. Though there are several tricky ways to register your event listener for any event, but I'm going to list down only top 3 ways, out of 
+which you can use any of them based on the situation.
+
+
+1) Using an Anonymous Inner Class
+
+2) Activity class implements the Listener interface.
+
+3) Using Layout file activity_main.xml to specify event handler directly.
+
+
+	Touch Mode :------------
+
+Users can interact with their devices by using hardware keys or buttons or touching the screen.Touching the screen puts the device into touch mode. 
+The user can then interact with it by touching the on-screen virtual buttons, images, etc.You can check if the device is in touch mode by calling the 
+View class’s isInTouchMode() method
+
+
+	Focus
+A view or widget is usually highlighted or displays a flashing cursor when it’s in focus. This indicates that it’s ready to accept input from the user.
+
+1) isFocusable() − it returns true or false
+
+2) isFocusableInTouchMode() − checks to see if the view is focusable in touch mode. 
+
+
+
+
+
+
+
+
+
+		Android -Drag and Drop  :-------------------------
+Android drag/drop framework allows your users to move data from one view to another view in the current layout using a graphical drag and drop gesture .
+Framework include three important component to support drag and drop functionality --
+
+=> Drag event class
+=> Drag listener
+=> Helper method and classes
+
+
+
+	Drag / Drop Process :--------------
+There are basically four steps or states in the drag and drop process :-
+
+1) Started
+this event occurs when you start draggin an item in a layout your application calls startDrag() method to tell the system to tell the system to start a drag.
+The arguments inside startDrag() method provide the data to be dragged metadata for this data and a callback for drawing the drag shadow.
+
+The syste first reponds by calling back to your application to get a drag shadow.It then displays the drag shadow on th device.Next the system sends drag
+event with action type ACTION_DRAG_STARTED to the registered drag event listener for all the View object in the current layout .
+
+To continue to receive drag events including a possible drop event a drag event listener must return true, if the drag event listener returns false then
+it will not receive drag events for the current operation until the system sends drag event with action ty[e ACTION_DRAG_ENDED
+
+the user continnue the drag System send ACTION_DRAG_ENTERED action followed by ACTION_DRAG_LOCATION action to the registered drag event listener for the 
+View where dragging points enters . The listener may choose to alter its View object's appearence in response to the event or can react by highlighting 
+its View.
+
+The drag event listener receive a ACTION_DRAG_EXITED action the user has moved the drag shadow outside the bounding box of the view.
+
+Dropped =>
+the user release the dragged item wiht in the bounding box of a view the system sends the view listener a drag event with action type ACTION_DROP
+
+Ended =>
+just after the action type ACTION_DROP the system sends out a drag event with action type ACTION_DRAG_ENDED to indicate that the drag operation is over.
+
+
+The DragEvent Class :----------------
+The DragEvent represent an event that is sent out by the system at various times during a drag and drop operation. This class provides few constants
+and important methods which we use during Drag/Drop process.
+
+
+
+
+
+
+	Following are all constants integers available as a part of DragEvent class. :-------------
+
+
+1
+ACTION_DRAG_STARTED
+
+Signals the start of a drag and drop operation.
+
+2	
+ACTION_DRAG_ENTERED
+
+Signals to a View that the drag point has entered the bounding box of the View.
+
+3	
+ACTION_DRAG_LOCATION
+
+Sent to a View after ACTION_DRAG_ENTERED if the drag shadow is still within the View object's bounding box.
+
+4	
+ACTION_DRAG_EXITED
+
+Signals that the user has moved the drag shadow outside the bounding box of the View.
+
+5	
+ACTION_DROP
+
+Signals to a View that the user has released the drag shadow, and the drag point is within the bounding box of the View.
+
+6	
+ACTION_DRAG_ENDED
+
+Signals to a View that the drag and drop operation has concluded.
+
+
+
+	Methods :------------------
+
+1	
+int getAction()
+
+Inspect the action value of this event..
+
+2	
+ClipData getClipData()
+
+Returns the ClipData object sent to the system as part of the call to startDrag().
+
+3	
+ClipDescription getClipDescription()
+
+Returns the ClipDescription object contained in the ClipData.
+
+4	
+boolean getResult()
+
+Returns an indication of the result of the drag and drop operation.
+
+5	
+float	getX()
+
+Gets the X coordinate of the drag point.
+
+6	
+float getY()
+
+Gets the Y coordinate of the drag point.
+
+7	
+String toString()
+
+Returns a string representation of this DragEvent object.
+
+
+
+	Listening for Drag Event :------------------
+
+If you want any of your views within a Layout should respond Drag event then your view either implements View.OnDragListener or 
+setup onDragEvent(DragEvent) callback method. When the system calls the method or listener, it passes to them a DragEvent object explained above. 
+You can have both a listener and a callback method for View object. If this occurs, the system first calls the listener and then defined callback as long as listener returns true.
+
+The combination of the onDragEvent(DragEvent) method and View.OnDragListener is analogous to the combination of the onTouchEvent() and 
+View.OnTouchListener used with touch events in old versions of Android
+
