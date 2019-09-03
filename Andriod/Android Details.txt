@@ -1,0 +1,155 @@
+10:31 AM 9/3/2019
+
+	Intent :------------
+
+public class Intent extends Object implements Parcelable, Cloneable
+
+Parcelable => Interface for classes whose instance can be written to and restored from a Parcel. Classes implementing the Parcelable interface must also have a non-null static field caled 
+	       CREATOR of a type that implements the Parcelable.Creator interface
+Parcel	 => Container for a message (data and object references) that can be sent through an IBinder.
+
+Cloneable => A class implements the Cloneable interface to indicate to the Object.clone() method that it is legal for that method to make a field-for-field copy of instance of that class.
+		creates and returns a copy of this object.
+
+
+An Intent is an abstract description of an operation to be performed. It can be used with
+
+startActivity(Intent) 	=> to launched an Activity
+broadcaseIntent	=> to send it to any interested  BroadcastReceiver components
+startService(Intent)	/ bindService(Intent, ServiceConnection, int)	=> to communicate with background.
+
+Intent has been used to call another acitivity
+Its most significant use  is in the launching of activites, where it can be throught of as the glue between activites.
+It is basically a passive data structure holding an abstract description of an action to be performed.
+
+Intent Structure :--------------
+The primary pieces of information in an intent are :
+
+1) Action	:- the general action to be performed such as  ACTION_VIEW,  ACTION_EDIT,  ACTION_MAIN
+
+2) Data	:- the data to operate on such as a person records in the contact database, expressed as a Uri.
+
+
+Inaddition to these primary attributes there are number of secondary attribute that you can also include with an intent:-
+
+3) Category	:- gives additional information about the action to execute. For example CATEGORY_LAUNCHER means it should appear in the Launcher as a top-level application.
+
+4) Type		:- specifies an explicity type (a MIME type) of the intent data
+
+5) Component	:-
+
+6) Extras		:- this is a Bundle of any additional information.this can be used to provide extended information to the component.
+		For example if we have a action to send an e-mail message we could include extra pieces of data here to supply a subject body etc.
+
+
+In Android the reuse of other application components is a concept knowns as task. An application can access other Android components to achieve a task.
+For Example from a component of your application you can trigger another component in the Android system which manage photos, even it thif component is not part of your application. 
+In this component you select a photo and return to your application to use the selected photo.
+
+
+
+Intent  Resolution :---------------
+There are two primary forms of intens you will use
+
+1) Explicit Intent
+2) Implicit Intent
+
+
+Explicit Intent :-----------
+In Android Explicit Intent explicitly specify the name of component to be invoked by an activy and we use explicit intents to start a component in out own app.
+By using explicit intents we can send or share data / content from one activity to another activity based on your requirement
+Explicit intent going to be connected internal world of application suppose if you wants to connect one activity to another activity we can do this quoteby explicit intent.
+To create an Explicit Intent we need to define the component name for Intent object.
+
+
+
+Implicit Intent :-----------
+These intent do not name a target and the field of the component name is left blank. Implicit intents are often used to activate component in other application.
+It is not specified a component instead they must include enough information for the system to determine which of the available component is best to run for that intent.
+
+
+
+Intent-filter :------------------
+Intent Filter is an expression in app's manifest file (ActivityManifest.xml) and it is used to specify the type of intent that the component would like to receive. In case if we create Intent filter 
+for an activity there is a possibility for other apps to start our activity by sending a certain type of intent.
+											otherwise the activity can be started only by an explicit intent.
+
+
+
+
+There are three intent characteristics you can filter on the action , data and categories. For each of these characteriscs you can provides multiple possible matching values (via addAction(String),
+ addDataType(String), addDataScheme(String), addDataSchemeSpecificpart(String ,int), addDataAuthority(String,String), addDataPath(String,int) and addCategory(String), respectively)
+
+
+Filter Rule :-----------
+A match is based on the following rule.Note that for an IntentFilter to match an Intent three condition must hold the action and category must match and the data (both data type and data 
+scheme+authority+path if specified) must match
+
+=> Action matches if any of the given values match the Intent action; if the filter specifies no actions, then it will only match Intents that do not contain an action.
+
+=> Data Type matches if any of the given values match the Intent type. The Intent type is determined by calling Intent#resolveType. A wildcard can be used for the MIME sub-type, in both 
+the Intent and IntentFilter, so that the type "audio/*" will match "audio/mpeg", "audio/aiff", "audio/*", etc. Note that MIME type matching here is case sensitive, unlike formal RFC MIME
+types! You should thus always use lower case letters for your MIME types.
+
+=> Data Scheme matches if any of the given values match the Intent data's scheme. The Intent scheme is determined by calling Intent#getData and Uri.getScheme() on that URI.
+Note that scheme matching here is case sensitive, unlike formal RFC schemes! You should thus always use lower case letters for your schemes.
+
+=> Data Scheme matches if any of the given values match the Intent data's scheme. The Intent scheme is determined by calling Intent#getData and Uri.getScheme() on that URI.
+ Note that scheme matching here is case sensitive, unlike formal RFC schemes! You should thus always use lower case letters for your schemes.
+
+
+
+
+
+Generally the Intent Filter ( <intent-filter> ) whatever we define in manifest file can be nested in the corresponding app components and we can specify the type of intent to accept using these
+three elements.
+
+<Action>It define the name of an intent action to be accepted and it must be a literal string value of an action not the class contant.
+
+<categories> it define the name of an intent category to be accepted and it must be the literal string value of an action not the class constant.
+
+<data>
+It defines the type of data to be accepted and by using one or more attributes we can specify various aspects of the data URI (scheme, host, port, path) and MIME type
+
+
+Intent Filter in Manifest File 
+Following is the code snippet of defining an activity with Intent Filter (<intent-filter>) in Android Manifest file (AndroidManifest.xml) like as shown below.
+
+ 
+
+<activity android:name=".MainActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+        <data android:mimeType="text/plain"/>
+    </intent-filter>
+</activity>
+
+We can define a filter with multiple instances of <action>, <category> or <data> elements and we need to make sure that component can handle all the combinations of filter elements.
+
+
+
+
+
+	Drawable resource :---------------
+A drawablw resource is a general concept for a graphics that can be drawn to the screen and which you can reterieve with APIs such as getDrawable(int) or apply to another Xml resource 
+attributes such as android:drawable and android:icon
+
+Different types of Drawable :-
+
+1) Bitmap		:- a bitmap graphics file (.png, .jgp, or .gif) create a BitmapDrawable
+2) Nine-patch File	:- A PNG file with stretchable region to allow image resizing on content
+3) Layer List	:- A drawable that manage an array of other Drawables .these are drawn in array order so the element with the largest index is be drawn on top.
+4) State List	:- an Xml file that reference different bitmap graphics for different states (for example to use a different image when a button is pressed)
+5) Level List	:- an Xml file that defines a drawable that manges a number of alternative Drawable each assign a maximum numerical value.
+6) Transition Drawable :-  an xml file that define a drawable that can cross fade between two drawable resource.
+7) Inset Drawable	:- an sml file that define drawable that insets another drawable by a specific distane.
+8)clip drawable	:- an xml file that define a drawable that clip another drawabable
+9) Scale Drawable	:- an xml file that define a drawable that change the size of another drawable
+
+
+A bitmap file is a .png, .jpg, or .gif file. Android creates a Drawable resource for any of these files when you save them in the res/drawable/ directory.
+
+resource reference:
+In Java: R.drawable.filename
+In XML: @[package:]drawable/filename

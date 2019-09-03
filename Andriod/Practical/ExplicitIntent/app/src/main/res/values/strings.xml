@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Explicit Intent - Activity1</string>
+    <string name="first_number">First Number</string>
+</resources>
