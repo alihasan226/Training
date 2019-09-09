@@ -176,7 +176,7 @@ Configure your Build :---------------------
 
 10:52 AM 9/7/2019
 	Button Advanceed Operation :-----------------
-Performin gthe Switch operation on button
+Performing the Switch operation on button
 
 package com.example.nestedbutton;
 
@@ -268,7 +268,8 @@ For example, the Android system provides a content provider that manages the use
 
 
 
-Activating Components :----------------
+	Activating Components :----------------
+
 Three of the four component types --activities , services, and broadcast receivers --are activated by an asynchronous message called an Intent.
 Intent bind individual component to each other at runtime. An intent is created with an Intent object, which defines a message to activate either a specific component (explicit intent ) or a 
 specific type of component (impicit intent).
@@ -277,6 +278,95 @@ For activities and services an intent defines the action to be perform (for exam
 
 
 
+
+
+
+
+
+
+
+	Broadcast overview :-----------------------
+
+Android apps can send or receive broadcast message from the Android system and other Android apps.
+These broadcast are sent when an event of interest occurs. For example the Android system sends broadcast when various system events occurs such as when the system boots up or the 
+device stats charging. App can also send custom broadcast, for example to notify other apps of something that they might be interested in(for example some new data has been downloaded).
+
+Apps can register to receive specific broadcasts. When a broadcast is sent, the system automatically routes broadcasts to apps that have subscribed to receive that particular type of 
+broadcast.
+
+
+
+=> About system broadcasts
+
+The system automatically sends broadcasts when various system events occur, such as when the system switches in and out of airplane mode. System broadcasts are sent to all apps that 
+are subscribed to receive the event.
+
+The broadcast message itself is wrapped in an Intent object whose action string identifies the event that occurred (for example android.intent.action.AIRPLANE_MODE). 
+The intent may also include additional information bundled into its extra field. For example, the airplane mode intent includes a boolean extra that indicates whether or not Airplane Mode is on.
+
+
+=> Changes to system broadcasts
+As the Android platform evolves, it periodically changes how system broadcasts behave. Keep the following changes in mind if your app targets Android 7.0 (API level 24) or higher, or
+ if it's installed on devices running Android 7.0 or higher.
+
+Android 9
+Beginning with Android 9 (API level 28), The NETWORK_STATE_CHANGED_ACTION broadcast doesn't receive information about the user's location or personally identifiable data.
+
+In addition, if your app is installed on a device running Android 9 or higher, system broadcasts from Wi-Fi don't contain SSIDs, BSSIDs, connection information, or scan results. 
+To get this information, call getConnectionInfo() instead.
+
+Android 8.0
+Beginning with Android 8.0 (API level 26), the system imposes additional restrictions on manifest-declared receivers.
+
+If your app targets Android 8.0 or higher, you cannot use the manifest to declare a receiver for most implicit broadcasts (broadcasts that don't target your app specifically). 
+You can still use a   {  context-registered receiver   }   when the user is actively using your app.
+
+
+Android 7.0
+Android 7.0 (API level 24) and higher don't send the following system broadcasts:
+
+ACTION_NEW_PICTURE
+ACTION_NEW_VIDEO
+Also, apps targeting Android 7.0 and higher must register the CONNECTIVITY_ACTION broadcast using registerReceiver(BroadcastReceiver, IntentFilter).
+Declaring a receiver in the manifest doesn't work.
+
+
+=> Context-Register Receiver
+To register a receiver with a context perform the follwoing steps:
+
+1) Create an instance of BroadcasarReceiver
+
+	BroadcastReceiver br=new MyBroadcastReceiver();
+
+2) Create an IntentFilter and register the receiver by calling registerReceiver (BoradcastReceiver,IntentFilter):
+
+	IntentFilter filter=new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+	filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+	registerReceiver(br,this);
+
+3) To stop receiving broadcasts, call unregisterReceiver(android.content.BroadcastReceiver). Be sure to unregister the receiver when you no longer need it or the context is no longer 
+valid.
+
+Be mindful of where you register and unregister the receiver, for example, if you register a receiver in onCreate(Bundle) using the activity's context, you should unregister it in 
+onDestroy() to prevent leaking the receiver out of the activity context. If you register a receiver in onResume(), you should unregister it in onPause() to prevent registering it multiple
+times (If you don't want to receive broadcasts when paused, and this can cut down on unnecessary system overhead). Do not unregister in onSaveInstanceState(Bundle), because this
+isn't called if the user moves back in the history stack.
+
+
+
+Sending Broadcasts :-----------------------
+Android provides three ways for app to send broadcast
+
+1) The sendOrderedBroadcast(Intent,String) methods sends broadcast s to one receiver at a time. As each receiver executes it turn it can propagate a result to the receiver or it can 
+completelt abort the broadcast so that it won't be passed to other receivers.The order receiver run in can be controlled with the android:parioority attribute of amtching intent-filter receiver with 
+the same protity will be run in an arbitrary order.
+
+2) The sendBroadcast(Intent) method sends broadcasts to all receivers in an undefined order. This is called a Normal Broadcast. This is more efficient, but means that receivers cannot 
+read results from other receivers, propagate data received from the broadcast, or abort the broadcast.
+
+3)The LocalBroadcastManager.sendBroadcast method sends broadcasts to receivers that are in the same app as the sender. If you don't need to send broadcasts across apps,
+use local broadcasts. The implementation is much more efficient (no interprocess communication needed) and you don't need to worry about any security issues related to other apps
+being able to receive or send your broadcasts.
 
 
 
@@ -335,15 +425,13 @@ You should always externalize app resources sich as image and string from your c
 device configurations by grouping them in specially-named resources directories. At runtime android uses the appropriate resource based on the cureent configuration.
 
 
-
-
-
-
+	
 	BroadCast Receiver ;---------------------------------------
-In Android Broadcast Receiver is a component which  aill allow android system or other system or other apps to delever events to the app like sending a low battery message or screen turned off
-message to the app. The app can also broadcasr to let other apps know that required data availabe in a device to use it.
 
-Generally we use Intent to deliver broadcast events to other apps and Boradcast Recciver use status bar notification to let user know that broadcasr events occurs.
+In Android Broadcast Receiver is a component which  will allow android system or other system or other apps to delever events to the app like sending a low battery message or screen turned off
+message to the app. The app can also broadcast to let other apps know that required data availabe in a device to use it.
+
+Generally we use Intent to deliver broadcast events to other apps and Boradcast Recciver use status bar notification to let user know that broadcast events occurs.
 In android Broadcast Receiver is implementted as a subclass of BroadcastReceiver and each braodcast is delivered as an Intent object.
 
 we can register an app to receive only few broadcast message based on our requirements. When a new broadcasr received the system will check for specifieed have subscribed or not subscribed or not based on that it will routes the broadcast to the apps.
@@ -381,7 +469,118 @@ LoadBroadcastManager.sendBroadcast		This method is used to send broadcasts to re
 
 
 
+
+
+
+
+
+
+
+
+	Services :-----------------------------------------------
+A services is an application component that can perform long-running operations in the background, and it doesn't provides a user interface.
+Another application component can start a service and it continues to run in the background even if the user switches to another application.
+
+Additionally a component can bind to s vervice to interact with in and even perform interprocess communication (IPC)
+
+For example a service can handle network transaction, play music, perform file I/O or interact with a content provider all from the background.
+
+
+
+	There are three different types of services:
+
+1) Foreground
+
+A foreground service performs some operations that is noticeable to the user.
+For example an audio app would use a foerground service to play an audio track. Foreground service must display a Notification.
+Foreground services continue running even when the user isn't interacting with the app.
+
+2) Background 
+
+A background service performs an oparation that isn't directly noticed by the user.
+For example if an app used a service its storage that would usually be a background service.
+
+Note: If your app targets API level 26 or higher, the system imposes restrictions on running background services when the app itself isn't in the foreground. In most cases like this, 
+your app should use a scheduled job instead
+
+
+3) Bound
+A service is bound when an application compoennt binds to it by calling bindService().
+A bound service offeres a client-server interface that allows components to interact with the service, send request, receive result and even do so across processes with interprocess communication (IPC).
+A bound service runs only as long as another application component is bound to it. Multiple components can bind to the service at once but when all of them unbind, the service is destroyed.
+
+
+
+Although this documentation generally discusses started and bound services separately, your service can work both ways—it can be started (to run indefinitely) and also allow binding. 
+It's simply a matter of whether you implement a couple of callback methods: onStartCommand() to allow components to start it and onBind() to allow binding.
+
+
+=> Choosing between a service and a thread :--
+A service is simply a component that can run in the background even when the user is not interacting with your application so you should create a service only if that is what you need.
+
+if you must perform work outside of your main thread but only while the user is interacting with your application youshould create  anew thread. 
+For example if you want to play some music but only while your activity is running you might create a thread in onCreate(), start running it in onStart() and onStop() and stop it in on Stop().
+Also consider using AsyncTask or Handlerthread instead of the traditional Thread class.
+
+
+
+
+
+	The basic :--------------------
+To create a service you must create a subclass of service or use one of its existing subclasses.
+In your implemnetation you must override some callback methods that handle aspect of the service lifecycle and provide a mechanism that allows the component to bind to the service.
+
+=> onStartCommand()
+
+The system invokes this method by calling startService() when another component (such as an activity) requests that the service be started. When this method executes, the service
+is started and can run in the background indefinitely. If you implement this, it is your responsibility to stop the service when its work is complete by calling stopSelf() or stopService(). 
+If you only want to provide binding, you don't need to implement this method.
+
+=> onBind()
+
+The system invokes this method by calling bindService() when another component wants to bind with the service (such as to perform RPC). In your implementation of this method,
+you must provide an interface that clients use to communicate with the service by returning an IBinder. You must always implement this method; however, if you don't want to allow 
+binding, you should return null
+
+
+=> onCreate()
+The system invokes this method to perform one-time setup procedures when the service is initially created (before it calls either onStartCommand() or onBind()).
+If the service is already running, this method is not called.
+
+=> onDestroy()
+The system invokes this method when the service is no longer used and is being destroyed. Your service should implement this to clean up any resources such as threads, registered 
+listeners, or receivers. This is the last call that the service receives.
+
+If a component starts the service by calling startService() (which results in a call to onStartCommand()), the service continues to run until it stops itself with stopSelf() or another 
+component stops it by calling stopService()
+
+If a component calls bindService() to create the service and onStartCommand() is not called, the service runs only as long as the component is bound to it. After the service is 
+unbound from all of its clients, the system destroys it.
+
+
+
+=> Declaring a service in the manifest
+you must declare all service in your application's manifest file just as you do for activities and other components.
+To declare your service add a <service> element as a child of the <application> element.
+
+<manifest ... >
+  ...
+  <application ... >
+      <service android:name=".ExampleService" />
+      ...
+  </application>
+</manifest>
+
+There are other attributes that you can include in the <service> element to define properties such as the permissions that are required to start the service and the process in which 
+the service should run.
+
+android:name attribute is the only required attribute --it specifies the class name of the service. After you publish your application leave this name unchanged to avoid the risk of breaking 
+code due to dependence on explicit intents to start or bind the service.
+
+
+
 10:31 AM 9/3/2019
+
 
 	Intent :------------
 
@@ -405,6 +604,8 @@ startService(Intent)	/ bindService(Intent, ServiceConnection, int)	=> to communi
 Intent has been used to call another acitivity
 Its most significant use  is in the launching of activites, where it can be throught of as the glue between activites.
 It is basically a passive data structure holding an abstract description of an action to be performed.
+
+
 
 Intent Structure :--------------
 The primary pieces of information in an intent are :
@@ -460,13 +661,122 @@ By using explicit intents we can send or share data / content from one activity 
 Explicit intent going to be connected internal world of application suppose if you wants to connect one activity to another activity we can do this quoteby explicit intent.
 To create an Explicit Intent we need to define the component name for Intent object.
 
+It have specifies a component (via setComponent(CompoenntName) or setClass(Context,Class)),which provides the exact class to be run.Often these will not include any other information
+simply beign a way fro an application to launch various internal acitvities it has as the user interact with the application.
+
+
+Example :------------------------------
+package com.example.explicitintent;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+    protected EditText firstnumber,secondnumber;
+    protected Button sum;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        firstnumber=(EditText)findViewById(R.id.editText);
+        secondnumber=(EditText)findViewById(R.id.editText2);
+        sum=(Button)findViewById(R.id.button2);
+
+        sum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int number1=Integer.parseInt(firstnumber.getText().toString());
+                int number2=Integer.parseInt(secondnumber.getText().toString());
+                int sum=number1+number2;
+                Intent intent=new Intent(getApplicationContext(),ResultActivity.class);      //the intent is sending to other activity that is ResultActivity.java
+                intent.putExtra("SUM"," "+sum);
+                /*
+                putExtra() adds extended data to the intent which of
+                two parameter( name of extra data ) second parameter is( data )itself
+
+
+                it is get called by getExtra() by the name that was specified
+                 */
+                startActivity(intent);						/// this ise used for starting the activity
+            }
+        });
+    }
+}
+
+
+Now we are gonna register that activity in the AndroidManifest.xml file in <activity> tag
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.explicitintent">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ResultActivity" ></activity>			//here we declare the other activity class to which we are gonna interact after perform some event.
+
+    </application>
+
+</manifest>
+
+
+//Now we have the another class that is resultactivity.java that is gonna be called after expliclit intent called.
+{
+    private ActionBar actionBar;
+    @Override
+    protected void onCreate(Bundle saveInstanceState) {
+
+        super.onCreate(saveInstanceState);
+        setContentView(R.layout.result);
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("Explicit Intent - Activity2");
+        TextView result=(TextView)findViewById(R.id.result_view);
+        Intent intent=getIntent();
+        String addition=(String)intent.getSerializableExtra("SUM");
+        /*
+        getExtra() fetches data which was added using putExtra()
+         */
+        addition="Sum = "+addition;
+        result.setText(addition);
+    }
+}
+
+
+//it will have the separeate layoutxml file  to show the UI.
+
+
+=> getExtras()
+public Bundla getExtras()
+Reterieve a mpa of extended data from the intent
+
+Returns
+Bundle 		=> the map of all extras previously added with putExtra() or null if none been added.
+
+
 
 
 Implicit Intent :-----------
 These intent do not name a target and the field of the component name is left blank. Implicit intents are often used to activate component in other application.
 It is not specified a component instead they must include enough information for the system to determine which of the available component is best to run for that intent.
 
-When using implecit intent given such an arbitaray intent we need to know what to do with it.This is handle by the process of intent resolution which maps an intent to an Activity
+When using implicit intent given such an arbitaray intent we need to know what to do with it.This is handle by the process of intent resolution which maps an intent to an Activity
 BroadCastreceiver or Service 
 
 		The intent resolution mechanism basically revolve around matching an intnet against all of <intent-filter> descriptions in the installation package.
@@ -481,11 +791,13 @@ for an activity there is a possibility for other apps to start our activity by s
 
 
 
-There are three intent characteristics you can filter on the action , data and categories. For each of these characteriscs you can provides multiple possible matching values (via addAction(String),
+There are three intent characteristics you can filter on the action , data and categories. 
+For each of these characteriscs you can provides multiple possible matching values (via addAction(String),
  addDataType(String), addDataScheme(String), addDataSchemeSpecificpart(String ,int), addDataAuthority(String,String), addDataPath(String,int) and addCategory(String), respectively)
 
 
 Filter Rule :-----------
+
 A match is based on the following rule.Note that for an IntentFilter to match an Intent three condition must hold the action and category must match and the data (both data type and data 
 scheme+authority+path if specified) must match
 
@@ -501,6 +813,20 @@ Note that scheme matching here is case sensitive, unlike formal RFC schemes! You
 => Data Scheme matches if any of the given values match the Intent data's scheme. The Intent scheme is determined by calling Intent#getData and Uri.getScheme() on that URI.
  Note that scheme matching here is case sensitive, unlike formal RFC schemes! You should thus always use lower case letters for your schemes.
 
+
+
+
+Adds a data specificatio to an intent filter. The specification can be just a data type (the mime Type attribute),just a URI , or both a data types and a URI. A URI is specified by separated attributes
+for each of its parts :-
+These attribute that specifiy the URL fromat are optional but also mutually dependent
+=> If a scheme is not specifies for the intent filter all the other URI attribute are ignored.
+=> If a host is not specified for the filter the port attribute and all the path attributed are ignored.
+
+setData() method specifies data ony as a URI
+setType() specifies it only as a MIME type
+setData and setType() specifies it as both a URI and a MIME type.
+The URI is read by getData() 
+The type is read by getType()
 
 
 
