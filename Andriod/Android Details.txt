@@ -172,7 +172,15 @@ If more than one value can be specified, the element is almost always repeated, 
 </intent-filter>
 
 
+
+
+
+
 Configure your Build :---------------------
+
+
+
+
 
 10:52 AM 9/7/2019
 	Button Advanceed Operation :-----------------
@@ -370,7 +378,10 @@ being able to receive or send your broadcasts.
 
 
 
+
+
 The Manifest file :---------------------
+
 Before the Android system can start an app component , start system must know that the component exist by reading the app's manifest file AndroidManifest.xml.
 Your app must declare all its component  in this file which must be at the root of the app project directory.
 
@@ -478,6 +489,7 @@ LoadBroadcastManager.sendBroadcast		This method is used to send broadcasts to re
 
 
 	Services :-----------------------------------------------
+
 A services is an application component that can perform long-running operations in the background, and it doesn't provides a user interface.
 Another application component can start a service and it continues to run in the background even if the user switches to another application.
 
@@ -492,7 +504,7 @@ For example a service can handle network transaction, play music, perform file I
 1) Foreground
 
 A foreground service performs some operations that is noticeable to the user.
-For example an audio app would use a foerground service to play an audio track. Foreground service must display a Notification.
+For example an audio app would use a foreground service to play an audio track. Foreground service must display a Notification.
 Foreground services continue running even when the user isn't interacting with the app.
 
 2) Background 
@@ -571,11 +583,105 @@ To declare your service add a <service> element as a child of the <application> 
   </application>
 </manifest>
 
+
+
 There are other attributes that you can include in the <service> element to define properties such as the permissions that are required to start the service and the process in which 
 the service should run.
 
 android:name attribute is the only required attribute --it specifies the class name of the service. After you publish your application leave this name unchanged to avoid the risk of breaking 
 code due to dependence on explicit intents to start or bind the service.
+
+
+
+
+Notice that the onStartCommand() methods must return an Integer. The integer is a value that describe how the system should continue the service in hte event that the system kills it.The default
+implementation for IntentService handles this for you but you are able to modify it. The return value from onStartCommand() must be one of the following constants:
+
+1)START_NOT_STICKY
+If the system kills the service after onStartCommand() return do not recreate the service unless there are pending intents to deliver.This is safest option to avoid running service when 
+not necessary and when your application can simply restart any unfinished jobs.
+
+2) START_STICKY
+if the system kills the service after onStartCommand() returns recreate the service and call onStartCommand() but do not redliver the last intent.In that case those intents are delivered.This 
+is suitable for media players (or similar service) that are not executing commands but are running indefinitely and waiting for a job.
+
+
+3) START_REDELIVER_INTENT
+if the system kills the service after onStartCommand() return recreate the service and call onStartCommand() with the last intent that was deliverd to the service.
+Any pending intents are delivered in turn. This is suitable for services that are actively performing a job that should be immediately resumed such as download a file.
+
+
+
+Starting a Services :-----------------------------
+you can start a service from an activity or other application component by passing an Intent to startService() or startForegroundService().
+The Android system calls the service's onStartCommadn() methods and pass it the Intent which specifies which service to start.
+
+
+Note: If your app targets API level 26 or higher, the system imposes restrictions on using or creating background services unless the app itself is in the foreground. If an app needs to 
+create a foreground service, the app should call startForegroundService(). That method creates a background service, but the method signals to the system that the service will promote 
+itself to the foreground. Once the service has been created, the service must call its startForeground() method within five seconds.
+
+For example an activity can start the example service in the previous section (helloService) using an Explicit intent with startService()
+
+Intent intent=new Intent(this,HelloService.class);
+startService(intent);
+
+The startService() method returns immediately and the Android system calls the service's onStartCommand() method if the service isn't already running the system first calls onCreate()
+and then it calls onStartCommand().
+
+If the service doesn't also provide binding, the intent that is delivered with startService() is the only mode of communication between the application component and the service.
+However, if you want the service to send a result back, the client that starts the service can create a PendingIntent for a broadcast (with getBroadcast()) and deliver it to the service in the Intent that starts the service. The service can then use the broadcast to deliver a result.
+
+Multiple requests to start the service result in multiple corresponding calls to the service's onStartCommand(). However, only one request to stop the service 
+(with stopSelf() or stopService()) is required to stop it
+
+
+
+
+
+
+=> Sending notification to the user :---------------------------
+When a service is running it can notify the user of events using ToastNotification or Status bar notificatios.
+
+A Toast Notification is a message that appears on the surface of the surrent windows fo ronly a moment before disappearing.
+A status bar notification provides an icon in the status bar with a message which the user can select in order to make an action (such as start an activity)
+
+Usually a status bar Notification is best technique to use when background works such as a file download has completed, and the user cannow act on it.
+When the user select the notification from the expanded view the notification can start an activity (such as to display to downloaded file)
+
+
+
+=>Running a service in the Foreground :---------------------
+A foreground service is a service that the user is actively aware of and  isn't a candidate fro the system to kill when low on memory.
+Foreground service must provides a notification for the status bar which in placed under ongoing heading .
+This meas that the notification cannot be dismissed unless the service is either stopped or removed from the foreground.
+
+
+For Example,  a music player that plays music from a service should be set to run in the foreground, because the user is explicitly aware of its operation.
+ The notification in the status bar might indicate the current song and allow the user to launch an activity to  interact with the music player. Similarly, an app to let users track their runs 
+would need a foreground service to track the user's location.
+
+To request that your service run in the foreground, call startForeground(). This method takes two parameters: an integer that uniquely identifies the notification and the 
+Notification for the status bar. The notification must have a priority of PRIORITY_LOW or higher. 
+
+
+Intent notificationIntent = new Intent(this,ExampleActivity.class);
+PendingIntent pendingIntent = PendingIntent.getActivity(this,0,notificationIntent,0);
+
+Notification notification = new Notification.Builder (this,CHANNEL_DEFAULT_IMPORTANCE)
+	..setContentTitle(getText(R.string.notification_title))
+    	.setContentText(getText(R.string.notification_message))
+    	.setSmallIcon(R.drawable.icon)
+    	.setContentIntent(pendingIntent)
+    	.setTicker(getText(R.string.ticker_text))
+    	.build();
+
+startForeground(ONGOING_NOTIFICATION_ID, notification);
+
+
+To remove the service from the foreground, call stopForeground(). This method takes a boolean, which indicates whether to remove the status bar notification as well. 
+This method does not stop the service. However, if you stop the service while it's still running in the foreground, the notification is also removed.
+
 
 
 
@@ -763,8 +869,9 @@ Now we are gonna register that activity in the AndroidManifest.xml file in <acti
 
 
 => getExtras()
+
 public Bundla getExtras()
-Reterieve a mpa of extended data from the intent
+Reterieve a map of extended data from the intent
 
 Returns
 Bundle 		=> the map of all extras previously added with putExtra() or null if none been added.
@@ -859,7 +966,215 @@ We can define a filter with multiple instances of <action>, <category> or <data>
 
 
 
-:
+
+
+
+3:02 PM 9/10/2019
+
+Fragments :---------------------------------------------
+A Fragment is a piece of an activty which enable more modular activity design.It will not ne wrong if we say a fragment is a kind of sub activity.
+
+Following are important points about fragment :--------------------------
+
+A fragment has its own layout and its own behaviour with its own life cycle callbacks.
+
+You can add or remove fragments in an activity while the activity is running.
+
+You can combine multiple fragments in a single activity to build a multi-pane UI.
+
+A fragment can be used in multiple activities.
+
+Fragment life cycle is closely related to the life cycle of its host activity which means when the activity is paused, all the fragments available in the activity will also be stopped.
+
+A fragment can implement a behaviour that has no user interface component.
+
+Fragments were added to the Android API in Honeycomb version of Android which API version 11
+
+
+=> You create fragments by extending Fragment class and You can insert a fragment into your activity layout by declaring the fragment in the activity's layout file, as a <fragment> element
+
+
+
+Fragment life-cycle :-----------------
+
+1) onAttach()
+ the fragment instance is associate with an activity instance. The fragment and the activity is not fully initialized.Typically you get in this method a reference to the activity
+which uses the fragemnt for furthrt initialization work.
+
+2) onCreate()
+call this method when fragment is created
+
+3) onCreateView()
+call this method when fragment draw user interface for the first time. To draw a UI for your fragment you must return a view component from this method that is the root of fragment layout.
+
+4) onActivityCreated()
+The onActivityCreated() is called after onCreateView() method when the host activity is created.At this point view can be accessed with the findViewBy Id() method...
+
+5) onStart()
+this method is called once the fragemnt gets visible
+
+6) onResume() fragment become active
+
+7) onPause()
+user in leaving the fragment
+
+8) onStop() 
+fragment is going to stop by calling onStop()
+
+9) onDestroyView()
+Fragment view will destroy after call this method
+
+10) onDestroy
+this is called to do final clean up.
+
+
+How to use Fragments?
+This involves number of simple steps to create Fragments.
+
+First of all decide how many fragments you want to use in an activity. For example let's we want to use two fragments to handle landscape and portrait modes of the device.
+
+Next based on number of fragments, create classes which will extend the Fragment class. The Fragment class has above mentioned callback functions. You can override any of the functions based on your requirements.
+
+Corresponding to each fragment, you will need to create layout files in XML file. These files will have layout for the defined fragments.
+
+Finally modify activity file to define the actual logic of replacing fragments based on your requirement.
+
+
+
+
+public static class ExampleFragment extends Fragment {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.example_fragment, container, false);
+    }
+}
+
+
+The container parameter passed to onCreateView() is the parent ViewGroup in which your fragment layout in inserted.
+
+The saveInstanceState parameter is a Bundle that provides data about the previous instance of the fragment if the fragment is being resumed.
+
+
+
+inflate() method takes three arguments:
+
+1) resource ID of the layout you want to inflate
+2) ViewGroup to be the parent of the infalted layout.Passing the container is important in order for the system to apply layout parameter to root view of the infalted specified by the parent view 
+in which it's going.
+3) boolean indicating whether the inflate layout should be attached to the ViewGroup.
+
+Adding a user interface :------------------------------
+A fragment is usually used as part of an acitvity user interface and contributes its own layout to the activity.
+To provide a layout from fragment you must implement the onCreateView() callback mwthod which must return a View that is the root of your fragmen' name.
+
+
+
+Types of Fragments :----------------------
+
+Basically fragments are divided as three stages as shown below.
+
+1) Single frame fragments - Single frame fragments are using for hand hold devices like mobiles, here we can show only one fragment as a view.
+
+2) List fragments - fragments having special list view is called as list fragment
+
+3) Fragments transaction - Using with fragment transaction. we can move one fragment to another fragment
+
+
+
+
+Adding a fragment to an Activity :------------------------
+Usually a fragment contribute a portion of UI to the host activity which is embedded as a part of the activity's overall view hierarchy. There are two ways you can add a fragment to the 
+activity layout:-------------------
+
+
+1) Declare the fragment inside the activity's layout file
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <fragment android:name="com.example.news.ArticleListFragment"
+            android:id="@+id/list"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    <fragment android:name="com.example.news.ArticleReaderFragment"
+            android:id="@+id/viewer"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+</LinearLayout>
+
+The android:name attribute in the <fragment> specifies the Fragment class to instantiate in the layout.
+
+
+summary:--------------------------
+we can add fragment by using the <fragment> tag that will be in the activity_main.xml file with a name of the  sub class that we declare in the MainActivity.java directory.
+
+
+
+
+
+
+2) Programmatically add the fragment to an existing ViewGroup.
+At any time while your activity is running you can add fragment to your activity layouot. you simply need to specify a ViewGroup in which to place the fragment.
+
+
+To make fragment transactions in your activity (such as add, remove, or replace a fragment), you must use APIs from FragmentTransaction. 
+You can get an instance of FragmentTransaction from your FragmentActivity like this:
+
+FragmentManager fragmentManager = getSupportFragmentManager();
+FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+You can then add a fragment using the add() method,
+
+
+ExampleFragment fragment = new ExampleFragment();
+fragmentTransaction.add(R.id.fragment_container, fragment);
+fragmentTransaction.commit();
+
+The first argument passed to add() is the ViewGroup in which the fragment should be placed specified by resource ID, and  the second parameter fragment to add.
+
+Once you've made your changes with FragmentTransaction you must call commit() for the changes to take effect.
+
+
+
+=> Managing Fragments
+
+To manage the fragments in your activity, you need to use FragmentManager. To get it, call getSupportFragmentManager() from your activity.
+Some things that you can do with FragmentManager include:
+
+1) Get fragments that exist in the activity, with findFragmentById() (for fragments that provide a UI in the activity layout) or findFragmentByTag() (for fragments that do or don't provide a UI).
+2) Pop fragments off the back stack, with popBackStack() (simulating a Back command by the user).
+2) Register a listener for changes to the back stack, with addOnBackStackChangedListener().
+
+For more information about these methods and others, refer to the FragmentManager class documentation.
+
+As demonstrated in the previous section, you can also use FragmentManager to open a FragmentTransaction, which allows you to perform transactions,
+such as add and remove fragments.
+
+
+Before you call commit(), however, you might want to call addToBackStack(), in order to add the transaction to a back stack of fragment transactions. \
+This back stack is managed by the activity and allows the user to return to the previous fragment state, by pressing the Back button
+
+
+In this example, newFragment replaces whatever fragment (if any) is currently in the layout container identified by the R.id.fragment_container ID. By calling addToBackStack(), the replace transaction is saved to the back stack so the user can reverse the transaction and bring back the previous fragment by pressing the Back button.
+
+FragmentActivity then automatically retrieve fragments from the back stack via onBackPressed()
+
+
+
+
+
+
+
+
+
+
+
 
 10:11 AM 9/4/2019
 
