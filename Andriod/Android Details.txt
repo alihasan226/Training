@@ -1,4 +1,7 @@
+
+
 App Manifest Overview :---------------------------
+
 Every app project must have an AndroidManifest.xml file(with precisely that name) at the root of the project source set.The Manifest declare the essential information about your app to the
 Android build tools Android operating system and Google play.
 
@@ -93,6 +96,12 @@ In every case, the icon and label that are set in a parent element become the de
 
 
 
+The icon and label that are set in a component's <intent-filter> are shown to the user whenever that compoennt is presented as an option to funfill an intent.
+By default this icon is inherited from which ever icon is declared for the parent component but  you might want to change the icon for an intent filter if it provides a unique action that you would
+like to better indicate in the chooser dislog.
+
+
+
 => Permissions
 Android apps must request permission to access sensitive user data (such as contacts and SMS) or certain system features (such as the camera and internet access). 
 Each permission is identified by a unique label. For example, an app that needs to send SMS messages must have the following line in the manifest:
@@ -176,7 +185,155 @@ If more than one value can be specified, the element is almost always repeated, 
 
 
 
+
+=> <action>
+syntax :-
+
+	<action android:name="string"/>
+
+contained in:
+	<intent-filter>
+
+description :
+Adds an action ot an internt filter. An <intent-filter> element must contain one or more <action> elements.
+If there are not <action>element in an intent fileter the filter doesn't accept any intent object 
+
+attribute :
+	android:name
+	The name of the action some standard actions are defined in the Intent class as
+	ACTION_string constants to assign one of these actions to this attribute prepend
+	"android.intnet.action. "to the string that follow ACTION_
+	For example for ACTION_MAIN use "android.intent.action.MAIN"
+
+
+
+
+=> <activity>
+
+<activity android:allowEmbedded=["true" | "false"]
+          android:allowTaskReparenting=["true" | "false"]
+          android:alwaysRetainTaskState=["true" | "false"]
+          android:autoRemoveFromRecents=["true" | "false"]
+          android:banner="drawable resource"
+          android:clearTaskOnLaunch=["true" | "false"]
+          android:colorMode=[ "hdr" | "wideColorGamut"]
+          android:configChanges=["mcc", "mnc", "locale",
+                                 "touchscreen", "keyboard", "keyboardHidden",
+                                 "navigation", "screenLayout", "fontScale",
+                                 "uiMode", "orientation", "density",
+                                 "screenSize", "smallestScreenSize"]
+          android:directBootAware=["true" | "false"]
+          android:documentLaunchMode=["intoExisting" | "always" |
+                                  "none" | "never"]
+          android:enabled=["true" | "false"]
+          android:excludeFromRecents=["true" | "false"]
+          android:exported=["true" | "false"]
+          android:finishOnTaskLaunch=["true" | "false"]
+          android:hardwareAccelerated=["true" | "false"]
+          android:icon="drawable resource"
+          android:immersive=["true" | "false"]
+          android:label="string resource"
+          android:launchMode=["standard" | "singleTop" |
+                              "singleTask" | "singleInstance"]
+          android:lockTaskMode=["normal" | "never" |
+                              "if_whitelisted" | "always"]
+          android:maxRecents="integer"
+          android:maxAspectRatio="float"
+          android:multiprocess=["true" | "false"]
+          android:name="string"
+          android:noHistory=["true" | "false"]  
+          android:parentActivityName="string" 
+          android:persistableMode=["persistRootOnly" | 
+                                   "persistAcrossReboots" | "persistNever"]
+          android:permission="string"
+          android:process="string"
+          android:relinquishTaskIdentity=["true" | "false"]
+          android:resizeableActivity=["true" | "false"]
+          android:screenOrientation=["unspecified" | "behind" |
+                                     "landscape" | "portrait" |
+                                     "reverseLandscape" | "reversePortrait" |
+                                     "sensorLandscape" | "sensorPortrait" |
+                                     "userLandscape" | "userPortrait" |
+                                     "sensor" | "fullSensor" | "nosensor" |
+                                     "user" | "fullUser" | "locked"]
+          android:showForAllUsers=["true" | "false"]
+          android:stateNotNeeded=["true" | "false"]
+          android:supportsPictureInPicture=["true" | "false"]
+          android:taskAffinity="string"
+          android:theme="resource or theme"
+          android:uiOptions=["none" | "splitActionBarWhenNarrow"]
+          android:windowSoftInputMode=["stateUnspecified",
+                                       "stateUnchanged", "stateHidden",
+                                       "stateAlwaysHidden", "stateVisible",
+                                       "stateAlwaysVisible", "adjustUnspecified",
+                                       "adjustResize", "adjustPan"] >   
+    . . .
+</activity>
+
+
+
+
+contained in :	<application>
+
+can contain :	<intent-filter>
+		<meta-data>
+		<layout>
+
+description :
+	
+	Declares an activyt that implements part of the application's visual user interface.
+
+
+=> android:exported
+this element sets whether the activity can be launched by components of the other applications -- "true: if it can be and "false" if not.
+If "false" the activity can be launched only by components of the same applicaiton or applications with the same user ID.
+
+if you are using intent  filter you should not set this element "flase" if you do so and an app tries to call the activtiy system throws an ActivityNotfoundException.
+if you don' have the intent filters the default value for this element is false.
+
+
+=> android:screenOrientation
+The orientation of the activity's display on the device. The system ignores this attribute if the activity is running in multi-window mode.
+The value can be any one of the following strings:
+
+1) unspecified	the default value the system choose the orientation the policy it uses and there for choice made in specific contect may diffre from device to device.
+
+
+
+=> android:shoeForAllUser
+whether or not the activity is shown when the device's current user is diffrent  than the user when launched the activity.you can set this attribute to a aresource or theme attribute that contains a boolean value.
+
+
+
 Configure your Build :---------------------
+
+
+
+
+
+<category>  :--------------------------------
+
+<category android:name="string"/>
+
+contined in: 
+	<intent-filter>
+
+description:
+	Adds a category name to an intent filter
+
+attribute:
+	android:name
+
+	The name of the category. Standard categories are defined in the  Intent class as CATEGORY_name constants
+	For example the string value for CATEGORY_LAUNCHER is "android.intent.category.LAUNCHER".
+
+In order ro receive implecit intents you must include the CATEGORY_DEFAULT category in the intent filter. The methods startactivity().
+
+
+
+
+
+
 
 
 
@@ -227,6 +384,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 3:03 PM 9/5/2019
+
+
 Application Fundamentals :------------
 Android apps can be written using Kotlin,Java and C++ languages . The Android SDK tools compiles your code along with any data and recources files into an APK, an Android package
 which is an archive file with an .apk suffix.
@@ -380,7 +539,9 @@ being able to receive or send your broadcasts.
 
 
 
-The Manifest file :---------------------
+Android Manifest file :---------------------
+
+
 
 Before the Android system can start an app component , start system must know that the component exist by reading the app's manifest file AndroidManifest.xml.
 Your app must declare all its component  in this file which must be at the root of the app project directory.
@@ -969,6 +1130,27 @@ We can define a filter with multiple instances of <action>, <category> or <data>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 3:02 PM 9/10/2019
 
 Fragments :---------------------------------------------
@@ -1028,7 +1210,53 @@ Fragment view will destroy after call this method
 this is called to do final clean up.
 
 
-How to use Fragments?
+
+
+life Cycle :-------------
+
+			Activity				  			Fragment
+
+
+1) onCreate()							2)onAttach()
+the activty is able define its appearence by setContentView()			in this we get a reference of the activity in the fragment is placed
+
+3)onAttachFragment							4) onCreate()
+this method is called on the activity to notify the activity that			5) onCreateView()
+								call this method when fragment draw user interface for the first time. To draw a UI for your fragment you 
+								must return a view component from this method that is the root of fragment layout.
+
+								6) onActivityCreated()
+								The onActivityCreated() is called after onCreateView() method when the host activity is created.
+								At this point view can be accessed with the findViewBy Id() method
+
+7) onStart()							8)onStart()
+
+9)onResume()							10) onResume()
+
+
+Now Fragment is Destroyed :---------------------
+			
+								1) onPaused()
+2)onPaused
+								3)onSaveInstanceState()					
+								give you bundle object to store some value
+4)onSaveInstanceState()
+								5)onStop()
+6)onStop()
+								7) onDestroyView()
+								after this the fragment completely destroey
+
+								8) onDetach()
+								Fragment is not tied to the Activity and does not have View hierarchy
+
+a fragment is attach recently
+
+
+
+
+
+=> How to use Fragments?
+
 This involves number of simple steps to create Fragments.
 
 First of all decide how many fragments you want to use in an activity. For example let's we want to use two fragments to handle landscape and portrait modes of the device.
@@ -1065,6 +1293,15 @@ inflate() method takes three arguments:
 in which it's going.
 3) boolean indicating whether the inflate layout should be attached to the ViewGroup.
 
+
+=> view.findViewById() is a call to a function by a reference of View class i.e view that is inflated using layout inflater
+
+=> layout inflater
+layout inflater is a class that help you to convert a View into java object and that is by creating is reference and call the function findViewbyId() using the reference view. this kind of inflation 
+is mostly used in Fragment because unlike activities Fragments have no object they can't be instantiated.
+Theri life cycle is totally depend upon the activities in which they are created.
+These fragments have no java object that's why they don't take place in Manifest file,because these fragemnt are implemented in Activities
+
 Adding a user interface :------------------------------
 A fragment is usually used as part of an acitvity user interface and contributes its own layout to the activity.
 To provide a layout from fragment you must implement the onCreateView() callback mwthod which must return a View that is the root of your fragmen' name.
@@ -1085,6 +1322,17 @@ Basically fragments are divided as three stages as shown below.
 
 
 Adding a fragment to an Activity :------------------------
+
+
+How to make Fragment :---------------------------
+
+1) Extend Fragment class
+2) Providing appearence in XML/Java
+3) Override onCreateView to link the appearence
+4) Use the Fragment in XML/Java
+
+
+
 Usually a fragment contribute a portion of UI to the host activity which is embedded as a part of the activity's overall view hierarchy. There are two ways you can add a fragment to the 
 activity layout:-------------------
 
@@ -1120,8 +1368,9 @@ we can add fragment by using the <fragment> tag that will be in the activity_mai
 
 
 2) Programmatically add the fragment to an existing ViewGroup.
-At any time while your activity is running you can add fragment to your activity layouot. you simply need to specify a ViewGroup in which to place the fragment.
 
+
+At any time while your activity is running you can add fragment to your activity layout. you simply need to specify a ViewGroup in which to place the fragment.
 
 To make fragment transactions in your activity (such as add, remove, or replace a fragment), you must use APIs from FragmentTransaction. 
 You can get an instance of FragmentTransaction from your FragmentActivity like this:
@@ -1137,6 +1386,9 @@ fragmentTransaction.add(R.id.fragment_container, fragment);
 fragmentTransaction.commit();
 
 The first argument passed to add() is the ViewGroup in which the fragment should be placed specified by resource ID, and  the second parameter fragment to add.
+
+
+fragmentTransaction.add(R.id.framelayout,sample1)
 
 Once you've made your changes with FragmentTransaction you must call commit() for the changes to take effect.
 
@@ -1161,13 +1413,51 @@ Before you call commit(), however, you might want to call addToBackStack(), in o
 This back stack is managed by the activity and allows the user to return to the previous fragment state, by pressing the Back button
 
 
-In this example, newFragment replaces whatever fragment (if any) is currently in the layout container identified by the R.id.fragment_container ID. By calling addToBackStack(), the replace transaction is saved to the back stack so the user can reverse the transaction and bring back the previous fragment by pressing the Back button.
+In this example, newFragment replaces whatever fragment (if any) is currently in the layout container identified by the R.id.fragment_container ID. By calling addToBackStack(), 
+the replace transaction is saved to the back stack so the user can reverse the transaction and bring back the previous fragment by pressing the Back button.
 
 FragmentActivity then automatically retrieve fragments from the back stack via onBackPressed()
 
 
+=> addToBackStack()
+public abstractFragmentTranscation addToBackStack(String name)
+
+Add this transaction to the back stack. This means that the transaction will be rememberred offer it is committed and will reverse its operation whenlater popped off the stack
+
+name => String : An optional name for this back stack state or null. This value may be null.
+
+=> commit
+public abstract int commit()
+Schedules a commit of this transaction.
+The commit does not happen immediately . it will be scheduled as work on the main thread to be done the next  time that thread ready.
+
+=> detach 
+public abstract FragmentTransaction detach (Fragment fragment)
+Detach the given fragment from the  UI. This is the same state as when it is put on the back stack the fragment is removed from the UI however its sate is still being actively managed by the fragment manager. when going into this state its view
+hierarchy is destroyed.
+
+=> disallowAddTobackStack
+
+public abstract FragmentTransaction disallowAddToBackStack()
+
+Disallow calls to addToBackStack(java.lang.String). Any furture calls to addtoBackStack will throw IllegalStateException.
+If addToBackStack has already been called this method will throw IllegalStateException.
+reutrn FragmentTransaction
 
 
+=> hide
+public abstract fragmentTransaction hide (Fragment fragment)
+Hides an existing  fragment. This is only relevant for fragment whode views has been added to a container as this will cause the view to be hidden.
+
+
+
+=> isEmpty
+true if this transaction contains no operations false otherwise.
+
+=> remove
+public abstract FragmentTransaction remove (Fragment fragment)
+
+Remove an existing fragment. If it was added to a container, its view is also removed from that container.
 
 
 
@@ -1645,6 +1935,18 @@ Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
 
 	Drawable resource :---------------
 
+
+====>
+Project now created launcher icons in the mipmap resources filders instead of the drawable folders
+Android introduced mipmap drawable for providing more flexibility to design the launcher icons. mipmap first introuduced in Android jelly Bean 4.3 . If you are building versions of your app for 
+different densities you should know about the mipmap resource directory. This is exactly like normal drawable folder resources except it does not participate in density striping while optimisation when creating different target apks.
+
+Why we should use mipmaps for app launcher icons?
+Devices have different resolutions so the launcher app show the icons on different resolutions. Resource optimisation techniques sometimes removes resources for unused screen 
+densities and when the launcher app has to upscale a lower-resolution icon for display it might look blurred. To avoid this issues, applications should use the mipmap drawable folders 
+for app launcher icons. The Android system never strips this resource, and ensures that launcher apps can pick icons with the best resolution for display.
+<===
+
 A drawablw resource is a general concept for a graphics that can be drawn to the screen and which you can reterieve with APIs such as getDrawable(int) or apply to another Xml resource 
 attributes such as android:drawable and android:icon
 
@@ -1666,3 +1968,60 @@ A bitmap file is a .png, .jpg, or .gif file. Android creates a Drawable resource
 resource reference:
 In Java: R.drawable.filename
 In XML: @[package:]drawable/filename
+
+
+
+
+
+
+	Accessing Cameras Take Photos :------------------------------------
+
+In this we are going to  Controlling the camera
+
+1) Request the camera feature :-------------------
+
+If an essential function of your application is taking pictures, then restrict its visibility on Google Play to devices that have a camera. To advertise that your application depends on having
+a camera, put a <uses-feature> tag in your manifest file:
+
+<manifest ... >
+    <uses-feature android:name="android.hardware.camera"
+                  android:required="true" />
+    ...
+</manifest>
+
+If your application uses, but does not require a camera in order to function, instead set android:required to false
+
+
+
+2) Take a photo with a camera app
+Function that involves an intent to capture a photo
+
+static final int REQUEST_IMAGE_CAPTURE = 1;
+
+private void dispatchTakePictureIntent() {
+    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    }
+}
+
+Notice that the startActivityForResult() method is protected by a condition that calls resolveActivity(), which returns the first activity component that can handle the intent.
+Performing this check is important because if you call startActivityForResult() using an intent that no app can handle, your app will crash. So as long as the result is not null,
+it's safe to use the intent.
+
+
+3) Get the thumbnail
+If the simple feat of taking a photo is not the culmination of your app's ambition, then you probably want to get the image back from the camera application and do something with it.
+
+The Android Camera application encodes the photo in the return Intent delivered to onActivityResult() as a small Bitmap in the extras, under the key "data". 
+The following code retrieves this image and displays it in an ImageView.
+
+@Override
+protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        Bundle extras = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) extras.get("data");
+        imageView.setImageBitmap(imageBitmap);
+    }
+}
+
