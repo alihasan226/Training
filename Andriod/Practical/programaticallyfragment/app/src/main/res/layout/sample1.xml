@@ -2,16 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D813">
+    android:background="#69F0AE"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fragment2"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="150dp"
-        android:textStyle="bold|italic"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="120dp"
+        android:textStyle="bold"
         android:textSize="30dp"/>
 
+    <EditText
+        android:id="@+id/editText"
+        android:layout_below="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="120dp"
+        android:ems="8"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_below="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="20dp"
+        android:ems="8"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_below="@id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="160dp"
+        android:text="Add"
+        android:background="@drawable/cornerbutton"/>
+
 </LinearLayout>
+
+    <!--em is a CSS property for font-size  => android:ems is the number of 'M' occurrences in a EditText field. it points to its width-->

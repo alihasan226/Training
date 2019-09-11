@@ -5,20 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#D81"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Page 1"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/cornerbutton"
+        />
 
     <FrameLayout
         android:id="@+id/framelayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="20dp"/>
+        android:layout_height="550dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        />
 
-    <FrameLayout
-        android:id="@+id/framelayout1"
-        android:layout_below="@+id/framelayout"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="20dp"/>
 
 </LinearLayout>
