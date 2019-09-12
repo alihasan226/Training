@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!--
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="50dp"
+        android:text="Sending Email"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edittext1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Recipient"
+        android:ems="10"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="100dp"/>
+    <EditText
+        android:id="@+id/edittext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Subject"
+        android:ems="10"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/edittext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Body"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="100dp"
+        android:ems="10"/>
+
+    <Button
+        android:id="@+id/buttonl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="160dp"
+        android:background="@drawable/buttoncorner"/>
+-->
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sending SMS"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="40dp"
+        android:textSize="30sp"
+        android:textColor="#030303"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/edittext1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="105dp"
+        android:hint="Phone Number"
+        android:ems="10"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/edittext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="20dp"
+        android:hint="Body of Message"
+        android:ems="10"
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/buttonl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="170dp"
+        android:background="@drawable/buttoncorner"
+        />
+
+</LinearLayout>

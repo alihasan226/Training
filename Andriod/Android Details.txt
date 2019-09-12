@@ -141,6 +141,8 @@ android {
   }
 }
 
+
+
 => <uses-feature>
 The <uses-feature> element allows you to declare hardware and software features your app needs. For example, if your app cannot achieve basic functionality on a device
 without a compass sensor, you can declare the compass sensor as required with the following manifest tag
@@ -301,7 +303,7 @@ The value can be any one of the following strings:
 
 
 => android:shoeForAllUser
-whether or not the activity is shown when the device's current user is diffrent  than the user when launched the activity.you can set this attribute to a aresource or theme attribute that contains a boolean value.
+whether or not the activity is shown when the device's current user is diffrent  than the user when launched the activity.you can set this attribute to a resource or theme attribute that contains a boolean value.
 
 
 
@@ -327,7 +329,7 @@ attribute:
 	The name of the category. Standard categories are defined in the  Intent class as CATEGORY_name constants
 	For example the string value for CATEGORY_LAUNCHER is "android.intent.category.LAUNCHER".
 
-In order ro receive implecit intents you must include the CATEGORY_DEFAULT category in the intent filter. The methods startactivity().
+In order ro receive implicit intents you must include the CATEGORY_DEFAULT category in the intent filter. The methods startactivity().
 
 
 
@@ -340,7 +342,8 @@ In order ro receive implecit intents you must include the CATEGORY_DEFAULT categ
 
 
 10:52 AM 9/7/2019
-	Button Advanceed Operation :-----------------
+	Button Advanced Operation :-----------------
+
 Performing the Switch operation on button
 
 package com.example.nestedbutton;
@@ -380,16 +383,21 @@ public class MainActivity extends AppCompatActivity {
 
 2) Make the Button Stylish :-------
 
+we can make button stylish using the 
+android:background="@drawable/botton_corner.xml
+
+that file should be present inside the button_corner( file name) under drawable folder.
+
+
 
 
 
 3:03 PM 9/5/2019
 
-
 Application Fundamentals :------------
 Android apps can be written using Kotlin,Java and C++ languages . The Android SDK tools compiles your code along with any data and recources files into an APK, an Android package
 which is an archive file with an .apk suffix.
-One APK file contains all the content of an ANdroid app and is the file that Android-powered device use to install the app.
+One APK file contains all the content of an Android app and is the file that Android-powered device use to install the app.
 
 
 The Android system implements the principle of least privilage .That is each app by default has access only to the components that it requires to do its work and no more. This creates a very secure environment only to the components that it requires to do
@@ -399,18 +407,18 @@ The Android system implements the principle of least privilage .That is each app
 
 
 	Application Component :-----------------
-App components are essentially building blocks of an Android app. Each component is an entry point through which the system or a user can can enter your app. Some component depends on others.
+App components are essentially building blocks of an Android app. Each component is an entry point through which the system or a user can enter your app. Some component depends on others.
  
 there are four different types of app components :-
 1) Activities
 2) Services
 3) Broadcast Receiver
-4) Content Provides
+4) Content Provides			(x)
 
 Each type serves a distinct purpose and has a distinct lifecycle that defines how the component is created and destroyed
 
 1) Activity
-An Activity is the entry point for interacting wiht the user.
+An Activity is the entry point for interacting with the user.
 It represent a single screen with a user interface.
 Example  an email app might have one activity that shows a list of new emails, another activity to compose an email, and another activity for reading emails.
 
@@ -437,7 +445,7 @@ For example, the Android system provides a content provider that manages the use
 
 	Activating Components :----------------
 
-Three of the four component types --activities , services, and broadcast receivers --are activated by an asynchronous message called an Intent.
+Three of the four component types --activities , services, and broadcast receivers -- are activated by an asynchronous message called an Intent.
 Intent bind individual component to each other at runtime. An intent is created with an Intent object, which defines a message to activate either a specific component (explicit intent ) or a 
 specific type of component (impicit intent).
 
@@ -456,7 +464,7 @@ For activities and services an intent defines the action to be perform (for exam
 
 Android apps can send or receive broadcast message from the Android system and other Android apps.
 These broadcast are sent when an event of interest occurs. For example the Android system sends broadcast when various system events occurs such as when the system boots up or the 
-device stats charging. App can also send custom broadcast, for example to notify other apps of something that they might be interested in(for example some new data has been downloaded).
+device stats charging. App can also send custom broadcast, For example to notify other apps of something that they might be interested in(for example some new data has been downloaded).
 
 Apps can register to receive specific broadcasts. When a broadcast is sent, the system automatically routes broadcasts to apps that have subscribed to receive that particular type of 
 broadcast.
@@ -522,6 +530,7 @@ isn't called if the user moves back in the history stack.
 
 
 Sending Broadcasts :-----------------------
+
 Android provides three ways for app to send broadcast
 
 1) The sendOrderedBroadcast(Intent,String) methods sends broadcast s to one receiver at a time. As each receiver executes it turn it can propagate a result to the receiver or it can 
@@ -755,7 +764,7 @@ code due to dependence on explicit intents to start or bind the service.
 
 
 
-Notice that the onStartCommand() methods must return an Integer. The integer is a value that describe how the system should continue the service in hte event that the system kills it.The default
+Notice that the onStartCommand() methods must return an Integer. The integer is a value that describe how the system should continue the service in the event that the system kills it.The default
 implementation for IntentService handles this for you but you are able to modify it. The return value from onStartCommand() must be one of the following constants:
 
 1)START_NOT_STICKY
@@ -763,7 +772,7 @@ If the system kills the service after onStartCommand() return do not recreate th
 not necessary and when your application can simply restart any unfinished jobs.
 
 2) START_STICKY
-if the system kills the service after onStartCommand() returns recreate the service and call onStartCommand() but do not redliver the last intent.In that case those intents are delivered.This 
+if the system kills the service after onStartCommand() returns recreate the service and call onStartCommand() but do not redeliver the last intent.In that case those intents are delivered.This 
 is suitable for media players (or similar service) that are not executing commands but are running indefinitely and waiting for a job.
 
 
@@ -1974,7 +1983,14 @@ In XML: @[package:]drawable/filename
 
 
 
+
+
+
+
+
+
 	Accessing Cameras Take Photos :------------------------------------
+
 
 In this we are going to  Controlling the camera
 
@@ -1994,10 +2010,11 @@ If your application uses, but does not require a camera in order to function, in
 
 
 2) Take a photo with a camera app
+
 Function that involves an intent to capture a photo
 
-static final int REQUEST_IMAGE_CAPTURE = 1;
 
+static final int REQUEST_IMAGE_CAPTURE = 1;
 private void dispatchTakePictureIntent() {
     Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -2009,8 +2026,23 @@ Notice that the startActivityForResult() method is protected by a condition that
 Performing this check is important because if you call startActivityForResult() using an intent that no app can handle, your app will crash. So as long as the result is not null,
 it's safe to use the intent.
 
+=>
+By the help of android startActivityForResult() method we can get result from another activity.
+By the help of Android startActivityForResult() method we can send information from one activity to another and vice-versa.
+The android startActivityForResult method requires a result from the second activity (activity to be invoked).
+
+In such case we need to override the onActivityResult method that is incoked aytomatically when second activity returs result.
+
+=> Method Signature
+There are two variants of startActivityForResult() method
+
+public void startActivityForResult(Intent intent,int requestCode)
+public void startActivityForResult(Intent intent,int requestCode,Bundle options)
+
+
 
 3) Get the thumbnail
+
 If the simple feat of taking a photo is not the culmination of your app's ambition, then you probably want to get the image back from the camera application and do something with it.
 
 The Android Camera application encodes the photo in the return Intent delivered to onActivityResult() as a small Bitmap in the extras, under the key "data". 
@@ -2024,4 +2056,115 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         imageView.setImageBitmap(imageBitmap);
     }
 }
+
+Android allows you to manipulate images by adding different kinds of effects on the images you can easily apply image processing to add certain kinds of effects on images.
+the effect could br brightness , darkness, grayscale conersion etc.
+							Android provides Bitmap clss to handle image. This can be found under android.graphics.bitmap.
+
+There are many ways through which you can instantiate bitmap. We are creating a bitmap of image from the imageView.
+
+1) requestCode 	=> identifies which app returned these results. This is defined by you when you call startActivityForResult().
+2) resultCode	=> informs you whether this app succeeded failed or something different
+3) data		=> holds any information returned by this app. This may be null
+
+
+
+4) Save the full-size photo
+
+The Android camera application saves a full-size photo if you give it file to save into. You must provide a fully qualifies file name where the camera app should save the photo.
+
+Generally, any photos that the user captures with the device camera should be saved on the device in the public external storage so they are accessible by all apps. 
+The proper directory for shared photos is provided by getExternalStoragePublicDirectory()
+
+with the DIRECTORY_PICTURES argument. Because the directory provided by this method is shared among all apps, reading and writing to it requires the 
+READ_EXTERNAL_STORAGE and WRITE_EXTERNAL_STORAGE permissions, respectively. The write permission implicitly allows reading, so if you need to write to the external storage then you need to request only one permission
+
+<manifest ...>
+	<uses-permision adnroid:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+</manifest>
+
+
+
+However if you'd like the photos to remain private to your app only you can instead use the directory provided by  getExternalfilesDir().
+On Android 4.3 and lower, writing to this directory also requires the WRITE_EXTERNAL_STORAGE permission. Beginning with Android 4.4, the permission is no longer required 
+because the directory is not accessible by other apps, so you can declare the permission should be requested only on the lower versions of Android by adding the maxSdkVersion
+
+<manifest ...>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+		android:maxSdkVersion="18"/>
+</manifest...>
+
+
+
+
+5) Once you decide the directory for the file, you need to create a collision-resistant file name. You may wish also to save the path in a member variable for later use.
+Here's an example solution in a method that returns a unique file name for a new photo using a date-time stamp:
+
+
+
+String currentPhotoPath;
+
+private File createImageFile() throws IOException {
+    // Create an image file name
+    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    String imageFileName = "JPEG_" + timeStamp + "_";
+    File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+    File image = File.createTempFile(
+        imageFileName,  /* prefix */
+        ".jpg",         /* suffix */
+        storageDir      /* directory */
+    );
+
+    // Save a file: path for use with ACTION_VIEW intents
+    currentPhotoPath = image.getAbsolutePath();
+    return image;
+}
+
+
+
+
+6) with this method available to create a file for the photo you can now create and invok the Intent like this
+
+static final int REQUEST_TAKE_PHOTO = 1;
+
+private void dispatchTakePictureIntent() {
+    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    // Ensure that there's a camera activity to handle the intent
+    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        // Create the File where the photo should go
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+            ...
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+            Uri photoURI = FileProvider.getUriForFile(this,
+                                                  "com.example.android.fileprovider",
+                                                  photoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        }
+    }
+}
+
+
+
+7) Now you need to configure the FileProvider. In your app's manifest add a provider to your application
+
+<application>
+   ...
+   <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="com.example.android.fileprovider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths"></meta-data>
+    </provider>
+    ...
+</application>
 
