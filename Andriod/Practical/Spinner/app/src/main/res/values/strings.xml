@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Spinner</string>
+    <string name="spinner_title">Country</string>
+</resources>

@@ -283,7 +283,7 @@ can contain :	<intent-filter>
 
 description :
 	
-	Declares an activyt that implements part of the application's visual user interface.
+	Declares an activity that implements part of the application's visual user interface.
 
 
 => android:exported
@@ -331,7 +331,10 @@ attribute:
 
 In order ro receive implicit intents you must include the CATEGORY_DEFAULT category in the intent filter. The methods startactivity().
 
-
+category -- Give additional information about the action to execute.
+CATEGORY_LAUNCHER means it should appear in the launcher as a top-level application
+CATEGORY_ALTERNATIVE means it should be included in a list of alternative actions the user can perform on a piece of data.
+MAIN means that this activity in the entry point of the application i,e when you launched the application this activity is created.
 
 
 
@@ -507,9 +510,9 @@ Declaring a receiver in the manifest doesn't work.
 
 
 => Context-Register Receiver
-To register a receiver with a context perform the follwoing steps:
+To register a receiver with a context perform the following steps:
 
-1) Create an instance of BroadcasarReceiver
+1) Create an instance of BroadcasarReceiver in onCreate() method
 
 	BroadcastReceiver br=new MyBroadcastReceiver();
 
@@ -519,13 +522,47 @@ To register a receiver with a context perform the follwoing steps:
 	filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 	registerReceiver(br,this);
 
+
+	in Android Oreo and higher version we can register the receiver in MainActivity class in onResume or onCreate method but we will have to unregister the broadcastreceiver 
+
+	=> 	@Override
+    		protected void onResume()
+    		{
+    		        super.onResume();
+    		        IntentFilter filter=new IntentFilter();
+    		        //filter.addAction("android.net.conn.CONNECTIVITY_CHANGED");if we want to perform some action
+    		        registerReceiver(myreceiver,filter);
+    		}
+
 3) To stop receiving broadcasts, call unregisterReceiver(android.content.BroadcastReceiver). Be sure to unregister the receiver when you no longer need it or the context is no longer 
 valid.
+
+@Override
+    protected void onPause()//for unregistering the broadcast receiver
+    {
+        super.onPause();
+        unregisterReceiver(myreceiver);
+    }
+
+
+4) Sending the Broadcast
+
+    public void broadcastIntent(View view)
+    {
+        Intent intent=new Intent();
+        intent.setAction("com.example.broadcastreceiver.CUSTOM_INTENT");//register that intent in the xml file
+        intent.setComponent(new ComponentName(getPackageName(),"com.example.broadcastreceiver.MyReceiver"));
+        //getApplicationContext().sendBroadcast(intent);
+        sendBroadcast(intent);
+    }
+
+
+
 
 Be mindful of where you register and unregister the receiver, for example, if you register a receiver in onCreate(Bundle) using the activity's context, you should unregister it in 
 onDestroy() to prevent leaking the receiver out of the activity context. If you register a receiver in onResume(), you should unregister it in onPause() to prevent registering it multiple
 times (If you don't want to receive broadcasts when paused, and this can cut down on unnecessary system overhead). Do not unregister in onSaveInstanceState(Bundle), because this
-isn't called if the user moves back in the history stack.
+isn't called if the user moves back in the history stack
 
 
 
@@ -543,6 +580,53 @@ read results from other receivers, propagate data received from the broadcast, o
 3)The LocalBroadcastManager.sendBroadcast method sends broadcasts to receivers that are in the same app as the sender. If you don't need to send broadcasts across apps,
 use local broadcasts. The implementation is much more efficient (no interprocess communication needed) and you don't need to worry about any security issues related to other apps
 being able to receive or send your broadcasts.
+
+	BroadCast Receiver ;---------------------------------------
+
+In Android Broadcast Receiver is a component which  will allow android system or other system or other apps to delever events to the app like sending a low battery message or screen turned off
+message to the app. The app can also broadcast to let other apps know that required data availabe in a device to use it.
+
+Generally we use Intent to deliver broadcast events to other apps and Boradcast Recciver use status bar notification to let user know that broadcast events occurs.
+In android Broadcast Receiver is implementted as a subclass of BroadcastReceiver and each braodcast is delivered as an Intent object.
+
+we can register an app to receive only few broadcast message based on our requirements. When a new broadcasr received the system will check for specifieed have subscribed or not subscribed or not based on that it will routes the broadcast to the apps.
+
+1)
+
+One way is by registring a broadcast using android application manifest file (AndroidManifest.xml) we need to specify <receiver> element in apps manifest file line as shown below.
+
+<receiver android:name=".SampleBroadcastReceiver">
+
+    <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+    </intent-filter>
+</receiver>
+
+2)
+Suppose if we register for ACTION_BOOT_COMPLETED events whenever the boot process is completed the broadcast receiver's method onReceive() method will be invoked.
+
+
+
+
+
+	Sending Broadcasts :-----------------------
+
+In android, we can send a broadcasts in apps using three different ways, those are 
+
+Method					Description
+
+sendOrderedBroadcast(Intent, String)		This method is used to send broadcasts to one receiver at a time.
+sendBroadcast(Intent)			This method is used to send broadcasts to all receivers in an undefined order.
+LoadBroadcastManager.sendBroadcast		This method is used to send broadcasts to receivers that are in the same app as the sender.
+
+
+
+
+
+
+
+
+
 
 
 
@@ -602,48 +686,11 @@ The system identifies the components that can respond to an intent by comparing 
 	App resources Overview :--------------------------------
 
 Resources are the additional files and static content that your code uses such as bitmap, layout definitions, user interfaces string, animation instruction and more.
-You should always externalize app resources sich as image and string from your code so that you can maintain them independently. you should also provide alternative resources for specific 
+You should always externalize app resources such as image and string from your code so that you can maintain them independently. you should also provide alternative resources for specific 
 device configurations by grouping them in specially-named resources directories. At runtime android uses the appropriate resource based on the cureent configuration.
 
 
 	
-	BroadCast Receiver ;---------------------------------------
-
-In Android Broadcast Receiver is a component which  will allow android system or other system or other apps to delever events to the app like sending a low battery message or screen turned off
-message to the app. The app can also broadcast to let other apps know that required data availabe in a device to use it.
-
-Generally we use Intent to deliver broadcast events to other apps and Boradcast Recciver use status bar notification to let user know that broadcast events occurs.
-In android Broadcast Receiver is implementted as a subclass of BroadcastReceiver and each braodcast is delivered as an Intent object.
-
-we can register an app to receive only few broadcast message based on our requirements. When a new broadcasr received the system will check for specifieed have subscribed or not subscribed or not based on that it will routes the broadcast to the apps.
-
-1)
-
-One way is by registring a broadcast using android application manifest file (AndroidManifest.xml) we need to specify <receiver> element in apps manifest file line as shown below.
-
-<receiver android:name=".SampleBroadcastReceiver">
-
-    <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"/>
-    </intent-filter>
-</receiver>
-
-2)
-Suppose if we register for ACTION_BOOT_COMPLETED events whenever the boot process is completed the broadcast receiver's method onReceive() method will be invoked.
-
-
-
-
-
-	Sending Broadcasts :-----------------------
-
-In android, we can send a broadcasts in apps using three different ways, those are 
-
-Method					Description
-
-sendOrderedBroadcast(Intent, String)		This method is used to send broadcasts to one receiver at a time.
-sendBroadcast(Intent)			This method is used to send broadcasts to all receivers in an undefined order.
-LoadBroadcastManager.sendBroadcast		This method is used to send broadcasts to receivers that are in the same app as the sender.
 
 
 
@@ -663,7 +710,7 @@ LoadBroadcastManager.sendBroadcast		This method is used to send broadcasts to re
 A services is an application component that can perform long-running operations in the background, and it doesn't provides a user interface.
 Another application component can start a service and it continues to run in the background even if the user switches to another application.
 
-Additionally a component can bind to s vervice to interact with in and even perform interprocess communication (IPC)
+Additionally a component can bind to service to interact with in and even perform interprocess communication (IPC)
 
 For example a service can handle network transaction, play music, perform file I/O or interact with a content provider all from the background.
 
@@ -698,6 +745,7 @@ It's simply a matter of whether you implement a couple of callback methods: onSt
 
 
 => Choosing between a service and a thread :--
+
 A service is simply a component that can run in the background even when the user is not interacting with your application so you should create a service only if that is what you need.
 
 if you must perform work outside of your main thread but only while the user is interacting with your application youshould create  anew thread. 
@@ -784,7 +832,7 @@ Any pending intents are delivered in turn. This is suitable for services that ar
 
 Starting a Services :-----------------------------
 you can start a service from an activity or other application component by passing an Intent to startService() or startForegroundService().
-The Android system calls the service's onStartCommadn() methods and pass it the Intent which specifies which service to start.
+The Android system calls the service's onStartCommand() methods and pass it the Intent which specifies which service to start.
 
 
 Note: If your app targets API level 26 or higher, the system imposes restrictions on using or creating background services unless the app itself is in the foreground. If an app needs to 
@@ -811,6 +859,7 @@ Multiple requests to start the service result in multiple corresponding calls to
 
 
 => Sending notification to the user :---------------------------
+
 When a service is running it can notify the user of events using ToastNotification or Status bar notificatios.
 
 A Toast Notification is a message that appears on the surface of the surrent windows fo ronly a moment before disappearing.
@@ -2167,4 +2216,334 @@ private void dispatchTakePictureIntent() {
     </provider>
     ...
 </application>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11:32 AM 9/13/2019	UI Layout :---------------------------------------------
+
+The basin building block for user interface is a view object which is crated from the view class and occupies rectangular area on the screen and is responsible for drawing and event 
+handling
+View is  the base class for widget which are used to creae interactive UI components like button text fields etc.
+
+ViewGroup is a subclass of View and provides invisible container that hold other Viewa or other ViewGrips and define thier layout properties.
+
+
+Once your layout has created you can load the layout resource from youe application code in you Activity.onCreate() callback implementation as shown below:----------
+
+public void onCreate(Bundle saveInstanceState)
+{
+	super.onCreate(saveInstanceState);
+	setContentview(R.layout.activity_main);
+}
+
+
+Android layout types  :------------------------
+there are number of Layout provided by Android which you use in almost all the Android application to provides different look and feel.
+
+1	Linear Layout
+LinearLayout is a view group that aligns all children in a single direction, vertically or horizontally.
+
+
+2	Relative Layout
+RelativeLayout is a view group that displays child views in relative positions.
+
+
+3	Table Layout
+TableLayout is a view that groups views into rows and columns.
+
+
+4	Absolute Layout
+AbsoluteLayout enables you to specify the exact location of its children.
+
+
+5	Frame Layout
+The FrameLayout is a placeholder on screen that you can use to display a single view.
+
+
+6	List View
+ListView is a view group that displays a list of scrollable items.
+
+
+7	Grid View
+GridView is a ViewGroup that displays items in a two-dimensional, scrollable grid.
+
+
+
+
+
+
+=> View Identification :----------------------------
+A View object may have a unique ID assigned to  it which will identify the View uniquely within the tree
+
+	Syntax:----
+
+			android:id="@+id/my_button"
+
+
+1) The at-symbol (@) at the beginning of the string indicates that the XML parser should parse and expand the rest of the ID string and identify it as an ID resource.
+2) The plus-symbol (+) means that this is a new resource name that must be created and added to our resources. To create an instance of the view object and capture it from the layout, use the following 
+
+
+Android GridView shows items in two-dimensional scrolling grid (rows and column) and the grid items are not necessarily perdetermined but they automatically inserted to the 
+layout using a ListAdapter.
+
+An adapter actually bridge between UI compoennt and the data source that fill data into UI component. Adapter can be used to supply the data to like spinner list view grid view etc.
+
+The ListView and GridView are subclass of AdapterView and they can be populated by binding them to an Adaptor which reterives data from an external source and created a View that represent each data entry.
+
+
+
+
+
+
+	UI Control :----------------------------------
+Input control are the interactive components in your app's user interface. ANdroid provides a wide variety of control you can use in your UI. such as buttons, text fileds, seek bars, check box,
+zom buttons, toggle button adn many more.
+
+There are number of UI control provided by Android that allow you to build the graphical user interface for your app.
+
+1) TextView
+2) EditText
+3) AutoCompleteTextView   //it is similar to the EditText except that it shows a list of completion suggestion automatically while the user is typing.
+4) Button
+5) ImageButton
+6) CheckBox
+7) ToggleButton
+8) Radiobutton
+9) Progress bar
+10) Spinner
+11) TimePicker
+12) DatePicker
+
+=> AutoCompleteTextView
+The AutoCompleteTextView is aview that is similar to Edittext except that it shows a list of completion suggestions automatically while the user is typing.
+The list of suggestion is displayed in drop down menu. The user can choose an item from there to replace the content of edit box with.
+
+
+String[] arr = { "Paries,France", "PA,United States","Parana,Brazil", "Padua,Italy", "Pasadena,CA,United States"};		//we define list of string like this
+ 
+
+
+ArrayAdapter
+
+public ArrayAdapter (Context context,int resource,T[] objects)
+constructor will result in the underlying data collection being immutable so method such as clear() will throw an exception.
+
+
+example 
+ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, android.R.layout.select_dialog_item,arr);
+
+autocompleteview.setThreshold(2);
+autocompleteview.setAdapter(adapter)
+
+
+
+=> Parameters
+1) context		context the current context this value must never be null.
+2) resource	int the resource ID for a layout file containing a TextView to use  when instantiating views.
+3) objects		T the object to represent in the ListView this value must never be null.
+
+
+
+
+=====>
+
+What is the difference between the AutoCompleteTextView and the Spinner
+the difference between the AutoCompleteTextView is the combination of the EditText TextView and Spinner but it is not same as in the spinner 
+
+spinner only showns the list of option form which we can  select the option the user can't put its own input in spinner , spinner is used where some set of input are fixed. 
+
+<====
+
+
+=>Spinner
+Spinner allows you to select an item from a deop down menu.
+For example when you are using Gmail application you would get drop down menu.
+
+
+
+=> ImageButton
+An ImageButton is an AbsoluteLayout which enables you to specify the exact location of its children. This shows a button with an image (instead of text) that can be  pressed or clicked by
+the user.
+
+
+
+
+
+
+
+
+	Android - Event Handling :-------------------------------------------------
+
+Events are a useful way to collect data about user's interaction with interactive components of applications. Like button presses or screen touch etc.
+The Android components of Applications. Like Button pressed or screen touch etc.
+The Android framework maintains an events queue as first-in first out basis. You can capture these events in your program  and take appropriate action as per requirements.
+
+There are following three concept related to Android Events Management :---------------
+
+1) Event Listeners - 
+An event listener is an interface in the View class that contains a single callback method. These methods will be called by the Android framework when the View to which the listener has 
+been registered is triggered by user interaction with the item in the UI.
+
+2) Event Listeners Registration - 
+Event Registration is the process by which an Event Handler gets registered with an Event Listener so that the handler is called when the Event Listener fires the event.
+
+3) Event Handlers - 
+When an event happens and we have registered an event listener for the event, the event listener calls the Event Handlers, which is the method that actually handles the event
+
+
+Example of EventHandler and EventListener :------------------------------------
+
+if we take the example of event handler than it can be
+
+public void onClick(View view)				//this is an event handler which handle the event on click some of the view control
+{
+}
+
+
+
+setOnClickListener is a event listener which is register  the event when the UI control interact by the user.
+
+
+
+
+
+		Event Listeners & Event Handlers  :-----------------------------------
+
+
+Event Handler	Event Listener & Description
+onClick()		OnClickListener()
+
+This is called when the user either clicks or touches or focuses upon any widget like button, text, image etc. You will use onClick() event handler to handle such event.
+
+onLongClick()	OnLongClickListener()
+
+This is called when the user either clicks or touches or focuses upon any widget like button, text, image etc. for one or more seconds. You will use onLongClick() event handler to handle such event.
+
+onFocusChange()	OnFocusChangeListener()
+
+This is called when the widget looses its focus ie. user goes away from the view item. You will use onFocusChange() event handler to handle such event.
+
+onKey()		OnFocusChangeListener()
+
+This is called when the user is focused on the item and presses or releases a hardware key on the device. You will use onKey() event handler to handle such event.
+
+onTouch()	OnTouchListener()
+
+This is called when the user presses the key, releases the key, or any movement gesture on the screen. You will use onTouch() event handler to handle such event.
+
+onMenuItemClick()	OnMenuItemClickListener()
+
+This is called when the user selects a menu item. You will use onMenuItemClick() event handler to handle such event.
+
+onCreateContextMenu()	onCreateContextMenuItemListener()
+
+This is called when the context menu is being built(as the result of a sustained "long click)
+
+
+
+	Event Listener Registration :-------------------
+Event Registration is the process by which  an Event handler gets registered with an event listener so that handler is called when the event listener fires the event.
+Three ways 
+1) Using ananamous inner class
+2) activity implementation the LIstener interface
+3) Using layout file activity_main xml to specify event handler directly
+
+
+Touch Mode
+Users can interact with their devices by using hardware keys or buttons or touching the screen.Touching the screen puts the device into touch mode. 
+The user can then interact with it by touching the on-screen virtual buttons, images, etc.You can check if the device is in touch mode by calling the View class’s isInTouchMode() 
+method.
+
+
+Focus
+A view or widget is usually highlighted or displays a flashing cursor when it’s in focus. This indicates that it’s ready to accept input from the user.
+
+isFocusable() - it returns true or false
+
+isFocusableInTouchMode() - checks to see if the view is focusable in touch mode. (A view may be focusable when using a hardware key but not when the device is in touch mode)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	=> Content Provider :-----------------------------
+
+
+
+
+A content provider component supplies data from one application to others on request. Such request are handle by the methods of the ContentResolver.
+A contentprovider can use different ways to store its data and the data can be stored in a database , in files or even a network.
+
+A content provider access to central repository of data. A provider is a part of android application which often provides its own UI for working with the data.
+
+Typically you work with content provider in one of two scenarios; 
+you may want to implement code to access an existing content provider in another application
+		
+				or
+you may want to create a new content provider in your application to share data with other application.
+
+
+Overview :-
+A content provider present data to external application as one or more tables that are similar to the table found in a realtional database.
+A row represent an instance of some type of data the provider collects and each column in the row represent an individual piece of data collected for an instance.
+
+A content provider coordinates access to the data storage layer in your application for a number of different  APIs and compoennts
+1) Sharing access to your application data with other applications
+2) sending data to a widget
+3) returning custom saerch suggestion for your application through the search framework using SearchRecentSuggestionsProvider
+4) Synchronizing application data with your server using an implementation of AbstractThreadedSyncAdapter
+5) Loading data in your ui suing a CursorLoader
+
+
+
+=> Accessing Provider
+When you want to access data in a content provider you use the ContentResolver object in your application's Context to communicate with the provider as a client.
+The ContentResolver object communicate with the provider object an instance of a class that implements ContentProvier.
+
+The provider object receive data request from method performs the requested action and return the results.
+The contentResolver method provides the basic CRUD (create, reterive , update and delete ) functions of persistent stroage.
+
+A common pattern for accessing a ContentProvider from your UI uses a CursorLoader to run an asynchronous query in the background.The Activity or Fragment in your UI call a 
+CursorLoader to the query, which in turn gets the ContentProvider using the ContentResolver. This allows the UI to continue to be available to the user while the query is running.
+
+
+The column headers are column names that are stored in the provider to prefer to a row's local you refer to  its locale column. For this provider the _ID column serves as a primary key column
+that the provider automatically maintains
+
+To get a list of the words and their locales from the User Dictionary Provider, you call ContentResolver.query(). The query() method calls the ContentProvider.query() method defined 
+by the User Dictionary Provider. The following lines of code show a ContentResolver.query()
+
+
+// Queries the user dictionary and returns results
+cursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,   // The content URI of the words table
+    projection,                        // The columns to return for each row
+    selectionClause,                   // Selection criteria
+    selectionArgs,                     // Selection criteria
+    sortOrder);                        // The sort order for the returned rows
+
+
 
