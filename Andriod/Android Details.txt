@@ -672,6 +672,11 @@ However, broadcast receivers can be either declared in the manifest or created d
 registerReceiver().
 
 
+
+
+
+
+
 Declaring component capabilities :----------------------------
 
 As discussed above, in Activating components, you can use an Intent to start activities, services, and broadcast receivers. You can use an Intent by explicitly naming the target component
@@ -679,6 +684,11 @@ As discussed above, in Activating components, you can use an Intent to start act
 the action. 
 
 The system identifies the components that can respond to an intent by comparing the intent received to the intent filters provided in the manifest file of other apps on the device.
+
+
+
+
+
 
 
 
@@ -871,6 +881,7 @@ When the user select the notification from the expanded view the notification ca
 
 
 =>Running a service in the Foreground :---------------------
+
 A foreground service is a service that the user is actively aware of and  isn't a candidate fro the system to kill when low on memory.
 Foreground service must provides a notification for the status bar which in placed under ongoing heading .
 This meas that the notification cannot be dismissed unless the service is either stopped or removed from the foreground.
@@ -974,7 +985,7 @@ ACTION_GET_CONTENT with MIME type vnd.android.cursor.item/phone -- Display the l
 
 
 Intent  Resolution :---------------
-There are two primary forms of intens you will use
+There are two primary forms of intents you will use
 
 1) Explicit Intent
 2) Implicit Intent
@@ -1212,6 +1223,7 @@ We can define a filter with multiple instances of <action>, <category> or <data>
 3:02 PM 9/10/2019
 
 Fragments :---------------------------------------------
+
 A Fragment is a piece of an activty which enable more modular activity design.It will not ne wrong if we say a fragment is a kind of sub activity.
 
 Following are important points about fragment :--------------------------
@@ -1229,10 +1241,26 @@ Fragment life cycle is closely related to the life cycle of its host activity wh
 A fragment can implement a behaviour that has no user interface component.
 
 Fragments were added to the Android API in Honeycomb version of Android which API version 11
+When you add a fragment as apert of your activity layout it lives in a viewGroup inside the activity's view hierarrchy and the fragment defines its own view layout.
+You can insert a fragment into your activty layout by declaring the fragment in the activity's layout file as a <fragment> element or from your application code by adding it to an 
+existing ViewGroup.
 
 
+
+Design Philosophy :-----------------------------
+Android intorduced fragments in Android 3.0(API level 11) primarily to support more dynamic and flexible UI design on large screens such as tablets.Because a tablet's screen is much larger 
+than of handset.
 => You create fragments by extending Fragment class and You can insert a fragment into your activity layout by declaring the fragment in the activity's layout file, as a <fragment> element
 
+
+
+
+
+
+Creating a Fragment :--------------------
+To Create a fragment you must create a subclass of fragment (or an existing subclass of it).
+The fragment class has code that looks a lot like an Activity.
+It contains callback methods similar to an sctivity such as onCreate(), onStart(), onPause() and onStop().
 
 
 Fragment life-cycle :-----------------
@@ -1326,6 +1354,9 @@ Corresponding to each fragment, you will need to create layout files in XML file
 Finally modify activity file to define the actual logic of replacing fragments based on your requirement.
 
 
+A fragment is usually used as part of an activity's user intterface an contributes its own layout to the acitivty.
+To provide a layout for a fragment you must implement the onCreateView() callback methods which the Android system calls when it's time for the fragment to draw its layout. Your implementation
+of this method must return a View that is the root of your fragment's layout.
 
 
 public static class ExampleFragment extends Fragment {
@@ -1391,8 +1422,8 @@ How to make Fragment :---------------------------
 
 
 
-Usually a fragment contribute a portion of UI to the host activity which is embedded as a part of the activity's overall view hierarchy. There are two ways you can add a fragment to the 
-activity layout:-------------------
+=> Usually a fragment contribute a portion of UI to the host activity which is embedded as a part of the activity's overall view hierarchy. 
+There are two ways you can add a fragment to the activity layout:-------------------
 
 
 1) Declare the fragment inside the activity's layout file
@@ -1522,6 +1553,15 @@ Remove an existing fragment. If it was added to a container, its view is also re
 
 
 
+
+Communication with the Activity :---------------------------------------------
+Although a Fragment is implemented as an object that's idependent from a FragmentActivty and can be used inside multiple activities a given instance of a fragment is directly tied to the activity that hosts it.
+ Specically the fragment can access the FragmentActivity instance with getActivity() and easily perform tasks such as find a view in the activity layout..
+
+
+Define an Interface :--------------------
+To allow a Fragment to communicate upto its Activity you can define an interface in the fragment class and implement it wihtin the Activity. The Fragment captures the interface implemnetation
+during its onAttach() lifecycle method and can then call the interface method in order to communicate with the activity.
 
 
 10:11 AM 9/4/2019
@@ -2493,7 +2533,6 @@ isFocusableInTouchMode() - checks to see if the view is focusable in touch mode.
 
 
 
-
 A content provider component supplies data from one application to others on request. Such request are handle by the methods of the ContentResolver.
 A contentprovider can use different ways to store its data and the data can be stored in a database , in files or even a network.
 
@@ -2520,6 +2559,7 @@ A content provider coordinates access to the data storage layer in your applicat
 
 
 => Accessing Provider
+
 When you want to access data in a content provider you use the ContentResolver object in your application's Context to communicate with the provider as a client.
 The ContentResolver object communicate with the provider object an instance of a class that implements ContentProvier.
 
@@ -2533,7 +2573,11 @@ CursorLoader to the query, which in turn gets the ContentProvider using the Cont
 The column headers are column names that are stored in the provider to prefer to a row's local you refer to  its locale column. For this provider the _ID column serves as a primary key column
 that the provider automatically maintains
 
-To get a list of the words and their locales from the User Dictionary Provider, you call ContentResolver.query(). The query() method calls the ContentProvider.query() method defined 
+To get a list of the words and their locales from the User Dictionary Provider, you call ContentResolver.query(). 
+/*this code runs in the background which call the content provider
+The query() method calls the ContentProvider.query() method defined 
+*/
+
 by the User Dictionary Provider. The following lines of code show a ContentResolver.query()
 
 
@@ -2545,5 +2589,252 @@ cursor = getContentResolver().query(
     selectionArgs,                     // Selection criteria
     sortOrder);                        // The sort order for the returned rows
 
+
+
+how the argument sto query(Uri, projection,selection,selectionArgs,sortOrder) match an SQL SELECT statement
+
+query() argument		SELECT keyword/parameter			Notes
+
+Uri			FROM table_name				Uri maps to the table in the provider named table_name
+projection		col,col,col,......				projection is an array of columns that should be included for rwo reterived.
+selection			WHERE col=value				selection specifies the criteria for selecting rows.
+selectionAgrs		No args equivalent selection argument
+sortorder			ORDER BY COL,COL,			sortOrder specifies the order in which rows appear in the returns Cursour.
+
+
+
+
+Content URIs
+A content URI is a URI that identifies data in a provider. Content URIs include the symbolic name of the entire provider (its authority) and a name that points to a table (a path). 
+Content URIs
+A content URI is a URI that identifies data in a provider. Content URIs include the symbolic name of the entire provider (its authority) and a name that points to a table (a path). When you call a client method to access a table in a provider, the content URI for the table is one of the arguments.
+
+In the preceding lines of code, the constant CONTENT_URI contains the content URI of the user dictionary's "words" table. The ContentResolver object parses out the URI's authority, and uses it to "resolve" the provider by comparing the authority to a system table of known providers. The ContentResolver can then dispatch the query arguments to the correct provider.
+
+The ContentProvider uses the path part of the content URI to choose the table to access. A provider usually has a path for each table it exposes.
+content://user_dictionary/words
+
+
+Many providers allow you to access a single row in a table by appending an ID value to the end of the URI. For example, to retrieve a row whose _ID is 4 from user dictionary, you can use this content URI:
+Uri singleUri = ContentUris.withAppendedId(UserDictionary.Words.CONTENT_URI,4);
+
+
+
+
+Retrieving data from the provider :---------------------------------
+This section describes how to reterive data from a provider using the User Dictionary Provider as an example.
+
+To reterive data from a provider follow these basic steps:
+1) Request the read access permission for the provider.
+2) Define the code that send a query to the provider
+
+=> Requesting read access permission:-
+To reterive data from a provider your application needs read acces permisssion for the provider you can't request this permissioon at run timeinstead you have to specify that you need this permission
+in your manifest file using the
+				<uses-permission>
+
+
+=> Contructing the query
+The next step in reteriving data from a provider is to construct a query.This snippet defines some varible for accessing the user DIctionary Provider.
+
+// A "projection" defines the columns that will be returned for each row
+String[] mProjection =
+{
+    UserDictionary.Words._ID,    // Contract class constant for the _ID column name
+    UserDictionary.Words.WORD,   // Contract class constant for the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant for the locale column name
+};
+
+// Defines a string to contain the selection clause
+String selectionClause = null;
+
+// Initializes an array to contain selection arguments
+String[] selectionArgs = {""};
+
+
+
+
+The expression that specifies the rows to retrieve is split into a selection clause and selection arguments. The selection clause is a combination of logical and Boolean expressions, 
+column names, and values (the variable mSelectionClause). If you specify the replaceable parameter ? instead of a value, the query method retrieves the value from the selection 
+arguments array (the variable mSelectionArgs).
+
+If you specify the replaceable parameter ? instead of a value, the query method retrieves the value from the selection arguments array (the variable mSelectionArgs).
+
+
+
+
+
+
+Displaying query results :-
+
+The ContentResolver.query() client method always returns a Cursor containing the columns specified by the query's projection for the rows that match the query's selection criteria. 
+A Cursor object provides random read access to the rows and columns it contains. Using Cursor methods, you can iterate over the rows in the results, determine the data type of each 
+column, get the data out of a column, and examine other properties of the results. Some Cursor implementations automatically update the object when the provider's data changes, or 
+trigger methods in an observer object when the Cursor changes, or both.
+
+If no rows match the selection criteria, the provider returns a Cursor object for which Cursor.getCount() is 0 (an empty cursor).
+
+If an internal error occurs the results of the query depend on the particular provider. It may show coose to return null or it may throw an Exception.
+Since a Cursor is a list rows a good way to display the content of a Cursorm is to link it to a Listview via a SImple CursorAdater.
+
+
+// Defines a list of columns to retrieve from the Cursor and load into an output row
+String[] wordListColumns =
+{
+    UserDictionary.Words.WORD,   // Contract class constant containing the word column name
+    UserDictionary.Words.LOCALE  // Contract class constant containing the locale column name
+};
+
+// Defines a list of View IDs that will receive the Cursor columns for each row
+int[] wordListItems = { R.id.dictWord, R.id.locale};
+
+// Creates a new SimpleCursorAdapter
+cursorAdapter = new SimpleCursorAdapter(
+    getApplicationContext(),               // The application's Context object
+    R.layout.wordlistrow,                  // A layout in XML for one row in the ListView
+    mCursor,                               // The result from the query
+    wordListColumns,                      // A string array of column names in the cursor
+    wordListItems,                        // An integer array of view IDs in the row layout
+    0);                                    // Flags (usually none are needed)
+
+// Sets the adapter for the ListView
+wordList.setAdapter(cursorAdapter);
+
+
+=> Getting data from query result :----------------
+Rather than simply displaying query results you can use them for other task.
+For example, you can retrieve spellings from the user dictionary and then look them up in other providers. To do this, you iterate over the rows in the Cursor:
+
+// Determine the column index of the column named "word"
+int index = mCursor.getColumnIndex(UserDictionary.Words.WORD);
+
+/*
+ * Only executes if the cursor is valid. The User Dictionary Provider returns null if
+ * an internal error occurs. Other providers may throw an Exception instead of returning null.
+ */
+
+if (mCursor != null) {
+    /*
+     * Moves to the next row in the cursor. Before the first movement in the cursor, the
+     * "row pointer" is -1, and if you try to retrieve data at that position you will get an
+     * exception.
+     */
+    while (mCursor.moveToNext()) {
+
+        // Gets the value from the column.
+        newWord = mCursor.getString(index);
+
+        // Insert code here to process the retrieved word.
+
+        ...
+
+        // end of while loop
+    }
+} else {
+
+    // Insert code here to report an error if the cursor is null or the provider threw an exception.
+}
+
+
+
+=> Content provider permissions:------------------
+A provider's application can specify mermission that other aoolication must have in order to access provider's data.
+
+These permissions ensure that the user knows what data an application will try to access. Based on the provider's requirements, other applications request the permissions they need 
+in order to access the provider
+
+
+As noted previously, the User Dictionary Provider requires the android.permission.READ_USER_DICTIONARY permission to retrieve data from it. The provider has the separate android.permission.WRITE_USER_DICTIONARY permission for inserting, updating, or deleting data.
+
+
+
+Inserting , updating and deleting data:-------------------------
+In the same way that you reterivieing data from  a provider you also use the interaction between a provider client and the provider's ContentProvider to modify data.
+
+
+Inserting data :-
+to insert data into a provider you call the Contentresolver.insert() method .This method insert a new  row into the provider and return content uri for that row.
+
+// Defines a new Uri object that receives the result of the insertion
+Uri newUri;
+
+...
+
+// Defines an object to contain the new values to insert
+ContentValues newValues = new ContentValues();
+
+/*
+ * Sets the values of each column and inserts the word. The arguments to the "put"
+ * method are "column name" and "value"
+ */
+newValues.put(UserDictionary.Words.APP_ID, "example.user");
+newValues.put(UserDictionary.Words.LOCALE, "en_US");
+newValues.put(UserDictionary.Words.WORD, "insert");
+newValues.put(UserDictionary.Words.FREQUENCY, "100");
+
+newUri = getContentResolver().insert(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    newValues                          // the values to insert
+);
+
+
+The column in this object don't need to have same data type and if you don't want to specify a value at all you can set a columnto null using  Contentvalus.putNull();
+
+
+
+
+
+=> Updating Data :-
+To update a row you use a ContentValues object with the updated values just as you do with an insertion, adn seleciton criteria just as you can do with query
+The client method you use is ContentResolver.update(). You only need to add values to the ContentValues object for coluns you are updating.
+I f you want to clear the contents of a column set the values to null.
+
+
+
+// Defines an object to contain the updated values
+ContentValues updateValues = new ContentValues();
+
+// Defines selection criteria for the rows you want to update
+String selectionClause = UserDictionary.Words.LOCALE +  " LIKE ?";
+String[] selectionArgs = {"en_%"};
+
+// Defines a variable to contain the number of updated rows
+int rowsUpdated = 0;
+
+...
+
+/*
+ * Sets the updated value and updates the selected words.
+ */
+updateValues.putNull(UserDictionary.Words.LOCALE);
+
+rowsUpdated = getContentResolver().update(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    updateValues,                      // the columns to update
+    selectionClause,                   // the column to select on
+    selectionArgs                      // the value to compare to
+);
+
+
+=> Deleting data:------------
+Deleting ows is similar to reteriving row data you specify selection criteria for the rows you want to delete and the client method returns the number of deleted rows.
+The following snippet deletes rows whose appid matches "user". The method returns of deleting rows.
+
+
+// Defines selection criteria for the rows you want to delete
+String selectionClause = UserDictionary.Words.APP_ID + " LIKE ?";
+String[] selectionArgs = {"user"};
+
+// Defines a variable to contain the number of rows deleted
+int rowsDeleted = 0;
+
+...
+
+// Deletes the words that match the selection criteria
+rowsDeleted = getContentResolver().delete(
+    UserDictionary.Words.CONTENT_URI,   // the user dictionary content URI
+    selectionClause,                   // the column to select on
+    selectionArgs                      // the value to compare to
+);
 
 
