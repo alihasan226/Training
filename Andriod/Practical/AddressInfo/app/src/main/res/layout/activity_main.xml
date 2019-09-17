@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relativelayout"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal Details"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <ImageView
+            android:id="@+id/imageview"
+            android:layout_width="138dp"
+            android:layout_height="137dp"
+            android:layout_below="@+id/textview2"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/one" />
+
+        <EditText
+            android:id="@+id/edittext1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="34dp"
+            android:layout_toEndOf="@+id/imageview"
+            android:hint="First Name"
+            android:inputType="text"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:id="@+id/edittext2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edittext1"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/imageview"
+            android:hint="Last Name"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:inputType="text"
+            android:textAllCaps="false"/>
+
+        <EditText
+            android:id="@+id/edittext3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edittext2"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/imageview"
+            android:hint="Date of Birth"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:inputType="date"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/edittext12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edittext3"
+            android:layout_marginTop="10dp"
+            android:hint="Email ID"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:inputType="textEmailAddress"
+            />
+
+
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/edittext12"
+            android:layout_marginTop="35dp"
+            android:text="Education"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_below="@+id/textview1"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@drawable/buttoncorner">
+
+            <EditText
+                android:id="@+id/edittext4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="University Name"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="text"/>
+
+            <EditText
+                android:id="@+id/edittext5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="College Name"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="text"/>
+
+
+            <EditText
+                android:id="@+id/edittext6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Stream"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="text"/>
+
+
+            <EditText
+                android:id="@+id/edittext7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Percetage"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="number"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textview3"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/linearlayout"
+            android:layout_marginTop="35dp"
+            android:text="Address"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+
+        <LinearLayout
+            android:id="@+id/linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@+id/textview3"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:background="@drawable/buttoncorner">
+
+            <EditText
+                android:id="@+id/edittext8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="House Number"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="number"/>
+
+            <EditText
+                android:id="@+id/edittext9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Block Number"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="number"/>
+
+
+            <EditText
+                android:id="@+id/edittext10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="City"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="text"/>
+
+
+            <EditText
+                android:id="@+id/edittext11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Pin Code"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:ems="20"
+                android:inputType="number"/>
+
+            <TextView
+                android:id="@+id/textview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select State"
+                android:textAllCaps="false"
+                android:textColor="#2B2929"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"/>
+
+            <Spinner
+                android:id="@+id/spinner1"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/circumference"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:background="@drawable/buttoncorner"
+            android:layout_below="@+id/linearlayout1"
+            android:layout_marginTop="20dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

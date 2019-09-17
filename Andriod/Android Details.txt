@@ -1554,14 +1554,84 @@ Remove an existing fragment. If it was added to a container, its view is also re
 
 
 
-Communication with the Activity :---------------------------------------------
+=> Communication with the Activity :--------------------------------------------
+
+Often you will want one Fragment to communicate with another for example to change the content based on a user event. All Fragment - to -  Fragment communication is done either through
+a shared ViewModel or through the associated Activity. Two Fragment should never communicate directly.
+
+The recommended way to communicate between fragments is to create a shared ViewModel object. Both fragments can access the ViewModel through their containing Activity. 
+The Fragments can update data within the ViewModel and if the data is exposed using LiveData the new state will be pushed to the other fragment as long as it is observing the 
+LiveData from the ViewModel.
+
+
+
 Although a Fragment is implemented as an object that's idependent from a FragmentActivty and can be used inside multiple activities a given instance of a fragment is directly tied to the activity that hosts it.
  Specically the fragment can access the FragmentActivity instance with getActivity() and easily perform tasks such as find a view in the activity layout..
 
 
 Define an Interface :--------------------
-To allow a Fragment to communicate upto its Activity you can define an interface in the fragment class and implement it wihtin the Activity. The Fragment captures the interface implemnetation
+To allow a Fragment to communicate upto its Activity you can define an interface in the fragment class and implement it wihtin the Activity. The Fragment captures the interface implementation
 during its onAttach() lifecycle method and can then call the interface method in order to communicate with the activity.
+
+
+1)
+buttonclick mclick;
+public interface buttonclick
+{
+        void sendValue(String text);	
+}
+
+
+
+@Override
+    public void onAttach(Activity activity)			//it is capturing the interface implementation during onAttach() lifecycle method
+    {
+        super.onAttach(activity);
+        try
+        {
+            mclick=(buttonclick)activity;
+        }
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException(activity.toString()+" must implement test click");
+        }
+    }
+
+
+
+// Now the fragment can deliver message to the activity by calling the  sendValue() method (or other method in the interface using mclickinstance of interface
+the following method in the fragment is called when the user clicks on a list item. The fragment uses the callback interface to deliver the event to the parent activity.
+
+  public void someMethod(String text)		
+    {
+        mclick.sendValue(text);
+    }
+
+
+
+
+//In order to receive event callback from the fragment the activity that host it must implement the interface defined in the fragment class.
+public class MainActivity extends AppCompatActivity implements fragmentone.buttonclick
+
+
+//Deliver a Message to a fragment
+The host activity can deliver messages to a fragment  by capturing the fragment instace with sendValue() then directly call the fragment's public method
+ @Override
+    public void sendValue(String text) {
+        frag2.updateedittext(text);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 10:11 AM 9/4/2019
@@ -2070,7 +2140,181 @@ In XML: @[package:]drawable/filename
 
 
 
+Shape Drawable :-----------------------------------
+This is a generic defined in XML
 
+file location:
+		res/drawable/filename.xml
+		The filename is used as the resource ID.
+
+Compiled resource datatypes:--
+
+		resource pointer to GradientDrawble
+
+Resource reference :---
+
+	In java R.drawable.filename
+	in XML [package:]drawable/filename
+
+Syntax:-
+
+	<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape=["rectangle" | "oval" | "line" | "ring"] >
+    <corners
+        android:radius="integer"
+        android:topLeftRadius="integer"
+        android:topRightRadius="integer"
+        android:bottomLeftRadius="integer"
+        android:bottomRightRadius="integer" />
+    <gradient
+        android:angle="integer"
+        android:centerX="float"
+        android:centerY="float"
+        android:centerColor="integer"
+        android:endColor="color"
+        android:gradientRadius="integer"
+        android:startColor="color"
+        android:type=["linear" | "radial" | "sweep"]
+        android:useLevel=["true" | "false"] />
+    <padding
+        android:left="integer"
+        android:top="integer"
+        android:right="integer"
+        android:bottom="integer" />
+    <size
+        android:width="integer"
+        android:height="integer" />
+    <solid
+        android:color="color" />
+    <stroke
+        android:width="integer"
+        android:color="color"
+        android:dashWidth="integer"
+        android:dashGap="integer" />
+</shape>
+
+
+<shape>
+this is the root element attributes
+
+	
+	android:shape
+			Defines the types of shape valid values are:-
+	
+			
+			Value		Desciption
+			
+			"rectangle"	A rectangle that fills the containing View. This is the default shape.
+			"oval"		An oval shape that fits the dimensions of the containing View.
+			"line"		A horizontal line that spans the width of the containing View. This shape requires the <stroke> element to define the width of the line.
+			"ring"		A ring shape.	
+
+			The following attributes are used only when android:shape="ring"
+
+		android:innerRadius
+		The radius for the inner part of the ring (the hole in the middle) as a dimension value or dimnesion rsources.
+
+
+android:innerRadius
+Dimension. The radius for the inner part of the ring (the hole in the middle), as a dimension value or dimension resource.
+
+android:innerRadiusRatio
+Float. The radius for the inner part of the ring, expressed as a ratio of the ring's width. For instance, if android:innerRadiusRatio="5", then the inner radius equals the ring's width divided by 5. This value is overridden by android:innerRadius. Default value is 9.
+
+android:thickness
+Dimension. The thickness of the ring, as a dimension value or dimension resource.
+
+android:thicknessRatio
+Float. The thickness of the ring, expressed as a ratio of the ring's width. For instance, if android:thicknessRatio="2", then the thickness equals the ring's width divided by 2. This value is overridden by android:innerRadius. Default value is 3.
+
+android:useLevel
+Boolean. "true" if this is used as a LevelListDrawable. This should normally be "false" or your shape may not appear
+
+
+
+<corners>
+Creates rounded corners for the shape. Applies only when the shape is a rectangle.
+attributes:
+
+android:radius
+Dimension. The radius for all corners, as a dimension value or dimension resource. This is overridden for each corner by the following attributes.
+
+android:topLeftRadius
+Dimension. The radius for the top-left corner, as a dimension value or dimension resource.
+
+android:topRightRadius
+Dimension. The radius for the top-right corner, as a dimension value or dimension resource.
+
+android:bottomLeftRadius
+Dimension. The radius for the bottom-left corner, as a dimension value or dimension resource.
+
+android:bottomRightRadius
+Dimension. The radius for the bottom-right corner, as a dimension value or dimension resource.
+
+
+
+<gradient>
+Specifies a gradient color for the shape.
+attributes:
+
+android:angle
+Integer. The angle for the gradient, in degrees. 0 is left to right, 90 is bottom to top. It must be a multiple of 45. Default is 0.
+android:centerX
+Float. The relative X-position for the center of the gradient (0 - 1.0).
+android:centerY
+Float. The relative Y-position for the center of the gradient (0 - 1.0).
+android:centerColor
+Color. Optional color that comes between the start and end colors, as a hexadecimal value or color resource.
+android:endColor
+Color. The ending color, as a hexadecimal value or color resource.
+android:gradientRadius
+Float. The radius for the gradient. Only applied when android:type="radial".
+android:startColor
+Color. The starting color, as a hexadecimal value or color resource.
+android:type
+Keyword. The type of gradient pattern to apply. Valid values are:
+Value	Description
+"linear"	A linear gradient. This is the default.
+"radial"	A radial gradient. The start color is the center color.
+"sweep"	A sweeping line gradient.
+android:useLevel
+Boolean. "true" if this is used as a LevelListDrawable
+
+
+
+<size>
+The size of the shape.
+attributes:
+
+android:height
+Dimension. The height of the shape, as a dimension value or dimension resource.
+android:width
+Dimension. The width of the shape, as a dimension value or dimension resource.
+
+
+
+<solid>
+A solid color to fill the shape.
+attributes:
+
+android:color
+Color. The color to apply to the shape, as a hexadecimal value or color resource.
+
+
+<stroke>
+A stroke line for the shape.
+attributes:
+
+android:width
+Dimension. The thickness of the line, as a dimension value or dimension resource.
+android:color
+Color. The color of the line, as a hexadecimal value or color resource.
+android:dashGap
+Dimension. The distance between line dashes, as a dimension value or dimension resource. Only valid if android:dashWidth is set.
+android:dashWidth
+Dimension. The size of each dash line, as a dimension value or dimension resource. Only valid if android:dashGap is set.
 
 
 
@@ -2348,8 +2592,9 @@ The ListView and GridView are subclass of AdapterView and they can be populated 
 
 
 	UI Control :----------------------------------
-Input control are the interactive components in your app's user interface. ANdroid provides a wide variety of control you can use in your UI. such as buttons, text fileds, seek bars, check box,
-zom buttons, toggle button adn many more.
+
+Input control are the interactive components in your app's user interface. ANdroid provides a wide variety of control you can use in your UI. such as buttons, text fields, seek bars, check box,
+zoom buttons, toggle button and many more.
 
 There are number of UI control provided by Android that allow you to build the graphical user interface for your app.
 
@@ -2366,9 +2611,39 @@ There are number of UI control provided by Android that allow you to build the g
 11) TimePicker
 12) DatePicker
 
+
 => AutoCompleteTextView
-The AutoCompleteTextView is aview that is similar to Edittext except that it shows a list of completion suggestions automatically while the user is typing.
+
+The AutoCompleteTextView is a view that is similar to EditText except that it shows a list of completion suggestions automatically while the user is typing.
 The list of suggestion is displayed in drop down menu. The user can choose an item from there to replace the content of edit box with.
+The list of suggestion is obtained from a data adapter and appears only after a given number of characters defined by the threahold.
+
+
+
+There are different steps that the user can perform the autocomplete text:---
+
+The following code snippet shows how to create a text view which suggest various countries names while the user is typing:
+
+ public class CountriesActivity extends Activity {
+     protected void onCreate(Bundle icicle) {
+         super.onCreate(icicle);
+         setContentView(R.layout.countries);
+
+         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                 android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+         AutoCompleteTextView textView = (AutoCompleteTextView)
+                 findViewById(R.id.countries_list);
+         textView.setAdapter(adapter);
+     }
+
+     private static final String[] COUNTRIES = new String[] {
+         "Belgium", "France", "Italy", "Germany", "Spain"
+     };
+ }
+ 
+
+
+
 
 
 String[] arr = { "Paries,France", "PA,United States","Parana,Brazil", "Padua,Italy", "Pasadena,CA,United States"};		//we define list of string like this
@@ -2408,7 +2683,7 @@ spinner only showns the list of option form which we can  select the option the 
 
 
 =>Spinner
-Spinner allows you to select an item from a deop down menu.
+Spinner allows you to select an item from a drop down menu.
 For example when you are using Gmail application you would get drop down menu.
 
 
@@ -2837,4 +3112,116 @@ rowsDeleted = getContentResolver().delete(
     selectionArgs                      // the value to compare to
 );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11:11 AM 9/17/2019      Styles and Themes :------------------------------------------------------------
+
+Styles and theme on Android allow you to separate the detailes of your app design from the UI structure and behaviour similar to stylesheets in web design.
+A style is a collection of attributes that specify the appearance for a single View. AStyle can specify attributes such as font color, font size, background, and much more.
+
+A theme is a type of style that's applied to an entire app activity or view hierarchy--not just an individual view. When you apply your style as a theme every view in the app or activity
+applies each style sttribute that it supports. Themes can also apply styles to non-view element such as the status bar and window background.
+
+Styles and themes are declared in a style resource file in res/values/, usually named styles.xml.
+
+
+=>  Create and apply  s tyle:----------------------------
+To create a new style or theme open your project's res/values/styles.xml file.For each style you want to create follow these steps:
+
+1) Add a <style> element with a name that uniquely identifies the style
+2) Add an <item> element for each style attribute you want to define.
+
+The name in each item specifies an attribute you would otherwise use as an XML attribute in your layout. The value in the <item> element is the value for that attribute.
+
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="GreenText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#00FF00</item>
+    </style>
+</resources>
+
+
+you can apply the style to a view as follows:
+
+<TextView
+	style="@style/GreenText"
+/>
+
+
+
+However instead of applying a style to individual views you'll usually apply styles as a theme for your entire app, activity or collection of views.
+
+
+=> Extend and customize a style :-------------------------------------
+
+When creating your own styles you should always extend an existing style from the framework or supprt library so that you maintain compatibility wuth platform UI style. 
+To extend a style, specify the style you want to extend with the parent attribute. You can then override the inherited style attributes and add new ones.
+
+For example, you can inherit the Android platform's default text appearance and modify it as follows:
+
+
+<style name="GreenText" parent="@android:style/TextAppearance">
+    <item name="android:textColor">#00FF00</item>
+</style>
+
+
+However, you should always inherit your core app styles from the Android Support Library. The styles in the support library provide compatibility with Android 4.0 (API level 14) and 
+higher by optimizing each style for the UI attributes available in each version. The support library styles often have a name similar to the style from the platform, but with AppCompat
+ included.
+
+To inherit styles from a library or your own project, declare the parent style name without the @android:style/ part shown above. For example, the following example inherits text 
+appearance styles from the support library:
+
+
+<style name="GreenText" parent="TextAppearance.AppCompat">
+    <item name="android:textColor">#00FF00</item>
+</style>
+
+
+
+You can also inherit styles (except those from the platform) by extending a style's name with a dot notation, instead of using the parent attribute. That is, prefix the name of your style 
+with the name of the style you want to inherit, separated by a period. You should usually do this only when extending your own styles, not styles from other libraries. For example, the 
+following style inherits all styles from the GreenText style above and then increases the text size
+
+
+<style name="GreenText.Large">
+    <item name="android:textSize">22dp</item>
+</style>
+
+
+
+Apply a style as a theme :-------------------------------------------------
+you can create a theme the same way you create styles. The difference is how you apply it: instead of applying a style with the style attribute on a view you apply a theme with the android:theme
+attribute on either the <application> tag or on <activity> tag in the AndroidManifest.xml file.
+
+for example:-
+
+<manifest>
+	<aplication android:theme="@style/Theme.AppCompat"></application>
+</manifest>
+
+
+And here's how tp apply the "light" theme to just one activity:
+
+<manifest ... >
+    <application ... >
+        <activity android:theme="@style/Theme.AppCompat.Light" ... >
+        </activity>
+    </application>
+</manifest>
 
