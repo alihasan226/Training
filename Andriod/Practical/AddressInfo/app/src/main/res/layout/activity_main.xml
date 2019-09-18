@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/relativelayout"
@@ -25,7 +26,8 @@
             android:text="Personal Details"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            />
 
         <ImageView
             android:id="@+id/imageview"
@@ -50,6 +52,7 @@
             android:textStyle="bold"
             />
 
+
         <EditText
             android:id="@+id/edittext2"
             android:layout_width="match_parent"
@@ -64,6 +67,7 @@
             android:inputType="text"
             android:textAllCaps="false"/>
 
+
         <EditText
             android:id="@+id/edittext3"
             android:layout_width="match_parent"
@@ -76,7 +80,9 @@
             android:textColor="#000000"
             android:textStyle="bold"
             android:inputType="date"
-            android:focusable="false"/>
+            android:focusable="false" />
+
+
 
         <EditText
             android:id="@+id/edittext12"
@@ -157,11 +163,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="Percetage"
+                android:hint="Percentage"
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:ems="20"
-                android:inputType="number"/>
+                android:inputType="numberDecimal"/>
 
         </LinearLayout>
 
@@ -211,7 +217,7 @@
                 android:textStyle="bold"
                 android:textColor="#000000"
                 android:ems="20"
-                android:inputType="number"/>
+                android:inputType="text"/>
 
 
             <EditText
@@ -253,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/circumference"
+
                 />
 
         </LinearLayout>

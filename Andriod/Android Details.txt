@@ -1,3 +1,56 @@
+4:10 PM 9/18/2019
+TextUtils :------------------------------------
+It is simply a set of utility functions to do operations onString objects. In fact the whole class doesn't have any instance fileds or methods. Everything is static Container it like a container to group
+function with a text-based semantic. Many of them could have been methods of string inherited class or Charsequence inherited class.
+
+	For example you can do :-
+TextUtils.indexOf(string,char)
+
+
+
+
+ArrayAdapter :-------------------------
+You can use this adapter to provide views for an AdapterView Returns a view for each object in a collection of data object you provides you provides and can be used with list-based user interface
+widget such as ListView or Spinner.
+
+By default the array adapter creates a view by calling Object#toString() Returns a view for each objet in a collection you provides and places the result in a TextView .
+You may also customize what type of view is used for the data object in the collection.
+To customize what type of view is used for the data object override getView(int, android.view.View,android.view.ViewGroup) and inflate a view resource.
+
+
+
+
+Spinner :-----------------------------------
+Spinner provides a quick way to select one value from a  set. In the default state a spinner shows its currently selected value. Touching the spinner displays a dropdown menu with all the 
+other available values from which the user can select a new one.
+
+You can add spinner to your layout with the spinner object. You should usually os do in your XML layout with a Spinner element
+
+
+
+
+
+DatePickerDialog :-----------------------------------------
+Android  Date Time Picker are  used a lot in android apps. These components are used to select date and time ina customised user interface. we will use DatePickerDialog
+classes with calender class in our android application code to achiene this.
+
+public DatePickerDialog(Context context, DatePickerDialog.OnDateSetListener listener, int year, int month, int dayofmonth)
+creates a new date picker dialog for the sprcified date using the parent context's default date picker theme.
+
+Parameter :-------------------
+
+context		:--			context the parent context this value must never br null
+listener		:--			DatePickerDialog.OnDateSetListener the listener to call when the user sets the date this value may be null.
+year		:-- 			int the initially selected year
+month		:--			int the initially selected month (0-11 for compatibility withh Calender#month)
+dayofmonth	:--			the initially selected day of month (1-31 depending on the month)
+
+
+
+
+
+
+
 
 
 App Manifest Overview :---------------------------
