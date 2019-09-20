@@ -1,3 +1,44 @@
+12:49 PM 9/20/2019 Animation in Android :--------------------------
+Animation can add visual cues that notify users about what's going on in your app. They are especially useful when the UI changes state such as when content loads or new action
+become available. Animaiton also add a polished look to your app, which gives it a higher quality look and feel.
+Android includes different animation APIs depending on what type of animation you want.
+
+
+
+Animation bitmaps :-------------------
+When you want to animate a bitmap graphic such as an icon or illustration you should use the drawable animation APIs. Usually these animation are defined statically with drawable
+resource but you can  also define the animation behaviour at runtime.
+
+
+
+Animation UI visibility and motion :------------------------
+When you need to change the visibility or position of views in your layout you should include animations to help the user understand how the UI is changing.
+To move releat or hide views with in the current layouot you can use the property animation system provided by the 
+	android.animation package available in andorid 3.0 (ApI Level 11) and higher
+These APIs updated the properties of your View objects over a period of time , continuously redrawing the view as the properties change. for example whe you change the position properties
+ the view moves across the screen , or when you change the alpha property the view fades in or out.
+
+
+
+
+7:18 PM 9/20/2019 Floating Action Button :------------------------
+
+
+10:41 AM 9/20/2019 TextInputLayout :-
+To implement the textinputlayout in your android project you have to make some changes in your Gradle Scripts (build.gradle (Module:app)) 
+
+    implementation 'com.android.support:appcompat-v7:29.0.0'
+    implementation 'com.android.support:design:29.0.0'
+
+these two implementation will have to added in your dependencies section
+
+
+ 
+
+
+
+
+
 4:10 PM 9/18/2019
 TextUtils :------------------------------------
 It is simply a set of utility functions to do operations onString objects. In fact the whole class doesn't have any instance fileds or methods. Everything is static Container it like a container to group

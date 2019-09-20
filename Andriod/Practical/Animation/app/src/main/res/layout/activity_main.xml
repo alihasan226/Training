@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0CB9A"
+    android:padding="20dp"
+    android:animateLayoutChanges="true"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:animateLayoutChanges="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:layout_below="@+id/linearlayout">
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearlayout3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:animateLayoutChanges="true"
+        android:layout_below="@+id/linearlayout1"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/linearlayout3"
+        tools:ignore="UnknownId" />
+
+
+</RelativeLayout>
