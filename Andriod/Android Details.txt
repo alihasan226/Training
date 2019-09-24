@@ -1,3 +1,294 @@
+1:10 PM 9/24/2019 Recycler View :----------------------
+it is also a kind of view group
+ViewHolder  - this will hold the view and helps in recycling
+ Adapter this will adapt our data so that it can be displayed in a list.
+
+
+In Android RecyclerView is an advanced and flexible version of ListView and GridView.
+It is a continer used for displaying large amount of data sets that can be scrolled very efficiently by maintaining a limited number of views.
+It was introduced in Material Design in API level 21 (Android 5.0 Lollipop)
+
+It is an advanced and flexible version of ListView and GridView.
+In Recycler view android provides a lot of new features which are not present in existing Listview or GridView.
+
+
+Important Notes :---------------------
+InAndroid RecyclerView provides an ability to implement the horizontal, vertical and Expandable List. it is mainly used when we have data collection whose elements can be change
+at runtime based on user action or any network events. For using this wifget we have to specify the Adapter and Layout Manager.
+
+
+Baisc RecyclerView XML Code :
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="abhiandroid.com.recyclerviewexample.MainActivity">
+    
+<android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>
+
+
+
+
+Gradle Dependency to use RecyclerView :-----------------------------------------------------------------------
+The RecyclerView wdiget is a part of separate library for API 7 level or higher. Add the following dependency in your Gradle build file to use recyclerview.
+
+
+gradleScript >build.gradle and inside dependencies
+
+dependencies {
+...
+compile "com.android.support:recyclerview-v7:23.0.1"
+}
+
+
+Need of RecycleView in Android :-------------------
+Listview /GridView recycle the item layout but don't keep the reference to the layout children forcing us to call findViewById(), for every child of our item layout for every time we call
+getView(). This issue causes the scrolling or non reqponsive problem as it frantically tries to gab references to the view's we needed.
+
+RecyclerView still uses Adapter to act as Data source but in this we have to create a ViewHolder to kepp the reference of view in memory so when we need new view it either creates
+ a new ViewHolder object to inflate the layout and hold those references or it recycles one from existing stacks.
+
+
+Component of RecycleView In Andorid: -------------------------------
+Mainley used component of RecyclerView
+
+1) Layout Manager
+In Android a RecyclerView needs to have a layoutManager and an Adapter to bb instantiated.
+It is used to define type of Layout which RecyclerView should use.
+It contain the reference of all view  that are filled by the data of the entry.
+
+We can create a Custom Layout Manager by extending RecyclerView.LayoutManager Class but RecyclerView Provides three types of in-built Layout Managers.
+
+1) Linear Layout Manager – It is used for displaying the data items in a horizontal or vertical scrolling List
+2) GridLayoutManager – It is used to show the items in grid format
+3) StaggeredGridLayoutManager – It is used to show the items in staggered Grid. 
+
+
+=> LinearLayout manager (Context context)
+it is used for displaying the data item in a horizontal or vertical scrolling List.
+we use Linearlayout manager for displaying the Recyclerview as a ListView.
+
+public constructor for LinearLayout
+LinearLayoutManager(Context context): It is used to create a vertical LinearLayoutManager. In this we need to set only one parameter i.e used to set the context the current Activity.
+Example: In below code snippet we show how to use this constructor in Android.
+
+
+With Default Vertical Orientation:
+
+// get the reference of RecyclerView
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+// set a LinearLayoutManager with default orientation
+LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
+
+
+With Horizontal Orientation :---
+
+/ get the reference of RecyclerView
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+// set a LinearLayoutManager with default orientation
+LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
+
+
+LinearLayoutManager(Context context, int orientation, boolean reverseLayout): In this first parameter is used to set the current context, second is used to set the Layout Orientation 
+should be vertical or horizontal. By using this constructor we can easily create a horizontal or vertical List. Third parameter is a boolean value when set to true layouts from end to start 
+it means items are arranged from end to start.
+
+// get the reference of RecyclerView
+RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+// set a LinearLayoutManager with default horizontal orientation and false value for reverseLayout to show the items from start to end
+LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);
+recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
+
+
+GridLayoutManager :--------------------------------------------------
+It is used to show the items in grid format. If we need to display items in grid format then we can use GridLayoutManager. In simple words we can say that we use the GridLayoutManager 
+for displaying RecyclerView as a GridView.
+
+
+public constructor for GridLayoutManger :-
+
+GridLayoutManager (Context context, int spanCount): It is used to create a Vertical GridLayoutManager. In this constructor first parameter is used to set the current context and second
+parameter is used to set the spanCount means the number of columns in the grid.
+
+With Default Vertical Orientation:
+// get the reference of RecyclerView
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+// set a GridLayoutManager with default vertical orientation and 3 number of columns
+GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
+
+
+With Horizontal Orientation:
+
+// get the reference of RecyclerView
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+// set a GridLayoutManager with 3 number of columns
+GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
+gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL); // set Horizontal Orientation
+recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
+
+
+GridLayoutManager (Context context, int spanCount, int orientation, boolean reverseLayout): 
+In this constructor first parameter is used to set the current context, second parameter is used to set the spanCount means the number of columns in the grid, third parameter is used to
+set the Layout Orientation should be vertical or horizontal and last param is a boolean value when sets to true layout from end to start means grids are arranged from end to start.
+
+// get the reference of RecyclerView
+RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+// set a GridLayoutManager with 3 number of columns , horizontal gravity and false value for reverseLayout to show the items from start to end
+GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3,LinearLayoutManager.HORIZONTAL,false);
+recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
+
+
+=> ViewHolder: 
+ViewHolder is used to store the reference of the View’s for one entry in the RecyclerView. A ViewHolder is a static inner class in our Adapter which holds references to the relevant view’s.
+By using these references our code can avoid time consuming findViewById() method to update the widgets with new data.
+3:49 PM 9/23/2019
+Android ButterKnife library is a view injection library that injects views into android activity / fragments using annotations. For example, @BindView annotation avoids using 
+findViewById() method by automatically type casting the view element. Not just view binding, butterknife provides lot of other useful options like binding strings, dimens, drawables, click events and lot more. We’ll see brief about every component 
+offered in this article.
+
+
+---------------------------------------
+Pagination  In Reycler View
+---------------------------------------
+In Android Pagination is very common feature for heavy-data apps today. It's also called endless scrolling or infinite scrolling.
+You want to fectch all the data of feed at once and bind with the view , which could-time consuming and your app will appears as running slow.
+Pagination is used for better user experience and resource management.
+It has broken down a list of content  into equal smaller pieces loaded one at a time.
+
+
+Why pagination :-------
+Pagination allows the user to see the latest content with little wait time and for providing smooth user experience we are used pagination.
+
+Need of Pagination :-------------------------
+When you scroll this list and reaches the end of the view more items are loaded.
+
+When Pagination :---------------------
+When you have too big content to load that takes a long time to load wither from pulling data from database or APIs calls. Then we use pagination.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11:53 AM 9/23/2019
+What is Network transaction?
+In computer programming a transaction usually means a sequence of information exchange and related work.
+
+In Android Retrofit is a REST Client for java and android by Square inc under Apache 2.0 license.Its a simple network library that used for network transaction.
+By using this library we can seamlessly capture JSON reponse from web service/web API.
+it's easy and fast library to reterive and upload the data (JSON or any other structured data) via a REST based web service.
+
+JSON :  Javascript Object Notation
+JSON is a syntax for storing and exchanging data
+JSON is text wtitten with JavaScript object notation
+
+When exchanging data between a browser and a server the data can only be text.
+JSON is text and we can convert any JavaScript into JSON and send JSON to the server.
+we can also convert any JSON received from the server into JavaSript objects.
+this way we can work with the data.
+
+That is used to fetch and send the data from/to server.
+Retrofit is better alternative ofother libraries in term of performance, ease of use , extensibility and others.
+
+In Android retrofit library is different from other network libraries because it gives us an easy to use platform through which we don't need to parse JSON responce as they are done 
+by libraries itself.It used GSON library in the background to parse the response data. what we need to so is define a POJO (Plain Old Java Object) to parse the response.
+
+
+
+POJO/Model Class :-------
+For fetching response we need to create POJO class that automatically parse the JSON data using GSON in background. We just need to create this POJO class. For creating POJO class
+first method is defining each and every variable by ourself
+
+second best and fast method is using http://www.jsonschema2pojo.org/ platform. By using this platform you can easily convert your JSON response to POJO class.
+for this we need to copy our JSON response and paste it in jsonschema2pojo and it will create setter getter methods as per our requirement.
+
+
+Sample POJO class:
+
+public class SamplePojo {
+
+private int userId;
+private String name;
+
+public int getUserId() {
+return userId;
+}
+
+public String getName() {
+return name;
+}
+}
+
+
+
+API Interface :-----------
+Now we need to create an interface to define our different method that will be used for network transactions.
+public interface ApiInterface {
+
+
+// For POST request
+
+    @FormUrlEncoded    // annotation that used with POST type request
+    @POST("/demo/login.php") // specify the sub url for our base url
+    public void login(
+            @Field("user_email") String user_email,
+            @Field("user_pass") String user_pass, Callback<SignUpResponse> callback); 
+
+//user_email and user_pass are the post parameters and SignUpResponse is a POJO class which recieves the response of this API
+
+
+// for GET request
+
+    @GET("/demo/countrylist.php") // specify the sub url for our base url
+    public void getVideoList(Callback<List<CountryResponse>> callback);
+
+// CountryResponse is a POJO class which receives the response of this API
+
+}
+
+ 
+
+
+
+RestAdapter :------------------
+We need to define RestAdapter to implement API's. Suppose we have to implement login API then we need to build RestAdapter, setting root url and create connection between our
+adapter and API interface. for this its  better to create a class in which we have a method that create the connection and then return the API interface object.
+You can create this RestAdapter where you want to implement API but its better to create a common class/method and use it where you want.
+
+ public class Api {
+
+    public static ApiInterface getClient() {
+
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint("http://healthyblackmen.org") //Setting the Root URL
+                .build(); //Finally building the adapter
+
+        //Creating object for our interface
+        ApiInterface api = adapter.create(ApiInterface.class);
+        return api;
+    }
+}
+
 12:49 PM 9/20/2019 Animation in Android :--------------------------
 Animation can add visual cues that notify users about what's going on in your app. They are especially useful when the UI changes state such as when content loads or new action
 become available. Animaiton also add a polished look to your app, which gives it a higher quality look and feel.
