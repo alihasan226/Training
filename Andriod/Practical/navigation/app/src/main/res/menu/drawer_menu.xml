@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"><!-- it is used to show the menu in navigation window as a preview-->
+
+    <group android:checkableBehavior="single"> <!-- these are the menu in the navigation drawer and from this menu item we can only select one item-->
+
+        <item
+            android:id="@+id/video"
+            android:icon="@drawable/video_library"
+            android:title="Video" />
+
+        <item
+            android:id="@+id/photo"
+            android:icon="@drawable/photos"
+            android:title="Photos" />
+
+        <item
+            android:id="@+id/image"
+            android:icon="@drawable/image"
+            android:title="Image" />
+    </group>
+
+    <item android:title="Communicate"><!-- it will be below the menu to perform some different action-->
+        <menu>
+
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/share"
+                android:title="Share" />
+
+        </menu>
+    </item>
+
+</menu>
