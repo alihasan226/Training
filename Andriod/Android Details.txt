@@ -151,6 +151,30 @@ recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to Recycl
 => ViewHolder: 
 ViewHolder is used to store the reference of the View’s for one entry in the RecyclerView. A ViewHolder is a static inner class in our Adapter which holds references to the relevant view’s.
 By using these references our code can avoid time consuming findViewById() method to update the widgets with new data.
+
+
+
+Difference between the Recycler View and ListView :-----------------
+
+1) View Holder
+In list view definition view holder was suggested approach for keeping reference for views. But it was not cumpulsion. Althougn by not doing so ListView used show staled data.
+ANother major drawback of not using view holder could lead a heavy operation of finding view ids every time which resulted in laggy listview.
+ the problem is solved in recycler view by use of RecyclerView.ViewHolder.
+This is the major difference in RecyclerView and ListView
+
+2) Layout Manager
+3) Item Animation
+4) Adapter
+5) item Decorator
+6) OnItemTouchListener
+
+
+
+
+
+
+
+
 3:49 PM 9/23/2019
 Android ButterKnife library is a view injection library that injects views into android activity / fragments using annotations. For example, @BindView annotation avoids using 
 findViewById() method by automatically type casting the view element. Not just view binding, butterknife provides lot of other useful options like binding strings, dimens, drawables, click events and lot more. We’ll see brief about every component 
@@ -165,6 +189,9 @@ You want to fectch all the data of feed at once and bind with the view , which c
 Pagination is used for better user experience and resource management.
 It has broken down a list of content  into equal smaller pieces loaded one at a time.
 
+Pagination (Endless Scrolling or Infinite Scrolling) is a festure common in content-heavy apps. It breaks down a list of content into equal smaller pieces loaded one at a time.
+How to implement Pagination with RecyclerView, handle adapter changes with new data, error handling and more.
+
 
 Why pagination :-------
 Pagination allows the user to see the latest content with little wait time and for providing smooth user experience we are used pagination.
@@ -173,11 +200,14 @@ Need of Pagination :-------------------------
 When you scroll this list and reaches the end of the view more items are loaded.
 
 When Pagination :---------------------
-When you have too big content to load that takes a long time to load wither from pulling data from database or APIs calls. Then we use pagination.
+When you have too big content to load that takes a long time to load either from pulling data from database or APIs calls. Then we use pagination.
 
 
+layoutManager.getChildCount() //visible
+layoutManager.getItemCount() //total item in adapter
+findFirstVisibleItemPosition() //item that have scrollout
 
-
+if(visibleitem+scrollout == totalitem) than we get new data
 
 
 
@@ -194,6 +224,25 @@ When you have too big content to load that takes a long time to load wither from
 What is Network transaction?
 In computer programming a transaction usually means a sequence of information exchange and related work.
 
+
+=> RESTful API
+REST stands for Representational state Transfer(REST) Technology
+A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, and DELETE data.
+
+
+
+=> How RESTful APIs work
+A RESTful API breaks down a transaction to create a series of small modules. Each modules adddresses a particular underlying part of the transaction.
+This modularity provides developers with a lot of flexibility but it can be challenging for developer to design from scratch.
+Currently the models provides by AmazonS3, Cloud DataManagement interface (CDMI) and OpenStack Swift are the most popular.
+
+A RESTful API explicitly takes advantage of HTTP methodologies defined by the RFC 2616 protocol. 
+
+GET to reterieve a resource; 
+PUT to change the state of or update aresource, which can be an object, file or block; 
+POST to create that resource;
+DELETE to remove it.
+
 In Android Retrofit is a REST Client for java and android by Square inc under Apache 2.0 license.Its a simple network library that used for network transaction.
 By using this library we can seamlessly capture JSON reponse from web service/web API.
 it's easy and fast library to reterive and upload the data (JSON or any other structured data) via a REST based web service.
@@ -208,19 +257,24 @@ we can also convert any JSON received from the server into JavaSript objects.
 this way we can work with the data.
 
 That is used to fetch and send the data from/to server.
-Retrofit is better alternative ofother libraries in term of performance, ease of use , extensibility and others.
+Retrofit is better alternative of other libraries in term of performance, ease of use , extensibility and others.
 
 In Android retrofit library is different from other network libraries because it gives us an easy to use platform through which we don't need to parse JSON responce as they are done 
 by libraries itself.It used GSON library in the background to parse the response data. what we need to so is define a POJO (Plain Old Java Object) to parse the response.
 
 
 
-POJO/Model Class :-------
+POJO / Model Class :-------
 For fetching response we need to create POJO class that automatically parse the JSON data using GSON in background. We just need to create this POJO class. For creating POJO class
 first method is defining each and every variable by ourself
 
 second best and fast method is using http://www.jsonschema2pojo.org/ platform. By using this platform you can easily convert your JSON response to POJO class.
 for this we need to copy our JSON response and paste it in jsonschema2pojo and it will create setter getter methods as per our requirement.
+
+
+API Key Name => alihasanapi
+APIkey => ng0GJouUXk1zNw0xTEzbzN3WMpd7xeIE
+Fullcontact.com
 
 
 Sample POJO class:
@@ -289,6 +343,13 @@ You can create this RestAdapter where you want to implement API but its better t
     }
 }
 
+
+
+
+First things we have to find an adequate web API from which to fetch data . After a fair bit of hunting  we settled on FullContactPerson API. This is an excellent and interesting API.
+It takes a person's email address and them returns information about the person from over120 different social netowks, including facebook twitter and linkedin.
+The return information can be in either XML or JSON.
+Like most API's you need an API key which must be specifies with every API
 12:49 PM 9/20/2019 Animation in Android :--------------------------
 Animation can add visual cues that notify users about what's going on in your app. They are especially useful when the UI changes state such as when content loads or new action
 become available. Animaiton also add a polished look to your app, which gives it a higher quality look and feel.
