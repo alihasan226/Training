@@ -1,17 +1,19 @@
 package com.example.retrofitexample;
 
-import retrofit.RestAdapter;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Api {
 
-    public static ApiInterface getClient()
+    public static Jsonplaceholder getClient()
     {
-        RestAdapter adapter=new RestAdapter.Builder()
-                .setEndpoint("http://mobileappdatabase.in/")
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")//Here we set the root URL
+                .addConverterFactory(GsonConverterFactory.create())//and this is the converter GSON
                 .build();
 
-        //creating object for our interface
-        ApiInterface api=adapter.create(ApiInterface.class);
-        return api;
+
+        Jsonplaceholder jsonplaceholder=retrofit.create(Jsonplaceholder.class);
+        return jsonplaceholder;
     }
 }

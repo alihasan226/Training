@@ -1,65 +1,76 @@
 package com.example.retrofitexample;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    pojo pojodata;
-    private Button btn_submit;
-    private EditText et_name,et_email,et_password;
-
-    final String emailpattern="[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    private TextView tv_data;
+    protected ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        et_name=findViewById(R.id.et_name);
-        et_email=findViewById(R.id.et_email);
-        et_password=findViewById(R.id.et_pass);
-        btn_submit=findViewById(R.id.btn_submitt);
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
+        actionBar=getSupportActionBar();
+        actionBar.setTitle("RetroFit Get Method");
+        tv_data=findViewById(R.id.textview);
+
+
+
+        //Here we declare the Retrofit
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")//Here we set the root URL
+                .addConverterFactory(GsonConverterFactory.create())//and this is the converter GSON
+                .build();
+
+        //jsonholder return the APi interface class object to the MainActivity
+        Jsonplaceholder jsonplaceholder=retrofit.create((Jsonplaceholder.class));
+
+
+        Call<List<Post>> call=jsonplaceholder.getPost();
+
+
+        call.enqueue(new Callback<List<Post>>() {
+
             @Override
-            public void onClick(View view) {
-                signUp();
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if(!response.isSuccessful()){
+                    tv_data.setText("Code"+response.code());
+                    return;
+                }
+
+                List<Post> post1=response.body();
+                for(Post post:post1)
+                {
+                    String content="";
+                    content+="ID : "+post.getId()+"\n";
+                    content+="User ID : "+post.getUserId()+"\n";
+                    content+="Title : "+post.getTitle()+"\n";
+                    content+="Text : "+post.getText();
+
+
+                    tv_data.append(content);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                    tv_data.setText(t.getMessage());
             }
         });
-    }
-
-    public void signUp()
-    {
-
-
-
-        Api.getClient().registration(et_name.getText().toString().trim(),
-                et_email.getText().toString().trim(),
-                et_password.getText().toString().trim(),
-                "email", new Callback<pojo>() {
-                    @Override
-                    public void success(pojo signUpResponse, Response response) {
-                        // in this method we will get the response from API
-                        pojodata = signUpResponse;
-                        // display the message getting from web api
-                        Toast.makeText(MainActivity.this, signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void failure(RetrofitError error) {
-                        // if error occurs in network transaction then we can get the error in this method.
-                        Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-
-                    }
-                });
 
     }
 }

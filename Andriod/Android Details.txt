@@ -1,5 +1,6 @@
-1:10 PM 9/24/2019 Recycler View :----------------------
-it is also a kind of view group
+1:10 PM 9/24/2019 		Recycler View :----------------------
+
+It is also a kind of view group
 ViewHolder  - this will hold the view and helps in recycling
  Adapter this will adapt our data so that it can be displayed in a list.
 
@@ -220,7 +221,119 @@ if(visibleitem+scrollout == totalitem) than we get new data
 
 
 
-11:53 AM 9/23/2019
+11:53 AM 9/23/2019	 	Retrofit :--------------------------------------------------
+
+It is a type-safe HTTP client for Android and Java.
+
+API Declaration :------------ 
+Annotation on the interface methoda and its parameters indicate how  a request will be handled.
+
+Request Method :-
+Every method must have an Http annotation that provides the request method and relative URL.
+There are five built-in annotations GET, POST,  PUT,  DELETE and HEAD
+
+we can specify the query parameter in URL.
+@GET("user/list?sort=desc")
+
+
+HTTP defines a set of request method to indicate the desired action to be performed for a given resource.
+
+GET
+the GET method request a representation of the specific resource. Request using GET should only reterive data.
+
+HEAD
+the HEAD method asks for a response identical to that of a GET request but without the reqponse body.
+
+POST
+the POST method is used to submit an  entity to the specified resource, often causing a change in state or side effects on the server.
+
+PUT
+The PUT method replaces all current representations of the target resource with the request payload
+
+DELETE
+The DELETE method deletes the specified resource.
+
+
+FORM ENCODED AND MULTIPART
+methods can also be declare to send form-encoded and multipart data.
+form-encoded data is sent when @FormUrlEncoded is present on the method
+Each key-value apir annotated with @Field containing the name and the obejct providing the value.
+
+@FormUrlEncoded
+@POST("user/edit")
+Call<User> updateUser(@Field("first_name") String first, @Field("last_name") String last);
+
+
+
+If we want to get the set the Query with the REQUEST method than we can out that in 
+@GET("posts")//Here we declare the relative URL
+    Call<List<Post>> getPost(@Query("userId") int userId,
+                             @Query("_sort")    String sort,
+                             @Query("_order")   String order
+    );
+
+Here we have the Request method and the relative url  that is post 
+to fit the Query we have enter the  \\@Query("user_Id) int userId, @Query("_sort")    String sort,  @Query("_order")   String order  
+so this is query and we can set the paramter of the query in the MainActivity class  Call<List<Post>> call=jsonplaceholder.getPost(2,"id","desc");
+
+If we want to get the more than two Query means to say that want to get the userId of  two person than we can get by using 
+
+ @GET("posts")//Here we declare the relative URL
+    Call<List<Post>> getPost(@Query("userId") Integer userId,
+                             @Query("userId") Integer userId1,
+                             @Query("_sort")    String sort,
+                             @Query("_order")   String order
+    );
+
+
+2nd method
+ @GET("posts")//Here we declare the relative URL
+    Call<List<Post>> getPost(@Query("userId") Integer[],
+                             @Query("_sort")    String sort,
+                             @Query("_order")   String order
+    );
+
+
+we can also put the data in the form key and value pair  using Map<>
+
+    @GET("posts")//Here we declare the relative URL
+    Call<List<Post>> getPost(@QueryMap Map<String,String> parameters);
+
+
+in MainActivity class we can use
+
+ Map<String,String> parameter=new HashMap<>();
+        parameter.put("userId","1");
+        parameter.put("_sort","id");
+        parameter.put("_order","desc");
+
+        Call<List<Post>> call=jsonplaceholder.getPost(parameter);
+
+
+
+we cal also use more complex relative url so for that we can use the
+   @GET
+    Call<List<PostComment>> getComment(@Url String url);
+
+and in MainActivity paramter we can pass the "relative url "
+
+
+
+
+
+POST is another kind of the Request method  that is used for the send data to the server.
+ we will perform on the /posts end point 
+
+@POST("posts")
+Call<Post> createPost(@Body Post post);
+iin this we serealizing the post object into Json format than we put it to http body
+
+
+@FORMUrlEncoded
+@POST
+Call<Post> createPost(@Feild
+
+
 What is Network transaction?
 In computer programming a transaction usually means a sequence of information exchange and related work.
 
