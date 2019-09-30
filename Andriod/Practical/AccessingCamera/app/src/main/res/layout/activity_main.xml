@@ -5,21 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/buttonl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:text="Capture"
-        />
 
     <ImageView
         android:id="@+id/imageview1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="50dp"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_height="600dp"/>
 
+
+    <Button
+        android:id="@+id/buttonl"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_gravity="center"
+        android:text="Upload Image"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:background="@drawable/buttoncorner"
+
+        />
 </LinearLayout>

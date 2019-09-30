@@ -221,19 +221,116 @@ if(visibleitem+scrollout == totalitem) than we get new data
 
 
 
-11:53 AM 9/23/2019	 	Retrofit :--------------------------------------------------
+11:53 AM 9/23/2019	 	Retrofit :----------------------------------------------------------------------------------------
+
+
 
 It is a type-safe HTTP client for Android and Java.
 
+
+Retrofit turns your HTTP API into a Java interface.
+public interface GithubService{
+@GET("user/{user}/repos")
+Call<List<Repo>> listRepos(@Path("user") String user);
+}
+
+The Retrofit class generates an implementation of the GitHubServices interace
+Retrofit retrofit = new Retrofit.Builder()
+    .baseUrl("https://api.github.com/")
+    .build();
+
+GitHubService service = retrofit.create(GitHubService.class);
+
+
+
+
 API Declaration :------------ 
-Annotation on the interface methoda and its parameters indicate how  a request will be handled.
+Annotation on the interface methods and its parameters indicate how  a request will be handled.
 
 Request Method :-
 Every method must have an Http annotation that provides the request method and relative URL.
 There are five built-in annotations GET, POST,  PUT,  DELETE and HEAD
 
-we can specify the query parameter in URL.
+
+
+The relative URL of the resource is specified in the annotation.
+@GET("user/list")
+
+we can also specify the query parameter in URL.
 @GET("user/list?sort=desc")
+
+
+@GET("/post")
+Call<List<Post>> getPost(@Query("userId") int userId)
+
+@GET("posts")
+Call<List<Post>> getPosts(@Query("userId") int userId,@Query("_sort") String sort,@Query("_order") String order);
+
+same like as /post?userId&_sort=id&_order=desc
+
+
+URL Manipulation :---------------
+A request URL can be updated dynamically using replacement blocks and paramters on the method .A replacement block is an alphanumeric string surrounded by { and }.
+A corresponding parameter must be annotate with @Path using the same string.
+
+@GET("group/{id}/users")
+Call<List<User>> groupList(@Path("id") int groupId);
+
+Query parameters can also be added.
+
+@GET("group/{id}/users")
+Call<List<User>> groupList(@Path("id") int groupId, @Query("sort") String sort);
+
+
+For complex query parameter combinations a Map can be used.
+
+@GET("group/{id}/users")
+Call<List<User>> groupList(@Path("id") int groupId, @QueryMap Map<String, String> options);
+Here we can put the userId in the MainActivity directly
+
+
+
+REQUEST Body :----------
+ An object can be specified for use as an HTTP request body with the body annotaion
+@POST("users/new")
+Call<User> createUser(@Body User user);
+
+The @Body annotation defines a single request body.
+The object will also be converted using a converter specific on the Retrofit instance. If no converter is added only RequestBody can be used.
+
+
+
+FORM ENCODED AND MULTIPART
+Methods can also be declared to send form-encoded and multipart data.
+
+Form-encoded data is sent when @FormUrlEncoded is present on the method. Each key-value pair is annotated with @Field containing the name and the object providing the value.
+
+@FormUrlEncoded
+@POST("user/edit")
+Call<User> updateUser(@Field("first_name") String first, @Field("last_name") String last)
+
+The @Body annotation defines a single request body.
+
+@MULTIPART
+Multipart requested are used when @Multipart is present on the method . Parts are declared using the @Part annotation.
+@Multipart
+@PUT("user/photo")
+Call<User> updateUser(@Part("photo") RequestBody photo, @Part("description") RequestBody description);
+
+Multipart parts use one of Retrofit's converters or they can implement RequestBody to handle their own serialization.
+
+
+
+
+
+PUT / PATCH / DELETE :---------------
+these are applied for a single item
+
+Put and Patch both are used for updating the existing resource
+
+PUT=> Completely replace the existing resource with one we send over
+
+PATCH=> If we don't send any request to the server it doesnot get the null value it will fit the default value that have already been added.
 
 
 HTTP defines a set of request method to indicate the desired action to be performed for a given resource.
@@ -273,6 +370,7 @@ If we want to get the set the Query with the REQUEST method than we can out that
     );
 
 Here we have the Request method and the relative url  that is post 
+
 to fit the Query we have enter the  \\@Query("user_Id) int userId, @Query("_sort")    String sort,  @Query("_order")   String order  
 so this is query and we can set the paramter of the query in the MainActivity class  Call<List<Post>> call=jsonplaceholder.getPost(2,"id","desc");
 
@@ -284,6 +382,7 @@ If we want to get the more than two Query means to say that want to get the user
                              @Query("_sort")    String sort,
                              @Query("_order")   String order
     );
+
 
 
 2nd method
@@ -326,12 +425,15 @@ POST is another kind of the Request method  that is used for the send data to th
 
 @POST("posts")
 Call<Post> createPost(@Body Post post);
-iin this we serealizing the post object into Json format than we put it to http body
+in this we serializing the post object into Json format than we put it to HTTP body
 
 
 @FORMUrlEncoded
 @POST
 Call<Post> createPost(@Feild
+
+
+
 
 
 What is Network transaction?
@@ -437,6 +539,10 @@ public interface ApiInterface {
 
 
 
+
+
+
+
 RestAdapter :------------------
 We need to define RestAdapter to implement API's. Suppose we have to implement login API then we need to build RestAdapter, setting root url and create connection between our
 adapter and API interface. for this its  better to create a class in which we have a method that create the connection and then return the API interface object.
@@ -463,6 +569,40 @@ First things we have to find an adequate web API from which to fetch data . Afte
 It takes a person's email address and them returns information about the person from over120 different social netowks, including facebook twitter and linkedin.
 The return information can be in either XML or JSON.
 Like most API's you need an API key which must be specifies with every API
+
+LoggingInterceptor :--------------------------------------
+Retrofit integrate a log feature for basic request and response debugging.The logging functionality was removed in Retrofit 2 since the required HTTP layer is now completely 
+based on OkHttp. Since many developer asked for logging capabilities in Retrofit 2 the developer of OkHttp addes a logging interceptor in release 2.6.0.
+
+Retrofit 2 compltely relies on OkHttp for any network operation.The developer of OkHttp released a separate logging interceptor project which implements logging for OkHttp.
+You can add it to your project with quickly edit of your  build.gradle.
+
+while developing your app and for debugging purpose it's nice to have a log feature intergrated to show request and response information .Since logging isn't ite
+
+
+
+
+OkHttp Android :--------------------
+Initially Android has only two HTTP client HttpURL Connection and Apache HTTP Client for sending and receiving data from the web . Each of these client requied a lot of coding inside it.
+It having various limitation when it come to cancelling an HTTP request or connection-pooling.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 12:49 PM 9/20/2019 Animation in Android :--------------------------
 Animation can add visual cues that notify users about what's going on in your app. They are especially useful when the UI changes state such as when content loads or new action
 become available. Animaiton also add a polished look to your app, which gives it a higher quality look and feel.
@@ -969,6 +1109,7 @@ The Android system implements the principle of least privilage .That is each app
 
 
 	Application Component :-----------------
+
 App components are essentially building blocks of an Android app. Each component is an entry point through which the system or a user can enter your app. Some component depends on others.
  
 there are four different types of app components :-
@@ -1326,6 +1467,7 @@ Also consider using AsyncTask or Handlerthread instead of the traditional Thread
 
 
 	The basic :--------------------
+
 To create a service you must create a subclass of service or use one of its existing subclasses.
 In your implemnetation you must override some callback methods that handle aspect of the service lifecycle and provide a mechanism that allows the component to bind to the service.
 
@@ -3665,15 +3807,19 @@ Dimension. The size of each dash line, as a dimension value or dimension resourc
 
 
 
-	Accessing Cameras Take Photos :------------------------------------
+11:04 AM 9/30/2019	Camera :------------------------------------
+Android provides full access to the devices camera hardware so you can build a wide range of camera or vision-based apps.
+If you just need a way for the user to capture a photo you can simply request an existing camera app to capture a photo and return it to you.
 
 
-In this we are going to  Controlling the camera
+
+
+=>Take photos
 
 1) Request the camera feature :-------------------
 
-If an essential function of your application is taking pictures, then restrict its visibility on Google Play to devices that have a camera. To advertise that your application depends on having
-a camera, put a <uses-feature> tag in your manifest file:
+If an essential function of your application is taking pictures, then restrict its visibility on Google Play to devices that have a camera.
+To advertise that your application depends on having a camera, put a <uses-feature> tag in your manifest file:
 
 <manifest ... >
     <uses-feature android:name="android.hardware.camera"
@@ -3683,6 +3829,9 @@ a camera, put a <uses-feature> tag in your manifest file:
 
 If your application uses, but does not require a camera in order to function, instead set android:required to false
 
+It's then your responsibility to check for the availability of the camera at runtime by calling has SystemFeature(PackageManager.FEATURE_CAMERA_ANY). If a camera is not available
+you sholud then disable your camera features.
+ 
 
 
 2) Take a photo with a camera app
@@ -3707,7 +3856,7 @@ By the help of android startActivityForResult() method we can get result from an
 By the help of Android startActivityForResult() method we can send information from one activity to another and vice-versa.
 The android startActivityForResult method requires a result from the second activity (activity to be invoked).
 
-In such case we need to override the onActivityResult method that is incoked aytomatically when second activity returs result.
+In such case we need to override the onActivityResult method that is invoked automatically when second activity returns result.
 
 => Method Signature
 There are two variants of startActivityForResult() method
@@ -3717,7 +3866,7 @@ public void startActivityForResult(Intent intent,int requestCode,Bundle options)
 
 
 
-3) Get the thumbnail
+3) Get the thumbnail :------------------------------------------
 
 If the simple feat of taking a photo is not the culmination of your app's ambition, then you probably want to get the image back from the camera application and do something with it.
 
@@ -3732,6 +3881,118 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         imageView.setImageBitmap(imageBitmap);
     }
 }
+
+
+NOTE :- This thumbnail image from "data" might br good for icon but not a lot more. Dealing with a full-sized image takes a bit more work.
+
+
+
+5) Save the full-size photo :---------------------------------
+
+The Andorid camera application saves a full-size photo if you give it a file to save into.
+You must provide a fully qualifies file name where the camera app should save the photo.
+Generally any photos that the user captures with the device camera should be saved on the device in the public external storage so they are accessible by all apps.
+
+The proper directory for shared photos is provided by getExternalStoragePublicDirectory(), with the DIRECTORY_PICTURE argument.
+Because the directory provided by this method is shared among all apps, reading and writing to it requires the READ_EXTERNAL_STORAGE and WRITE_EXTERNAL_STORAGE permissio.
+
+The write permission implicitly allows reading so if you need to write to the external storage then you need to request only one permission:
+
+
+<manifest ...>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    ...
+</manifest>
+
+
+
+However if you's like the photos to remain private to your app only you can instead use the directory provided by getExternalFilesDir().
+Files you save in the directory provided by getExternalFilesDir() or getFilesDir() are deleted when the user uninstall your app.
+
+
+Once you decide the directory for the file, you need to create a collision-resistant file name.You may wish also to save the path in a member variable for later use.
+
+Here's an example solution that returs a unique file name for a new photo using a date-time stamp:
+
+String currentPhotoPath;
+
+private File createImageFile() throws IOException {
+    // Create an image file name
+    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    String imageFileName = "JPEG_" + timeStamp + "_";
+    File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+    File image = File.createTempFile(
+        imageFileName,  /* prefix */
+        ".jpg",         /* suffix */
+        storageDir      /* directory */
+    );
+
+    // Save a file: path for use with ACTION_VIEW intents
+    currentPhotoPath = image.getAbsolutePath();
+    return image;
+}
+
+
+With this method available to create a file for the photo you can now create and invoke the Intent like this:
+
+static final int REQUEST_TAKE_PHOTO = 1;
+
+private void dispatchTakePictureIntent() {
+    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    // Ensure that there's a camera activity to handle the intent
+    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        // Create the File where the photo should go
+        File photoFile = null;
+        try {
+            photoFile = createImageFile();
+        } catch (IOException ex) {
+            // Error occurred while creating the File
+            ...
+        }
+        // Continue only if the File was successfully created
+        if (photoFile != null) {
+            Uri photoURI = FileProvider.getUriForFile(this,
+                                                  "com.example.android.fileprovider",
+                                                  photoFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+        }
+    }
+}
+
+
+Now you need to configure the FileProvider.In your app's manifest add a provider to your application:
+
+<application>
+   ...
+   <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="com.example.android.fileprovider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths"></meta-data>
+    </provider>
+    ...
+</application>
+
+
+Make sure that the authorities string matches the second argument to getUriForFile(Context, String, File). In the meta-data section of the provider definition, you can see that the 
+provider expects eligible paths to be configured in a dedicated resource file, res/xml/file_paths.xml. Here is the content required for this particular example:
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path name="my_images" path="Android/data/com.example.package.name/files/Pictures" />
+</paths>
+
+
+
+
+
+
+
 
 Android allows you to manipulate images by adding different kinds of effects on the images you can easily apply image processing to add certain kinds of effects on images.
 the effect could br brightness , darkness, grayscale conersion etc.

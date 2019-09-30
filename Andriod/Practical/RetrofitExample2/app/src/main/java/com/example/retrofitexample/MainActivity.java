@@ -5,10 +5,16 @@ import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.OkHttpClient.Builder;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,15 +31,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         et_commet=findViewById(R.id.textview);
 
+        HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel((HttpLoggingInterceptor.Level.HEADERS));
+
+        OkHttpClient okHttpClient=new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
+
+        //Gson gson=new GsonBuilder().serializeNulls().create();   in term of putting the null value if we don't pass anything using patch method than we can use it.
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")//that is my base URL
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())//but we will have to pass the gson object in the parenthsis of this method.
+                .client(okHttpClient)
                 .build();
 
         jsonplaceholder=retrofit.create(Jsonplaceholder.class);
         //getpost();
-       //fetchComment();
-        createPost();
+        //fetchComment();
+        //createPost();
+        putPost();
+        //patchPost();
+        //deletePost();
+
     }
 
     public void getpost()
@@ -152,5 +171,54 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void putPost()
+    {
+        Post new_post=new Post(12,null,"New Text");
+        Call<Post> call=jsonplaceholder.putPost("123",5,new_post);
+
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+
+                if(!response.isSuccessful()){
+                    et_commet.setText("Code"+response.code());
+                    return;
+                }
+
+                Post postresponse=response.body();
+                //here we reteriving the post request
+
+                String content="";
+                content+="Code : "+response.code()+"\n";//this is response code that is generated after the HTTP request action performed.
+                content+="ID : "+postresponse.getId()+"\n";
+                content+="User ID : "+postresponse.getUserId()+"\n";
+                content+="Title : "+postresponse.getTitle()+"\n";
+                content+="Text: "+postresponse.getText()+"\n\n";
+                et_commet.append(content);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                et_commet.setText(t.getMessage());
+            }
+        });
+    }
+
+    private void deletePost()
+    {
+        Call<Void> call=jsonplaceholder.deletePost(5);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                et_commet.setText("Code : "+response.code());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                et_commet.setText(t.getMessage());
+            }
+        });
+    }
 
 }
