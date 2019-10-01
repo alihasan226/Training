@@ -1,3 +1,43 @@
+11:56 AM 10/1/2019		Firebase Cloud Messaging :------------------------------------------------
+Firebase Cloud Messaging(FCM) formerly Known as Google Cloud Messaging (GCM) is a cross-platform cloud solution for message and notification for Android, IOS, and web application
+which currently can be used at no cost.
+
+[
+Google Cloud Messaging (GCM) was a mobile notification service developed by Google that enables third-party application developers to send notification data or information from
+developer-run servers to applications that target the Google Android Operating System, as well as application or extension developed for the Google Chrome browser. It is available to developer
+free of charge.The GCM Service was first announced in June 2012 as a successor to Google's now-defunct Android Cloud to Device Messaging service,
+
+It has been superseded by Google's Firebase Cloud Messaing (FCM) on May 29 2019
+]
+Firebase is a platform that provides different feature like crash reporting , authentication, database,
+Firebase provides a full set of authentication options out-of-the-box. Firebase automatically stores your user's credentials securely (using bcryt) and redundanylt (with replication and daily off-site backups). This separates sensitive user credentials from
+from your application data, and lets you focus on the user interface and experience for your app.
+
+
+
+Building a Notification and Messaging System 
+1) First of all you have to register user app instance with firebase cloud messaging server.
+2) After that on your server you write code that allow you to address this devices by id,group or topic and it tells the firebase cloud messaging to send the messages for you.
+
+
+Requirement For FirebaseMessaging API
+1) Android Studion 1.4 or higher with gradle
+2) FCM client require device running Android 4.1 or higher that also have the Google Play Store app installed or an emulator running Android 4.1. Note you are not limited to deploying
+	your Android apps through Goolge Play store.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1:10 PM 9/24/2019 		Recycler View :----------------------
 
 It is also a kind of view group
