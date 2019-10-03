@@ -4,8 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ADC8F5"
     tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/et_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="100dp"/>
+
+    <EditText
+        android:id="@+id/et_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_below="@+id/et_mail"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_pass"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:text="LogIn"
+        android:background="@drawable/buttoncorner"
+        android:textColor="#FF0000"
+        android:textAllCaps="false"
+        android:onClick="clickIt"/>
+
+    <TextView
+        android:id="@+id/tv_optional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_submit"
+        android:layout_marginTop="15dp"
+        android:text="Or"
+        android:textStyle="normal"
+        android:textSize="18sp"
+        android:textColor="#000000"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/gmail_button"
@@ -13,8 +59,37 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:layout_centerVertical="true">
+        android:layout_below="@+id/tv_optional"
+        android:layout_marginTop="15dp">
     </com.google.android.gms.common.SignInButton>
+
+
+    <TextView
+        android:id="@+id/tv_boundry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gmail_button"
+        android:text="New User"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        />
+
+    <Button
+        android:id="@+id/btn_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create New Account"
+        android:textAllCaps="false"
+        android:layout_below="@id/tv_boundry"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/buttoncorner"
+        android:textColor="#FF0000"
+        android:onClick="clickIt"/>
 
 
 </RelativeLayout>
