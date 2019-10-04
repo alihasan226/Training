@@ -9,60 +9,110 @@
     <EditText
         android:id="@+id/et_mail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="100dp"
+        android:background="@drawable/email_pass_field"
+        android:paddingLeft="5dp"/>
+
+
 
     <EditText
         android:id="@+id/et_pass"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:hint="Password"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:layout_below="@+id/et_mail"
-        android:layout_marginTop="20dp" />
+        android:background="@drawable/email_pass_field"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="5dp"/>
 
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/et_pass"
         android:layout_marginTop="20dp"
         android:layout_marginRight="80dp"
         android:layout_marginLeft="80dp"
-        android:text="LogIn"
+        android:text="Login"
         android:background="@drawable/buttoncorner"
-        android:textColor="#FF0000"
+        android:textColor="#0D44EB"
         android:textAllCaps="false"
-        android:onClick="clickIt"/>
+        android:onClick="clickIt"
+        android:textStyle="normal"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/btn_forgot"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/btn_submit"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:text="Forgot Password"
+        android:background="@drawable/buttoncorner"
+        android:textColor="#EB0D14"
+        android:textAllCaps="false"
+        android:onClick="clickIt"
+        android:textStyle="normal"
+        android:textSize="18sp"/>
+
 
     <TextView
         android:id="@+id/tv_optional"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_submit"
+        android:layout_below="@+id/btn_forgot"
         android:layout_marginTop="15dp"
         android:text="Or"
         android:textStyle="normal"
         android:textSize="18sp"
         android:textColor="#000000"/>
 
-    <com.google.android.gms.common.SignInButton
+
+
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tv_optional"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginLeft="80dp"
+        android:text="Continue with Facebook"
+        android:background="@drawable/facebook_button"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:onClick="clickIt"
+        android:textStyle="normal"
+        android:textSize="18sp"/>
+
+
+    <Button
         android:id="@+id/gmail_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/login_button"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="80dp"
-        android:layout_below="@+id/tv_optional"
-        android:layout_marginTop="15dp">
-    </com.google.android.gms.common.SignInButton>
-
+        android:layout_marginLeft="80dp"
+        android:text="Continue with Gmail"
+        android:background="@drawable/gmail_button"
+        android:textColor="#FFFFFF"
+        android:textAllCaps="false"
+        android:onClick="clickIt"
+        android:textStyle="normal"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/tv_boundry"
@@ -80,7 +130,7 @@
     <Button
         android:id="@+id/btn_create"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Create New Account"
         android:textAllCaps="false"
         android:layout_below="@id/tv_boundry"
@@ -88,8 +138,10 @@
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:background="@drawable/buttoncorner"
-        android:textColor="#FF0000"
-        android:onClick="clickIt"/>
+        android:textColor="#0D44EB"
+        android:onClick="clickIt"
+        android:textStyle="normal"
+        android:textSize="18sp"/>
 
 
 </RelativeLayout>

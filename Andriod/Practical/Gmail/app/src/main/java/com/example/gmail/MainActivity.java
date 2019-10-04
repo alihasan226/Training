@@ -3,14 +3,19 @@ package com.example.gmail;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +23,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.internal.ImageRequest;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -32,21 +48,33 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
+
+import static android.provider.ContactsContract.Intents.Insert.EMAIL;
+
 public class MainActivity extends AppCompatActivity {
 
     public GoogleApiClient mGoogleSignInClient;
-    private SignInButton button;
+    private Button button,loginButton,forgot_password;
     public final int RC_SIGN_IN=1;
     public final String TAG="MAIN_ACTIVITY";
     public FirebaseAuth mAuth;
     private EditText et_mail;
     private EditText et_pass;
     private Button btn_submit,btn_create;
+    private CallbackManager mCallbackManager;
+
 
     FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -60,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         et_pass=findViewById(R.id.et_pass);
         btn_submit=findViewById(R.id.btn_submit);
         btn_create=findViewById(R.id.btn_create);
+        loginButton = findViewById(R.id.login_button);
+        forgot_password=findViewById(R.id.btn_forgot);
 
 
         mAuth=FirebaseAuth.getInstance();//here in onCreate method the Firebase instance is shared
@@ -71,6 +101,75 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 GooglesignIn();
+            }
+        });
+
+
+
+
+        /*FaceBook Integration
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                mCallbackManager = CallbackManager.Factory.create();
+                loginButton.setReadPermissions("email", "public_profile");
+                loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Log.d(TAG, "Facebook : onSuccess:" + loginResult);
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "facebook:onCancel");
+                        // ...
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d(TAG, "facebook:onError", error);
+                        //printKeyHash(MainActivity.this);  for generating the Hash Key
+                        // ...
+                    }
+                });
+            }
+        });
+        */
+        mCallbackManager=CallbackManager.Factory.create();
+        final Button loginButton=findViewById(R.id.login_button);
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, "Facebook : onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+                // ...
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+                //printKeyHash(MainActivity.this);  for generating the Hash Key
+                // ...
+            }
+        });
+
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginManager
+                        .getInstance()
+                        .logInWithReadPermissions(
+                                MainActivity.this, Collections.singletonList(EMAIL)
+                        );
             }
         });
 
@@ -138,15 +237,127 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                         } else {
                             msg="Successfull";
-                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
 
+
+        //Facebook LogIn Integration
+
+
+
+
+
+
+
+
+
     }//End of onCreate()
 
 
+    /*
+    //Generating HashKey
+    public static String printKeyHash(Activity context) {
+        PackageInfo packageInfo;
+        String key = null;
+        try {
+            //getting application package name, as defined in manifest
+            String packageName = context.getApplicationContext().getPackageName();
+
+            //Retriving package info
+            packageInfo = context.getPackageManager().getPackageInfo(packageName,
+                    PackageManager.GET_SIGNATURES);
+
+            Log.e("Package Name=", context.getApplicationContext().getPackageName());
+
+            for (Signature signature : packageInfo.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                key = new String(Base64.encode(md.digest(), 0));
+
+                // String key = new String(Base64.encodeBytes(md.digest()));
+                Log.d("Key Hash=", key);
+            }
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("Name not found", e1.toString());
+        }
+        catch (NoSuchAlgorithmException e) {
+            Log.e("No such an algorithm", e.toString());
+        } catch (Exception e) {
+            Log.e("Exception", e.toString());
+        }
+
+        return key;
+    }
+
+     */
+
+
+//Facebook Token => EAAFi1TauXZAUBAE7nGDh0zljMLiLPIh3fFF0ijuBRG4ZBmj3pfrVZBAMJYQnaSYfnZA2ORVIlGkkve6Q4tvGZAQMtAIdDPHQoE3LphN06gHE6ZATbuGvIoxYiTnZCHBzd6HQSiS0xL3JluxZC6H9EGqqQZCZCbmLZA8m7AsvYIoLNNN8qYSbEK2agcWXZC3jt64o9ZBfFKd2pyYMi0eyrkMpREfptwDt0FaZBuqq8ZD
+    //FacaBook Integration Code
+    private void handleFacebookAccessToken(final AccessToken token) {
+        Log.w(TAG, "handleFacebookAccessToken:" + token.getToken());
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            /*Log.w(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String name=user.getEmail();
+                            String name1=user.getDisplayName();
+                            Toast.makeText(MainActivity.this,"Welcome\n"+name+"\n"+name1,Toast.LENGTH_SHORT).show();
+                            updateUI(user);
+                            */
+
+                            GraphRequest request = GraphRequest.newMeRequest(
+                                    token.getCurrentAccessToken(),
+                                    new GraphRequest.GraphJSONObjectCallback() {
+                                        @Override
+                                        public void onCompleted(
+                                                JSONObject object,
+                                                GraphResponse response) {
+
+
+                                            try {
+                                                Log.w(TAG, response.toString());
+
+                                                String id = response.getJSONObject().getString("id");
+                                                String name = response.getJSONObject().getString("name");
+                                                String email=response.getJSONObject().getString("email");
+
+                                                Toast.makeText(MainActivity.this,id+"\n"+name+"\n"+email,Toast.LENGTH_LONG).show();
+                                                /*et_mail.setText(name);
+                                                et_pass.setText(email);
+
+                                                 */
+                                                //TODO put your code here
+                                            } catch (JSONException e) {
+                                                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                                            }
+                                            // Application code
+                                        }
+                                    });
+                            Bundle parameters = new Bundle();
+                            parameters.putString("fields", "id,name,email");
+                            request.setParameters(parameters);
+                            request.executeAsync();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication__Failed",Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
 
 
 
@@ -160,18 +371,35 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_create:
                 CreateNew();
                 break;
+            case R.id.btn_forgot:
+                forgot_password();
+                break;
         }
     }
 
 
-
+    public void forgot_password()
+    {
+        startActivity(new Intent(MainActivity.this,Forgot_Password.class));
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-       // mAuth.addAuthStateListener(mAuthListener);
 
+            // Check if user is signed in (non-null) and update UI accordingly.
+           FirebaseUser currentUser = mAuth.getCurrentUser();
+            if(currentUser!=null) {
+                updateUI();
+            }
+
+    }
+
+
+    public void updateUI()
+    {
+        //Toast.makeText(getApplicationContext(),"You Are Login",Toast.LENGTH_SHORT).show();
     }
 
 
@@ -206,7 +434,7 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Invalid Username and Password", Toast.LENGTH_SHORT).show();
                                 //updateUI(null);
                             }
 
@@ -217,6 +445,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     public void CreateNew()
     {
@@ -247,6 +477,10 @@ public class MainActivity extends AppCompatActivity {
                 // ...
             }
         }
+
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+
+
     }
 
 
@@ -281,3 +515,22 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
+
+
+
+/*
+
+keytool -exportcert -alias androiddebugkey -keystore C:\Users\Android\.android\debug.keystore | "PATH_TO_OPENSSL_LIBRARY\bin\openssl sha1 -binary | "PATH_TO_OPENSSL_LIBRARY\bin\openssl" base64
+
+
+
+        keytool -exportcert -alias androiddebugkey -keystore C:\Users\Android\.android\debug.keystore | C:\openssl-0.9.8k_X64\bin\openssl sha1 -binary | C:\openssl-0.9.8k_X64\bin\openssl base64
+
+
+
+keytool -exportcert -alias androiddebugkey -keystore C:\Users\Android\.android\debug.keystore | C:\openssl-0.9.8k_X64\bin\openssl sha1 -binary | "C:\openssl-0.9.8k_X64\bin\openssl base64
+
+
+
+*/

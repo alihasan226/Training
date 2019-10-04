@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Beryl System Solutions</string>
+    <string name="facebook_app_id">390142861663637</string>
+    <string name="fb_login_protocol_scheme">fb390142861663637</string>
 </resources>
