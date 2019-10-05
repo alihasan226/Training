@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:background="@drawable/sun"
+           android:orientation="vertical">
+
+           <ImageView
+               android:id="@+id/sun_image"
+               android:layout_width="240dp"
+               android:layout_height="150dp"
+               android:src="@drawable/mercury"
+               android:layout_gravity="center_horizontal"
+               android:layout_below="@id/scroll_view"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Mercury is the smallest and innermost planet in the Solar System. Its orbit around the Sun takes only 87.97 days, the shortest of all the planets in the Solar System. It is named after the Roman deity Mercury, the messenger of the gods.
+
+Like Venus, Mercury orbits the Sun within Earth's orbit as an inferior planet, and its apparent distance from the Sun as viewed from Earth never exceeds 28°. This proximity to the Sun means the planet can only be seen near the western horizon after sunset or eastern horizon before sunrise, usually in twilight. At this time, it may appear as a bright star-like object, but is often far more difficult to observe than Venus. The planet telescopically displays the complete range of phases, similar to Venus and the Moon, as it moves in its inner orbit relative to Earth, which recurs over its synodic period of approximately every 116 days.
+
+Mercury rotates in a way that is unique in the Solar System. It is tidally locked with the Sun in a 3:2 spin-orbit resonance,[16] meaning that relative to the fixed stars, it rotates on its axis exactly three times for every two revolutions it makes around the Sun.[a][17] As seen from the Sun, in a frame of reference that rotates with the orbital motion, it appears to rotate only once every two Mercurian years. An observer on Mercury would therefore see only one day every two Mercurian years."
+               android:textSize="20sp"
+               android:textColor="#000000"
+               android:textStyle="normal"
+               android:padding="5dp"
+               />
+
+       </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

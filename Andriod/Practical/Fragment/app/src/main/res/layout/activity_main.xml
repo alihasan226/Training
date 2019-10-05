@@ -5,14 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
     <fragment
         android:id="@+id/simplefragment"
         android:name="com.example.fragment.addfragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
         />
+
+    <fragment
+        android:id="@+id/secondfragment"
+        android:name="com.example.fragment.Second"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/simplefragment"
+        android:layout_margin="5dp"/>
 
 </LinearLayout>

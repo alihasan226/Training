@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sun"
+            android:orientation="vertical">
+
+
+
+            <ImageView
+                android:id="@+id/sun_image"
+                android:layout_width="240dp"
+                android:layout_height="150dp"
+                android:src="@drawable/sun2"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@id/scroll_view"
+                />
+
+            <TextView
+                android:id="@+id/sun_text"
+                android:layout_below="@id/sun_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/the_sun_or_sol_15_is_the_star_at_the_center_of_the_solar_system_it_is_a_nearly_perfect_sphere_of_hot_plasma_16_17_with_internal_convective_motion_that_generates_a_magnetic_field_via_a_dynamo_process_18_it_is_by_far_the_most_important_source_of_energy_for_life_on_earth_its_diameter_is_about_1_39_million_kilometers_864_000_miles_or_109_times_that_of_earth_and_its_mass_is_about_330_000_times_that_of_earth_it_accounts_for_about_99_86_of_the_total_mass_of_the_solar_system_19_roughly_three_quarters_of_the_sun_s_mass_consists_of_hydrogen_73_the_rest_is_mostly_helium_25_with_much_smaller_quantities_of_heavier_elements_including_oxygen_carbon_neon_and_iron_20_the_sun_is_a_g_type_main_sequence_star_g2v_based_on_its_spectral_class_as_such_it_is_informally_and_not_completely_accurately_referred_to_as_a_yellow_dwarf_its_light_is_closer_to_white_than_yellow_it_formed_approximately_4_6_billion_a_11_21_years_ago_from_the_gravitational_collapse_of_matter_within_a_region_of_a_large_molecular_cloud_most_of_this_matter_gathered_in_the_center_whereas_the_rest_flattened_into_an_orbiting_disk_that_became_the_solar_system_the_central_mass_became_so_hot_and_dense_that_it_eventually_initiated_nuclear_fusion_in_its_core_it_is_thought_that_almost_all_stars_form_by_this_process_the_sun_currently_fuses_about_600_million_tons_of_hydrogen_into_helium_every_second_converting_4_million_tons_of_matter_into_energy_every_second_as_a_result_this_energy_which_can_take_between_10_000_and_170_000_years_to_escape_from_its_core_is_the_source_of_the_sun_s_light_and_heat_when_hydrogen_fusion_in_its_core_has_diminished_to_the_point_at_which_the_sun_is_no_longer_in_hydrostatic_equilibrium_its_core_will_undergo_a_marked_increase_in_density_and_temperature_while_its_outer_layers_expand_eventually_transforming_the_sun_into_a_red_giant_it_is_calculated_that_the_sun_will_become_sufficiently_large_to_engulf_the_current_orbits_of_mercury_and_venus_and_render_earth_uninhabitable_but_not_for_about_five_billion_years_after_this_it_will_shed_its_outer_layers_and_become_a_dense_type_of_cooling_star_known_as_a_white_dwarf_and_no_longer_produce_energy_by_fusion_but_still_glow_and_give_off_heat_from_its_previous_fusion"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:textStyle="normal"
+                android:padding="5dp"/>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

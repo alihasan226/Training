@@ -1962,8 +1962,9 @@ We can define a filter with multiple instances of <action>, <category> or <data>
 
 
 3:02 PM 9/10/2019
-
-Fragments :---------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Android Fragment
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 A Fragment is a piece of an activty which enable more modular activity design.It will not ne wrong if we say a fragment is a kind of sub activity.
 
@@ -1982,7 +1983,7 @@ Fragment life cycle is closely related to the life cycle of its host activity wh
 A fragment can implement a behaviour that has no user interface component.
 
 Fragments were added to the Android API in Honeycomb version of Android which API version 11
-When you add a fragment as apert of your activity layout it lives in a viewGroup inside the activity's view hierarrchy and the fragment defines its own view layout.
+When you add a fragment as apart of your activity layout it lives in a viewGroup inside the activity's view hierarrchy and the fragment defines its own view layout.
 You can insert a fragment into your activty layout by declaring the fragment in the activity's layout file as a <fragment> element or from your application code by adding it to an 
 existing ViewGroup.
 
@@ -1999,9 +2000,9 @@ than of handset.
 
 
 Creating a Fragment :--------------------
-To Create a fragment you must create a subclass of fragment (or an existing subclass of it).
+To Create a fragment you must create a subclass of fragment (or an existing subclass of it ).
 The fragment class has code that looks a lot like an Activity.
-It contains callback methods similar to an sctivity such as onCreate(), onStart(), onPause() and onStop().
+It contains callback methods similar to an activity such as onCreate(), onStart(), onPause() and onStop().
 
 
 Fragment life-cycle :-----------------
@@ -2045,7 +2046,7 @@ life Cycle :-------------
 
 
 1) onCreate()							2)onAttach()
-the activty is able define its appearence by setContentView()			in this we get a reference of the activity in the fragment is placed
+the activity is able define its appearence by setContentView()			in this we get a reference of the activity in the fragment is placed
 
 3)onAttachFragment							4) onCreate()
 this method is called on the activity to notify the activity that			5) onCreateView()
@@ -2076,7 +2077,50 @@ Now Fragment is Destroyed :---------------------
 								8) onDetach()
 								Fragment is not tied to the Activity and does not have View hierarchy
 
-a fragment is attach recently
+A fragment is attach recently
+
+
+
+
+Adding user Interface :----------------------------------------
+
+A fragment is usually as part of an activity's user interface and contributes its own layout to the activity.
+To provide a layout for a fragment you must implement the onCreateView() callback method,which the Android system calls when it's time for the fragment to draw its layout.
+Your implementation of its method must return a view that is the root of your fragment's layout.
+
+To return a layout onCreateView() you inflate it from a layout resource defined in XML. to help you do so onCreateView() provides a LayoutInflater object.
+
+LayoutInflater is a class used to instantiate layout  XMl file into its corresponding view objects which can be used in java programs.
+( In Simple terms there are two ways to create UI in android . One is static way and another is Dynamic or programmatically ).
+
+
+public static class ExampleFragment extends Fragment {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.example_fragment, container, false);
+    }
+}
+
+
+The container parameter passed to onCreateView() is the parent ViewGroup (from the activity's layout) in which your fragment layout is inserted. The saveInstanceState parameter is a
+Bundle that provides data about the previous instance of the fragment, 
+							if the fragment is being resumed (restoring state is discussed more in the section about Handling the Fragment 
+Lifecycle).
+
+
+
+The inflate() method takes three arguments:
+
+=> The resource ID of the layout you want to inflate.
+
+=> The ViewGroup to be the parent of the inflated layout. Passing the container is important in order for the system to apply layout parameters to the root view of the inflated layout,
+ specified by the parent view in which it's going.
+
+=> A boolean indicating whether the inflated layout should be attached to the ViewGroup (the second parameter) during inflation. (In this case, this is false because the system is already
+ inserting the inflated layout into the container—passing true would create a redundant view group in the final layout.
+
 
 
 
@@ -2250,6 +2294,7 @@ FragmentActivity then automatically retrieve fragments from the back stack via o
 
 
 => addToBackStack()
+
 public abstractFragmentTranscation addToBackStack(String name)
 
 Add this transaction to the back stack. This means that the transaction will be rememberred offer it is committed and will reverse its operation whenlater popped off the stack
@@ -2325,7 +2370,7 @@ public interface buttonclick
 
 
 @Override
-    public void onAttach(Activity activity)			//it is capturing the interface implementation during onAttach() lifecycle method
+    public void onAttach(Activity activity)			// it is capturing the interface implementation during onAttach() lifecycle method
     {
         super.onAttach(activity);
         try
@@ -4176,8 +4221,9 @@ public void onCreate(Bundle saveInstanceState)
 }
 
 
-Android layout types  :------------------------
-there are number of Layout provided by Android which you use in almost all the Android application to provides different look and feel.
+Android Layout types  :------------------------
+
+There are number of Layout provided by Android which you use in almost all the Android application to provides different look and feel.
 
 1	Linear Layout
 LinearLayout is a view group that aligns all children in a single direction, vertically or horizontally.
@@ -4412,7 +4458,10 @@ This is called when the context menu is being built(as the result of a sustained
 
 
 
+
+
 	Event Listener Registration :-------------------
+
 Event Registration is the process by which  an Event handler gets registered with an event listener so that handler is called when the event listener fires the event.
 Three ways 
 1) Using ananamous inner class
