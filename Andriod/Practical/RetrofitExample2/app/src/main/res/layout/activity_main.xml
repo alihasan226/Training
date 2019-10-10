@@ -7,10 +7,45 @@
     android:padding="10dp"
     tools:context=".MainActivity">
 
+
+
+    <EditText
+        android:id="@+id/et_userId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter UserID"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Title"
+        android:layout_below="@+id/et_userId"
+        />
+
+    <EditText
+        android:id="@+id/et_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Title"
+        android:layout_below="@+id/et_title"
+        />
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Click"
+        android:textAllCaps="false"
+        android:layout_below="@+id/et_text"/>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedscroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btn_submit">
 
         <TextView
             android:id="@+id/textview"
@@ -21,5 +56,13 @@
             android:textSize="20sp"/>
 
     </androidx.core.widget.NestedScrollView>
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>

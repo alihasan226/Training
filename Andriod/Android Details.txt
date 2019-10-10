@@ -309,8 +309,10 @@ Call<List<Post>> getPosts(@Query("userId") int userId,@Query("_sort") String sor
 same like as /post?userId&_sort=id&_order=desc
 
 
+
+
 URL Manipulation :---------------
-A request URL can be updated dynamically using replacement blocks and paramters on the method .A replacement block is an alphanumeric string surrounded by { and }.
+A request URL can be updated dynamically using replacement blocks and paramters on the method . A replacement block is an alphanumeric string surrounded by { and }.
 A corresponding parameter must be annotate with @Path using the same string.
 
 @GET("group/{id}/users")
@@ -328,6 +330,11 @@ For complex query parameter combinations a Map can be used.
 Call<List<User>> groupList(@Path("id") int groupId, @QueryMap Map<String, String> options);
 Here we can put the userId in the MainActivity directly
 
+
+/*
+demo
+uwXs5K4RjL1mYNp7BSmRdGkgPMPvhMJq
+*/
 
 
 REQUEST Body :----------
@@ -433,7 +440,7 @@ If we want to get the more than two Query means to say that want to get the user
     );
 
 
-we can also put the data in the form key and value pair  using Map<>
+we can also put the data in the form key and value pair  using Map<> 
 
     @GET("posts")//Here we declare the relative URL
     Call<List<Post>> getPost(@QueryMap Map<String,String> parameters);
@@ -476,9 +483,18 @@ Call<Post> createPost(@Feild
 
 
 
-What is Network transaction?
+=> What is Network transaction?
+
 In computer programming a transaction usually means a sequence of information exchange and related work.
 
+=> What is API
+API is the acronym for Application Programming Interface, which is a Software intermediary that allows two applications to talk to each other. Each time you use an app like Facebook, Send
+an instance message or check the whether on your phonr you're using an API.
+
+Example=>
+When you use an application on your mobile phone tha application connects to the internet and sends data to a server. The server then reterives that data interprets it performs
+the necessary actions and sends it back to your phone. The application then interprets that data and presents you with the information you wanted in a readable way. This is what an 
+API is all of the happens via API.
 
 => RESTful API
 REST stands for Representational state Transfer(REST) Technology
@@ -494,7 +510,7 @@ Currently the models provides by AmazonS3, Cloud DataManagement interface (CDMI)
 A RESTful API explicitly takes advantage of HTTP methodologies defined by the RFC 2616 protocol. 
 
 GET to reterieve a resource; 
-PUT to change the state of or update aresource, which can be an object, file or block; 
+PUT to change the state of or update the source, which can be an object, file or block; 
 POST to create that resource;
 DELETE to remove it.
 
@@ -512,16 +528,17 @@ we can also convert any JSON received from the server into JavaSript objects.
 this way we can work with the data.
 
 That is used to fetch and send the data from/to server.
-Retrofit is better alternative of other libraries in term of performance, ease of use , extensibility and others.
+Retrofit is better alternative of other libraries in term of performance, ease of use , extensibility and others.  ( Why we use Retrofit )
 
 In Android retrofit library is different from other network libraries because it gives us an easy to use platform through which we don't need to parse JSON responce as they are done 
 by libraries itself.It used GSON library in the background to parse the response data. what we need to so is define a POJO (Plain Old Java Object) to parse the response.
 
 
+Step (1)
 
 POJO / Model Class :-------
 For fetching response we need to create POJO class that automatically parse the JSON data using GSON in background. We just need to create this POJO class. For creating POJO class
-first method is defining each and every variable by ourself
+first method is defining each and every variable by ourself.
 
 second best and fast method is using http://www.jsonschema2pojo.org/ platform. By using this platform you can easily convert your JSON response to POJO class.
 for this we need to copy our JSON response and paste it in jsonschema2pojo and it will create setter getter methods as per our requirement.
@@ -549,30 +566,18 @@ return name;
 }
 
 
+Step (2)
 
 API Interface :-----------
 Now we need to create an interface to define our different method that will be used for network transactions.
-public interface ApiInterface {
 
+public interface Jsonplaceholder {
 
-// For POST request
+	 @POST("posts")				//"post" it is a relative URL in the parenthesis of @POST ( and it is a request method )
+   	 Call<Post> createPost(@Body Post post);
 
-    @FormUrlEncoded    // annotation that used with POST type request
-    @POST("/demo/login.php") // specify the sub url for our base url
-    public void login(
-            @Field("user_email") String user_email,
-            @Field("user_pass") String user_pass, Callback<SignUpResponse> callback); 
-
-//user_email and user_pass are the post parameters and SignUpResponse is a POJO class which recieves the response of this API
-
-
-// for GET request
-
-    @GET("/demo/countrylist.php") // specify the sub url for our base url
-    public void getVideoList(Callback<List<CountryResponse>> callback);
-
-// CountryResponse is a POJO class which receives the response of this API
-
+       	 //Call<Post> we get a post back when we execute our post request
+	// here Post inside the Call<> is a POJO class name that is used for converting the JSON data to Java data.
 }
 
  
@@ -581,28 +586,75 @@ public interface ApiInterface {
 
 
 
-
+Step (3)
 
 RestAdapter :------------------
 We need to define RestAdapter to implement API's. Suppose we have to implement login API then we need to build RestAdapter, setting root url and create connection between our
 adapter and API interface. for this its  better to create a class in which we have a method that create the connection and then return the API interface object.
 You can create this RestAdapter where you want to implement API but its better to create a common class/method and use it where you want.
 
- public class Api {
 
-    public static ApiInterface getClient() {
 
-        RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://healthyblackmen.org") //Setting the Root URL
-                .build(); //Finally building the adapter
+protected void onCreate(Bundle savedInstanceState) {		//We define the RestAdapter in MainActivity.java inside onCreate() method for code usability
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        et_commet=findViewById(R.id.textview);
 
-        //Creating object for our interface
-        ApiInterface api = adapter.create(ApiInterface.class);
-        return api;
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")		//that is my base URL
+                .addConverterFactory(GsonConverterFactory.create())	//This is factory method for parsing the JSON to JavaObject
+                .build();
+
+        jsonplaceholder=retrofit.create(Jsonplaceholder.class);		// Here we are creating the object of our interface using the Jsonplaceholder class.
+        //getpost();
+       //fetchComment();
+        createPost();
     }
-}
 
 
+
+
+Step (4)
+
+public void createPost()
+    {
+        //Post post=new Post(23,"New Title","New Text");	//here we are sending the data to the server
+
+        Map<String,String> paramters=new HashMap<>();
+        paramters.put("userId","23");
+        paramters.put("title","New Title");
+        paramters.put("body","New Text");
+
+        Call<Post> call=jsonplaceholder.createpost(paramters);	//Here we use the callback method to get the response from api
+
+        call.enqueue(new Callback<Post>() {		// on using the object of the Callback we execute the operation
+            @Override					// we getting the response from Server in two method onResponse() and onFailure() 
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if(!response.isSuccessful())
+                {
+                    et_commet.setText("Code : "+response.code());//HTTP response status codes indicates whether a specific HTTP request has been successfully completed.
+                    return; //if we get the 400-499 than it means the request has been failed nad there response code will be concatinated in the textview(that we have already been declared)
+                }
+
+                Toast.makeText(getBaseContext(),"Succesfully ========== Login",Toast.LENGTH_LONG).show();
+
+                /*Post postresponse=response.body();
+                //here we reteriving the post request
+                    String content="";
+                    content+="Code : "+response.code()+"\n";//this is response code that is generated after the HTTP request action performed.
+                    content+="ID : "+postresponse.getId()+"\n";
+                    content+="User ID : "+postresponse.getUserId()+"\n";
+                    content+="Title : "+postresponse.getTitle()+"\n";
+                    content+="Text: "+postresponse.getText()+"\n\n";
+                    et_commet.append(content);*/
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t){
+                et_commet.setText(t.getMessage());//this message will print after getting failure
+            }
+        });
+    }
 
 
 First things we have to find an adequate web API from which to fetch data . After a fair bit of hunting  we settled on FullContactPerson API. This is an excellent and interesting API.
@@ -627,9 +679,76 @@ Initially Android has only two HTTP client HttpURL Connection and Apache HTTP Cl
 It having various limitation when it come to cancelling an HTTP request or connection-pooling.
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1:16 PM 10/10/2019 	EventBus in Android :--------------------------------------
+
+
+EverntBus is an open-source library for Android and Java using the publisher/subscriber pattern for loose coupling. EventBus enables central communication to decoupled classes with
+just a few lines of code simplifying the code removing dependencies and speeding up app development.
+
+Publisher/subscriber pattern is widely used in Android application.It is mostly used in Activity-Fragment communication, Service and Async Tasks.
+In this pattern a subsriber waits a message from publisher when something happens. This message can be anyhting.
+
+=> Publish/Subscribe pattern
+publish/subscribe pattern provides a messaging system between publisher and subscribers.
+Subscribers registers to publishers and start waiting for a certain event occurs.
+
+
+When this event occurs publisher notyfies all of its subscribes via the event bus.
+
+=> EventBus library
+EventBus is developed by Greenrobot team. You can add it to your project by
+
+	compile 'org.greenrobot:eventbus:3.0.0'
+
+
+Step (1)
+First of all we have to register our activity (or class you are using) to event bus.
+@Override
+public void onStart() {
+    super.onStart();
+    EventBus.getDefault().register(this);
+}
+
+@Override
+public void onStop() {
+    EventBus.getDefault().unregister(this);
+    super.onStop();
+}
 
 
 
+Step (2)
+we said that publisher send message to subscriber when a certain event occurs. So lets define message
+
+public class Message{
+    private final String message;
+
+    public Message(String message) {
+       this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
+
+
+
+Step (3)
+Now publisher send a message the subscriber get an event when they are posted by publisher. Posting events are also easy.
+
+EventBus.getDefault().post(new Message("Message event is occured"));
+
+
+
+Sticky events :----------------------
+When an activity is waiting an event , it can be paused by another activity. In this scenario activity won't be abel to get event even if it resumes again.for overcoming this problem sticky
+ events can be used.
+Sticky events are posted by publisher and lives they are cosumed by a subscriber. In this way  if an event is posted when subscriber is at paused state subscriber can get the event even
+once it resumes again. Sticky events is posted as follows:
+
+	EventBus.getDefault().postSticky(new MessageEvent("Sticky message"));
 
 
 
@@ -644,6 +763,7 @@ It having various limitation when it come to cancelling an HTTP request or conne
 
 
 12:49 PM 9/20/2019 Animation in Android :--------------------------
+
 Animation can add visual cues that notify users about what's going on in your app. They are especially useful when the UI changes state such as when content loads or new action
 become available. Animaiton also add a polished look to your app, which gives it a higher quality look and feel.
 Android includes different animation APIs depending on what type of animation you want.

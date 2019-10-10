@@ -1,6 +1,11 @@
 package com.example.retrofitexample;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -24,12 +29,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private TextView et_commet;
+    private Button btn_submit;
+    private EditText et_userid,et_title,et_text;
     private Jsonplaceholder jsonplaceholder;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         et_commet=findViewById(R.id.textview);
+
+        et_userid=findViewById(R.id.et_userId);
+        et_title=findViewById(R.id.et_title);
+        et_text=findViewById(R.id.et_text);
+
+        btn_submit=findViewById(R.id.btn_submit);
+
+        progressBar=findViewById(R.id.progress_bar);
+
 
         HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
         loggingInterceptor.setLevel((HttpLoggingInterceptor.Level.HEADERS));
@@ -49,9 +66,18 @@ public class MainActivity extends AppCompatActivity {
         //getpost();
         //fetchComment();
         //createPost();
-        putPost();
-        //patchPost();
+        //putPost();
+        //patchpost();
         //deletePost();
+
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                patchpost(et_userid.getText().toString(),et_title.getText().toString(),et_text.getText().toString());
+                progressBar.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
 
@@ -97,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     public void fetchComment()
     {
         //using this we can get the comment of respective post id
-        Call<List<PostComment>> call=jsonplaceholder.getComment(2);
+        Call<List<PostComment>> call=jsonplaceholder.getComment(3);
 
         call.enqueue(new Callback<List<PostComment>>() {
             @Override
@@ -130,16 +156,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     public void createPost()
     {
-        //Post post=new Post(23,"New Title","New Text");//here we are sending the data to the server
+        Post post=new Post(23,"New Title","New Text");//here we are sending the data to the server using body and
 
-        Map<String,String> paramters=new HashMap<>();
-        paramters.put("userId","23");
-        paramters.put("title","New Title");
-        paramters.put("body","New Text");
 
-        Call<Post> call=jsonplaceholder.createpost(paramters);
+        Call<Post> call=jsonplaceholder.createPost(post);
 
         call.enqueue(new Callback<Post>() {
             @Override
@@ -167,14 +191,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Post> call, Throwable t){
                 et_commet.setText(t.getMessage());//this message will print after getting failure
+                Toast.makeText(getApplicationContext(),"Authentication Failure",Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    /*
     private void putPost()
     {
         Post new_post=new Post(12,null,"New Text");
-        Call<Post> call=jsonplaceholder.putPost("123",5,new_post);
+        Call<Post> call=jsonplaceholder.patchPost(1,new_post);
 
         call.enqueue(new Callback<Post>() {
             @Override
@@ -203,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+*/
     private void deletePost()
     {
         Call<Void> call=jsonplaceholder.deletePost(5);
@@ -220,5 +246,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void patchpost(String userId,String title,String text)
+    {
+
+        Post new_post=new Post(Integer.parseInt(userId),title,text);
+        Call<Post> call=jsonplaceholder.patchPost(1,new_post);
+
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+
+                if(!response.isSuccessful()){
+                    et_commet.setText("Code"+response.code());
+                    return;
+                }
+
+                Post postresponse=response.body();
+                //here we reteriving the post request
+
+                if(response.code()==200)
+                {
+                    Toast.makeText(getApplicationContext(),"User successfully Added",Toast.LENGTH_SHORT).show();
+                }
+                progressBar.setVisibility(View.GONE);
+                String content="";
+                //content+="Code : "+response.code()+"\n";//this is response code that is generated after the HTTP request action performed.
+                //content+="ID : "+postresponse.getId()+"\n";
+                content+="User ID : "+postresponse.getUserId()+"\n";
+                content+="Title : "+postresponse.getTitle()+"\n";
+                content+="Text: "+postresponse.getText()+"\n\n";
+                et_commet.append(content);
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                et_commet.setText(t.getMessage());
+            }
+        });
+    }
+
 
 }

@@ -54,8 +54,7 @@ public interface Jsonplaceholder {
     @POST("posts")
     Call<Post> createpost(@Field("userId") int userId,
                           @Field("title") String title,
-                          @Field("body") String body
-    );
+                          @Field("body") String body);
 
     @FormUrlEncoded
     @POST("posts")
@@ -69,7 +68,7 @@ public interface Jsonplaceholder {
     Call<Post> putPost(@Header("Dynamic-Header") String header,@Path("id") int id,@Body Post post);
 
     @PATCH("posts/{id}")
-    Call<Post> patchPost(@Path("id") int id,@Body Post psot);
+    Call<Post> patchPost(@Path("id") int id,@Body Post post);
 
     @DELETE("posts/{id}")
     Call<Void> deletePost(@Path("id") int id);
