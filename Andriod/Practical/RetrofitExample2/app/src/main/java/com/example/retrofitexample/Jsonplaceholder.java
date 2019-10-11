@@ -1,5 +1,8 @@
 package com.example.retrofitexample;
 
+import com.example.retrofitexample.Model.Clouds;
+import com.example.retrofitexample.Model.Example;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +24,9 @@ import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
 public interface Jsonplaceholder {
+
+
+
 
     @GET("posts")//Here we declare the relative URL
     Call<List<Post>> getPost(@Query("userId") Integer[] userId,
@@ -73,8 +79,20 @@ public interface Jsonplaceholder {
     @DELETE("posts/{id}")
     Call<Void> deletePost(@Path("id") int id);
 
+
+    //for Weather Forcasting Details from  https://samples.openweathermap.org/data/2.5/weather?q=London&appid=746ac30f1d6fa590e1274d7595d9a513
+    @GET("weather")
+    Call<Example> getweather(@Query("q") String location,@Query("APPID") String API_KEY);
+
 }
 
+
+
+//http://api.openweathermap.org/data/2.5/weather?q=Arrah&APPID=746ac30f1d6fa590e1274d7595d9a513
+
+//http://api.openweathermap.org/data/2.5/weather?appid=72e0ab27553c1e0279c6e68ee4d226a7&q=Delhi&units=metric
+//http://api.openweathermap.org/data/2.5/weather?appid=72e0ab27553c1e0279c6e68ee4d226a7&q={}&units=metric
+//https://samples.openweathermap.org/data/2.5/weather?id=2172797&appid=b6907d289e10d714a6e88b30761fae22
 //     https://jsonplaceholder.typicode.com/comments?postId=1
 
 //some time we use in post type connection method /posts?userId=1&_sort=id&_order=desc  Hwew  ? indicate our Query start  and & indicate another second paramter added with it.

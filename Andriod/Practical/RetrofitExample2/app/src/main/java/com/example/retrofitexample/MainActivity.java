@@ -2,6 +2,11 @@ package com.example.retrofitexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,9 +15,12 @@ import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.retrofitexample.Model.Clouds;
+import com.example.retrofitexample.Model.Example;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,26 +34,28 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.retrofitexample.broadcastreceiver.isConnect;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView et_commet;
+    private EditText et_city;
     private Button btn_submit;
-    private EditText et_userid,et_title,et_text;
     private Jsonplaceholder jsonplaceholder;
     private ProgressBar progressBar;
+    IntentFilter intentFilter;
+
+    broadcastreceiver receiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         et_commet=findViewById(R.id.textview);
-
-        et_userid=findViewById(R.id.et_userId);
-        et_title=findViewById(R.id.et_title);
-        et_text=findViewById(R.id.et_text);
-
-        btn_submit=findViewById(R.id.btn_submit);
-
+        et_city=findViewById(R.id.et_cityname);
+        btn_submit=findViewById(R.id.btn_weather);
         progressBar=findViewById(R.id.progress_bar);
+        receiver=new broadcastreceiver();
+        intentFilter=new IntentFilter("Connectivity Check");
 
 
         HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
@@ -57,27 +67,112 @@ public class MainActivity extends AppCompatActivity {
 
         //Gson gson=new GsonBuilder().serializeNulls().create();   in term of putting the null value if we don't pass anything using patch method than we can use it.
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")//that is my base URL
+                .baseUrl("https://api.openweathermap.org/data/2.5/")//that is my base URL
                 .addConverterFactory(GsonConverterFactory.create())//but we will have to pass the gson object in the parenthsis of this method.
                 .client(okHttpClient)
                 .build();
 
         jsonplaceholder=retrofit.create(Jsonplaceholder.class);
-        //getpost();
-        //fetchComment();
-        //createPost();
-        //putPost();
-        //patchpost();
-        //deletePost();
-
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                patchpost(et_userid.getText().toString(),et_title.getText().toString(),et_text.getText().toString());
-                progressBar.setVisibility(View.VISIBLE);
+
+                Intent intent = new Intent("Connectivity Check");
+                //sendBroadcast(intent);
+
+
+
+                //Network Connectivity Checking
+                ConnectivityManager cm =(ConnectivityManager)MainActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+
+
+                progressBar.setVisibility(View.VISIBLE);//It is used for the progress bar
+                if(isConnected)
+                {
+                    //getpost();
+                    //fetchComment();
+                    //createPost();
+                    //putPost();
+                    //patchpost();
+                    //deletePost();
+                    getmovie();
+                }else
+                {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
+
+
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(receiver,intentFilter);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        unregisterReceiver(receiver);
+    }
+
+    public void getmovie()
+    {
+
+        String API_KEY="746ac30f1d6fa590e1274d7595d9a513";
+
+        Call<Example> call=jsonplaceholder.getweather(et_city.getText().toString(),API_KEY);
+        call.enqueue(new Callback<Example>() {
+            @Override
+            public void onResponse(Call<Example> call, Response<Example> response) {
+                if(!response.isSuccessful()) {
+                    et_commet.setText(response.code());
+                    return;
+                }
+                else if(response.code()==200)
+                {
+
+                    Example body=response.body();//Returning the response of server back to the pojo class from where we can get the using getter method of every field.
+                    String name="";
+                    name+="ID \t"+body.getSys().getId()+"\n";
+                    name+="Country \t"+body.getSys().getCountry()+"\n";
+                    name+="City \t"+body.getName()+"\n";
+                    name+="Longitudinal \t"+body.getCoord().getLon()+"\n";
+                    name+="Latitudinal \t"+body.getCoord().getLat()+"\n";
+                    name+="Temperature \t"+body.getMain().getTemp()+" K\n";
+                    name+="Pressure \t"+body.getMain().getPressure()+" mmHg\n";
+                    name+="Humidity \t"+body.getMain().getHumidity()+"%\n";
+                    name+="Wind Speed \t"+body.getWind().getSpeed()+" km/h\n";
+                    name+="Clouds \t"+body.getClouds().getAll()+"\n";
+                    name+="Sunrise \t"+body.getSys().getSunrise()+"\n";
+                    name+="Sunset \t"+body.getSys().getSunset()+"\n";
+                    name+="Weather \t"+body.getWeather().get(0).getMain()+"\n";
+                    name+="Visibility \t"+body.getVisibility()+" m\n";
+                    progressBar.setVisibility(View.GONE);
+                    et_commet.setText(name);
+
+                }
+                else if(response.code()==404)
+                {
+                    Toast.makeText(getApplicationContext(),et_city.getText().toString()+" Not Found.",Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Example> call, Throwable t) {
+                et_commet.setText(t.getMessage());
+            }
+        });
+
 
     }
 

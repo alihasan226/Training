@@ -4,48 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
 
-
-    <EditText
-        android:id="@+id/et_userId"
+    <TextView
+        android:id="@+id/tv_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter UserID"
-        android:inputType="number"
-        />
+        android:text="Weather Forecast Details"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="#000000"/>
 
     <EditText
-        android:id="@+id/et_title"
+        android:id="@+id/et_cityname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Title"
-        android:layout_below="@+id/et_userId"
-        />
-
-    <EditText
-        android:id="@+id/et_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Title"
-        android:layout_below="@+id/et_title"
-        />
+        android:hint="Enter City"
+        android:textSize="24sp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:layout_below="@id/tv_weather"
+        android:textColor="#000000"/>
 
     <Button
-        android:id="@+id/btn_submit"
+        android:id="@+id/btn_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Click"
-        android:textAllCaps="false"
-        android:layout_below="@+id/et_text"/>
+        android:layout_below="@id/et_cityname"
+        android:text="Get Details"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:textAllCaps="false"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedscroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/btn_submit">
+        android:layout_below="@id/btn_weather"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/textview"
