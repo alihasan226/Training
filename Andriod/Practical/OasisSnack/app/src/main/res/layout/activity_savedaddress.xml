@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_custom_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/llAddNewAddress"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/toolbar"
+        android:elevation="5dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imageAddress"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/icon_add"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"/>
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/tvAddAddress"
+            android:layout_width="wrap_content"
+            style="@style/OpenSans_Regular"
+            android:layout_height="wrap_content"
+            android:text="Add a new address"
+            android:textColor="@color/oasisblue"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/imageAddress"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#E2E2E2"
+        android:layout_below="@id/llAddNewAddress"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAddNewAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewLine"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/llDELEIVERHERE"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:background="@color/colorOrange"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true">
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/btnDeliver"
+            android:textAlignment="center"
+            style="@style/OpenSans_SemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deliver Here"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

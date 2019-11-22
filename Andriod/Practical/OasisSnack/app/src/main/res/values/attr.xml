@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="fontType" format="enum">
+        <enum name="OpenSans_Bold" value="0" />
+        <enum name="OpenSans_BoldItalic" value="1" />
+        <enum name="OpenSans_Italic" value="2" />
+        <enum name="OpenSans_Light" value="3" />
+        <enum name="OpenSans_LightItalic" value="4" />
+        <enum name="OpenSans_Regular" value="5" />
+        <enum name="OpenSans_SemiBold" value="6" />
+    </attr>
+
+    <declare-styleable name="BuzzFonts">
+        <attr name="fontType"/>
+    </declare-styleable>
+    </resources>

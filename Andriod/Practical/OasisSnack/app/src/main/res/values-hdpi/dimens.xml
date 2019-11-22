@@ -1,0 +1,19 @@
+<resources>
+	<dimen name="nav_header_height">50dp</dimen>
+	<dimen name="onefifty">75dp</dimen>
+	<dimen name="eighty">40dp</dimen>
+	<dimen name="sixty">30dp</dimen>
+	<dimen name="fiftyfive">28dp</dimen>
+	<dimen name="fifty">25dp</dimen>
+	<dimen name="fourty">20dp</dimen>
+	<dimen name="twentyfive">13dp</dimen>
+	<dimen name="twentytwo">11dp</dimen>
+	<dimen name="twenty">10dp</dimen>
+	<dimen name="fifteen">8dp</dimen>
+	<dimen name="ten">5dp</dimen>
+	<dimen name="eight">4dp</dimen>
+	<dimen name="five">3dp</dimen>
+
+	<dimen name="text_twentyfour">12sp</dimen>
+	<dimen name="text_twenty">10sp</dimen>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/ten">
+
+
+
+    <com.oasissnacks.oasissnacks.utils.CustomTextView
+        android:id="@+id/expandable_cartlistgroup"
+        style="@style/OpenSans_Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/explist_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="80dp"
+        android:layout_toEndOf="@+id/lblListHeader"
+        android:src="@drawable/expandable_group"
+        android:layout_toRightOf="@+id/lblListHeader"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

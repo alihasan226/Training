@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <include layout="@layout/layout_custom_toolbar"
+        android:id="@+id/toolbar"/>
+    <com.oasissnacks.oasissnacks.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/tvNoItemsCart"
+        android:textColor="#2B2A2A"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        style="@style/OpenSans_Regular"
+        android:text="There are no items in your cart."
+        android:maxLines="2"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cart_recyclerview"
+            android:layout_marginBottom="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
+
+
+
+
+
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/llcartButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_bottamfilter"
+        android:gravity="center_vertical"
+        android:weightSum="1">
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/tvTotalPrice"
+            style="@style/OpenSans_SemiBold"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text=""
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"/>
+
+        <Button
+            style="@style/OpenSans_SemiBold"
+            android:id="@+id/btn_checkout"
+            android:layout_width="0dp"
+            android:textSize="14sp"
+            android:layout_height="match_parent"
+
+            android:layout_weight="0.5"
+            android:background="@color/colorOrange"
+            android:text="Continue"
+            android:textAllCaps="true"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+</RelativeLayout>

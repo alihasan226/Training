@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlRoot"
+    android:padding="2dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/cbFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:text=""
+        android:textSize="16sp"
+        style="@style/OpenSans_SemiBold"
+        tools:ignore="RtlCompat" />
+
+
+
+    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        android:background="@color/white"
+        app:bar_color="@color/colorGrayRecycler"
+        app:bar_highlight_color="@color/colorGrayRecycler"
+        app:corner_radius="20"
+        app:data_type="_float"
+        app:left_thumb_image="@drawable/circle_dot"
+        app:max_value="100"
+        app:min_value="0"
+        app:right_thumb_image="@drawable/circle_dot"/>
+
+    <TextView
+        android:id="@+id/tvMinimumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seekbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="18dp"
+        android:padding="10dp"
+        android:text="1.00"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/tvMaximumText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seekbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
+        android:padding="10dp"
+        android:text="1.00"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        tools:ignore="RtlCompat" />
+
+
+</RelativeLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:layout_height="wrap_content">
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort BY"
+            style="@style/OpenSans_SemiBold"
+            android:padding="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorText"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/colorText"/>
+
+
+
+    <RadioGroup
+        android:id="@+id/rgRight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
+
+        <RadioButton
+
+            android:id="@+id/radio1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:textColor="@color/black"
+            style="@style/OpenSans_Regular"
+            android:textSize="14sp"
+
+            android:drawableRight="@drawable/custom_checkbox"
+            android:text="Position"
+
+            android:height="30dp"
+            />
+
+
+
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:button="@null"
+            android:drawableRight="@drawable/custom_checkbox"
+            android:text="Product Name"
+            android:textColor="@color/black"
+            style="@style/OpenSans_Regular"
+            android:textSize="14sp"
+            android:height="30dp"
+            />
+        <RadioButton
+            android:id="@+id/radio3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="@drawable/custom_checkbox"
+            android:text="Price"
+            android:textColor="@color/black"
+            style="@style/OpenSans_Regular"
+            android:textSize="14sp"
+            android:height="30dp"
+            />
+
+
+
+    </RadioGroup>
+
+
+
+
+</LinearLayout>

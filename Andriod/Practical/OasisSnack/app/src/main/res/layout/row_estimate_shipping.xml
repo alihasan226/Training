@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_margin="1dp"
+    android:id="@+id/llRoot"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RadioGroup
+        android:layout_below="@+id/tvPayableAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rb"
+                android:layout_alignParentStart="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="RtlCompat" />
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:layout_width="wrap_content"
+                style="@style/OpenSans_Bold"
+                android:layout_gravity="center"
+                android:layout_centerVertical="true"
+                android:text="$20"
+                android:layout_toRightOf="@id/rb"
+                android:textSize="14sp"
+                android:id="@+id/tvPrice"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                />
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                style="@style/OpenSans_SemiBold"
+                android:layout_gravity="center"
+                android:text="HOme Delivery"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:id="@+id/tvTitle"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+               />
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:layout_width="wrap_content"
+                style="@style/OpenSans_Regular"
+                android:layout_gravity="center"
+                android:text="fed Ex"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/tvCarrierTitle"
+                android:textSize="14sp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                tools:ignore="RtlCompat" />
+
+        </RelativeLayout>
+
+
+    </RadioGroup>
+
+
+</LinearLayout>
+</layout>

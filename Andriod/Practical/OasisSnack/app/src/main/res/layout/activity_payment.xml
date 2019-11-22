@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E9E8E7">
+
+    <include
+        android:id="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_custom_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
+
+        <LinearLayout
+            android:id="@+id/llRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
+                android:id="@+id/llNewCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line1"
+                android:visibility="visible"
+                android:padding="20dp">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvCard"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Card Number"
+                    android:textColor="#777575"
+                    android:layout_marginLeft="4dp"
+                    android:textSize="15sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomEditText
+                    style="@style/OpenSans_Regular"
+                    android:id="@+id/etCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="@color/black"
+                    android:hint="Enter Card Number"
+                    android:inputType="number"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/cursorcolor"
+                    android:textSize="14sp"
+                    tools:ignore="RtlCompat" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvExpireDate"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expire Date"
+                    android:textColor="#777575"
+                    android:layout_marginLeft="4dp"
+                    android:textSize="15sp"
+                    android:layout_below="@id/etCard"/>
+
+                <com.oasissnacks.oasissnacks.utils.CustomEditText
+                    style="@style/OpenSans_Regular"
+                    android:id="@+id/etmounth"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/etCard"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="13dp"
+                    android:backgroundTint="@color/black"
+                    android:hint="MM"
+                    android:textAlignment="center"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/cursorcolor"
+                    android:textSize="14sp"
+                    tools:ignore="RtlCompat" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomEditText
+                    style="@style/OpenSans_Regular"
+                    android:id="@+id/etYear"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/etCard"
+                    android:layout_toEndOf="@id/etmounth"
+                    android:textAlignment="center"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="13dp"
+                    android:backgroundTint="@color/black"
+                    android:hint="YYYY"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/cursorcolor"
+                    android:textSize="14sp"
+                    tools:ignore="RtlCompat" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvCVV"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="120dp"
+                    android:text="CVV"
+                    android:textColor="#777575"
+                    android:layout_marginLeft="4dp"
+                    android:textSize="15sp"
+                    android:layout_below="@id/etCard"/>
+
+                <com.oasissnacks.oasissnacks.utils.CustomEditText
+                    style="@style/OpenSans_Regular"
+                    android:id="@+id/etCVV"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/etCard"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="112dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="13dp"
+                    android:backgroundTint="@color/black"
+                    android:hint="CVV"
+                    android:inputType="numberPassword"
+                    android:textAlignment="center"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/cursorcolor"
+                    android:textSize="14sp"
+                    tools:ignore="RtlCompat" />
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llPlaceOrder"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:visibility="visible"
+                android:background="@color/colorOrange"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="50dp">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/btnDeliver"
+                    android:textAlignment="center"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PAY"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#E9E8E7"
+                android:layout_marginTop="30dp"/>
+
+            <RelativeLayout
+                android:layout_below="@id/llNewCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:padding="20dp">
+
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/price_details"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="PRICE DETAILS"
+
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_below="@id/price_details"
+                    android:layout_marginTop="5dp"
+                    android:background="#E2E2E2" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/price"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_line"
+                    android:layout_marginTop="10dp"
+                    android:text="Price (1 item)"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvAmount"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_line"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="7dp"
+                    android:text="$ 0.00"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/delivery"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/price"
+                    android:layout_marginTop="5dp"
+                    android:text="Delivery"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/delivery_item"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/price"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="7dp"
+                    android:text="Free"
+                    android:textColor="#0F6808"
+                    android:textSize="14sp" />
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_below="@id/delivery_item"
+                    android:layout_marginTop="5dp"
+                    android:background="#E2E2E2" />
+
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/amount_payable"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/delivery"
+                    android:layout_marginTop="10dp"
+                    android:text="Amount Payable"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvPayableAmount"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/delivery"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="7dp"
+                    android:text="$ 0.00"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

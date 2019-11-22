@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:id="@+id/rlRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp">
+
+    <RelativeLayout
+        android:id="@+id/cartLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/product_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="10dp"
+            android:adjustViewBounds="true"/>
+
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/productName"
+            style="@style/OpenSans_Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="5dp"
+            android:layout_toEndOf="@+id/product_image"
+            android:layout_toRightOf="@+id/product_image"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            style="@style/OpenSans_Regular"
+            android:id="@+id/tvProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="$ 0.00"
+            android:layout_toEndOf="@id/product_image"
+            android:layout_toRightOf="@id/product_image"
+            android:layout_below="@id/productName"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#B10909"/>
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            style="@style/OpenSans_SemiBold"
+            android:id="@+id/tvStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text=""
+            android:layout_toEndOf="@id/product_image"
+            android:layout_toRightOf="@id/product_image"
+            android:layout_below="@id/tvProductPrice"
+            android:layout_marginLeft="20dp" />
+
+
+    </RelativeLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cartLayout"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/cartstroke"
+        android:orientation="horizontal"
+        android:paddingTop="7dp"
+        android:paddingRight="14dp"
+        android:paddingLeft="19dp"
+        android:paddingBottom="9dp">
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            style="@style/OpenSans_SemiBold"
+            android:id="@+id/tvQty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_expand_more"
+            android:layout_marginLeft="12dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/itemDelete"
+        android:layout_width="73dp"
+        android:layout_height="40dp"
+        android:layout_below="@id/cartLayout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/layout_qty"
+        android:layout_toRightOf="@id/layout_qty"
+        android:background="@drawable/cartstroke"
+        android:text="Delete"
+        android:textAllCaps="false" />
+
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/view_horizontalline"
+        android:layout_below="@id/layout_qty"
+        android:layout_height="0.7dp"
+        android:background="#E2E2E2"
+        android:layout_marginTop="15dp"/>
+
+    <!--
+    <LinearLayout
+        android:id="@+id/llRoot"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/view_horizontalline"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+
+
+        <LinearLayout
+
+            android:id="@+id/llEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4975"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_edit"
+                android:drawablePadding="10dp"
+                android:text="Edit"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.003"
+            android:background="#E2E2E2" />
+
+
+        <LinearLayout
+            android:id="@+id/llremove"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4975"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_delete"
+                android:drawablePadding="10dp"
+                android:text="Remove"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    -->
+
+
+
+</RelativeLayout>
+</layout>

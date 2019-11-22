@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp">
+
+        <RelativeLayout
+            android:id="@+id/cartLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="10dp"
+                android:adjustViewBounds="true"/>
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/productName"
+                style="@style/OpenSans_Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_toEndOf="@+id/product_image"
+                android:layout_toRightOf="@+id/product_image"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                style="@style/OpenSans_Regular"
+                android:id="@+id/tvProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="$ 0.00"
+                android:layout_toEndOf="@id/product_image"
+                android:layout_toRightOf="@id/product_image"
+                android:layout_below="@id/productName"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#B10909"/>
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                style="@style/OpenSans_SemiBold"
+                android:id="@+id/tvStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text=""
+                android:layout_toEndOf="@id/product_image"
+                android:layout_toRightOf="@id/product_image"
+                android:layout_below="@id/tvProductPrice"
+                android:layout_marginLeft="20dp" />
+
+            <LinearLayout
+                android:id="@+id/layout_qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/productName"
+                android:layout_toEndOf="@id/tvStock"
+                android:layout_toRightOf="@id/tvStock"
+                android:background="@drawable/cartstroke"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="17dp"
+                android:paddingTop="5dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="7dp">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvQty"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+                    android:src="@drawable/ic_expand_more" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:id="@+id/view_horizontalline"
+            android:layout_below="@id/cartLayout"
+            android:layout_height="0.7dp"
+            android:background="#E2E2E2"
+            android:layout_marginTop="15dp"/>
+
+    </RelativeLayout>
+</layout>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e2e2e2"
+    android:orientation="vertical">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_custom_toolbar" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvMyOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/toolbar"
+                android:layout_marginBottom="5dp"
+                android:background="#FFFFFF"/>
+
+            <LinearLayout
+                android:id="@+id/llShoppingDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/rvMyOrder"
+                android:layout_marginTop="5dp"
+                android:background="@color/white">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Shopping Details"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:textSize="16sp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e2e2e2"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#fff"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="20dp">
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        style="@style/OpenSans_Bold"
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ali Hasan"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        style="@style/OpenSans_Regular"
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Vivekanand sr Boys Hostel, Anand Engineering college, Keetham Agra"
+                        android:textColor="@color/black"/>
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        style="@style/OpenSans_Regular"
+                        android:id="@+id/tvState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Agra"
+                        android:textColor="@color/black"/>
+
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        style="@style/OpenSans_Regular"
+                        android:id="@+id/tvCountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Uttar Pradesh - 282007"
+                        android:textColor="@color/black"/>
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        style="@style/OpenSans_SemiBold"
+                        android:id="@+id/tvPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Phone Number : 9760656467"
+                        android:textColor="@color/black"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llPriceDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rvMyOrder"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    style="@style/OpenSans_SemiBold"
+                    android:id="@+id/tvPriceDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Price Details"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:textSize="16sp"/>
+                <View
+                    android:id="@+id/viewLine"
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/tvPriceDetails"
+                    android:layout_height="1dp"
+                    android:background="#e2e2e2"/>
+
+                <RelativeLayout
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="10dp">
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/price"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="List price"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/tvAmount"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="$0.00"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/delivery"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/price"
+                        android:layout_marginTop="5dp"
+                        android:text="Selling Price"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/delivery_item"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/price"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="$0.00"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/tvExtraDiscount"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/delivery"
+                        android:layout_marginTop="5dp"
+                        android:text="Extra Discount"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/etExtraDiscount"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/delivery_item"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="$0.00"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/tvSpecialPrice"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvExtraDiscount"
+                        android:layout_marginTop="5dp"
+                        android:text="Special Price"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/etSpecialPrice"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvExtraDiscount"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="$0.00"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/tvShippingFee"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvSpecialPrice"
+                        android:layout_marginTop="5dp"
+                        android:text="Shipping Fee"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/etShippingFee"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvSpecialPrice"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="$0.00"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/tvShippingDiscount"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvShippingFee"
+                        android:layout_marginTop="5dp"
+                        android:text="Shipping Discount"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/etShippingDiscount"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvShippingFee"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="7dp"
+                        android:text="$0.00"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+                <View
+
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/delivery_item"
+                    android:layout_marginTop="5dp"
+                    android:background="#E2E2E2" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/amount_payable"
+                        style="@style/OpenSans_SemiBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Total Amount"
+                        android:textColor="@color/black"
+                        android:paddingBottom="10dp"
+                        android:textSize="16sp" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/tvPayableAmount"
+                        style="@style/OpenSans_SemiBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="7dp"
+                        android:text="$ 0.00"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

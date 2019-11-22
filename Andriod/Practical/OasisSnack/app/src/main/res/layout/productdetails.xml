@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="0.5dp"
+    android:layout_marginRight="0.5dp">
+
+
+
+
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true" />
+
+    <com.oasissnacks.oasissnacks.utils.CustomTextView
+        android:id="@+id/textview"
+        android:ellipsize="end"
+        style="@style/OpenSans_Regular"
+        android:layout_below="@+id/image_view"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+
+        android:maxLines="2"
+        android:textColor="#000000"
+        android:textSize="12sp"/>
+    <com.oasissnacks.oasissnacks.utils.CustomTextView
+        android:id="@+id/textprice"
+        style="@style/OpenSans_Bold"
+        android:layout_below="@+id/textview"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14sp"/>
+
+    <com.oasissnacks.oasissnacks.utils.CustomTextView
+        android:id="@+id/textperprice"
+        style="@style/OpenSans_Regular"
+        android:layout_below="@+id/textprice"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#505050"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:id="@+id/add_to_cart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/textperprice">
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/btn_addtocart"
+            style="@style/OpenSans_SemiBold"
+            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="33dp"
+            android:text="Add to Cart"
+            android:gravity="center"
+            android:background="@drawable/corner"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_gravity="center"
+            android:onClick="buttonclick"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

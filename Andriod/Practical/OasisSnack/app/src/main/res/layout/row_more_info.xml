@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:weightSum="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:layout_width="0dp"
+            android:id="@+id/tvTitie"
+            android:layout_weight="0.35"
+            android:singleLine="true"
+            style="@style/OpenSans_SemiBold"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:text="Title"
+            android:gravity="start"
+            android:layout_alignParentStart="true"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlCompat" />
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:layout_width="0dp"
+            android:id="@+id/tvText"
+            android:singleLine="true"
+            style="@style/OpenSans_Regular"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_weight="0.75"
+            android:layout_centerHorizontal="true"
+            android:text="Title"
+            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlCompat" />
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+</layout>

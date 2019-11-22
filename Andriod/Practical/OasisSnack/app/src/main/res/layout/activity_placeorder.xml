@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_custom_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E2E2E2"
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/llAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <CheckBox
+                     style="@android:style/Widget.CompoundButton.RadioButton"
+                    android:id="@+id/rbAddressCheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp" />
+
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/rbSavedAddress"
+                    android:layout_marginLeft="5dp"
+                    android:text="Use My shipping Address as a Billing Address."
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    tools:ignore="RtlCompat" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:layout_marginBottom="2dp">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvDontAddress"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="You have not added any address yet."
+                    android:textSize="13sp"
+                    android:textColor="#E2E2E2"
+                    android:visibility="gone" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvUserName"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Deepak Sharma"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvUserAddress"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:singleLine="true"
+                    android:text="Faridabad"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvRegionAndPostalCode"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Delhi - 100232"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvMobileNumber"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:singleLine="true"
+                    android:text="999999999"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+
+                <LinearLayout
+
+                    android:id="@+id/llChangeAdress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvDontAddress"
+                    android:layout_marginTop="10dp"
+                    android:visibility="visible"
+                    android:background="@drawable/corner">
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/btn_checkout"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="2dp"
+                        android:gravity="center"
+                        android:text="Add Billing Address"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCardDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:layout_marginTop="4dp"/>
+
+
+            <LinearLayout
+                android:paddingStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                tools:ignore="RtlCompat">
+
+                <RelativeLayout
+                    android:padding="15dp"
+                    android:id="@+id/rlApplyCoupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="RtlCompat">
+
+                    <ImageView
+                        android:id="@+id/ivApplyCoupon"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/add_sign" />
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        android:id="@+id/tvAppyCoupon"
+                        style="@style/OpenSans_SemiBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="13dp"
+                        android:layout_toEndOf="@id/ivApplyCoupon"
+                        android:text="Apply Coupon"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:ignore="RtlCompat" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:background="@color/white"
+                android:layout_below="@id/llRoot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp">
+
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/price_details"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="PRICE DETAILS"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_below="@id/price_details"
+                    android:layout_marginTop="5dp"
+                    android:background="#E2E2E2" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/price"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_line"
+                    android:layout_marginTop="10dp"
+                    android:text="Price (1 item)"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvAmount"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_line"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="7dp"
+                    android:text="$ 0.00"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/delivery"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/price"
+                    android:layout_marginTop="5dp"
+                    android:text="Delivery"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/delivery_item"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/price"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="7dp"
+                    android:text="Free"
+                    android:textColor="#0F6808"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_below="@id/delivery_item"
+                    android:layout_marginTop="5dp"
+                    android:background="#E2E2E2" />
+
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/amount_payable"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/delivery"
+                    android:layout_marginTop="10dp"
+                    android:text="Amount Payable"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvPayableAmount"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/delivery"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="7dp"
+                    android:text="$ 0.00"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_bottamfilter"
+        android:gravity="center_vertical"
+        android:weightSum="1">
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/tvTotalPrice"
+            android:layout_width="0dp"
+            style="@style/OpenSans_SemiBold"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/white"
+            android:textAlignment="center"
+            android:text="$ 0.00"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            tools:ignore="RtlCompat" />
+
+        <Button
+            style="@style/OpenSans_Regular"
+            android:id="@+id/btnContinue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:layout_weight="0.5"
+            android:background="@color/colorOrange"
+            android:text="Continue"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

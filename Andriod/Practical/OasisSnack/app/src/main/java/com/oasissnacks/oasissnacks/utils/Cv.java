@@ -1,0 +1,45 @@
+package com.oasissnacks.oasissnacks.utils;
+
+public interface Cv {
+    String SERVICE_NAME = "NetworkingService";
+    String TIMEOUT = "Something went wrong";
+    String PREFS_APP_USER = "com.oasissnacks.app_user";
+   // String BASE_URL = "http://quality2code.com/oasiss/api/v1/index.php/";
+    String BASE_URL = "http://192.249.121.115/~shakir/oasis/api/v1/index.php/";
+    // String BASE_URL="http://beryl-khz2.localhost.run/oasis/api/v1/index.php/";
+    String ACTION_LOGIN = "login";
+    String ACTIONDELETECART = "delete_cart";
+    String ACTION_EDITCART= "edit_cart";
+    String ACTION_GETCART = "get_cart";
+    String ACTIONGETDETAILS = "get_user";
+    String ACTIONSAVEPROFILE = "edit_profile";
+    String ACTION_ADDCART = "add_to_cart";
+    String ACTION_FILTER= "filter";
+    String ACTION_SIGNUP = "signup";
+    String ACTIONFORGOTPASSWORD = "forgot_password";
+    String ACTION_GET_CATEGORY = "get_category";
+    String ACTION_GET_HOME = "action_get_home";
+    String ACTION_GET_CATEGORY_PRODUCTS = "get_category_products";
+    String ACTION_GET_PRODUCT_DETAILS = "get_product_details";
+    String ACTIONGETSHIPPINGMETHOD = "get_estimate_rate";
+    String ACTIONADDCHECKOUTADDRESS = "add_checkout_address";
+    String ACTIONSTATICPAGE = "static_content";
+    String ACTION_GET_All_RELATEDPRODUCT="get_related_product";
+    String COUPONCODE="coupon_code";
+    String ADDWISHLIST="add_wishlist";
+    String REMOVEWISHLIST="remove_wishlist";
+    String POSTREVIEW="post_review";
+    String GETWISHLIST="get_wishlist";
+    String APPLYCOUPON="apply_coupon";
+    String AMAZONLOGIN="amazon_signin";
+    String GETUSERADDRESSLIST="get_user_address_list";
+    String ESTIMATESHIPPINGADDRESS="estimate_shipping_rates";
+    String GETPAYMENTMETHOD="get_payment_method";
+    String GETMYORDERS="orders";
+    String GETMYORDERDETAILS="get_payment_method";
+    String GETCOUNTRYLIST="get_country_list";
+    String GETSTATELIST="get_state_list";
+    int PERMISSIONS_BUZZ_REQUEST = 0xABC;
+    String LOGIN_ERROR = "You did not sign in correctly or your account is temporarily disabled.";
+    String SIGNUP_PASSWORD = "Password must contain one special character,one numeric";
+}

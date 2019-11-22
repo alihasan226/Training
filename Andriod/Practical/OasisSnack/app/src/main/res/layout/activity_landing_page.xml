@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/white">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/nav"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/menu" />
+
+                        <ImageView
+                            android:layout_width="120dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/nav"
+                            android:layout_toRightOf="@+id/nav"
+                            android:src="@drawable/header_logo"
+                            tools:ignore="RtlCompat" />
+
+                        <RelativeLayout
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            tools:ignore="RtlCompat">
+
+                            <ImageView
+                                android:id="@+id/ivCart"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+
+                                android:src="@drawable/ic_shopping_cart_grey" />
+
+                            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                android:id="@+id/tvCartValue"
+                                style="@style/OpenSans_Regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:background="@drawable/bg_textvew_landing"
+
+                                android:text="22"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:textSize="8sp"
+                                android:visibility="invisible" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#e2e2e2" />
+
+                <LinearLayout
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    tools:ignore="MissingConstraints">
+
+                    <com.oasissnacks.oasissnacks.utils.CustomEditText
+                        android:id="@+id/et_searchbar"
+                        style="@style/OpenSans_Regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/curve_grey_stroke"
+                        android:focusableInTouchMode="true"
+                        android:hint="Search entire store here"
+                        android:maxLines="1"
+                        android:paddingLeft="10dp"
+                        android:textColor="#b4b4b4"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#e2e2e2" />
+
+              <!--  <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">-->
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+
+                  <!--      <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="80dp"
+                            android:paddingRight="2dp">
+
+                            <ImageView
+                                android:id="@+id/category_button1"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:onClick="buttonclick"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/oasissnack_category" />
+   <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                style="@style/OpenSans_Regular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/category_button1"
+                                android:layout_marginTop="4dp"
+                                android:text="All Category"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RelativeLayout>-->
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/landingpage_recyclerview"
+                            android:layout_width="0dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="0.9"
+                            android:background="@color/white" />
+
+                    </LinearLayout>
+
+              <!--  </HorizontalScrollView>-->
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.viewpager.widget.ViewPager
+                                android:id="@+id/viewpager_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp" />
+
+                            <me.relex.circleindicator.CircleIndicator
+                                android:id="@+id/circleIndicatorOne"
+                                android:layout_width="match_parent"
+
+                                android:layout_height="48dp"
+                                android:layout_alignParentBottom="true"
+
+                                app:ci_drawable="@drawable/circle_inicator"
+                                app:ci_drawable_unselected="@drawable/circle_indicator_unselected" />
+
+
+                            <ImageView
+                                android:id="@+id/ivLeftOne"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="5dp"
+                                android:src="@drawable/ic_keyboard_arrow_left_white_24dp"
+                                tools:ignore="RtlCompat" />
+
+
+                            <ImageView
+                                android:id="@+id/ivRightOne"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="5dp"
+                                android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
+                                tools:ignore="RtlCompat" />
+                        </RelativeLayout>
+
+                        <WebView
+                            android:id="@+id/webview1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:ignore="WebViewLayout" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                android:id="@+id/tvProductTitle"
+                                style="@style/OpenSans_SemiBold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:text="@string/most_viewed_products"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+
+                                <androidx.viewpager.widget.ViewPager
+                                    android:id="@+id/second_viewpager"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="350dp"
+                                    android:layout_marginStart="40dp"
+                                    android:layout_marginEnd="40dp"
+                                    />
+
+                                <ImageView
+                                    android:id="@+id/ivLeft"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="5dp"
+                                    android:src="@drawable/ic_keyboard_arrow_left_white_24dp"
+                                    tools:ignore="RtlCompat" />
+
+
+                                <ImageView
+                                    android:id="@+id/ivRight"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="5dp"
+
+                                    android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
+                                    tools:ignore="RtlCompat" />
+                            </RelativeLayout>
+
+                            <me.relex.circleindicator.CircleIndicator
+                                android:id="@+id/circleIndicator"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                app:ci_drawable="@drawable/circle_inicator"
+                                app:ci_drawable_unselected="@drawable/circle_indicator_unselected" />
+
+                            <WebView
+                                android:id="@+id/webview2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                tools:ignore="WebViewLayout" />
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvReview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                 />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="#fff"
+                android:fitsSystemWindows="true">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="180dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/oasis" />
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginLeft="20dp">
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="Home"
+                                    android:id="@+id/tvHome"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:id="@+id/tvProfile"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="Profile"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:id="@+id/tvWishList"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="My Wishlist"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:id="@+id/tvMyOrder"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="My Order"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:id="@+id/tvContactUs"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="Contact us"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:id="@+id/tvPrivacyPolicy"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="Privacy Policy"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:id="@+id/tvShppingpolicy"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="Shopping return Policy"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:text="About us"
+                                    android:id="@+id/tvAboutUS"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    style="@style/OpenSans_Regular"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center_vertical"
+                                    android:id="@+id/tvTermsCondition"
+                                    android:text="Brand Fullfilment"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp" />
+
+                                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                    android:id="@+id/btn_signin"
+                                    style="@style/OpenSans_SemiBold"
+                                    android:layout_width="100dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="right"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="20dp"
+                                    android:background="@drawable/button_corner"
+                                    android:gravity="right|center_vertical"
+                                    android:onClick="buttonclick"
+                                    android:text="Logout"
+                                    android:textAlignment="center"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+
+                                <ExpandableListView
+                                    android:id="@+id/expandableListView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="100dp"
+                                    android:background="@color/white"
+                                    android:divider="@android:color/darker_gray"
+                                    android:dividerHeight="1dp"
+                                    android:groupIndicator="@null"
+                                    android:indicatorRight="?android:attr/expandableListPreferredItemIndicatorRight" />
+
+
+                            </LinearLayout>
+
+                        </ScrollView>
+
+                    </LinearLayout>
+
+
+            </com.google.android.material.navigation.NavigationView>
+
+        </androidx.drawerlayout.widget.DrawerLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

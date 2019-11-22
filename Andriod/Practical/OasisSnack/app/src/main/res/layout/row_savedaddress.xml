@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <RelativeLayout
+        android:id="@+id/llSavedAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbSavedAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"/>
+
+        <RelativeLayout
+            android:id="@+id/llsavedAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/rbSavedAddress"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            tools:ignore="RtlCompat">
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvUserName"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Ali Hasan"
+                android:textColor="@color/black"
+                android:textSize="17sp"/>
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:text="Edit"
+                android:textSize="12dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/btn_shadow"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:textColor="@color/oasisblue"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"/>
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvUserAddress"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toLeftOf="@id/btnEdit"
+                android:layout_below="@id/tvUserName"
+                android:text="D-60 New Ashok Nagar, New Delhi - 110096"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvUserNumber"
+                style="@style/OpenSans_Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvUserAddress"
+                android:layout_marginTop="10dp"
+                android:text="9760656467"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/viewLine"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#E2E2E2"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/llsavedAddress"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+</layout>

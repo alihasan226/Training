@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/llProductId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="5dp">
+
+        <ImageView
+            android:id="@+id/ivPRoductImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:adjustViewBounds="true"/>
+
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/tvProductName"
+            style="@style/OpenSans_Regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="19dp"
+            android:layout_toStartOf="@+id/ivDelete"
+            android:layout_toLeftOf="@+id/ivDelete"
+            android:layout_toEndOf="@+id/ivPRoductImage"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:maxLines="2"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/ivDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"/>
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            style="@style/OpenSans_SemiBold"
+            android:id="@+id/tvProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="$ 0.00"
+            android:layout_toEndOf="@id/ivPRoductImage"
+            android:layout_toRightOf="@id/ivPRoductImage"
+            android:layout_below="@id/tvProductName"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"/>
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            style="@style/OpenSans_Regular"
+            android:id="@+id/tvPRoductCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text=""
+            android:layout_toEndOf="@id/ivPRoductImage"
+            android:layout_toRightOf="@id/ivPRoductImage"
+            android:layout_below="@id/tvProductPrice"
+            android:layout_marginLeft="20dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:id="@+id/view_horizontalline"
+            android:layout_below="@id/tvPRoductCount"
+            android:layout_height="0.7dp"
+            android:background="#E2E2E2"
+            android:layout_marginTop="10dp"/>
+
+
+
+    </RelativeLayout>
+</layout>

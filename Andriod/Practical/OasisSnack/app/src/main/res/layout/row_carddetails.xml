@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/llBankDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="20dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp">
+
+            <CheckBox
+                style="@android:style/Widget.CompoundButton.RadioButton"
+                android:id="@+id/rbBankDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp" />
+
+            <RelativeLayout
+                android:id="@+id/llsavedAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/rbBankDetails"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical"
+                tools:ignore="RtlCompat">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvBankName"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank Name"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/bankLogo"
+                    android:layout_width="35dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_alignParentRight="true"/>
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvCardNumber"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvBankName"
+                    android:layout_toLeftOf="@id/bankLogo"
+                    android:layout_marginTop="3dp"
+                    android:text="ACCOUNT NO : "
+                    android:textColor="#888888"
+                    android:textSize="14sp"/>
+
+                <com.oasissnacks.oasissnacks.utils.CustomEditText
+                    style="@style/OpenSans_Regular"
+                    android:id="@+id/etCVV"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="0.5"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/black"
+                    android:hint="CVV"
+                    android:inputType="numberPassword"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:textCursorDrawable="@drawable/cursorcolor"
+                    android:layout_below="@id/tvCardNumber"
+                    android:textSize="14sp"
+                    tools:ignore="RtlCompat" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="#EBEBEB"
+            android:layout_below="@id/llBankDetails"/>
+
+    </RelativeLayout>
+</layout>

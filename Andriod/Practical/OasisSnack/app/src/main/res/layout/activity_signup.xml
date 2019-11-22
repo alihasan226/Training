@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:id="@+id/scrollView"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:id="@+id/linearlayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+
+            <ImageButton
+                android:id="@+id/login_with_amazon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:visibility="visible"
+                android:padding="0dp"
+                android:src="@drawable/btnlwa_gold_loginwithamazon_pressed" />
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_firstname"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="First Name"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/et_firstname"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/stoke"
+                android:hint="Enter Your First Name"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_lastname"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Last Name"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/et_lastname"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/stoke"
+                android:hint="Enter Your Last Name"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp" />
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_email"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Email"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/et_email"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/stoke"
+                android:hint="Enter Your Email"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_password"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Password"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/et_password"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/stoke"
+                android:hint="Enter Your Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp" />
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_confirmpassword"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Confirm Password"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/et_confirmpassword"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/stoke"
+                android:hint="Enter Your Confirm Password"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp" />
+
+
+            <LinearLayout
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/corner"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/btn_signin"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:onClick="buttonclick"
+                    android:text="Create an Account"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

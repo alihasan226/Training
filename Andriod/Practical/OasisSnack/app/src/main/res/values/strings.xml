@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">OasisSnacks</string>
+    <string name="title_activity_landing_page">LandingPageActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Hello Guest User</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="dialog_msg_logout">Are you sure you want to logout?</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="dialog_titel_logout">Log out</string>
+    <string name="btn_ok">OK</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="_383_products_found">383\nProducts Found</string>
+    <string name="text_discription">- A delightful variation on our original tea, with a flavorful infusion of spearmint flavor and just a touch of honey\nUSDA-Certified Organic\nOnly 60 calories per 8-oz. serving; a great alternative to soft drinks\nThe perfect balance of organic tea leaves blended with all-natural ingredients</string>
+    <string name="most_viewed_products">MOST VIEWED PRODUCTS</string>
+    <string name="core_power_elite_high_protein_n_250_ml">Core Power Elite High Protein \n 250 ml (pack of 12)</string>
+    <string name="change_password">Enter your Email and we\'ll send you a code to \nchange your password.</string>
+    <string-array name="QuantitiyArray">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+    <string-array name="StateArray">
+        <item>Please Select State</item>
+        <item>Rajasthan</item>
+        <item>Haryana</item>
+        <item>Punjab</item>
+        <item>Uttar Pradesh</item>
+        <item>HmachalPradesh</item>
+
+    </string-array>
+    <string-array name="ProductArray">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+
+    </string-array>
+    <string-array name="countryArray">
+        <item>Please Select Country</item>
+        <item>US</item>
+        <item>India</item>
+        <item>China</item>
+        <item>Nepal</item>
+        <item>Bhutan</item>
+        <item>Africa</item>
+        <item>France</item>
+
+    </string-array>
+</resources>

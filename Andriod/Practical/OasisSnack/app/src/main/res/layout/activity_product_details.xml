@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_custom_toolbar" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scrolling"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginBottom="50dp"
+        android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp">
+
+
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/viewpager_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginRight="0dp" />
+
+                        <ImageView
+                            android:id="@+id/ivWisListGray"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/heart"
+                            tools:ignore="RtlCompat" />
+
+                        <me.relex.circleindicator.CircleIndicator
+                            android:id="@+id/circleIndicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_below="@id/viewpager_image"
+
+                            app:ci_drawable="@drawable/circle_inicator"
+                            app:ci_drawable_unselected="@drawable/circle_indicator_unselected" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            android:id="@+id/tv_name"
+                            style="@style/OpenSans_SemiBold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            tools:ignore="RtlCompat"
+                            android:paddingLeft="10dp"/>
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            style="@style/OpenSans_Regular"
+                            android:id="@+id/price_per_count"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:textColor="#80000000"
+                            android:textSize="14sp"
+                            tools:ignore="RtlCompat" />
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            android:id="@+id/tvProductPrice"
+                            style="@style/OpenSans_Bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:paddingLeft="10dp"
+                            tools:ignore="RtlCompat" />
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            android:id="@+id/tvStock"
+                            style="@style/OpenSans_Bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="-20dp"
+                            android:layout_marginRight="10dp"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            tools:ignore="RtlCompat" />
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            android:id="@+id/sku"
+                            style="@style/OpenSans_Regular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+
+                            android:layout_marginRight="10dp"
+                            android:textSize="14sp" />
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_qty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cartLayout"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/productstroke"
+                            android:orientation="horizontal"
+                            android:paddingTop="7dp"
+                            android:paddingRight="14dp"
+                            android:paddingLeft="15dp"
+                            android:paddingBottom="8dp">
+
+                            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                style="@style/OpenSans_SemiBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:paddingTop="1dp"
+                                android:text="Qty :"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                style="@style/OpenSans_SemiBold"
+                                android:id="@+id/QuantitySpinnerDetail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:text="1"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_expand_more"
+                                android:layout_marginLeft="8dp"
+                                android:layout_gravity="center"/>
+
+                        </LinearLayout>
+
+                        <!--<LinearLayout
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/bg_gray_corner"
+                            android:layout_width="wrap_content"
+                            android:paddingTop="7dp"
+                            android:paddingStart="2dp"
+                            android:paddingBottom="7dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            tools:ignore="RtlCompat">
+
+                            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                                style="@style/OpenSans_SemiBold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:paddingStart="8dp"
+                                android:text="Qty :"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+
+                            <Spinner
+                                android:id="@+id/QuantitySpinnerDetail"
+                                style="@style/OpenSans_SemiBold"
+                                android:layout_width="85dp"
+                                android:layout_height="wrap_content"
+                                android:entries="@array/ProductArray"
+                                android:spinnerMode="dialog" />
+
+                        </LinearLayout>-->
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="#e2e2e2" />
+
+                    <!--<CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="One-Off Purchase"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        tools:ignore="RtlCompat" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        android:text="Monthly Subscription"
+                        tools:ignore="RtlCompat" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        android:text="Weekly Subscription"
+                        tools:ignore="RtlCompat" />
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:textSize="16sp"
+                        android:text="Biweekly Subscription"
+                        tools:ignore="RtlCompat" />-->
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.oasissnacks.oasissnacks.utils.CustomTextView
+                        style="@style/OpenSans_SemiBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:paddingLeft="10dp"
+                        android:text="Product Details"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                    <!-- <ExpandableListView
+
+                     <ExpandableListView
+ >>>>>>> 098f00817e8c3923d715f63badd9cc5be33d258a
+                         android:id="@+id/expandable_product_list"
+                         android:layout_width="match_parent"
+                         android:layout_height="210dp"
+                         android:layout_marginTop="10dp"
+
+                         android:scrollbars="none" />-->
+
+
+                    <WebView
+                        android:id="@+id/desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:paddingLeft="10dp"
+                        tools:ignore="RtlCompat,WebViewLayout" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="#e2e2e2" />
+
+                    <RelativeLayout
+                        android:id="@+id/rlAllDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            style="@style/OpenSans_SemiBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:paddingLeft="10dp"
+                            android:text="All Details"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="10dp"
+                            android:paddingRight="10dp"
+                            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                            tools:ignore="RtlCompat" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="#e2e2e2" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            android:id="@+id/tv_related_product"
+                            style="@style/OpenSans_SemiBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:paddingLeft="10dp"
+                            android:text="Related Products"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            android:id="@+id/tv_viewmore"
+                            style="@style/OpenSans_SemiBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:onClick="buttonclickviewmore"
+                            android:paddingTop="2dp"
+                            android:paddingLeft="2dp"
+                            android:paddingBottom="2dp"
+                            android:paddingRight="10dp"
+                            android:text="View More"
+                            android:textColor="@color/oasisblue"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_options"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="#e2e2e2" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            style="@style/OpenSans_SemiBold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:paddingLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginLeft="20dp"
+                            android:text="Rating and Review"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <com.oasissnacks.oasissnacks.utils.CustomTextView
+                            style="@style/OpenSans_SemiBold"
+                            android:id="@+id/tvWriteAReview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="10dp"
+                            android:padding="2dp"
+                            android:paddingRight="10dp"
+                            android:text="Write a Review"
+                            android:textColor="@color/oasisblue"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvReviewProductDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_bottamfilter"
+        android:elevation="5dp"
+        android:gravity="center_vertical"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btnAddToCart"
+            style="@style/OpenSans_SemiBold"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/white"
+            android:text="Add To Cart"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnBuy"
+            style="@style/OpenSans_SemiBold"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@color/colorOrange"
+            android:text="Buy"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

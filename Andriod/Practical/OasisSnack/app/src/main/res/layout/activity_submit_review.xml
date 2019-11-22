@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/layout_custom_toolbar"
+        android:id="@+id/toolbar"/>
+
+    <ScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="30dp">
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvTitle"
+                style="@style/OpenSans_Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="You're reviewing :"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvProductName"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTitle"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Product Name Bubbly Water"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvRating"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/tvProductName"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="Your Rating"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:secondaryProgressTint="#0DB113"
+                android:progressTint="#3f7e00"
+                android:progressBackgroundTint="#E2E2E2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRating"
+                android:numStars="5"
+                android:rating="0.0"
+                android:stepSize="1.0"/>
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvNickName"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/ratingBar"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="Nickname"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/etNickName"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvNickName"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:hint="Enter Nickname"
+                android:inputType="textCapSentences"
+                android:background="@drawable/stoke"
+                android:singleLine="true"
+                android:maxLength="30"
+                android:textCursorDrawable="@drawable/cursorcolor"/>
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvSummary"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/etNickName"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="Summary"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/etSummary"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvSummary"
+                android:layout_height="45dp"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:hint="Enter Summary"
+                android:inputType="text"
+                android:background="@drawable/stoke"
+                android:singleLine="true"
+                android:maxLength="100"
+                android:textCursorDrawable="@drawable/cursorcolor"/>
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvReview"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@id/etSummary"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="Review"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/etReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvReview"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:hint="Give your review for this product"
+                android:inputType="textMultiLine"
+                android:scrollbarStyle="insideInset"
+                android:lines="5"
+                android:background="@drawable/stoke"
+                android:gravity="top|left"
+                android:scrollbars="vertical"
+                android:textCursorDrawable="@drawable/cursorcolor"/>
+
+            <LinearLayout
+                android:id="@+id/llbtnReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_below="@id/etReview"
+                android:background="@drawable/corner">
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/btnSubmitReview"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:text="Submit Review"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

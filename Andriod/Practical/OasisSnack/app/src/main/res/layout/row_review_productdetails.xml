@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="RtlCompat">
+
+            <LinearLayout
+
+                android:id="@+id/llStar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_star_review"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/tvRating"
+                    style="@style/OpenSans_Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+
+                    android:text="5.0"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_star_white_24dp" />
+
+            </LinearLayout>
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvREviewTitile"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_toRightOf="@id/llStar"
+                android:singleLine="true"
+                android:text="Wonderful"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/tvReviewDescription"
+            style="@style/OpenSans_Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/llStar"
+            android:text="Wonderful"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="RtlCompat" />
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/tvReviewName"
+            style="@style/OpenSans_Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/llStar"
+            android:text="Wonderful"
+            android:textSize="14sp"
+            tools:ignore="RtlCompat" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="#e2e2e2" />
+    </LinearLayout>
+</layout>

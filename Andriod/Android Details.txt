@@ -1,3 +1,15 @@
+
+
+
+
+4:21 PM 10/15/2019  NestedScrollView :---------------------------------
+NestedScrollView is just like Scrollview but it support scting as both a nested scrolling parent and child on both new and old verison of Android.nested scrolling is enabled by default.
+NestedScrollView is a widget that are used when we want to implement scrollable view inside another scrollble view.
+
+Normaly it is difficult to implement scrollable view inside another scrollble view because system would be unable to decide which view to scroll.This is where  NestedScrollView comes in.
+
+
+
 11:56 AM 10/1/2019		Firebase Cloud Messaging :------------------------------------------------
 Firebase Cloud Messaging(FCM) formerly Known as Google Cloud Messaging (GCM) is a cross-platform cloud solution for message and notification for Android, IOS, and web application
 which currently can be used at no cost.
@@ -78,7 +90,7 @@ Baisc RecyclerView XML Code :
 
 
 Gradle Dependency to use RecyclerView :-----------------------------------------------------------------------
-The RecyclerView wdiget is a part of separate library for API 7 level or higher. Add the following dependency in your Gradle build file to use recyclerview.
+The RecyclerView widget is a part of separate library for API 7 level or higher. Add the following dependency in your Gradle build file to use recyclerview.
 
 
 gradleScript >build.gradle and inside dependencies
@@ -211,15 +223,59 @@ This is the major difference in RecyclerView and ListView
 
 
 
+Data Binding in Recyclerview :-------------------
+
+Data binding is part of android architecture components .It allows us to bind the UI components to data sources ina declaration format.
+In this layout data binding is enabled by keeping the root elements as <layout>.
+Put the xml file inside the <layout></layout> tag.
+
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+</layout>
 
 
 
 
+3:49 PM 9/23/2019 ButterKnief in Android :------------------------------------
 
-3:49 PM 9/23/2019
 Android ButterKnife library is a view injection library that injects views into android activity / fragments using annotations. For example, @BindView annotation avoids using 
 findViewById() method by automatically type casting the view element. Not just view binding, butterknife provides lot of other useful options like binding strings, dimens, drawables, click events and lot more. We’ll see brief about every component 
 offered in this article.
+
+Field and method binding for Andorid views which uses annotation processing to generating boilerplate code for you 
+=> Eliminate findView ById calls by using @BindView on fields
+=> Group multiple view in a  list or array. Operation on all of them at once with actions setters or properties
+=> Eliminate anonymous inner-classes for listener by annotating methods with @COnClick and others.
+=> Eliminate resource looksup by using resources annotations on fields.
+
+
+
+=> Annotation fields with @BindView and a view ID for Butter Knief to find and automatically cast the corresponing view in your layout
+Example 
+	class ExampleActivity extends Activtiy{
+	@BindView(R.id.title) TextView title;
+	@BindView(R.id.subtitle) TextView subtitle;
+	@BindView(R.id.footer) Textview footer;
+
+	@Override public void onCreate(Bundle saveInstanceState){
+	super.onCreate(saveInstanceState);
+	setContentView(R.layout.simple_activity);
+	Butterknief.bind(this);			//in onCreate method we have to add this to use the butterKnief in our code
+	}
+
+
+	we will have to add these dependencies for using the butter knief
+	
+	dependencies{
+	implementation 'com.jakewharton:butterknief:10.2.0
+	annotationProcessor 'com.jakewharton:butterknief-compiler:10.2.0'
+	}
+
+
+
+
+
+
 
 
 ---------------------------------------
@@ -263,7 +319,17 @@ if(visibleitem+scrollout == totalitem) than we get new data
 
 11:53 AM 9/23/2019	 	Retrofit :----------------------------------------------------------------------------------------
 
+RESTful API (REST if represented as the Representational state transfer)
 
+RESTful API is an application program interface (API) that uses HTTP request to GET,PUT,POST and DELETE data.
+
+Retrofit is REST Client for Android and Java by Square.It makes it relatively easy to reterive and upload JSON (or other structure data) via a REST based web service.
+In Retrofit you configure which converter is used for the data serialization.
+
+{ Data Serialization is the process of converting structured data to a format that allows sharing or storage of the data ina form that allws recovery of its original structures
+
+
+Retrofit turns your HTTP API into a Java interface.
 
 It is a type-safe HTTP client for Android and Java.
 

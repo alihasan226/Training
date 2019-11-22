@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="MyCheckbox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:colorControlActivated">#222020</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+    </style>
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="android:height">15dp</item>
+        <item name="android:width">15dp</item>
+        ... // Additional customizations
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="OpenSans_Bold">
+        <item name="fontType">OpenSans_Bold</item>
+    </style>
+    <style name="OpenSans_BoldItalic">
+        <item name="fontType">OpenSans_BoldItalic</item>
+    </style>
+    <style name="OpenSans_Light">
+        <item name="fontType">OpenSans_Light</item>
+    </style>
+    <style name="OpenSans_LightItalic">
+        <item name="fontType">OpenSans_LightItalic</item>
+    </style>
+    <style name="OpenSans_Regular">
+        <item name="fontType">OpenSans_Regular</item>
+
+    </style>
+
+    <style name="OpenSans_SemiBold">
+        <item name="fontType">OpenSans_SemiBold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/popup_background</item>
+    </style>
+
+</resources>

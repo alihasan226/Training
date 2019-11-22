@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        layout="@layout/layout_custom_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@id/toolbar"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_firstname"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="First Name"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="13dp"
+                android:backgroundTint="@color/black"
+                android:hint="Enter First Name"
+                android:inputType="text"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_lastname"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Name"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:layout_below="@id/et_firstname"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/et_firstname"
+                android:backgroundTint="@color/black"
+                android:hint="Enter Last Name"
+                android:inputType="text"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_Email"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:layout_below="@id/et_lastname"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_Email"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/et_lastname"
+                android:backgroundTint="@color/black"
+                android:hint="Enter Email"
+                android:inputType="textEmailAddress"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_street_address"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Street Address"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:layout_below="@id/et_Email"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_street_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/et_Email"
+                android:backgroundTint="@color/black"
+                android:hint="Line 1"
+                android:inputType="text"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_street_address1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_below="@id/et_street_address"
+                android:backgroundTint="@color/black"
+                android:hint="Line 2"
+                android:inputType="text"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_street_address2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_below="@id/et_street_address1"
+                android:backgroundTint="@color/black"
+                android:hint="Line 3"
+                android:inputType="text"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_city"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:layout_below="@id/et_street_address2"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_city"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/et_street_address2"
+                android:backgroundTint="@color/black"
+                android:hint="Enter City Name"
+                android:inputType="text"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                style="@style/OpenSans_SemiBold"
+                android:id="@+id/tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Country"
+                android:layout_below="@id/et_city"
+                android:textColor="#777575"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"/>
+
+            <RelativeLayout
+                android:id="@+id/layoutSpinnerState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_state">
+
+                <Spinner
+                    android:entries="@array/countryArray"
+                    android:id="@+id/spinnerCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    style="@android:style/Widget.Material.Spinner.Underlined"
+                    tools:ignore="NewApi" />
+
+            </RelativeLayout>
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_zip_code"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zip/Postal Code"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:layout_below="@id/layoutSpinnerState"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_zip_code"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/layoutSpinnerState"
+                android:backgroundTint="@color/black"
+                android:hint="Enter Zip/Postal Code"
+                android:inputType="number"
+                android:maxLength="6"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                style="@style/OpenSans_SemiBold"
+                android:id="@+id/tv_country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="States/Province"
+                android:layout_below="@id/et_zip_code"
+                android:textColor="#777575"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"/>
+
+
+            <RelativeLayout
+                android:id="@+id/layoutSpinnerCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_country">
+
+                <Spinner
+                    android:entries="@array/StateArray"
+                    android:id="@+id/spinnerState"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    style="@android:style/Widget.Material.Spinner.Underlined"
+                    tools:ignore="NewApi" />
+
+            </RelativeLayout>
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tv_phone"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:layout_below="@id/layoutSpinnerCountry"
+                android:textSize="14sp" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                style="@style/OpenSans_Regular"
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginTop="13dp"
+                android:layout_below="@id/layoutSpinnerCountry"
+                android:backgroundTint="@color/black"
+                android:hint="Enter Phone Number"
+                android:inputType="number"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/tvAddressType"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address Type"
+                android:textColor="#777575"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/et_phone"
+                android:textSize="14sp" />
+
+            <RadioGroup
+                android:id="@+id/rgAddressType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvAddressType"
+                android:layout_marginTop="10dp"
+                android:padding="15dp">
+
+                <RadioButton
+                    android:id="@+id/rbAddressType1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UseAs My Default Shipping Address"/>
+
+                <RadioButton
+                    android:id="@+id/rbAddressType2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="UseAs My Default Billing Address"/>
+
+            </RadioGroup>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/colorOrange"
+                android:layout_below="@id/rgAddressType"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp">
+
+                <com.oasissnacks.oasissnacks.utils.CustomTextView
+                    android:id="@+id/btnSaveAddress"
+                    style="@style/OpenSans_SemiBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:text="Save Address"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:onClick="buttonclick"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>
+

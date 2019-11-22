@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#fff">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_custom_toolbar" />
+
+
+    <LinearLayout
+        android:id="@+id/linearlayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical"
+
+        android:padding="10dp">
+
+       <!-- <RelativeLayout
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfileImage"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_width="0dp" />
+
+            <ImageView
+                android:id="@+id/ivImagePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/ic_photo_camera_black_24dp"
+                tools:ignore="RtlCompat" />
+        </RelativeLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:weightSum="1">
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="First Name"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Last Name"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/etFirstName"
+                style="@style/OpenSans_Regular"
+                android:layout_width="0dp"
+
+                android:layout_height="50dp"
+
+                android:layout_marginEnd="10dp"
+                android:layout_weight="0.5"
+                android:backgroundTint="@color/black"
+                android:hint="First Name"
+
+                android:inputType="textEmailAddress"
+                android:maxLength="32"
+
+                android:maxLines="1"
+                android:textColorHint="@color/black"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/etLastName"
+                style="@style/OpenSans_Regular"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="0.5"
+                android:backgroundTint="@color/black"
+                android:hint="Last Name"
+                android:inputType="textEmailAddress"
+                android:maxLength="32"
+                android:maxLines="1"
+                android:textColorHint="@color/black"
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp"
+                tools:ignore="RtlCompat" />
+
+
+        </LinearLayout>
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            style="@style/OpenSans_SemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:paddingLeft="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"/>
+
+        <com.oasissnacks.oasissnacks.utils.CustomEditText
+            android:id="@+id/etEmail"
+            style="@style/OpenSans_Regular"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/black"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLength="32"
+
+            android:maxLines="1"
+            android:textColorHint="@color/black"
+            android:textCursorDrawable="@drawable/cursorcolor"
+
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                style="@style/OpenSans_SemiBold"
+                android:id="@+id/tv_old_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Old Password"
+                android:paddingLeft="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"/>
+
+        <com.oasissnacks.oasissnacks.utils.CustomEditText
+            android:id="@+id/etPassword"
+            style="@style/OpenSans_Regular"
+            android:layout_below="@id/tv_old_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/black"
+            android:hint="Old Password"
+            android:inputType="textPassword"
+            android:maxLength="30"
+            android:text="abc"
+            android:maxLines="1"
+
+            android:textColorHint="#B1B1B1"
+
+            android:textCursorDrawable="@drawable/cursorcolor"
+            android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/ivEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_old_password"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_mode_edit_black_24dp"
+                tools:ignore="RtlCompat" />
+        </RelativeLayout>
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            android:id="@+id/tv_NewPassword"
+            style="@style/OpenSans_SemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Password"
+            android:visibility="gone"
+            android:paddingLeft="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"/>
+
+
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/etNewPassword"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                android:backgroundTint="@color/black"
+                android:hint=" New Password"
+                android:inputType="textPassword"
+                android:maxLength="30"
+                android:maxLines="1"
+
+                android:textColorHint="#B1B1B1"
+
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp" />
+
+        <com.oasissnacks.oasissnacks.utils.CustomTextView
+            style="@style/OpenSans_SemiBold"
+            android:id="@+id/tv_ConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm Password"
+            android:paddingLeft="5dp"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"/>
+
+            <com.oasissnacks.oasissnacks.utils.CustomEditText
+                android:id="@+id/etConfirmPassword"
+                style="@style/OpenSans_Regular"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:visibility="gone"
+                android:backgroundTint="@color/black"
+                android:hint=" Confirm Password"
+                android:inputType="textPassword"
+                android:maxLength="30"
+                android:maxLines="1"
+
+                android:textColorHint="#B1B1B1"
+
+                android:textCursorDrawable="@drawable/cursorcolor"
+                android:textSize="14sp" />
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/btn_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:background="@drawable/corner">
+
+            <com.oasissnacks.oasissnacks.utils.CustomTextView
+                android:id="@+id/btnUpdate"
+                style="@style/OpenSans_SemiBold"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:gravity="center"
+                android:text="Update"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
