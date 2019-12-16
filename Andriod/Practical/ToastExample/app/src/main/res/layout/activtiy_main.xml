@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/relativelayout"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvweather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Weather Report"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/etweather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Name of City"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/tvweather"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"/>
+
+    <Button
+        android:id="@+id/btnLogIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etweather"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="5dp"
+        android:text="Get Status"
+        android:textAllCaps="false"/>
+
+    <EditText
+        android:id="@+id/etresponse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/btnLogIn"/>
+
+
+    <TextView
+        android:id="@+id/tvmovie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Movie Report"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_below="@id/etresponse"/>
+
+    <Button
+        android:id="@+id/btnMovie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvmovie"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="5dp"
+        android:text="Get Movie"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/etmovieresponse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/btnMovie"/>
+
+
+</RelativeLayout>

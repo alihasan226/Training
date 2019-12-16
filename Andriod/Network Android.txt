@@ -1,0 +1,100 @@
+1:03 PM 11/28/2019 :-----------------------------------------------------
+
+HTTP is the way modern application network. It's how we exchange data and media. Doing HTTP efficiently makes your stuff load faster and saves bandwidth.
+OkHttp is an HTTP client that's efficient by default:
+=> HTTP/2 support allows all request to the same host to share a socket
+=> Connection pooling reduce request latency
+=>Transparent GZIP shrinks download sizes.
+=> Reponse caching avoids the network completely for repeat request.
+
+OkHttp preserves when the network is troublesome; it will sliently recover from common connection problems. If your service has multiple IP address OkHttp will attemp alternate
+
+Calls :------
+The HTTP client's job is to accept your request and produce its responce.
+
+
+Request :------------------
+Each HTTP request contains a URL a method (Like GEt or POST) and a list of headers. Requests may also contain abody a data stream of a specific content type.
+
+
+Response :---------------
+The response answers the request with a code  (like 200 for success or 404 for not found) headers and its own optional body.
+
+when you providing OkHttp with an hTTP request you are describing the request at a high-level.
+
+
+Retrofit :------------------------------
+Retrofit is a type-safe reSt client for android and java which aims to make it easier to consume RESFUL web services. Retrofit 2 directly which has a lot of new features and a
+changed internal API compared to the previous versions.
+
+
+Retrofit 2 by default leverages OkHttp as the networking layer and is build on the top of  it.
+Retrofit automatically serializes the JSON response using POJO (Plain Old Java Object) which must be defined in advanced for the JSON structure. To serialise JSON we need a converter 
+to convert it into Gson first.
+
+The logging intreceptor a log string of the entire response that's returned.
+
+Interceptors are a powerful mechanism present in OkHttp that can monitor rewrite and retry calls.
+
+Interceptor can be majority divided into two categories:
+
+1) Application Interceptors :
+To register an application interceptor we need to call addInterceptor() on OkHttpClient.Builder
+
+2) Network Interceptors:
+To register a Network interceptor invoke addnetworkInterceptor() instead of addInterceptor()
+
+
+importance of the Login Interceptor :---------------------------
+While developing your app and for debugging purpose it's nice to have a log integrated to show request and response information. Since logging isn't integrate  by default
+anymore in Retrofit we need to add logging interceptor for OkHttp . Luckily OkHttp already ships with this interceptor and you need to activate it for your OkHttpClient.
+
+
+HttpLoginInterceptor logininterceptor =new HttpLoginInterceptor();
+
+OkHttpClient.Builder builder=new OkHttpClient.Builder.addInterceptor(logininterceptor);
+
+Retrofit retrofit=new Retrofit.Builder().baseUrl("paste your base Url").addConverterFactory(GsonConverterFactory.create()).client(builder).build();
+
+
+Different Types of the Log Level in Login Interceptor :-----------------------------
+Logging too much information will blow up your Android monitor , that's why OkHttp's logging intercetor has four log level :  NONE, BASIC, HEADERS, BODY
+
+NONE :-------------------------
+No logging 
+Use this log for production environments to enhance your apps performance by skiping any logging operation.
+
+
+BASIC :--------------------------
+using the log level BASIC will only log minimal information about your request .If you're just interested in the request bosy size response bosy size and response status this log level is
+the right  one.
+
+HEADERS :---------------
+Using the HEADERS log level will only log request and response headers.
+
+we use the two header fields Accept and Content-Type to illustrate the output if you define the values yourself.
+
+
+Body :-------------------- 
+Log request and response headers and body
+This is te most complete log level and will print out every related information for your request and response.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

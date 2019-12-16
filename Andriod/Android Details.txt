@@ -113,7 +113,7 @@ Component of RecycleView In Andorid: -------------------------------
 Mainley used component of RecyclerView
 
 1) Layout Manager
-In Android a RecyclerView needs to have a layoutManager and an Adapter to bb instantiated.
+In Android a RecyclerView needs to have a layoutManager and an Adapter to be instantiated.
 It is used to define type of Layout which RecyclerView should use.
 It contain the reference of all view  that are filled by the data of the entry.
 
@@ -149,6 +149,17 @@ RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 // set a LinearLayoutManager with default orientation
 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
+
+@BindView(R.id.recyclerView)
+RecyclerView recyclerView;
+
+LinearLayoutManager linearlayoutmanager;
+
+linearlayoutmanager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.HORIZONTAL,false);	//setting for the Horizontal direction
+recyclerView.setLayoutManager(linearlayoutmanager);
+
+linearlayoutmanager=new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);	//setting for the Vertical direction
+recyclerView.setLayoutManager(linearlayoutmanager);
 
 
 LinearLayoutManager(Context context, int orientation, boolean reverseLayout): In this first parameter is used to set the current context, second is used to set the Layout Orientation 
@@ -234,6 +245,54 @@ Put the xml file inside the <layout></layout> tag.
 </layout>
 
 
+4:32 PM 12/9/2019 Updating data in an Android RecyclerView :-----------------------------
+In  this we are going to learn about how to updating the adapter data in an adnroid recycler view. 
+
+The process of modifyinh the adapter data includes two main steps:
+1) Update the data set
+2) notify the adpter of the changes
+
+
+1) Inserting a Single Item
+String item="Ali"
+int insertindex=2;
+data.add(insertindex,item);
+adapter.notifyItemInserted(insertindex);
+
+
+2) insert multiple items
+
+List<String> new_data=new ArrayList<String>();
+new_data.add("Ali");
+new_data.add("shahid);
+new_data.add("abdul");
+int startindex=2;
+data.add(startindex,new_data);
+adapter.notifyItemRangeChanges(startindex,new_data.size());
+
+
+
+3)  Remove Single Item
+int removeindex=2;
+data.remove(removeindex);
+adapter.notifyItemRemoved(removedindex);
+
+
+4) Remove multiple items
+int startindex=2;
+int endindex=4;
+int count=endindex-startindex;
+data.sublist(startindex,endindex).clear();
+adapter.notifyItemRangedRemoved(startindex,count);
+
+
+5) Remove All items
+data.clear();
+adapter.notifyDataSetChanged();
+
+
+
+
 
 
 3:49 PM 9/23/2019 ButterKnief in Android :------------------------------------
@@ -245,7 +304,7 @@ offered in this article.
 Field and method binding for Andorid views which uses annotation processing to generating boilerplate code for you 
 => Eliminate findView ById calls by using @BindView on fields
 => Group multiple view in a  list or array. Operation on all of them at once with actions setters or properties
-=> Eliminate anonymous inner-classes for listener by annotating methods with @COnClick and others.
+=> Eliminate anonymous inner-classes for listener by annotating methods with @OnClick and others.
 => Eliminate resource looksup by using resources annotations on fields.
 
 
@@ -326,7 +385,7 @@ RESTful API is an application program interface (API) that uses HTTP request to 
 Retrofit is REST Client for Android and Java by Square.It makes it relatively easy to reterive and upload JSON (or other structure data) via a REST based web service.
 In Retrofit you configure which converter is used for the data serialization.
 
-{ Data Serialization is the process of converting structured data to a format that allows sharing or storage of the data ina form that allws recovery of its original structures
+{ Data Serialization is the process of converting structured data to a format that allows sharing or storage of the data ina form that allows recovery of its original structures
 
 
 Retrofit turns your HTTP API into a Java interface.
@@ -639,7 +698,7 @@ Now we need to create an interface to define our different method that will be u
 
 public interface Jsonplaceholder {
 
-	 @POST("posts")				//"post" it is a relative URL in the parenthesis of @POST ( and it is a request method )
+	 @POST("posts")				//"posts" it is a relative URL in the parenthesis of @POST ( and it is a request method )
    	 Call<Post> createPost(@Body Post post);
 
        	 //Call<Post> we get a post back when we execute our post request
@@ -926,6 +985,9 @@ dayofmonth	:--			the initially selected day of month (1-31 depending on the mont
 
 
 App Manifest Overview :---------------------------
+Before the android system can start an app component the system must know that the component exits by reading the app's manifest file, AndroidManifest.xml
+
+The parimary task of  the manifest is to inform the system about the app's components. For example a manifest file can declare an activity as follows:
 
 Every app project must have an AndroidManifest.xml file(with precisely that name) at the root of the project source set.The Manifest declare the essential information about your app to the
 Android build tools Android operating system and Google play.
@@ -1363,6 +1425,7 @@ Bound services run because some other app (or the system) has said that it wants
 3) Broadcast Receiver
 A broadcast receiver is a component that enables the system to deliver events to the app outside of a regular user flow, allowing the app to respond to system-wide broadcast 
 announcements. Because broadcast receivers are another well-defined entry into the app, the system can deliver broadcasts even to apps that aren't currently running.
+Broadcast receiver don't display a user interface they may create a status bar notification to alert the user when a broadcast event occurs
 
 
 4) Content Providers

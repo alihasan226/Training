@@ -1,0 +1,252 @@
+10:38 AM 12/13/2019 Clicking the back button twice to exit an Activity :--------------------------------------------
+
+boolean doubletapback=false;
+@Override
+public void onBackPressed(){
+
+	if(doubletapback){
+		super.onBackPressed();
+		return;
+	}
+
+	this.doubletapback=true;
+	Toast.makeText(getApplicationContext(),"Press back again to Exit",Toast.LENGTH_SHORT).show();
+
+	new Handler().postDelayed(new Runnable(){
+		
+		@Override
+		public void run(){
+			doubletapback=false;
+		}
+	},2000);
+}
+
+
+
+
+2:23 PM 12/12/2019 How to Create Shadow around Layout for Android :------------------------------------------
+we can create shadow  around layout using drawable resource file 
+we will have to make <layer-list> tag in which we will have
+
+<layer-list>
+<item>
+	<!--First item tag will create the shadow around the layout-->
+	<shape>
+		<padding
+			android:paddingTop="..dp"
+			android:paddingBottom:"..dp"
+			android:paddingLeft="..dp"
+			android:paddingRight="..dp"
+		</padding>
+	</shape>
+</item>
+
+<item>
+	<!-- this second tag is use for the designing the parent tag-->
+	<shape>
+		<solid android:color="#ffffff"/>
+		<cornor android:radius="3dp"/>
+	</shape>
+</item>
+</layer-list>
+
+
+
+
+2:35 PM 12/12/2019 Spinner  :------------------
+A view that displays one child at a time and lets the user pick among them. The item in the Spinner come from the Adapter associated with this view.
+
+Display mode for spinner constant values.
+
+There are two mode of the spinner  
+1) dialog mode		=> Spinner options will be presented to the user as a dialog window.
+2) dropdown mode		=> Spinner options will be presented to the user as an inline deopdown anchored to the spinner widget itself.
+
+
+
+5:20 PM 12/9/2019 Android DataBinding :--------------------------------------------------------
+Data binding is general technique that binds data sources from the provider and consumer together and synchronizes them.
+
+What does it offer us?
+1. Make findViewById totally obsolete.
+2. Encourage to separate UI logic and business logic
+3. Make easy to synchronize between data sources and UI elements
+4. Provides a way to bind event listener using lambda or method reference from xml
+5. provides a way to bind customsetter methods or rename setter method of view's attributes.
+
+
+In build gradle file we will add following gradles property which enabled data binding,
+
+android {
+
+	dataBinding {
+		enabled=true
+	}
+}
+
+
+=> in layout file generally we have ViewGroup (Eg.RelativeLayout or LinearLayout) as top in View hierarchy. But here we will make <layout> tag as most parent tag or root tag. After adding
+it build systems
+
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context="com.androidbytes.databindingdemo.MainActivity">
+
+        <TextView
+            android:id="@+id/text_view_occupation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</layout>
+
+
+=> After above step binding class will be generated based on same name of layout file (eg activity_main's binding class will be generated ActivityMainBinding). We can set setContentView
+using DataBindingUtil like:
+
+
+@Override
+protected void onCreate(Bundle saveInstanceState){
+
+	super.onCreate(saveInstanceState);
+
+	ActivityMainBinding binding=DataBindingUtil.setContentView(this,R.layout.activity_main);
+	binding.textViewOccupation.setText("Student");
+}
+
+10:35 AM 11/29/2019 
+
+Floating Action Button :---------------------------------
+A Floating action button (FAB) is a circular button that triggers the primary action in your app's UI.
+A Floating Action button displays the primary action in an application. It is a round icon button that's elevated above other page content. Floating action buttons come in a default and mini
+size. Floating action button provides quick access to important or common action within app.
+
+Add the floating action button to your layout => the following code show how the FloatingActionButton should appear in your layout file.
+
+<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_my_icon"
+        android:contentDescription="@string/submit"
+        android:layout_margin="16dp" />
+
+     
+
+Response to Button taps :-----------------------------
+You can then apply an View.OnClickListener to handle FAB taps. for example the following code displays a Snackbar when the user taps the FAB.
+
+FloatingActionButton fab = findViewById(R.id.fab);
+fab.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+});
+
+
+A FAB should perform a constructive action (such as create, share or explore).
+A FAB should be relevant to the screen on which it appears.
+
+FAB containers come in two sizes ;
+1) Default (56 x 56dp)
+2) Mini (40 x40dp)
+
+A FAB's icon should clearly illustrate its action. A FAB shouldn't contain notification or actions found elsewhere on a screen .
+
+Types of transitions :-------------------------
+
+Speed Dial :-
+When pressed a FAB can display three to six related action in the form of a spped dial.This transition can occur in one of the following ways:
+Upon press the FAB can emit related actions
+Upon press the FAB can transform into menu containing related action (Android only).
+
+
+Snackbar :-----------------------------------------
+Snackbar in android is a new widget introduces with the Material design library as a replacement of a Toast.
+Snackbars provide lightweight feedback about an operation. They show a brief message at the bottom of the screen on mobile and lower left on large devices. Snackbars appear above all 
+screen on mobile and lower left on large device at a time.
+Snackbar should not have more than one action button.
+
+They automatically disapper after timeout or after user interaction elsewhere on the screen particularly after interacton that summon a new user surface or activity.
+
+Difference between Toast and Snackbar
+1) A Toast message can be customised and printed anywhere on the screen but a Snackbar can be only showed in the buttom of the screen.
+2) A Toast message don't have the action button but Snackbar may have action button optionally . Though A Snackbar shouldn't have more than one action button .
+3) Toast message cannot be off until the time limit finish but Snackbar can be swiped off before the time limit.
+
+Snackbars can contain an action which is set via setAction(CharSequence,android.view.View.OnClicklistener)
+
+
+Snackbar snackbar = Snackbar
+        .make(coordinatorLayout, "hello", Snackbar.LENGTH_LONG);
+snackbar.show();
+
+In the above snippet make() method accepts three parameters:
+1) coordinatorLayout :it is the root layout of the activity
+2) hello : this is the message to be appear on snackbar and we can customise it with our own message
+3) Snackbar.LENGTH_LONG: this is last parameter which is the time limit howlong snackbar to be displayed
+
+show() method is used to display the Snackbar on the screen.
+
+
+setAction in Snackbar in android
+
+Snackbar snackbar = Snackbar
+                        .make(coordinatorLayout, "Message is deleted", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Message is restored!", Snackbar.LENGTH_SHORT);
+                                snackbar1.show();
+                            }
+                        });
+
+                snackbar.show();
+
+
+
+
+10:17 AM 12/3/2019  About XML :----------------------
+Using Android'sXML vocabluary you can quickly design UI layout and the screen elements they contain in the same way you can create page in HTML  with a series of nested elements.
+
+Each layout file must contain eactly one root element which must be a View or ViewGroup object. Once you've defined the root elements you can add additional layout object or
+widgets as child elements to gradually build a View hierarchy the defines your layout.
+
+
+
+
+
+java.lang.IndexOutOfBoundsException: Invalid index 612, size is 50
+        at java.util.ArrayList.throwIndexOutOfBoundsException(ArrayList.java:260)
+        at java.util.ArrayList.get(ArrayList.java:313)
+        at com.oasissnacks.oasissnacks.acitivity.ChangeAddressActivity.onClick(ChangeAddressActivity.java:278)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
