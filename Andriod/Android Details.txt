@@ -1,7 +1,6 @@
 
 
 
-
 4:21 PM 10/15/2019  NestedScrollView :---------------------------------
 NestedScrollView is just like Scrollview but it support scting as both a nested scrolling parent and child on both new and old verison of Android.nested scrolling is enabled by default.
 NestedScrollView is a widget that are used when we want to implement scrollable view inside another scrollble view.
@@ -67,7 +66,7 @@ In Recycler view android provides a lot of new features which are not present in
 
 Important Notes :---------------------
 InAndroid RecyclerView provides an ability to implement the horizontal, vertical and Expandable List. it is mainly used when we have data collection whose elements can be change
-at runtime based on user action or any network events. For using this wifget we have to specify the Adapter and Layout Manager.
+at runtime based on user action or any network events. For using this widget we have to specify the Adapter and Layout Manager.
 
 
 Baisc RecyclerView XML Code :
@@ -133,24 +132,8 @@ LinearLayoutManager(Context context): It is used to create a vertical LinearLayo
 Example: In below code snippet we show how to use this constructor in Android.
 
 
-With Default Vertical Orientation:
 
-// get the reference of RecyclerView
-RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-// set a LinearLayoutManager with default orientation
-LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
-
-
-With Horizontal Orientation :---
-
-/ get the reference of RecyclerView
-RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-// set a LinearLayoutManager with default orientation
-LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-recyclerView.setLayoutManager(linearLayoutManager); // set LayoutManager to RecyclerView
-
-@BindView(R.id.recyclerView)
+@BindView(R.id.recyclerView)		//Binding the view of the recycler view in main class.
 RecyclerView recyclerView;
 
 LinearLayoutManager linearlayoutmanager;
@@ -183,29 +166,16 @@ public constructor for GridLayoutManger :-
 GridLayoutManager (Context context, int spanCount): It is used to create a Vertical GridLayoutManager. In this constructor first parameter is used to set the current context and second
 parameter is used to set the spanCount means the number of columns in the grid.
 
-With Default Vertical Orientation:
-// get the reference of RecyclerView
-RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-// set a GridLayoutManager with default vertical orientation and 3 number of columns
-GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
-recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
-
-
-With Horizontal Orientation:
-
-// get the reference of RecyclerView
-RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-// set a GridLayoutManager with 3 number of columns
-GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
-gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL); // set Horizontal Orientation
-recyclerView.setLayoutManager(gridLayoutManager); // set LayoutManager to RecyclerView
 
 
 GridLayoutManager (Context context, int spanCount, int orientation, boolean reverseLayout): 
 In this constructor first parameter is used to set the current context, second parameter is used to set the spanCount means the number of columns in the grid, third parameter is used to
 set the Layout Orientation should be vertical or horizontal and last param is a boolean value when sets to true layout from end to start means grids are arranged from end to start.
 
-// get the reference of RecyclerView
+
+GridLayoutManager gridLayoutManager=new GridLayoutManager(getApplicationContext() , 2 , GridLayoutManager.VERTICAL , false);
+
+// Get the Reference of RecyclerView
 RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 // set a GridLayoutManager with 3 number of columns , horizontal gravity and false value for reverseLayout to show the items from start to end
 GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),3,LinearLayoutManager.HORIZONTAL,false);
@@ -295,7 +265,7 @@ adapter.notifyDataSetChanged();
 
 
 
-3:49 PM 9/23/2019 ButterKnief in Android :------------------------------------
+3:49 PM 9/23/2019   ButterKnief in Android :------------------------------------
 
 Android ButterKnife library is a view injection library that injects views into android activity / fragments using annotations. For example, @BindView annotation avoids using 
 findViewById() method by automatically type casting the view element. Not just view binding, butterknife provides lot of other useful options like binding strings, dimens, drawables, click events and lot more. We’ll see brief about every component 
@@ -341,11 +311,11 @@ Example
 Pagination  In Reycler View
 ---------------------------------------
 In Android Pagination is very common feature for heavy-data apps today. It's also called endless scrolling or infinite scrolling.
-You want to fectch all the data of feed at once and bind with the view , which could-time consuming and your app will appears as running slow.
+You want to fetch all the data of feed at once and bind with the view , which could-time consuming and your app will appears as running slow.
 Pagination is used for better user experience and resource management.
 It has broken down a list of content  into equal smaller pieces loaded one at a time.
 
-Pagination (Endless Scrolling or Infinite Scrolling) is a festure common in content-heavy apps. It breaks down a list of content into equal smaller pieces loaded one at a time.
+Pagination (Endless Scrolling or Infinite Scrolling) is a feature common in content-heavy apps. It breaks down a list of content into equal smaller pieces loaded one at a time.
 How to implement Pagination with RecyclerView, handle adapter changes with new data, error handling and more.
 
 

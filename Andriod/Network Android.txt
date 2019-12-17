@@ -1,5 +1,18 @@
 1:03 PM 11/28/2019 :-----------------------------------------------------
 
+To Work with  Retrofit we will have to work with Retrofit you basically need the following three classes:
+=> Model class which is used as a JSON model
+=> INterfaces that define the possible HTTP operations
+=> Retrofit.Builder class- Instanceswhich uses the interface and the Builder API to allow defining the URL end point for the HTTP.
+
+Every method of an interface represents one possible API calls. It must have a HTTPannotation (GET,POST etc) to specify the request type and the relative URL. The return value 
+wrap the response in a call object with the type of the expexted result.
+
+	@GET("user")
+	Call<List<User>> getUsers();
+
+
+
 HTTP is the way modern application network. It's how we exchange data and media. Doing HTTP efficiently makes your stuff load faster and saves bandwidth.
 OkHttp is an HTTP client that's efficient by default:
 => HTTP/2 support allows all request to the same host to share a socket
