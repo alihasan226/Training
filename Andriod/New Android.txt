@@ -125,6 +125,8 @@ protected void onCreate(Bundle saveInstanceState){
 	binding.textViewOccupation.setText("Student");
 }
 
+
+
 10:35 AM 11/29/2019 
 
 Floating Action Button :---------------------------------
@@ -225,15 +227,6 @@ Using Android'sXML vocabluary you can quickly design UI layout and the screen el
 
 Each layout file must contain eactly one root element which must be a View or ViewGroup object. Once you've defined the root elements you can add additional layout object or
 widgets as child elements to gradually build a View hierarchy the defines your layout.
-
-
-
-
-
-java.lang.IndexOutOfBoundsException: Invalid index 612, size is 50
-        at java.util.ArrayList.throwIndexOutOfBoundsException(ArrayList.java:260)
-        at java.util.ArrayList.get(ArrayList.java:313)
-        at com.oasissnacks.oasissnacks.acitivity.ChangeAddressActivity.onClick(ChangeAddressActivity.java:278)
 
 
 
