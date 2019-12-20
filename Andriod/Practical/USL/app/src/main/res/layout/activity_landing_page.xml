@@ -50,6 +50,19 @@
                             android:textColor="@color/white" />
 
 
+                        <Button
+                            android:id="@+id/btn_Submit"
+                            android:layout_width="55dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:textAllCaps="false"
+                            android:text="Submit"
+                            android:textSize="14sp"
+                            android:textColor="@color/white"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/button_background"/>
+
                     </RelativeLayout>
 
                 </androidx.appcompat.widget.Toolbar>
@@ -125,6 +138,56 @@
                         <include
                             android:id="@+id/tablelayout"
                             layout="@layout/layout_table" />
+
+                        <LinearLayout
+                            android:id="@+id/rlSubOutPut"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:weightSum="1"
+                            android:background="@color/white"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="10dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.83"
+                                android:background="@drawable/input_background">
+
+                                <TextView
+                                    android:id="@+id/tvSubtotal1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text=""
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/white"/>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.166"
+                                android:background="@drawable/input_background">
+
+                                <TextView
+                                    android:id="@+id/tvSubtotal2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text=""
+                                    android:textStyle="bold"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/white"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 

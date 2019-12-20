@@ -51,7 +51,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_login:
                 if(validation())
                 {
-                    Toast.makeText(getApplicationContext(),"Working",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this,LandingPageActivity.class));
                 }
                 break;
