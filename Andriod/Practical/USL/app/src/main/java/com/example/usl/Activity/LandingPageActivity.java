@@ -1,14 +1,11 @@
-package com.example.usl;
+package com.example.usl.Activity;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.TextureView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,15 +19,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
-import androidx.databinding.adapters.AdapterViewBindingAdapter;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import java.text.SimpleDateFormat;
+import com.example.usl.R;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.Delayed;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,17 +54,20 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
     @BindView(R.id.tvSubtotal1)
     TextView tvSubtotal1;
     @BindView(R.id.tvSubtotal2)
-    TextView TvSubtotal2;
+    TextView tvSubtotal2;
+    @BindView(R.id.tvtotal)
+    TextView tvTotal;
 
+    public int subtotal_column1=0,subtotal_column2=0;
     public TextView tvRow1,tvRow2,tvRow3,tvRow4,tvRow5,tvRow6,tvRow7,tvRow8,tvRow9,tvRow10,tvRow11,tvRow12;
 
     public int c1r1,c1r2,c1r3,c1r4,c1r5,c1r6,c1r7,c1r8,c1r9,c1r10,c2r1,c2r2,c2r3,c2r4,c2r5,c2r6,c2r7,c2r8,c2r9,c2r10,c3r1,c3r2,c3r3,c3r4,c3r5,c3r6,c3r7,c3r8,c3r9,c3r10,c4r1,c4r2,c4r3,c4r4,c4r5,c4r6,c4r7,c4r8,c4r9,c4r10
     ,c5r1,c5r2,c5r3,c5r4,c5r5,c5r6,c5r7,c5r8,c5r9,c5r10,c6r1,c6r2,c6r3,c6r4,c6r5,c6r6,c6r7,c6r8,c6r9,c6r10,c7r1,c7r2,c7r3,c7r4,c7r5,c7r6,c7r7,c7r8,c7r9,c7r10,c8r1,c8r2,c8r3,c8r4,c8r5,c8r6,c8r7,c8r8,c8r9,c8r10
     ,c9r1,c9r2,c9r3,c9r4,c9r5,c9r6,c9r7,c9r8,c9r9,c9r10,c10r1,c10r2,c10r3,c10r4,c10r5,c10r6,c10r7,c10r8,c10r9,c10r10,c11r1,c11r2,c11r3,c11r4,c11r5,c11r6,c11r7,c11r8,c11r9,c11r10,c12r1,c12r2,c12r3,c12r4,c12r5,c12r6,c12r7,c12r8,c12r9,c12r10;
-
     public int TC1,TC2,TC3,TC4,TC5,TC6,TC7,TC8,TC9,TC10,TC11,TC12;
-
     public int col1,col2,col3,col4,col5,col6,col7,col8,col9,col10,col11,col12;
+    public int C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12;
+    public int subCol1,subCol2,subCol3,subCol4,subCol5,subCol6,subCol7,subCol8,subCol9,subCol10,subCol11,subCol12;
 
     public EditText tvOne,tvTwo,tvThree,tvFour,tvFive,tvSix,tvSeven,tvEight,tvNine,tvTen,tveleven,tvtwlve,tvthiteen,tvFourteen,tvFifteen,tvSixteen,tvSeventeen,tvEighteen,tvNinteen,tvTwenty
     ,tvtevone,tvtwentytwo,tvtwentythree,tvtwentyFour,tvtwentyFive,tvtwentySix,tvtwentySeven,tvtwentyEight,tvtwentyNine,tvThirty,tvthiryone,tvthirtytwo,tvthirtythree,tvthirtyFour,tvthirtyFive
@@ -79,6 +77,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
     public final Handler handler=new Handler();
     public int Count[][]=new int[10][12];
+    public int SubCount[]=new int[10];
+    public int SubCount1[]=new int[2];
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,11 +90,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             list.add(game[i]);
         }
 
-        for(int i=0;i<10;i++){
-            for(int j=0;j<12;j++){
-                Count[i][j]=0;
-            }
-        }
+
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -129,6 +125,18 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onResume(){
         super.onResume();
+        for(int i=0;i<10;i++){
+            for(int j=0;j<12;j++){
+                Count[i][j]=0;
+            }
+        }
+        for(int i=0;i<10;i++){
+            SubCount[i]=0;
+        }
+        for(int i=0;i<2;i++){
+            SubCount1[i]=0;
+        }
+
         col1=1;
         col2=2;
         col3=3;
@@ -141,7 +149,19 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
         col10=10;
         col11=11;
         col12=12;
-
+        C1=1;
+        C2=2;
+        C3=3;
+        C4=4;
+        C5=5;
+        C6=6;
+        C7=7;
+        C8=8;
+        C9=9;
+        C10=10;
+        C11=11;
+        C12=12;
+        
         setItemView();
         setTextValue();
     }
@@ -154,18 +174,12 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
         final DatePickerDialog   mDatePicker =new DatePickerDialog(LandingPageActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                tvDate.setText(new StringBuilder().append(selectedday).append("-").append(selectedmonth+1).append("-").append(selectedyear));
+                tvDate.setText(new StringBuilder().append(selectedday).append("/").append(selectedmonth+1).append("/").append(selectedyear));
             }
         },year, month, day);
-        mDatePicker.getDatePicker().setMaxDate(System.currentTimeMillis());
+        mDatePicker.getDatePicker().setMinDate(mcurrentDate.getTimeInMillis());
         mDatePicker.show();
     }
-
-    @OnClick(R.id.btn_Submit)
-    public void submit(){
-        Toast.makeText(getApplicationContext(),"Need to Submit",Toast.LENGTH_SHORT).show();
-    }
-
 
 
     public void setItemView() {
@@ -278,15 +292,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r1,0,0,col1);
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c1r1,0,0,col1);
-                }
-            };
         });
 
         tvTwo.addTextChangedListener(new TextWatcher() {
@@ -303,15 +311,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r2,1,0,col1);
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c1r2,1,0,col1);
-                }
-            };
         });
 
         tvThree.addTextChangedListener(new TextWatcher() {
@@ -328,15 +330,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r3,2,0,col1);
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c1r3,2,0,col1);
-                }
-            };
         });
 
         tvFour.addTextChangedListener(new TextWatcher() {
@@ -353,15 +349,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r4,3,0,col1);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c1r4,3,0,col1);
-                }
-            };
+
         });
 
         tvFive.addTextChangedListener(new TextWatcher() {
@@ -378,13 +370,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r5,4,0,col1);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c1r5,4,0,col1);
                 }
             };
         });
@@ -403,13 +395,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r6,5,0,col1);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c1r6,5,0,col1);
                 }
             };
         });
@@ -428,13 +420,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r7,6,0,col1);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c1r7,6,0,col1);
                 }
             };
         });
@@ -453,13 +445,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r8,7,0,col1);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c1r8,7,0,col1);
                 }
             };
         });
@@ -478,13 +470,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r9,8,0,col1);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c1r9,8,0,col1);
                 }
             };
         });
@@ -503,13 +495,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c1r10,9,0,col1);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c1r10,9,0,col1);
                 }
             };
         });
@@ -528,13 +520,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r1,0,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r1,0,1,col2);
                 }
             };
         });
@@ -553,13 +545,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r2,1,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r2,1,1,col2);
                 }
             };
         });
@@ -578,13 +570,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r3,2,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r3,2,1,col2);
                 }
             };
         });
@@ -603,13 +595,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r4,3,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r4,3,1,col2);
                 }
             };
         });
@@ -628,13 +620,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r5,4,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r5,4,1,col2);
                 }
             };
         });
@@ -653,13 +645,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r6,5,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r6,5,1,col2);
                 }
             };
         });
@@ -678,13 +670,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r7,6,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r7,6,1,col2);
                 }
             };
         });
@@ -703,13 +695,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r8,7,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r8,7,1,col2);
                 }
             };
         });
@@ -728,13 +720,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r9,8,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r9,8,1,col2);
                 }
             };
         });
@@ -752,19 +744,19 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c2r10,9,1,col2);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c2r10,9,1,col2);
                 }
             };
         });
 
         //Column 3
-        tvtwlve.addTextChangedListener(new TextWatcher() {
+        tvtevone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
@@ -777,13 +769,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r1,0,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r1,0,2,col3);
                 }
             };
         });
@@ -801,13 +793,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r2,1,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r2,1,2,col3);
                 }
             };
         });
@@ -825,13 +817,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r3,2,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r3,2,2,col3);
                 }
             };
         });
@@ -849,13 +841,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r4,3,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r4,3,2,col3);
                 }
             };
         });
@@ -873,13 +865,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r5,4,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r5,4,2,col3);
                 }
             };
         });
@@ -897,13 +889,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r6,5,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r6,5,2,col3);
                 }
             };
         });
@@ -921,13 +913,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r7,6,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r7,6,2,col3);
                 }
             };
         });
@@ -945,13 +937,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r8,7,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r8,7,2,col3);
                 }
             };
         });
@@ -969,13 +961,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r9,8,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r9,8,2,col3);
                 }
             };
         });
@@ -993,13 +985,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c3r10,9,2,col3);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c3r10,9,2,col3);
                 }
             };
         });
@@ -1018,13 +1010,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r1,0,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r1,0,3,col4);
                 }
             };
         });
@@ -1042,13 +1034,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r2,1,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r2,1,3,col4);
                 }
             };
         });
@@ -1066,13 +1058,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r3,2,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r3,2,3,col4);
                 }
             };
         });
@@ -1090,13 +1082,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r4,3,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r4,3,3,col4);
                 }
             };
         });
@@ -1114,13 +1106,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r5,4,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r5,4,3,col4);
                 }
             };
         });
@@ -1138,13 +1130,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r6,5,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r6,5,3,col4);
                 }
             };
         });
@@ -1162,13 +1154,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r7,6,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r7,6,3,col4);
                 }
             };
         });
@@ -1186,13 +1178,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r8,7,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r8,7,3,col4);
                 }
             };
         });
@@ -1210,13 +1202,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r9,8,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r9,8,3,col4);
                 }
             };
         });
@@ -1234,13 +1226,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c4r10,9,3,col4);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c4r10,9,3,col4);
                 }
             };
         });
@@ -1260,13 +1252,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r1,0,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r1,0,4,col5);
                 }
             };
         });
@@ -1284,13 +1276,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r2,1,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r2,1,4,col5);
                 }
             };
         });
@@ -1308,13 +1300,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r3,2,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r3,2,4,col5);
                 }
             };
         });
@@ -1332,13 +1324,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r4,3,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r4,3,4,col5);
                 }
             };
         });
@@ -1356,13 +1348,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r5,4,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r5,4,4,col5);
                 }
             };
         });
@@ -1380,13 +1372,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r6,5,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r6,5,4,col5);
                 }
             };
         });
@@ -1404,13 +1396,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r7,6,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r7,6,4,col5);
                 }
             };
         });
@@ -1428,13 +1420,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r8,7,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r8,7,4,col5);
                 }
             };
         });
@@ -1452,13 +1444,13 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r9,8,4,col5);
+
+
             }
             Runnable userStopTyping=new Runnable() {
                 @Override
                 public void run() {
-                    Column(c5r9,8,4,col5);
                 }
             };
         });
@@ -1476,15 +1468,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c5r10,9,4,col5);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c5r10,9,4,col5);
-                }
-            };
+
         });
 
         //Column 6
@@ -1501,15 +1489,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r1,0,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r1,0,5,col6);
-                }
-            };
+
         });
 
         tvFiftytwo.addTextChangedListener(new TextWatcher() {
@@ -1525,15 +1509,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r2,1,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r2,1,5,col6);
-                }
-            };
+
         });
 
         tvFiftythree.addTextChangedListener(new TextWatcher() {
@@ -1549,15 +1529,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r3,2,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r3,2,5,col6);
-                }
-            };
+
         });
 
         tvFiftyFour.addTextChangedListener(new TextWatcher() {
@@ -1573,15 +1549,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r4,3,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r4,3,5,col6);
-                }
-            };
+
         });
 
         tvFiftyFive.addTextChangedListener(new TextWatcher() {
@@ -1597,15 +1569,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r5,4,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r5,4,5,col6);
-                }
-            };
+
         });
 
         tvFiftySix.addTextChangedListener(new TextWatcher() {
@@ -1621,15 +1589,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r6,5,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r6,5,5,col6);
-                }
-            };
+
         });
 
         tvFiftySeven.addTextChangedListener(new TextWatcher() {
@@ -1645,15 +1609,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r7,6,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r7,6,5,col6);
-                }
-            };
+
         });
 
         tvFiftyEight.addTextChangedListener(new TextWatcher() {
@@ -1669,15 +1629,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r8,7,5,col6);
+
+
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r8,7,5,col6);
-                }
-            };
+
         });
 
         tvFiftyNine.addTextChangedListener(new TextWatcher() {
@@ -1693,15 +1649,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r9,8,5,col6);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r9,8,5,col6);
-                }
-            };
         });
 
         tvSixty.addTextChangedListener(new TextWatcher() {
@@ -1717,15 +1666,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c6r10,9,5,col6);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c6r10,9,5,col6);
-                }
-            };
         });
 
         //Column 7
@@ -1742,15 +1684,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r1,0,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r1,0,6,col7);
-                }
-            };
         });
 
         tvSixtyTwo.addTextChangedListener(new TextWatcher() {
@@ -1766,15 +1701,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r2,1,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r2,1,6,col7);
-                }
-            };
         });
 
         tvSixtyThree.addTextChangedListener(new TextWatcher() {
@@ -1790,15 +1718,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r3,2,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r3,2,6,col7);
-                }
-            };
+
         });
 
         tvSixtyFour.addTextChangedListener(new TextWatcher() {
@@ -1814,15 +1736,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r4,3,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r4,3,6,col7);
-                }
-            };
         });
 
         tvSixtyFive.addTextChangedListener(new TextWatcher() {
@@ -1838,15 +1753,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r5,4,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r5,4,6,col7);
-                }
-            };
         });
 
         tvSixtySix.addTextChangedListener(new TextWatcher() {
@@ -1862,15 +1770,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r6,5,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r6,5,6,col7);
-                }
-            };
         });
 
         tvSixtySeven.addTextChangedListener(new TextWatcher() {
@@ -1886,15 +1787,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r7,6,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r7,6,6,col7);
-                }
-            };
         });
 
         tvSixtyEight.addTextChangedListener(new TextWatcher() {
@@ -1910,15 +1804,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r8,7,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r8,7,6,col7);
-                }
-            };
         });
 
         tvSixtyNine.addTextChangedListener(new TextWatcher() {
@@ -1934,15 +1821,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r9,8,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r9,8,6,col7);
-                }
-            };
         });
 
         tvSeventy.addTextChangedListener(new TextWatcher() {
@@ -1958,15 +1838,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c7r10,9,6,col7);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c7r10,9,6,col7);
-                }
-            };
         });
 
         //Column 8
@@ -1984,15 +1857,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r1,0,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r1,0,7,col8);
-                }
-            };
         });
 
         tvSeventytwo.addTextChangedListener(new TextWatcher() {
@@ -2008,15 +1874,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r2,1,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r2,1,7,col8);
-                }
-            };
         });
 
         tvSeventythree.addTextChangedListener(new TextWatcher() {
@@ -2032,15 +1891,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r3,2,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r3,2,7,col8);
-                }
-            };
         });
 
         tvSeventyFour.addTextChangedListener(new TextWatcher() {
@@ -2056,15 +1908,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r4,3,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r4,3,7,col8);
-                }
-            };
         });
 
         tvSeventyFive.addTextChangedListener(new TextWatcher() {
@@ -2080,15 +1925,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r5,4,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r5,4,7,col8);
-                }
-            };
         });
 
         tvSeventySix.addTextChangedListener(new TextWatcher() {
@@ -2104,15 +1942,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r6,5,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r6,5,7,col8);
-                }
-            };
         });
 
         tvSeventySeven.addTextChangedListener(new TextWatcher() {
@@ -2128,15 +1959,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r7,6,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r7,6,7,col8);
-                }
-            };
         });
 
         tvSeventyEight.addTextChangedListener(new TextWatcher() {
@@ -2152,15 +1976,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r8,7,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r8,7,7,col8);
-                }
-            };
         });
 
         tvSeventyNine.addTextChangedListener(new TextWatcher() {
@@ -2176,15 +1993,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r9,8,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r9,8,7,col8);
-                }
-            };
         });
 
         tvEighty.addTextChangedListener(new TextWatcher() {
@@ -2200,15 +2010,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c8r10,9,7,col8);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c8r10,9,7,col8);
-                }
-            };
+
         });
 
         //Column 9
@@ -2225,15 +2029,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r1,0,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r1,0,8,col9);
-                }
-            };
         });
 
         tvEightyTwo.addTextChangedListener(new TextWatcher() {
@@ -2249,15 +2046,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r2,1,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r2,1,8,col9);
-                }
-            };
         });
 
         tvEightyThree.addTextChangedListener(new TextWatcher() {
@@ -2273,15 +2063,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r3,2,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r3,2,8,col9);
-                }
-            };
         });
 
         tvEightyFour.addTextChangedListener(new TextWatcher() {
@@ -2297,15 +2080,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r4,3,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r4,3,8,col9);
-                }
-            };
         });
 
         tvEightyFive.addTextChangedListener(new TextWatcher() {
@@ -2321,15 +2097,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r5,4,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r5,4,8,col9);
-                }
-            };
         });
 
         tvEightySix.addTextChangedListener(new TextWatcher() {
@@ -2345,15 +2114,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r6,5,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r6,5,8,col9);
-                }
-            };
         });
 
         tvEightySeven.addTextChangedListener(new TextWatcher() {
@@ -2369,15 +2131,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r7,6,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r7,6,8,col9);
-                }
-            };
         });
 
         tvEightyEight.addTextChangedListener(new TextWatcher() {
@@ -2393,15 +2148,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r8,7,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r8,7,8,col9);
-                }
-            };
         });
 
         tvEightyNine.addTextChangedListener(new TextWatcher() {
@@ -2417,15 +2165,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r9,8,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r9,8,8,col9);
-                }
-            };
         });
 
         tvNinty.addTextChangedListener(new TextWatcher() {
@@ -2441,15 +2182,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c9r10,9,8,col9);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c9r10,9,8,col9);
-                }
-            };
         });
 
         //Column 10
@@ -2466,15 +2200,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r1,0,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r1,0,9,col10);
-                }
-            };
         });
 
         tvNintytwo.addTextChangedListener(new TextWatcher() {
@@ -2490,15 +2217,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r2,1,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r2,1,9,col10);
-                }
-            };
         });
 
         tvNintythree.addTextChangedListener(new TextWatcher() {
@@ -2514,15 +2234,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r3,2,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r3,2,9,col10);
-                }
-            };
         });
 
         tvNintyFour.addTextChangedListener(new TextWatcher() {
@@ -2538,15 +2251,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r4,3,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r4,3,9,col10);
-                }
-            };
         });
 
         tvNintyFive.addTextChangedListener(new TextWatcher() {
@@ -2562,15 +2268,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r5,4,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r5,4,9,col10);
-                }
-            };
         });
 
         tvNintySix.addTextChangedListener(new TextWatcher() {
@@ -2586,15 +2285,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r6,5,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r6,5,9,col10);
-                }
-            };
         });
 
         tvNintySeven.addTextChangedListener(new TextWatcher() {
@@ -2610,15 +2302,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r7,6,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r7,6,9,col10);
-                }
-            };
         });
 
         tvNintyEight.addTextChangedListener(new TextWatcher() {
@@ -2634,15 +2319,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r8,7,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r8,7,9,col10);
-                }
-            };
         });
 
         tvNintyNine.addTextChangedListener(new TextWatcher() {
@@ -2658,15 +2336,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r9,8,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r9,8,9,col10);
-                }
-            };
         });
 
         tvHundrad.addTextChangedListener(new TextWatcher() {
@@ -2682,15 +2353,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c10r10,9,9,col10);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c10r10,9,9,col10);
-                }
-            };
         });
 
         //Column 11
@@ -2707,15 +2371,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r1,0,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r1,0,10,col11);
-                }
-            };
         });
 
         tvd2.addTextChangedListener(new TextWatcher() {
@@ -2731,15 +2388,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r2,1,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r2,1,10,col11);
-                }
-            };
         });
 
         tvd3.addTextChangedListener(new TextWatcher() {
@@ -2755,15 +2405,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r3,2,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r3,2,10,col11);
-                }
-            };
+
         });
 
         tvd4.addTextChangedListener(new TextWatcher() {
@@ -2779,15 +2423,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r4,3,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r4,3,10,col11);
-                }
-            };
         });
 
         tvd5.addTextChangedListener(new TextWatcher() {
@@ -2803,15 +2440,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r5,4,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r5,4,10,col11);
-                }
-            };
         });
 
         tvd6.addTextChangedListener(new TextWatcher() {
@@ -2827,15 +2457,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r6,5,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r6,5,10,col11);
-                }
-            };
         });
 
         tvd7.addTextChangedListener(new TextWatcher() {
@@ -2851,15 +2474,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r7,6,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r7,6,10,col11);
-                }
-            };
         });
 
         tvd8.addTextChangedListener(new TextWatcher() {
@@ -2875,15 +2491,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r8,7,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r8,7,10,col11);
-                }
-            };
         });
 
         tvd9.addTextChangedListener(new TextWatcher() {
@@ -2899,15 +2508,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r9,8,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r9,8,10,col11);
-                }
-            };
         });
 
         tvd10.addTextChangedListener(new TextWatcher() {
@@ -2923,15 +2525,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c11r10,9,10,col11);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c11r10,9,10,col11);
-                }
-            };
         });
         //Column 12
         tvh1.addTextChangedListener(new TextWatcher() {
@@ -2947,15 +2542,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r1,0,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r1,0,11,col12);
-                }
-            };
         });
 
         tvh2.addTextChangedListener(new TextWatcher() {
@@ -2971,15 +2559,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r2,1,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r2,1,11,col12);
-                }
-            };
         });
 
         tvh3.addTextChangedListener(new TextWatcher() {
@@ -2995,15 +2576,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r3,2,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r3,2,11,col12);
-                }
-            };
         });
 
         tvh4.addTextChangedListener(new TextWatcher() {
@@ -3019,15 +2593,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r4,3,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r4,3,11,col12);
-                }
-            };
         });
 
         tvh5.addTextChangedListener(new TextWatcher() {
@@ -3043,15 +2610,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r5,4,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r5,4,11,col12);
-                }
-            };
         });
 
         tvh6.addTextChangedListener(new TextWatcher() {
@@ -3067,15 +2627,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r6,5,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r6,5,11,col12);
-                }
-            };
         });
 
         tvh7.addTextChangedListener(new TextWatcher() {
@@ -3091,15 +2644,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r7,6,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r7,6,11,col12);
-                }
-            };
         });
 
         tvh8.addTextChangedListener(new TextWatcher() {
@@ -3115,15 +2661,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r8,7,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r8,7,11,col12);
-                }
-            };
         });
 
         tvh9.addTextChangedListener(new TextWatcher() {
@@ -3139,15 +2678,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r9,8,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r9,8,11,col12);
-                }
-            };
         });
 
         tvh10.addTextChangedListener(new TextWatcher() {
@@ -3163,20 +2695,12 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(userStopTyping,2000);
+                Column(c12r10,9,11,col12);
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                    Column(c12r10,9,11,col12);
-                }
-            };
         });
     }
 
     public void Column(int temp,int row,int column,int col){
-
         if(col==1){
             TC1=0;
             Count[row][column]=temp;
@@ -3184,6 +2708,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                 TC1+=Count[i][col-1];
             }
             tvRow1.setText(String.valueOf(TC1));
+            SubColumn(Integer.parseInt(tvRow1.getText().toString()),0,C1);
         }else if(col==2){
             TC2=0;
             Count[row][column]=temp;
@@ -3191,6 +2716,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                 TC2+=Count[i][col-1];
             }
             tvRow2.setText(String.valueOf(TC2));
+            SubColumn(Integer.parseInt(tvRow2.getText().toString()),1,C2);
         }else if(col==3){
             TC3=0;
             Count[row][column]=temp;
@@ -3198,62 +2724,63 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                 TC3+=Count[i][col-1];
             }
             tvRow3.setText(String.valueOf(TC3));
+            SubColumn(Integer.parseInt(tvRow3.getText().toString()),2,C3);
         }else if(col==4){
             TC4=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC4+=Count[i][col-1];
             }
-
             tvRow4.setText(String.valueOf(TC4));
+            SubColumn(Integer.parseInt(tvRow4.getText().toString()),3,C4);
         }else if(col==5){
             TC5=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC5+=Count[i][col-1];
             }
-
             tvRow5.setText(String.valueOf(TC5));
+            SubColumn(Integer.parseInt(tvRow5.getText().toString()),4,C5);
         }else if(col==6){
             TC6=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC6+=Count[i][col-1];
             }
-
             tvRow6.setText(String.valueOf(TC6));
+            SubColumn(Integer.parseInt(tvRow6.getText().toString()),5,C6);
         }else if(col==7){
             TC7=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC7+=Count[i][col-1];
             }
-
             tvRow7.setText(String.valueOf(TC7));
+            SubColumn(Integer.parseInt(tvRow7.getText().toString()),6,C7);
         }else if(col==8){
             TC8=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC8+=Count[i][col-1];
             }
-
             tvRow8.setText(String.valueOf(TC8));
+            SubColumn(Integer.parseInt(tvRow8.getText().toString()),7,C8);
         }else if(col==9){
             TC9=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC9+=Count[i][col-1];
             }
-
             tvRow9.setText(String.valueOf(TC9));
+            SubColumn(Integer.parseInt(tvRow9.getText().toString()),8,C9);
         }else if(col==10){
             TC10=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC10+=Count[i][col-1];
             }
-
             tvRow10.setText(String.valueOf(TC10));
+            SubColumn(Integer.parseInt(tvRow10.getText().toString()),9,C10);
         }else if(col==11){
             TC11=0;
             Count[row][column]=temp;
@@ -3261,18 +2788,71 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                 TC11+=Count[i][col-1];
             }
             tvRow11.setText(String.valueOf(TC11));
+            SubColumn(Integer.parseInt(tvRow11.getText().toString()),0,C11);
         }else if(col==12){
             TC12=0;
             Count[row][column]=temp;
             for(int i=0;i<10;i++){
                 TC12+=Count[i][col-1];
             }
-
             tvRow12.setText(String.valueOf(TC12));
+            SubColumn(Integer.parseInt(tvRow12.getText().toString()),1,C12);
         }
-
     }
 
+    public void SubColumn(int temp,int row,int COL){
+        if(COL==1){
+            SubCount[row]=temp;
+        }else if(COL==2){
+            SubCount[row]=temp;
+        }else if(COL==3){
+            SubCount[row]=temp;
+        }else if(COL==4){
+            SubCount[row]=temp;
+        }else if(COL==5){
+            SubCount[row]=temp;
+        }else if(COL==6){
+            SubCount[row]=temp;
+        }else if(COL==7){
+            SubCount[row]=temp;
+        }else if(COL==8){
+            SubCount[row]=temp;
+        }else if(COL==9){
+            SubCount[row]=temp;
+        }else if(COL==10){
+            SubCount[row]=temp;
+        }else if(COL==11){
+            SubCount1[row]=temp;
+        }else if(COL==12){
+            SubCount1[row]=temp;
+        }
+        print_total();
+    }
+
+    public void print_total(){
+        int temp=0;
+        for(int i=0;i<10;i++){
+            temp+=SubCount[i];
+        }
+        subtotal_column1=temp;
+        tvSubtotal1.setText(String.valueOf(temp));
+        temp=0;
+        for(int i=0;i<2;i++){
+            temp+=SubCount1[i];
+        }
+        subtotal_column2=temp;
+        tvSubtotal2.setText(String.valueOf(temp));
+        tvTotal.setText(String.valueOf(subtotal_column1+subtotal_column2));
+    }
+
+    @OnClick(R.id.btn_Submit)
+    public void submit(){
+        if(Integer.parseInt(tvTotal.getText().toString())>0){
+            Toast.makeText(getApplicationContext(),"Welcome to USL",Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(),"Please Enter Token",Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -3284,6 +2864,5 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                 break;
         }
     }
-
 
 }

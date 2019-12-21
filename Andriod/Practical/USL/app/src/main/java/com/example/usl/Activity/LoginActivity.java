@@ -1,4 +1,4 @@
-package com.example.usl;
+package com.example.usl.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.usl.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_login:
                 if(validation())
                 {
-                    startActivity(new Intent(LoginActivity.this,LandingPageActivity.class));
+                    startActivity(new Intent(LoginActivity.this, LandingPageActivity.class));
                 }
                 break;
             default:
@@ -65,10 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             etUserID.setError("Required Field");
             etUserID.requestFocus();
             return false;
-        }else if(TextUtils.isDigitsOnly(etUserID.getText())){
-            etUserID.setError("Invalid UserID");
-            etUserID.requestFocus();
-            return  false;
         }else if(TextUtils.isEmpty(etPassword.getText())){
             etPassword.setError("Required Field");
             etPassword.requestFocus();
