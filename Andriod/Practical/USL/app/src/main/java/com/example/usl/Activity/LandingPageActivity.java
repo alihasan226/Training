@@ -161,7 +161,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
         C10=10;
         C11=11;
         C12=12;
-        
+
         setItemView();
         setTextValue();
     }
