@@ -25,6 +25,7 @@ import com.example.usl.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -79,18 +80,19 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
     public int Count[][]=new int[10][12];
     public int SubCount[]=new int[10];
     public int SubCount1[]=new int[2];
+    public HashMap<String,Integer> hashNumber;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_page);
         ButterKnife.bind(this);
+        hashNumber= new HashMap<String, Integer>();
         rlDatePicker.setOnClickListener(this);
         list=new ArrayList<String>();
         for(int i=0;i<game.length;i++){
             list.add(game[i]);
         }
-
-
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
@@ -120,6 +122,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
         tvRow11=table.findViewById(R.id.tvRow11);
         tvRow12=table.findViewById(R.id.tvRow12);
 
+        //tvOne.addTextChangedListener(new CustomTextWatcher(tvOne));
+
     }
 
     @Override
@@ -137,50 +141,12 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             SubCount1[i]=0;
         }
 
-        col1=1;
-        col2=2;
-        col3=3;
-        col4=4;
-        col5=5;
-        col6=6;
-        col7=7;
-        col8=8;
-        col9=9;
-        col10=10;
-        col11=11;
-        col12=12;
-        C1=1;
-        C2=2;
-        C3=3;
-        C4=4;
-        C5=5;
-        C6=6;
-        C7=7;
-        C8=8;
-        C9=9;
-        C10=10;
-        C11=11;
-        C12=12;
+        col1=1;col2=2;col3=3;col4=4;col5=5;col6=6;col7=7;col8=8;col9=9;col10=10;col11=11;col12=12;
+        C1=1;C2=2;C3=3;C4=4;C5=5;C6=6;C7=7;C8=8;C9=9;C10=10;C11=11;C12=12;
 
         setItemView();
         setTextValue();
     }
-
-    public void datepicker(){
-        Calendar mcurrentDate=Calendar.getInstance();
-        int year=mcurrentDate.get(Calendar.YEAR);
-        int month=mcurrentDate.get(Calendar.MONTH);
-        int day=mcurrentDate.get(Calendar.DAY_OF_MONTH);
-        final DatePickerDialog   mDatePicker =new DatePickerDialog(LandingPageActivity.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                tvDate.setText(new StringBuilder().append(selectedday).append("/").append(selectedmonth+1).append("/").append(selectedyear));
-            }
-        },year, month, day);
-        mDatePicker.getDatePicker().setMinDate(mcurrentDate.getTimeInMillis());
-        mDatePicker.show();
-    }
-
 
     public void setItemView() {
         tvOne = table.findViewById(R.id.tvOne);tvTwo = table.findViewById(R.id.tvTwo);tvThree = table.findViewById(R.id.tvThree);tvFour = table.findViewById(R.id.tvFour);
@@ -269,13 +235,63 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
         tvNintyNine = table.findViewById(R.id.tvNintyNine);
         tvHundrad = table.findViewById(R.id.tvHundrad);
 
-         tvd1 = table.findViewById(R.id.tvd1);
-         tvd2 = table.findViewById(R.id.tvd2);
-         tvd3 = table.findViewById(R.id.tvd3);
-         tvd4 = table.findViewById(R.id.tvd4);  tvd5 = table.findViewById(R.id.tvd5);  tvd6 = table.findViewById(R.id.tvd6);  tvd7 = table.findViewById(R.id.tvd7);  tvd8 = table.findViewById(R.id.tvd8);  tvd9 = table.findViewById(R.id.tvd9);  tvd10 = table.findViewById(R.id.tvd10);
-          tvh1 = table.findViewById(R.id.tvh1);  tvh2 = table.findViewById(R.id.tvh2);  tvh3 = table.findViewById(R.id.tvh3);  tvh4 = table.findViewById(R.id.tvh4);  tvh5 = table.findViewById(R.id.tvh5);  tvh6 = table.findViewById(R.id.tvh6);  tvh7 = table.findViewById(R.id.tvh7);  tvh8 = table.findViewById(R.id.tvh8);  tvh9 = table.findViewById(R.id.tvh9);  tvh10 = table.findViewById(R.id.tvh10);
+        tvd1 = table.findViewById(R.id.tvd1);
+        tvd2 = table.findViewById(R.id.tvd2);
+        tvd3 = table.findViewById(R.id.tvd3);
+        tvd4 = table.findViewById(R.id.tvd4);  tvd5 = table.findViewById(R.id.tvd5);  tvd6 = table.findViewById(R.id.tvd6);  tvd7 = table.findViewById(R.id.tvd7);  tvd8 = table.findViewById(R.id.tvd8);  tvd9 = table.findViewById(R.id.tvd9);  tvd10 = table.findViewById(R.id.tvd10);
+        tvh1 = table.findViewById(R.id.tvh1);  tvh2 = table.findViewById(R.id.tvh2);  tvh3 = table.findViewById(R.id.tvh3);  tvh4 = table.findViewById(R.id.tvh4);  tvh5 = table.findViewById(R.id.tvh5);  tvh6 = table.findViewById(R.id.tvh6);  tvh7 = table.findViewById(R.id.tvh7);  tvh8 = table.findViewById(R.id.tvh8);  tvh9 = table.findViewById(R.id.tvh9);  tvh10 = table.findViewById(R.id.tvh10);
 
     }
+
+    /*private class CustomTextWatcher implements TextWatcher{
+
+        private int temp=0;
+        private View view;
+        private CustomTextWatcher(View view){
+            this.view=view;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if(String.valueOf(charSequence).equalsIgnoreCase("")){
+                temp=0;
+            }else{
+                temp=Integer.parseInt(charSequence.toString());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            switch (view.getId()){
+                case R.id.tvOne:
+                    hashNumber.put("1",temp);
+                    Column(temp,0,0,col1);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }*/
+
+    public void datepicker(){
+        Calendar mcurrentDate=Calendar.getInstance();
+        int year=mcurrentDate.get(Calendar.YEAR);
+        int month=mcurrentDate.get(Calendar.MONTH);
+        int day=mcurrentDate.get(Calendar.DAY_OF_MONTH);
+        final DatePickerDialog   mDatePicker =new DatePickerDialog(LandingPageActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                tvDate.setText(new StringBuilder().append(selectedday).append("/").append(selectedmonth+1).append("/").append(selectedyear));
+            }
+        },year, month, day);
+        mDatePicker.getDatePicker().setMinDate(mcurrentDate.getTimeInMillis());
+        mDatePicker.show();
+    }
+
+
+
 
     public void setTextValue(){
 
@@ -292,8 +308,8 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("1",c1r1);
                 Column(c1r1,0,0,col1);
-
             }
         });
 
@@ -308,11 +324,10 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r2=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("2",c1r2);
                 Column(c1r2,1,0,col1);
-
             }
         });
 
@@ -327,11 +342,10 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r3=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("3",c1r3);
                 Column(c1r3,2,0,col1);
-
             }
         });
 
@@ -346,14 +360,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r4=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("4",c1r4);
                 Column(c1r4,3,0,col1);
-
-
             }
-
         });
 
         tvFive.addTextChangedListener(new TextWatcher() {
@@ -367,18 +378,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r5=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("5",c1r5);
                 Column(c1r5,4,0,col1);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvSix.addTextChangedListener(new TextWatcher() {
@@ -392,18 +396,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r6=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("6",c1r6);
                 Column(c1r6,5,0,col1);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvSeven.addTextChangedListener(new TextWatcher() {
@@ -417,18 +414,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r7=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("7",c1r7);
                 Column(c1r7,6,0,col1);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvEight.addTextChangedListener(new TextWatcher() {
@@ -442,18 +432,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r8=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("8",c1r8);
                 Column(c1r8,7,0,col1);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvNine.addTextChangedListener(new TextWatcher() {
@@ -467,18 +450,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r9=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("9",c1r9);
                 Column(c1r9,8,0,col1);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvTen.addTextChangedListener(new TextWatcher() {
@@ -492,18 +468,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c1r10=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("10",c1r10);
                 Column(c1r10,9,0,col1);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         //Column 2
@@ -520,15 +489,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("11",c2r1);
                 Column(c2r1,0,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwlve.addTextChangedListener(new TextWatcher() {
@@ -542,18 +505,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c2r2=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("12",c2r2);
                 Column(c2r2,1,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthiteen.addTextChangedListener(new TextWatcher() {
@@ -570,15 +526,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("13",c2r3);
                 Column(c2r3,2,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourteen.addTextChangedListener(new TextWatcher() {
@@ -592,18 +542,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c2r4=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("14",c2r4);
                 Column(c2r4,3,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFifteen.addTextChangedListener(new TextWatcher() {
@@ -617,18 +560,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c2r5=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("15",c2r5);
                 Column(c2r5,4,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvSixteen.addTextChangedListener(new TextWatcher() {
@@ -642,18 +578,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c2r6=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("16",c2r6);
                 Column(c2r6,5,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvSeventeen.addTextChangedListener(new TextWatcher() {
@@ -667,18 +596,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c2r7=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("17",c2r7);
                 Column(c2r7,6,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvEighteen.addTextChangedListener(new TextWatcher() {
@@ -692,18 +614,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c2r8=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("18",c2r8);
                 Column(c2r8,7,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvNinteen.addTextChangedListener(new TextWatcher() {
@@ -717,18 +632,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
                     c2r9=Integer.parseInt(charSequence.toString());
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("19",c2r9);
                 Column(c2r9,8,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvTwenty.addTextChangedListener(new TextWatcher() {
@@ -744,17 +652,10 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("20",c2r10);
                 Column(c2r10,9,1,col2);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
-
         //Column 3
         tvtevone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -769,15 +670,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("21",c3r1);
                 Column(c3r1,0,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentytwo.addTextChangedListener(new TextWatcher() {
@@ -793,15 +688,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("22",c3r2);
                 Column(c3r2,1,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentythree.addTextChangedListener(new TextWatcher() {
@@ -817,15 +706,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("23",c3r3);
                 Column(c3r3,2,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentyFour.addTextChangedListener(new TextWatcher() {
@@ -841,15 +724,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("24",c3r4);
                 Column(c3r4,3,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentyFive.addTextChangedListener(new TextWatcher() {
@@ -865,15 +742,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("25",c3r5);
                 Column(c3r5,4,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentySix.addTextChangedListener(new TextWatcher() {
@@ -889,15 +760,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("26",c3r6);
                 Column(c3r6,5,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentySeven.addTextChangedListener(new TextWatcher() {
@@ -913,15 +778,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("27",c3r7);
                 Column(c3r7,6,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentyEight.addTextChangedListener(new TextWatcher() {
@@ -937,15 +796,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("28",c3r8);
                 Column(c3r8,7,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvtwentyNine.addTextChangedListener(new TextWatcher() {
@@ -961,15 +814,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("29",c3r9);
                 Column(c3r9,8,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvThirty.addTextChangedListener(new TextWatcher() {
@@ -985,15 +832,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("30",c3r10);
                 Column(c3r10,9,2,col3);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         //Column 4
@@ -1010,15 +851,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("31",c4r1);
                 Column(c4r1,0,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtytwo.addTextChangedListener(new TextWatcher() {
@@ -1034,15 +869,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("32",c4r2);
                 Column(c4r2,1,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtythree.addTextChangedListener(new TextWatcher() {
@@ -1058,15 +887,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("33",c4r3);
                 Column(c4r3,2,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtyFour.addTextChangedListener(new TextWatcher() {
@@ -1082,15 +905,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("34",c4r4);
                 Column(c4r4,3,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtyFive.addTextChangedListener(new TextWatcher() {
@@ -1106,15 +923,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("35",c4r5);
                 Column(c4r5,4,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtySix.addTextChangedListener(new TextWatcher() {
@@ -1130,15 +941,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("36",c4r6);
                 Column(c4r6,5,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtySeven.addTextChangedListener(new TextWatcher() {
@@ -1154,15 +959,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("37",c4r7);
                 Column(c4r7,6,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtyEight.addTextChangedListener(new TextWatcher() {
@@ -1178,15 +977,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("38",c4r8);
                 Column(c4r8,7,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvthirtyNine.addTextChangedListener(new TextWatcher() {
@@ -1202,15 +995,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("39",c4r9);
                 Column(c4r9,8,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourty.addTextChangedListener(new TextWatcher() {
@@ -1226,19 +1013,12 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("40",c4r10);
                 Column(c4r10,9,3,col4);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         //Column 5
-
         tvFourtyone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -1252,15 +1032,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("41",c5r1);
                 Column(c5r1,0,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFortytwo.addTextChangedListener(new TextWatcher() {
@@ -1276,15 +1050,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("42",c5r2);
                 Column(c5r2,1,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourtythree.addTextChangedListener(new TextWatcher() {
@@ -1300,15 +1068,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("43",c5r3);
                 Column(c5r3,2,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourtyFour.addTextChangedListener(new TextWatcher() {
@@ -1324,15 +1086,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("44",c5r4);
                 Column(c5r4,3,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourtyFive.addTextChangedListener(new TextWatcher() {
@@ -1348,15 +1104,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("45",c5r5);
                 Column(c5r5,4,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourtySix.addTextChangedListener(new TextWatcher() {
@@ -1372,15 +1122,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("46",c5r6);
                 Column(c5r6,5,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourtySeven.addTextChangedListener(new TextWatcher() {
@@ -1396,15 +1140,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("47",c5r7);
                 Column(c5r7,6,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFortyEight.addTextChangedListener(new TextWatcher() {
@@ -1420,15 +1158,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("48",c5r8);
                 Column(c5r8,7,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFourtyNine.addTextChangedListener(new TextWatcher() {
@@ -1444,15 +1176,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("49",c5r9);
                 Column(c5r9,8,4,col5);
-
-
             }
-            Runnable userStopTyping=new Runnable() {
-                @Override
-                public void run() {
-                }
-            };
         });
 
         tvFifty.addTextChangedListener(new TextWatcher() {
@@ -1468,13 +1194,10 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("50",c5r10);
                 Column(c5r10,9,4,col5);
-
-
             }
-
         });
-
         //Column 6
         tvFiftyone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1489,11 +1212,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("51",c6r1);
                 Column(c6r1,0,5,col6);
-
-
             }
-
         });
 
         tvFiftytwo.addTextChangedListener(new TextWatcher() {
@@ -1509,11 +1230,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("52",c6r2);
                 Column(c6r2,1,5,col6);
-
-
             }
-
         });
 
         tvFiftythree.addTextChangedListener(new TextWatcher() {
@@ -1529,11 +1248,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("53",c6r3);
                 Column(c6r3,2,5,col6);
-
-
             }
-
         });
 
         tvFiftyFour.addTextChangedListener(new TextWatcher() {
@@ -1549,11 +1266,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("54",c6r4);
                 Column(c6r4,3,5,col6);
-
-
             }
-
         });
 
         tvFiftyFive.addTextChangedListener(new TextWatcher() {
@@ -1569,11 +1284,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("55",c6r5);
                 Column(c6r5,4,5,col6);
-
-
             }
-
         });
 
         tvFiftySix.addTextChangedListener(new TextWatcher() {
@@ -1589,11 +1302,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("56",c6r6);
                 Column(c6r6,5,5,col6);
-
-
             }
-
         });
 
         tvFiftySeven.addTextChangedListener(new TextWatcher() {
@@ -1609,11 +1320,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("57",c6r7);
                 Column(c6r7,6,5,col6);
-
-
             }
-
         });
 
         tvFiftyEight.addTextChangedListener(new TextWatcher() {
@@ -1629,11 +1338,9 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("58",c6r8);
                 Column(c6r8,7,5,col6);
-
-
             }
-
         });
 
         tvFiftyNine.addTextChangedListener(new TextWatcher() {
@@ -1649,6 +1356,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("59",c6r9);
                 Column(c6r9,8,5,col6);
             }
         });
@@ -1666,10 +1374,10 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("60",c6r10);
                 Column(c6r10,9,5,col6);
             }
         });
-
         //Column 7
         tvSixtyone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1684,6 +1392,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("61",c7r1);
                 Column(c7r1,0,6,col7);
             }
         });
@@ -1701,6 +1410,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("62",c7r2);
                 Column(c7r2,1,6,col7);
             }
         });
@@ -1718,6 +1428,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("63",c7r3);
                 Column(c7r3,2,6,col7);
             }
 
@@ -1736,6 +1447,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("64",c7r4);
                 Column(c7r4,3,6,col7);
             }
         });
@@ -1753,6 +1465,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("65",c7r5);
                 Column(c7r5,4,6,col7);
             }
         });
@@ -1770,6 +1483,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("66",c7r6);
                 Column(c7r6,5,6,col7);
             }
         });
@@ -1787,6 +1501,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("67",c7r7);
                 Column(c7r7,6,6,col7);
             }
         });
@@ -1804,6 +1519,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("68",c7r8);
                 Column(c7r8,7,6,col7);
             }
         });
@@ -1821,6 +1537,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("69",c7r9);
                 Column(c7r9,8,6,col7);
             }
         });
@@ -1838,12 +1555,11 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("70",c7r10);
                 Column(c7r10,9,6,col7);
             }
         });
-
         //Column 8
-
         tvSeventyone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -1857,6 +1573,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("71",c8r1);
                 Column(c8r1,0,7,col8);
             }
         });
@@ -1874,6 +1591,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("72",c8r2);
                 Column(c8r2,1,7,col8);
             }
         });
@@ -1891,6 +1609,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("73",c8r3);
                 Column(c8r3,2,7,col8);
             }
         });
@@ -1908,6 +1627,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("74",c8r4);
                 Column(c8r4,3,7,col8);
             }
         });
@@ -1925,6 +1645,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("75",c8r5);
                 Column(c8r5,4,7,col8);
             }
         });
@@ -1942,6 +1663,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("76",c8r6);
                 Column(c8r6,5,7,col8);
             }
         });
@@ -1959,6 +1681,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("77",c8r7);
                 Column(c8r7,6,7,col8);
             }
         });
@@ -1976,6 +1699,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("78",c8r8);
                 Column(c8r8,7,7,col8);
             }
         });
@@ -1993,6 +1717,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("79",c8r9);
                 Column(c8r9,8,7,col8);
             }
         });
@@ -2010,6 +1735,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("80",c8r10);
                 Column(c8r10,9,7,col8);
             }
 
@@ -2029,6 +1755,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("81",c9r1);
                 Column(c9r1,0,8,col9);
             }
         });
@@ -2046,6 +1773,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("82",c9r2);
                 Column(c9r2,1,8,col9);
             }
         });
@@ -2063,6 +1791,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("83",c9r3);
                 Column(c9r3,2,8,col9);
             }
         });
@@ -2080,6 +1809,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("84",c9r4);
                 Column(c9r4,3,8,col9);
             }
         });
@@ -2097,6 +1827,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("85",c9r5);
                 Column(c9r5,4,8,col9);
             }
         });
@@ -2114,6 +1845,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("86",c9r6);
                 Column(c9r6,5,8,col9);
             }
         });
@@ -2131,6 +1863,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("87",c9r7);
                 Column(c9r7,6,8,col9);
             }
         });
@@ -2148,6 +1881,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("88",c9r8);
                 Column(c9r8,7,8,col9);
             }
         });
@@ -2165,6 +1899,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("89",c9r9);
                 Column(c9r9,8,8,col9);
             }
         });
@@ -2182,6 +1917,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("90",c9r10);
                 Column(c9r10,9,8,col9);
             }
         });
@@ -2200,6 +1936,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("91",c10r1);
                 Column(c10r1,0,9,col10);
             }
         });
@@ -2217,6 +1954,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("92",c10r2);
                 Column(c10r2,1,9,col10);
             }
         });
@@ -2234,6 +1972,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("93",c10r3);
                 Column(c10r3,2,9,col10);
             }
         });
@@ -2251,6 +1990,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("94",c10r4);
                 Column(c10r4,3,9,col10);
             }
         });
@@ -2268,6 +2008,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("95",c10r5);
                 Column(c10r5,4,9,col10);
             }
         });
@@ -2285,6 +2026,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("96",c10r6);
                 Column(c10r6,5,9,col10);
             }
         });
@@ -2302,6 +2044,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("97",c10r7);
                 Column(c10r7,6,9,col10);
             }
         });
@@ -2319,6 +2062,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("98",c10r8);
                 Column(c10r8,7,9,col10);
             }
         });
@@ -2336,6 +2080,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("99",c10r9);
                 Column(c10r9,8,9,col10);
             }
         });
@@ -2353,6 +2098,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("100",c10r10);
                 Column(c10r10,9,9,col10);
             }
         });
@@ -2371,6 +2117,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d1",c11r1);
                 Column(c11r1,0,10,col11);
             }
         });
@@ -2388,6 +2135,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d2",c11r2);
                 Column(c11r2,1,10,col11);
             }
         });
@@ -2405,6 +2153,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d3",c11r3);
                 Column(c11r3,2,10,col11);
             }
 
@@ -2423,6 +2172,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d4",c11r4);
                 Column(c11r4,3,10,col11);
             }
         });
@@ -2440,6 +2190,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d5",c11r5);
                 Column(c11r5,4,10,col11);
             }
         });
@@ -2457,6 +2208,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d6",c11r6);
                 Column(c11r6,5,10,col11);
             }
         });
@@ -2474,6 +2226,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d7",c11r7);
                 Column(c11r7,6,10,col11);
             }
         });
@@ -2491,6 +2244,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d8",c11r8);
                 Column(c11r8,7,10,col11);
             }
         });
@@ -2508,6 +2262,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d9",c11r9);
                 Column(c11r9,8,10,col11);
             }
         });
@@ -2525,6 +2280,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("d10",c11r10);
                 Column(c11r10,9,10,col11);
             }
         });
@@ -2542,6 +2298,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h1",c12r1);
                 Column(c12r1,0,11,col12);
             }
         });
@@ -2559,6 +2316,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h2",c12r2);
                 Column(c12r2,1,11,col12);
             }
         });
@@ -2576,6 +2334,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h3",c12r3);
                 Column(c12r3,2,11,col12);
             }
         });
@@ -2593,6 +2352,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h4",c12r4);
                 Column(c12r4,3,11,col12);
             }
         });
@@ -2610,6 +2370,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h5",c12r5);
                 Column(c12r5,4,11,col12);
             }
         });
@@ -2627,6 +2388,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h6",c12r6);
                 Column(c12r6,5,11,col12);
             }
         });
@@ -2644,6 +2406,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h7",c12r7);
                 Column(c12r7,6,11,col12);
             }
         });
@@ -2661,6 +2424,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h8",c12r8);
                 Column(c12r8,7,11,col12);
             }
         });
@@ -2678,6 +2442,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h9",c12r9);
                 Column(c12r9,8,11,col12);
             }
         });
@@ -2695,6 +2460,7 @@ public class LandingPageActivity extends AppCompatActivity implements View.OnCli
             }
             @Override
             public void afterTextChanged(Editable editable) {
+                hashNumber.put("h10",c12r10);
                 Column(c12r10,9,11,col12);
             }
         });

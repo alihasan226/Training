@@ -10,6 +10,7 @@ public class Preferences {
     Context _context;
     int PRIVATE_MODE = 0;
     private static final String PREF_NAME = "usl";
+    private static final String  AUTH_TOKEN ="auth_token";
     private static Preferences instance;
 
     private Preferences(Context context) {
@@ -25,4 +26,13 @@ public class Preferences {
         return instance;
     }
 
+    public void setAuthToken(String authToken){
+        editor.putString(AUTH_TOKEN,authToken);
+        editor.commit();
+    }
+
+    public String getAuthToken(){
+        return pref.getString(AUTH_TOKEN,"");
+
+    }
 }

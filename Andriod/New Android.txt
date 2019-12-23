@@ -233,6 +233,27 @@ widgets as child elements to gradually build a View hierarchy the defines your l
 
 
 
+10:44 AM 12/23/2019 Android IntentService using BroadcastReceiver   :-------------------------------------------------------------
+
+We've discussed Android Service in earlier tutorial. An IntentService extends the Service class.
+Both Services and IntentSerivce are used to run operation that do not need a UI.
+An IntentService is used to rund data sequentially. Each time you call that operation would be added into the queue.
+
+Android IntentService vs Service :------------------------------
+
+A Service is invoked using startService()
+=> A service can be invoked from any thread.
+=> A service runs background operations on the Main Thread of the application by default. Hence it can block your application's UI.
+=> A service invoked multiple times would create multiple instance
+=> A service needs to be stopped using stopSelf() or stopService()
+=> Android service can run  paralle
+
+
+Synchronous and ASynchronous Request in Android :-------------------------
+When you asynchronous it means not in the foreground (it does not block the user interface while it accomplishes the given task) on the other hand synchronous means in the foreground
+while your application execute thin
+
+
 
 
 

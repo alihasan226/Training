@@ -26,7 +26,6 @@ public class ApiCallBack<T> implements  Callback<T>{
 
         @Override
         public void onFailure(Call<T> call, Throwable t) {
-
             EventBus.getDefault().post(Cv.TIMEOUT);
         }
 }

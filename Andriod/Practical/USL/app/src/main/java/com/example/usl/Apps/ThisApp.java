@@ -55,12 +55,19 @@ public class ThisApp extends Application {
         client.addInterceptor(chain -> {
             Request.Builder builder = chain.request().newBuilder()
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("Accept", "application/vnd.oasissnacks_backend.v1");
-            if (Preferences.getInstance(this)) {
+                    .addHeader("Accept", "application/vnd.usl_backend.v1");
+            if (Preferences.getInstance(this).getAuthToken().equalsIgnoreCase("")) {
+                str = "";
+                builder .addHeader("Authorization", "");
 
             } else {
 
+                str = "Bearer " + Preferences.getInstance(this).getAuthToken();
+                builder  .addHeader("Authorization", str);
+
             }
+
+            //String token = LocalRepositories.getAppUser(this).auth_token;
 
             return chain.proceed(builder.build());
         });
