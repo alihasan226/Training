@@ -256,11 +256,68 @@ while your application execute thin
 
 
 
+=> Display AlertDialog box in Android
+
+we can use an AlertDialog for this and construct one using its Builder class. The Example below uses the defaut constructor that takes only in a context since the dialog will iintent
+the proper theme from the Context. but there's also a constructor that allows you to specify a specific theme resource as the second parameter if you desire to do so.
+
+new AlertDialog.Builder(context)
+    .setTitle("Delete entry")
+    .setMessage("Are you sure you want to delete this entry?")
+
+    // Specifying a listener allows you to take an action before dismissing the dialog.
+    // The dialog is automatically dismissed when a dialog button is clicked.
+    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) { 
+            // Continue with delete operation
+        }
+     })
+
+    // A null listener allows the button to dismiss the dialog and take no further action.
+    .setNegativeButton(android.R.string.no, null)
+    .setIcon(android.R.drawable.ic_dialog_alert)
+    .show();
 
 
 
 
+CustomAlert Dialog in Android :---------------------
+
+        Dialog dialog = new Dialog(context,R.drawable.design);
+        dialog.setCanceledOnTouchOutSide(false);
+        dialog.setContentView(R.layout.dialog);
+
+        TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
+        text.setText(msg);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_dialog);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
 
 
+
+=> Method To Detect SoftKeyboard is Open or Not
+
+RelativeLayout rootView = (RelativeLayout) findViewById(R.id.addresses_confirm_root_view);
+
+    rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int heightDiff = rootView.getRootView().getHeight() - rootView.getHeight();
+
+                if (heightDiff > 100) { 
+                    Log.e("MyActivity", "keyboard opened");
+                } else { 
+                    Log.e("MyActivity", "keyboard closed");
+                }
+            }
+        });
 
 

@@ -1,7 +1,163 @@
+10:50 AM 1/14/2020 WebView in Android :---------------------------------------------
+WebView object allow you to display web content as part of your activity layout but lack some of the features of fully developed browsers. A WebView is useful when you need
+increased control over the UI adavanced configuration oprions that will allow you to embed you to web pages in a specially designed environemnt for your app.
+
+
+Android WebView is used to display HTML in an android app. We can use android WebView to load HTML page into android app.
+In such cases WebView will be the more appropriate widget as it handle a much wider range of HTML tags. WebView can also handle CSS and JavaScript which Html.forHtml() would simply ignore.
+
+Still WebView comes with its own set of cons such as it's much expensive widget to use in terms of memory consumption than a TextView. The reason for this increased memory is because WebView is powered by WebKit/Blink that are open Web rendering engine to power content in browser like
+chrome.
+
+
+=> Android WebView component is inserted into the XML layout file fo rthe layout we want the WebView to be displayed in.
+<WebView
+        android:id="@+id/webview"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+WebView component is initialized in hte MainActivity using its id defined in the activity_main.xml
+
+WebView webView=(WebView)findViewById(R.id.webview);
+
+
+=> Android WebView loadUrl
+Once we've obtained a reference to the WebView we can configure it and load URLs via HTTP. WebView loadUrl() method is used to load the URL into the WebView as shown below.
+
+webView.loadUrl("www.berylSystems.com");
+
+1) Support Javascript : JavaScript is by default turned off in WebView widgets. hence web pages containing javascript references won't work properly. To enable java script the  following
+snippet needs to be called on the WebView instance.
+
+	getSetting().setJavaScriptEnabled(true);
+
+2) Adding Internet Permission.
+
+3) Support Image Loading
+
+	webView.getSetting().setLoadsImageAutomatically(true);
+
+4) Setting ScrollBarStyle
+	
+webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+
+
+
+10:28 AM 1/14/2020  Android naming convention :---------------------------------
+ 
+=> Non-public , non-static field names start with m
+=> Static field names start with s
+=> Other field start with a lower case letter
+=> Public static final field (constant) are ALL_CAPS_WITH_UNDERSCROES
+
+
+=> Naming convention for XML files:
+activity_<ACTIVITY NAME>.xml  for all activities
+dialog_<DIALOG NAME>.xml for all custom dialogs
+row_<LIST_NAME>.xml for custom row for listview
+fragment_<FRAGMENT_NAME>.xml for all fragments
+
+=> Naming convention for component/widget in xml files:
+All components for X activity must start with the activity name all component should have prefix or short name like btn  for   button.  For example name for login activity component
+should be like following.
+
+activity_login_btn_login
+activity_login_et_username
+activity_login_et_password
+
+
+=> Short name for the Major component
+
+Button 		btn
+EditText 		et
+TextView		tv
+ProgressBar	pb
+CheckBox	chk
+RadioButton	rb
+ToggleButton	tb
+Spinner		spn
+Menu		mnu
+ListView		lv
+RecyclerView	rv
+GalleryView	gv
+LinearLayout	ll
+RelativeLayout	rl
+RadioGroup	rg
+FrameLayout	fl
+TableLayout	tl
+Table Row	tr
+Grid Layout	gl
+ImageView	iv
+ImageButton	ib
+Switch		sw
+WebView		wv
+ExpandableList	el
+ScrollView	sv
+Horizontal Scroll	hs
+Video View	 vv
+
+Include		ic
+Fragment		fr
+CustomView	cv
+
+
+
+
+
+
+3:07 PM 1/13/2020 ViewPager :---------------------------------------------
+Layout manager that allows the user to flip left and right through pages of data. We can supply an implementation of a Page Adapter to generate the pages that the view shows.
+
+ViewPager is most often used in conjuction with Fragment, which is convenient way to supply and manage the lifecycle of each page.There are standard adapters implemented for using
+fragment with the ViewPager, which cover the most common use cases. These are FragmentPagerAdapter and FragmentStatePagerAdapter each of these classes have code showing how
+to build a full user interface with them.
+
+
+Steps For Implementing ViewPager :
+There are three important steps to implement ViewPager:
+1) A layout( that contains ViewPager) for the MainActivity
+2) FragmentPagerAdapter/ fragmentStatePagerAdapter class which control the fragments to shown on pages swipes.
+
+
+
+
+
+
+
+2:55 PM 1/13/2020 HorizontalScrollView :-------------------------------
+
+Layout container for a view hierarchy that can be scrolled by the user, allowing it to be larger than the physical display. A HorizontalScrollview is Framelayout meaning you should place
+one child in it containing the entire contents to scroll; this child may itself be a layout manager with a complex hierarchy of objects. A child that is often used is a LinearLayout in a horizontal
+orientation, presenting a horizontal array of top-level items that the user can scroll through
+
+HorizontalScrollView only supports horizontal scrolling.For vertical scrolling use either ScrollView or ListView.
+
+<HorizontalScrollView
+        android:id="@+id/horizontalScrollView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding" >
+
+       <LinearLayout
+        android:id="@+id/shapeLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" >
+
+        </LinearLayout>
+
+</HorizontalScrollView>
+
+
+
 
 
 
 4:21 PM 10/15/2019  NestedScrollView :---------------------------------
+
 NestedScrollView is just like Scrollview but it support scting as both a nested scrolling parent and child on both new and old verison of Android.nested scrolling is enabled by default.
 NestedScrollView is a widget that are used when we want to implement scrollable view inside another scrollble view.
 
@@ -922,6 +1078,7 @@ To customize what type of view is used for the data object override getView(int,
 
 
 Spinner :-----------------------------------
+
 Spinner provides a quick way to select one value from a  set. In the default state a spinner shows its currently selected value. Touching the spinner displays a dropdown menu with all the 
 other available values from which the user can select a new one.
 
@@ -955,6 +1112,7 @@ dayofmonth	:--			the initially selected day of month (1-31 depending on the mont
 
 
 App Manifest Overview :---------------------------
+
 Before the android system can start an app component the system must know that the component exits by reading the app's manifest file, AndroidManifest.xml
 
 The parimary task of  the manifest is to inform the system about the app's components. For example a manifest file can declare an activity as follows:
@@ -1892,18 +2050,22 @@ Cloneable => A class implements the Cloneable interface to indicate to the Objec
 
 An Intent is an abstract description of an operation to be performed. It can be used with
 Intents are asynchronus message which allow Android component to request functionality from other component of the Android System.
+An Intent provides  a facility for performing late runtime binding  between the code in different applications. Its most significant use is in the launching of activities, where it can be thought
+of as the glue between activities. It is basically a passive data structure holding an abstract decription of an action to be perfromed.
 
 startActivity(Intent) 	=> to launched an Activity
 broadcastIntent	=> to send it to any interested  BroadcastReceiver components
 startService(Intent)	/ bindService(Intent, ServiceConnection, int)	=> to communicate with background.
 
 Intent has been used to call another acitivity
+
 Its most significant use  is in the launching of activites, where it can be throught of as the glue between activites.
 It is basically a passive data structure holding an abstract description of an action to be performed.
 
 
 
 Intent Structure :--------------
+
 The primary pieces of information in an intent are :
 
 1) Action	:- the general action to be performed such as  ACTION_VIEW,  ACTION_EDIT,  ACTION_MAIN
@@ -1916,7 +2078,7 @@ Some of the Example of action/data pair are: --------
 2) ACTION_DIAL tel:123	=> display the phone dialer with the given number filled in 
 
 
-Inaddition to these primary attributes there are number of secondary attribute that you can also include with an intent:-
+In addition to these primary attributes there are number of secondary attribute that you can also include with an intent:-
 
 3) Category	:- gives additional information about the action to execute. For example CATEGORY_LAUNCHER means it should appear in the Launcher as a top-level application.
 
@@ -1927,6 +2089,24 @@ Inaddition to these primary attributes there are number of secondary attribute t
 
 6) Extras		:- this is a Bundle of any additional information.this can be used to provide extended information to the component.
 		For example if we have a action to send an e-mail message we could include extra pieces of data here to supply a subject body etc.
+
+
+
+Example :-
+Bundle bundle=new Bundle();
+bundle.putString("Key","value");
+Intent intent=new Intent(FirstActivity.this,SecondActivity.class);
+intent.putExtras(bundle);
+startActivity(intent);
+
+
+we can get that bundle information in second activity by using  this:
+
+Bundle bundle=new Bundle();
+bundle.getIntent().getExtras("Key");	//it will return the string of value that we pass in FirstActivity
+
+
+
 
 
 In Android the reuse of other application components is a concept knowns as task. An application can access other Android components to achieve a task.
@@ -2155,6 +2335,20 @@ Following is the code snippet of defining an activity with Intent Filter (<inten
 We can define a filter with multiple instances of <action>, <category> or <data> elements and we need to make sure that component can handle all the combinations of filter elements.
 
 
+
+
+How can we finish an activity and alternatively :--------------------------
+To finish an activity you need to call finish() Method of activity wither manually or press button which itself calls finish method.
+
+1) FLAG_ACTIVITY_NEW_TASK
+if set this activity will become the start of a new task on this history stack. A task(from the activity will become that start of a new  task on this history stack. 
+
+2) FLAG_ACTIVITY_CLEAR_TOP
+if set and the activity being launched is already running in the current task then instead of launching a new instance of thet activity all of the other activties on top of it will be closed and this
+intent will be deliver to the (now on top) old activity as a new intent.
+
+3) FLAG_ACTIVITY_SINGLE_TOP
+if set the activity will not be launched if it is already running at the top of the history stack.
 
 
 
