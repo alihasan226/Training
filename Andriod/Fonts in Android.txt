@@ -1,0 +1,97 @@
+5:48 PM 1/16/2020  Fonts in XML :------------------------------------
+Android new feature Fonts in XML which lets you use fonts as resource. You can add the font  file in the res/font folder to bundle fonts as resources. these fonts are compiled in your R file
+and are automatically available in Android Studio.
+
+You can access the font resources with the help of a new resource type font.
+
+For example to access a font resource use @font/myfont  or   R.font.myfont
+
+
+
+To add font as resource  perform the following steps in the Android Studio:
+
+1) Right-click the res folder and go to New => Android resource directory
+	The New Resource Directory window appears.
+
+2) in the Resource type list select font and then click OK.
+
+3) Add your font files in the font folder.
+The folder structure below generates  R.font.dancing_script 
+
+
+
+=>    Creating a font family :----------------------------
+A font family is a set of font files along with its style and weight details. In android you can create a new font family as n XML resource and access it as a single unit instead of referencing
+each style and weight as separate resource.
+
+To createa font family folder perform the following steps in the android studio:
+
+1) Right click the font folder and go to New => Font resource file The New Resource File window appears
+
+2) Enter the file name and then click OK the new font resource XML open in the editor.
+
+3) Enclose each font file style and weight attribute in the <font> element.
+
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/lobster_regular" />
+    <font
+        android:fontStyle="italic"
+        android:fontWeight="400"
+        android:font="@font/lobster_italic" />
+</font-family>
+
+
+
+Adding font to a TextView :-------------------------------
+
+To set a font for the TextView do one of the following:
+
+=> in the layout XML file set the fontFamily attribute to the font file you want to access.
+<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/lobster"/>
+
+
+
+=>  Using fonts programatically
+To reterive fonts programatically call the getFont(int) method and provide the resource identifier of the font you want to reterive. This method returns a Typeface object.
+You can use the setTypeface()  method to set the typrface with specific styles.
+
+	Typefae typeface=getResources().getFont(R.font.myfont);
+	textView.setTypeface(typeface);
+
+
+
+
+
+
+
+
+6:25 PM 1/16/2020 Tooltip :--------------------------------------
+
+A tooltip is a small descriptive message that appears near a view when user long press the view or hover their mouse over it. This is useful when your app uses an icon to represent an action
+ or piece of information to save space in the layout.
+
+This is compatiable for Android 8.0 (API level 26) and higher version.
+
+
+=> Setting the tooltip text :------------------------ 
+you can specify the tooltip text in a View by calling setTooltipText() method. you can set the tooltipText property using the corresponding XML attributes or API.
+
+1) To specify the tooltip text in your XML files set the android:tooltipText attribute as.
+
+<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:tooltipText="Send an email" />
+
+
+2) To specify the tooltip text in code use setTooltipText(CharSequence) method
+FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+fab.setTooltipText("Send an email");
+
+ 

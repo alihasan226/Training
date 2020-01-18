@@ -1867,7 +1867,7 @@ A bound service runs only as long as another application component is bound to i
 
 
 
-Although this documentation generally discusses started and bound services separately, your service can work both ways—it can be started (to run indefinitely) and also allow binding. 
+your service can work both ways—it can be started (to run indefinitely) and also allow binding. 
 It's simply a matter of whether you implement a couple of callback methods: onStartCommand() to allow components to start it and onBind() to allow binding.
 
 
@@ -1875,9 +1875,72 @@ It's simply a matter of whether you implement a couple of callback methods: onSt
 
 A service is simply a component that can run in the background even when the user is not interacting with your application so you should create a service only if that is what you need.
 
-if you must perform work outside of your main thread but only while the user is interacting with your application youshould create  anew thread. 
+If you must perform work outside of your main thread but only while the user is interacting with your application youshould create  anew thread. 
 For example if you want to play some music but only while your activity is running you might create a thread in onCreate(), start running it in onStart() and onStop() and stop it in on Stop().
 Also consider using AsyncTask or Handlerthread instead of the traditional Thread class.
+
+
+
+
+Implementating the lifecycle callbacks :----------------------------------------
+
+Like an activity a service has lifecycle callback methods that you can implement to monitor changes in the service's state and perform work at the appropriate times.
+
+
+public class ExampleService extends Service {
+    int startMode;       // indicates how to behave if the service is killed
+    IBinder binder;      // interface for clients that bind
+    boolean allowRebind; // indicates whether onRebind should be used
+
+    @Override
+    public void onCreate() {
+        // The service is being created
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        // The service is starting, due to a call to startService()
+        return mStartMode;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        // A client is binding to the service with bindService()
+        return mBinder;
+    }
+
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        // All clients have unbound with unbindService()
+        return mAllowRebind;
+    }
+
+
+    @Override
+    public void onRebind(Intent intent) {
+        // A client is binding to the service with bindService(),
+        // after onUnbind() has already been called
+    }
+
+    @Override
+    public void onDestroy() {
+        // The service is no longer used and is being destroyed
+        //stopService(new Intent(context,services.class)) or by calling stopSelf() method.
+    }
+}
+
+
+1) Life cycle of the Unbounded Service
+
+call to startService()	   =>	onCreate()	-> onStartCommand()	->     onDestroy()		=>service ShutDown
+
+
+2) Life cycle of the bindService()
+
+call to bindService()	   =>	onCreate()	->  onBind()		->    unBind()	-> onDestroy()	=> service ShutDown
+
+
 
 
 
@@ -1885,7 +1948,7 @@ Also consider using AsyncTask or Handlerthread instead of the traditional Thread
 
 	The basic :--------------------
 
-To create a service you must create a subclass of service or use one of its existing subclasses.
+To create a service you must create a subclass of Service or use one of its existing subclasses.
 In your implemnetation you must override some callback methods that handle aspect of the service lifecycle and provide a mechanism that allows the component to bind to the service.
 
 => onStartCommand()
@@ -1939,6 +2002,18 @@ code due to dependence on explicit intents to start or bind the service.
 
 
 
+=> Creating a started service :---------------------------------
+A started service is one that another component starts by calling startService(), which result in a call to the service's onStartCommand() method.
+When a service is started it has a lifecycle that's independent of the component that started it. The service can run in the background indefinitely even if the component that started it is
+destroyed. As such the service stop itself when its job is completed by calling stopSelf()  or another component can stop it by calling stopService().
+
+An appliaction component such as an activity can start  the service by calling startService() and  passing an Intent that specifies the service and includes any data for the service to use.
+The service recive this Intent in the onStartCommand() method.
+
+
+
+
+
 
 Notice that the onStartCommand() methods must return an Integer. The integer is a value that describe how the system should continue the service in the event that the system kills it.The default
 implementation for IntentService handles this for you but you are able to modify it. The return value from onStartCommand() must be one of the following constants:
@@ -1955,6 +2030,75 @@ is suitable for media players (or similar service) that are not executing comman
 3) START_REDELIVER_INTENT
 if the system kills the service after onStartCommand() return recreate the service and call onStartCommand() with the last intent that was deliverd to the service.
 Any pending intents are delivered in turn. This is suitable for services that are actively performing a job that should be immediately resumed such as download a file.
+
+
+
+
+
+=> Traditonally there are two classes you can extend to create a started service:
+ 
+1) Service
+
+	This is base class for all service. when you extend this class it's important to create new thread in which the service can complete all of its work; the service uses your
+application main thread by default which can slow the performance of any activity  that your application is running.
+
+
+2) IntentService
+
+	This is a subclass of Service that uses a worker thread to handle all of the start request one at a time. This is the best option if you don't require that your service handle
+multiple request simultaneously. Implement onHandleIntent(), which receivce the intent for each start request so that you can complete the background work.
+
+
+
+Extending the IntentService class :---------
+
+Because most of the started service don't need to handle multiple request simultaneously (which can actually be a dangerous multi-threading scenario) it is best that you implement your
+service using IntentService class
+
+=> The IntentService class deos the following:
+
+1)  It create a default worker thread that executes all the intent that are delivered to onStartCommand(), separate from our application's main thread.
+2) Creates a work queue that passes one intent at a time to our onHandleIntent() implementation so you never have to worry about multi-threading.
+3) Stops the service after all of the star request are handled so never have to call stopSelf().
+4) provide default implementation of onStartCommand() that sends the intent to work queue and then to your onHandleIntent() implementation.
+
+
+To complete the work that is provided by client implement onHandleIntent().  we also need to provide a small constructor for the service.
+
+
+public class HelloIntentService extends IntentService {
+
+ 
+  public HelloIntentService() {
+      super("HelloIntentService");
+  }
+
+  /**
+   * The IntentService calls this method from the default worker thread with
+   * the intent that started the service. When this method returns, IntentService
+   * stops the service, as appropriate.
+   */
+  @Override
+  protected void onHandleIntent(Intent intent) {
+      // Normally we would do some work here, like download a file.
+      // For our sample, we just sleep for 5 seconds.
+      try {
+          Thread.sleep(5000);
+      } catch (InterruptedException e) {
+          // Restore interrupt status.
+          Thread.currentThread().interrupt();
+      }
+  }
+}
+
+
+
+
+
+
+
+
+
 
 
 
