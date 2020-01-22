@@ -321,3 +321,27 @@ RelativeLayout rootView = (RelativeLayout) findViewById(R.id.addresses_confirm_r
         });
 
 
+
+
+
+
+SeekBar in Android :--------------------------------------------------------
+A SeekBar is an extension of ProgressBar that adds a draggable thumb. The user can touch the thumb and drag left or right to set the surrent progress level or use the arrow keys.
+Placing focusable widgets to left or right of a Seekbar.
+
+
+XML Attributes :-
+
+android:thumb
+
+Draws the thumb on a seekbar.
+May be a reference to another resource in the form or theme atttribute in the form.
+
+
+setOnSeekBarChangeListener :-----------------------
+
+public void setOnSeekBarChangeListener(SeekBar.OnSeekBarChangeListener l)
+
+Sets a listener to receive notification of changes to the SeekBar's progress level. ALso provides notifications of when the user start and stop a touch gesture within SeekBar.
+
+

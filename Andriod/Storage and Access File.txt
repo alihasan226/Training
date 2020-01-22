@@ -1,0 +1,84 @@
+12:08 PM 1/18/2020 Android Storage :----
+
+
+1) Internal Storage  => is the app private storage
+
+2) External Storage is the publically accessing storage area
+
+External Storage in Android means the public storage and means internal storage as in device memory and SD card. Saving to external storage means device internal and SD card
+
+Internal Storage means app private Storage.
+
+the image are stored in the external storage or the app public storage where any app can save load and manage files.The images are publically available and thus not in internal storage by
+developer definiton.
+
+
+=> Difference between internal Storage, External Storage
+
+1) Internal Storage : is storage that is not accessible by the user except via installed apps (or by rooting their device) Example data/data/app_packageName
+The internal storage should only be used for application data ( preferences, files and setting, sound or image media for app to work).
+
+External Storage has two types :-
+
+1) Primary External Storage
+In built shared storage which is accessible by the user by plugging in a USB cable mounting it as drive on host computer"  Example When we say Nexus 5 32 GB.
+
+2) Secondary External Storage 
+Removable Storage Example SD card..
+
+
+
+
+Internal Strorage directories :
+These directories include both a dedicated location for stroing presistent files and another location for storing cache data. the system prevents other apps from accessing these location
+and on Android 10(API level 29) and higher these location are encrpted. These characteristics make these locations a good place to store sensitive data pnly your app itself can access.
+
+External Storage directories :
+these directories include both a dedicated location for storing persistent files and another location for string cach data. Although it's possible for another app to access these directories if that
+app hash the proper permission the files stored in these directories are mmeant for use only by your app. If you  intend to create files that other apps should be able to access youe app should
+store these files in the shared storage part of external instead.
+
+
+
+Access from internal storage :---------------
+for each appthe system provides directories within internal storage where an app can organize its files. One directory is designed fot your app's persistent files, and anpother contains 
+your's app cached files. your app doesn't require any system permission to read and write to files in these directories.
+
+Other apps cannot access files stored within internal storage. This makes internal storage a good place for app data that other apps shouldn't access.
+
+
+
+
+
+
+
+User-space Drivers :-----------------------------------------
+To allow app developers to resgister new device drivers with the framework, Android Things introduces the concept of a user driver. User drivers are components registered from with in
+apps that extending Android framework services. They allow any application to inject hardware events into the framework that other apps can using the standard Android APIs.
+
+
+<< Note cannot customize the behavoiur of device drivers in the Linnux Kernal or Hardware Abstraction layer (HAL) to add new functionality to a device >>
+
+
+
+Benefits :-------------------------
+in many apps using peripheral I/O to communicate directly with external hardware devices is sufficient. However ther are some benefits to integrating your hardware with the rest for the
+Android Framework:
+
+1) Portability
+2) Reuse
+3) Integration
+
+
+
+Device driver types :------------------
+
+1) Location - GNSS satellite constellation such as GPS provide high accuracy physical location information to apps. Integration the location results from receiver device with a user driver allow
+the framework to connect that data with other location sources such as Wifi and Google's FusedLocation provider.
+
+
+2) HID
+Human interface Device (HID) provider user input to apps. Touch pads keyboard and game controller are all examples of device that provide this type of input. Input user drivers let device 
+interact with the enhanced input framework APIs such as gesture or Drag and Drop.
+
+ 
