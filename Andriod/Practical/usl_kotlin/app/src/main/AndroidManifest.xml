@@ -26,6 +26,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+
         <service android:name=".network.ApiCallService" />
 
     </application>

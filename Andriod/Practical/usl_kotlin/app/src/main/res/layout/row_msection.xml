@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/rlData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp">
+
+
+            <TextView
+                android:id="@+id/tvpos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvpos"
+                android:src="@drawable/ic_arrow_forward"
+                android:layout_marginLeft="20dp"
+                android:layout_centerInParent="true"/>
+
+
+            <TextView
+                android:id="@+id/tvvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="24sp"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:layout_toRightOf="@id/ivImage"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                android:id="@+id/ivEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit"
+                android:layout_toLeftOf="@id/ivDelete"
+                android:layout_marginRight="30dp"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/darkGrey"
+            android:layout_below="@id/rlData"/>
+
+    </RelativeLayout>
+
+</layout>

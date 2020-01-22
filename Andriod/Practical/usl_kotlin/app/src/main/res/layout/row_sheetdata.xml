@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/llDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#ECECEC"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tvGameDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:paddingTop="2dp"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/tvGameName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/llDate"
+                android:layout_marginLeft="20dp"/>
+
+            <LinearLayout
+                android:id="@+id/btnSubmit"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/loginbutton_background"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tvhTotalAmount"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:id="@+id/tvSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center_vertical"
+                    android:paddingTop="6dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Submit"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnDelete"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/btnEdit"
+                android:layout_below="@id/llDate"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_delete_black"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/btnEdit"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/btnSheet"
+                android:layout_below="@id/llDate"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_mode_edit_black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnSheet"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/llDate"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_remove_red_eye_black"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvmTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="M Total"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvGameName"/>
+
+            <TextView
+                android:id="@+id/tvmTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tvmTotal"
+                android:layout_below="@id/tvGameName"/>
+
+            <TextView
+                android:id="@+id/tvdTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D Total"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvmTotal"/>
+
+            <TextView
+                android:id="@+id/tvdTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tvmTotal"
+                android:layout_below="@id/tvmTotalAmount"/>
+
+            <TextView
+                android:id="@+id/tvhTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="H Total"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvdTotal"/>
+
+            <TextView
+                android:id="@+id/tvhTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tvmTotal"
+                android:layout_below="@id/tvdTotalAmount"/>
+
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="18sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvhTotal"/>
+
+            <TextView
+                android:id="@+id/tvTotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tvmTotal"
+                android:layout_below="@id/tvhTotalAmount"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>

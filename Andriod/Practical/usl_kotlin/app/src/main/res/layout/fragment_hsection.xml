@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingTop="20dp"
+    android:paddingBottom="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPOsition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="Number"
+                android:textColor="@color/black"
+                android:paddingRight="30dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true" />
+
+            <TextView
+                android:id="@+id/tvValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:text="Amount"
+                android:layout_marginLeft="55dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llNUmberPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/llItemName"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+
+            <com.shawnlin.numberpicker.NumberPicker
+                android:id="@+id/numberpickerPosition"
+                android:layout_width="110dp"
+                android:layout_height="190dp"
+                android:layout_alignParentTop="true"
+                app:np_dividerColor="@color/white"
+                app:np_dividerThickness="0dp"
+                app:np_formatter="Format"
+                app:np_height="180dp"
+                app:np_max="59"
+                app:np_min="0"
+                app:np_selectedTextColor="@color/black"
+                app:np_selectedTextSize="55sp"
+                app:np_textColor="@color/darkGrey"
+                app:np_textSize="55sp"
+                app:np_value="5"
+                app:np_width="64dp"
+                app:np_maxFlingVelocityCoefficient="5"
+                android:layout_alignParentRight="true" />
+
+            <EditText
+                android:id="@+id/etValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:maxLines="1"
+                android:hint="000"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textStyle="normal"
+                android:textSize="55sp"
+                android:imeOptions="actionNext"
+                android:layout_toRightOf="@id/numberpickerPosition"
+                android:background="@drawable/input_background" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBetHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/llNUmberPicker"
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginTop="5dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bet"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/llBetHeading"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

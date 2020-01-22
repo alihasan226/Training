@@ -1,5 +1,6 @@
 package com.usl.usl.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -13,7 +14,7 @@ import com.usl.usl.R
 import com.usl.usl.apps.ConnectivityReceiver
 import com.usl.usl.apps.RegisterAbstractActivity
 import com.usl.usl.network.ApiCallService
-import com.usl.usl.network.response.user.UserResponse
+import com.usl.usl.network.response.user.UserResponsee
 import com.usl.usl.utils.*
 import org.greenrobot.eventbus.Subscribe
 
@@ -60,7 +61,7 @@ class LoginActivity : RegisterAbstractActivity(){
                 Preferences(applicationContext).getInstance(applicationContext)!!.setPassword(etPassword.text.toString())
                 val isConnected: Boolean = ConnectivityReceiver().isConnected()
                 if (isConnected) {
-                    myProgressDialog.show()
+                    //myProgressDialog.show()
                     ApiCallService.action(this@LoginActivity,ACTION_LOGIN)
                 } else {
                     Helper().alert(this@LoginActivity, "No Internet Connection", "USL")
@@ -72,9 +73,15 @@ class LoginActivity : RegisterAbstractActivity(){
     }
 
     @Subscribe
-    fun user(response:UserResponse){
-        if(response.equals(" ")){
-
+    fun user(response: UserResponsee){
+        if(response.status==200){
+            appUser=LocalRepositories().getAppUser(applicationContext)!!
+        }else if(response.status==202){
+            Preferences(applicationContext).getInstance(applicationContext)!!.setId(response.data?.player_id)
+            val intent=Intent(applicationContext,ResetPasswordActivity::class.java)
+            startActivity(intent)
+        }else{
+            Helper().alert(applicationContext,response.message,"USL")
         }
     }
 
