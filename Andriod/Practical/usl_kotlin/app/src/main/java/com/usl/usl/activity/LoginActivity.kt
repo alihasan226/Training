@@ -43,6 +43,11 @@ class LoginActivity : RegisterAbstractActivity(){
         myProgressDialog.setCancelable(true)
         myProgressDialog.setCanceledOnTouchOutside(true)
 
+        if (Preferences(applicationContext).getInstance(applicationContext)?.getuserID()!="" && Preferences(applicationContext).getInstance(applicationContext)?.getPassword()!="" && Preferences(applicationContext).getInstance(applicationContext)?.getAuthToken()!=""){
+            startActivity(Intent(this@LoginActivity, LandingPageActivity::class.java))
+            finish()
+        }
+
     }
 
 
