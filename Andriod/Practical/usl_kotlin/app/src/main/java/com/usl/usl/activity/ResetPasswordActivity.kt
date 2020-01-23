@@ -25,7 +25,7 @@ import java.util.*
 
 class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
 
-    
+
     @BindView(R.id.toolbar)
     lateinit var toolbar: View
     lateinit var tvHeading:TextView
