@@ -1,6 +1,9 @@
 package com.usl.usl.network
 
+import com.usl.usl.network.response.account.AccountResponse
+import com.usl.usl.network.response.upcominggame.UpcomingGameResponse
 import com.usl.usl.network.response.user.UserResponsee
+import com.usl.usl.network.response.usersheets.UserSheetResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -11,6 +14,13 @@ interface Api {
     fun login(@Body map: HashMap<Any,Any>): Call<UserResponsee?>?
     @PATCH("reset_password")
     fun reset_password(@Body map: HashMap<Any,Any>): Call<UserResponsee?>?
+    @GET("upcoming_games")
+    fun game(): Call<UpcomingGameResponse?>?
+    @GET("account")
+    fun account(): Call<AccountResponse?>?
+    @GET("sheets")
+    fun user_sheets(@Query("sheets_type") sheetTypes: String?): Call<UserSheetResponse?>?
+
    /* @GET("upcoming_games")
     fun game(): Call<UpcomingGamesResponse?>?
 

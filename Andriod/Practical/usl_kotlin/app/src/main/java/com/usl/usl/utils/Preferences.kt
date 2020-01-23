@@ -167,7 +167,7 @@ class Preferences {
 
 
     fun storeSheet(
-        jsonMap: HashMap<String?, String?>?,
+        jsonMap: HashMap<Any, Any>?,
         Key: String?
     ) {
         val jsonString = Gson().toJson(jsonMap)
@@ -191,7 +191,7 @@ class Preferences {
 
 
     fun storeNewSheet(
-        jsonMap: HashMap<Int?, String?>?,
+        jsonMap: HashMap<Int, String>,
         Key: String?
     ) {
         val jsonString = Gson().toJson(jsonMap)

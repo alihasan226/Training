@@ -75,7 +75,16 @@ class LoginActivity : RegisterAbstractActivity(){
     @Subscribe
     fun user(response: UserResponsee){
         if(response.status==200){
-            appUser=LocalRepositories().getAppUser(applicationContext)!!
+            appUser.id = response.data?.user?.id.toString()
+            appUser.name = response.data?.user?.name.toString()
+            appUser.user_id = response.data?.user?.user_id.toString()
+            appUser.auth_token =response.data?.user?.auth_token.toString()
+            Preferences(applicationContext).getInstance(applicationContext)?.setLimit(response.data?.user?.balance)
+            Preferences(applicationContext).getInstance(this)?.setId(response.data?.user?.id)
+            Preferences(applicationContext).getInstance(this)?.setAuthToken(response.data?.user?.auth_token)
+            LocalRepositories().saveAppUser(applicationContext, appUser)
+            startActivity(Intent(this@LoginActivity, LandingPageActivity::class.java))
+            finish()
         }else if(response.status==202){
             Preferences(applicationContext).getInstance(applicationContext)!!.setId(response.data?.player_id)
             val intent=Intent(applicationContext,ResetPasswordActivity::class.java)
@@ -112,4 +121,11 @@ class LoginActivity : RegisterAbstractActivity(){
         ivBack=toolbar.findViewById(R.id.ivBack)
         ivBack.visibility=View.GONE
     }
+
+    @Subscribe
+    fun timeout(msg: String?) {
+        //progressDialog.dismiss()
+        Helper().alert(this, msg, "USL")
+    }
+
 }

@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit
 class ThisApp : Application() {
 
 
-    var BASE_URL:String="http://68.183.92.181:3000/"
+    var BASE_URL:String="http://192.168.1.51:3001/"
     operator fun get(ctx: Context): ThisApp? {
         return ctx.applicationContext as ThisApp
     }
@@ -78,5 +78,5 @@ class ThisApp : Application() {
 
 }
 
-//192.168.1.19 local
+//192.168.1.51 local
 //68.183.92.181 Production

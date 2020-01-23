@@ -26,10 +26,46 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.LandingPageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activity.AddAmountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activity.SheetsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activity.MatchedBetActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
         <activity android:name=".activity.ResetPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activity.AccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activity.HistoryActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+        <activity android:name=".activity.ContactUsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
 
 
         <service android:name=".network.ApiCallService" />

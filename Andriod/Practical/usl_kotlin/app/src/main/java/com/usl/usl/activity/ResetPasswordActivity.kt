@@ -81,7 +81,7 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
             appUser.name = response.data?.user?.name.toString()
             appUser.user_id = response.data?.user?.user_id.toString()
             appUser.auth_token =response.data?.user?.auth_token.toString()
-            Preferences(applicationContext).getInstance(applicationContext)?.setLimit(response.data?.user?.limit)
+            Preferences(applicationContext).getInstance(applicationContext)?.setLimit(response.data?.user?.balance)
             Preferences(applicationContext).getInstance(this)?.setId(response.data?.user?.id)
             Preferences(applicationContext).getInstance(this)?.setAuthToken(response.data?.user?.auth_token)
             LocalRepositories().saveAppUser(applicationContext, appUser)

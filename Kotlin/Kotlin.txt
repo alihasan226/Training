@@ -70,7 +70,7 @@ main() function is the entry point of the program it is called first when kotlin
 
 fun means define a function
 
-main is by convention the entry point for an application   the main funtion(...)  is a list of functio's arguments.
+main is by convention the entry point for an application   the main funtion(...)  is a list of function's arguments.
 
 args in this case is the  name of the single argument to the function
 
@@ -91,6 +91,7 @@ fun main(args: Array<String>){
 
 
 Kotlin Variable :---------------------------
+
 Variable refers to a memory location.it is used to stored data. the data of variable can be changed and used depending on condition or information passed to program.
 
 Varaible Declaration :-
@@ -109,7 +110,7 @@ Globla Variable Top Level variable:-------------------------
 
 In Kotlin , A global variable is a variable that is declared at the top of the program and outside all functions similar to C and C++. 
 
-A lcoal variable can only be used in the particular block where it is declared. A global variable can be used in all functions.
+A local variable can only be used in the particular block where it is declared. A global variable can be used in all functions.
 
 Example =>
 
@@ -139,8 +140,22 @@ It is not mecessary to initialize variable at the time of its declaration. Varia
 
 
 
+val => val keyword work same as the var keyword but with one key difference the variable is read-only /nonmutable. The use of val islike declaring a new variable in Java with the final keyword.
+
+
+
+lateinit =>
+lateinit means late initialization. If you d not want to initialize a variable in the constructor instead you want to initialize it later on and if you can guarntee the initialization before using it then declare that variable tih lateinit keyword.It not allocate memory until initialization.
+
+
+you cannot use val for lateinit variable as it will be initialized later on. Also you must guarntee that you are initilizing the variable before using the variable otherwise it will throw exception at runtime. You cannot use lateinit for primitive like int, long etc.
+
+
+
+
 
 Kotlin Data Types :------------------------------------------------------------------
+
 Data types (basic type) refers to type and size of data associated with variable and functions. 
 Data types is used for declararing of memory location of variable which determine the feature of data.
 
@@ -167,7 +182,8 @@ Number types of data are those which hold only number type data variables. It is
 
 
 Character (Char) Data Type :------------------------
-Characters are represented using the keyword Char. Char types are declared using single quotes ('').
+
+Characters are represented using the keyword Char. Char types are declared using single quotes ('A').
 
 
 val calue='A'
@@ -179,6 +195,7 @@ value2='A'
 
 
 Boolean Data Types :----------------------------------
+
 Boolean data is represented using the type Boolean. It contains value either true or false.
 val flag=ture
 
@@ -186,12 +203,14 @@ val flag=ture
 
 
 Array :---------------------------------
+
 Arrays in kotlin are represented by the Array class. Array are created using library function arrayOf()  and Array() constructor.
 
 Array has get()   set()   function size property as well as some other useful member funtions.
 
 
 Creating Array using library function arrayOf() :-------------------------------------------------
+
 the arrayOf() function create array of wrapper types. The item value are passed inside arrayOf() function like arrayOf(1,2,3) which create an array[1,2,3].
 
 The elements of array are accessed through their index values   array[index]   Array index are start from zero.
@@ -213,6 +232,30 @@ val array=Array(5,{i - > i*2 } )
 
 
 String :-------------------------------------------------
+String class represents array of char types.String are immutable which means the length and elments cannot be changed after their creation.
+
+val ch:charArrayOf('h','e','l','l','o')
+val st=String(ch)
+
+Unlike Java Kotlin dosnot require a new keyword to instantiate an object of a String class. AString can be simply declared within double quotes("  ")  known as excaped string or triple quotes("""  """) known as raw string.
+
+
+Kotlin String Property :----------------------------
+length:Int		It returns the length of string sequence
+indices:IntRange	It returns the ranges of valid character indices from current char sequence.
+lastIndex:Int	It returns the index of last character from char sequence.
+
+
+String Elements :-------------------------------------
+
+The characters which are present in string are known as elments of string. Elment of string are accessed by indexing operation string[index]. String's index value starts from 0 and ends at one less than the size of string string[string.length-1].
+Index 0represent first element index 1 represent second element and so on.
+
+String templates :---------------------------------
+String template expression is a piece of code which is evaluated and its result is returned into string. Both string type (escaped and raw string) contain template expression. String templates start with a dollar $ which either a variable name or an arbitarary expression in curly braces.
+
+
+
 String in kotlin is represent by String class. String immutable which means we cannot change the elements in String.
 
 String declaration :
@@ -240,6 +283,41 @@ val text1 ="""
                  To  
            JavaTpoint  
     """
+
+
+
+
+
+String Equality :-------------------------------------
+In Kotlin string equality comparision are done on the basis of structural equality (==) and referential equality (===)
+
+In Structural equality two  objects have separate instances in memmory but contain same value.
+Referential equality specifies that two different reference point the same instacne in memory
+
+fun main(args:Array<String>){
+val str1="Hello World!"
+val str2="Hello World!"
+
+println(str1==str2)
+println(str1!=str2)
+
+
+
+
+Referential equality (===)
+
+To check the two different references point to the same instance, we use === operator. The !== operator is used for negation. a === b specifies true if and only if a and b both point to the same object.
+
+Let's see an example of referential equality to check different reference contains same instance or not. For creating string we are using a helper method buildString rather than using quotes.
+
+    fun main(args: Array<String>) {  
+    val str1 = buildString { "string value" }  
+    val str2 = buildString { "string value" }  
+    println(str1===str2)  
+    println(str1!==str2)  
+    }  
+
+
 
 
 
@@ -297,6 +375,7 @@ println(value2)
 
 
 Kotlin Operator :-----------------------------------------------------
+
 Operator are special chracter which perform operation on operands (values or variable). There are various kind of operator available in kotlin.
 
 => Arithmentic Operator
@@ -314,9 +393,33 @@ Arithmetic operator are used to perform basic mathematical operations such as ad
 
 
 
+Kotlin if-else Expression :------------------------------------------------
+As if is an expression it is not used as standalone it is used with if-else expression and the result of if-else expression is assign into the variable.
+
+Syntax:-
+    val returnValue = if (condation) {  
+         //code statement  
+        } else {  
+         // code statement  
+        }  
+        println(returnValue)  
+
+
+
+Kotlin for Loop :-----------------------------
+Kotlin for loop is used to iterate a part of program several times. It iterates through array ranges collections ar anything that provides for iterating . Kotlin for loop is equivalent to the foreach loop in language like c#.
+
+
+for(item in collection){
+
+}
+
+
+
 
 Kotlin when Expression  :-------------------------------
-Kotlin when expression is a conditional expression which returns the value . kotlin when expression is replacement of switch statement. kotlin when exression works as switch statement of other language (Java, C, C++)
+
+Kotlin when expression is a conditional expression which returns the value . kotlin when expression is replacement of switch statement. kotlin when expression works as switch statement of other language (Java, C, C++)
 
 
 fun main(args: Array<String>){
@@ -378,10 +481,10 @@ else  -> println("INvalid  input")
 
 
 
-Using when in the range :------------------------
+Using range in the When :------------------------
 The when expression also check the ranges of input provided in when condition. A range is created using  (double dot)  operator
 
-The in operator is used to check if a value belongs to a range
+The in operator is used to check a value belongs to a range
 
 fun main(args:Array<String>){
 var number=7
@@ -436,7 +539,8 @@ for (i in 1..5) print(i)
 }
 
 
-output :-
+Output :-------------------------------------
+
 for (i in 1..5) print(i) = 12345
 for (i in 5..1) print(i) = 
 for (i in 5 downTo 1) print(i) = 54321
@@ -497,7 +601,8 @@ for(..){
 
 
 
-Kotlin continue JUmp Strcuture :-------------------------------
+Kotlin continue Jump Strcuture :-------------------------------
+
 Kotlin continue statement is used to repeat the loop.It continue the current flow of the program and skip the reamaining code at specific condition.
 
 
@@ -520,11 +625,12 @@ fun main(args: Array<String>) {
 
 
 
-Kotlin function :---------------------------------
+Kotlin Function :---------------------------------
+
 Function is a group of interrelated block of code which perform specific task.  Function is used to break a program into different sub module .it makes reusability of code and makes program more 
 manageable.
 
-In Kotlin functions are declared uin fun keywork. there are two types of fcunctons depending on whether it is available in standard libraray or defined by user.
+In Kotlin functions are declared using fun keywork. there are two types of functions depending on whether it is available in standard libraray or defined by user.
 
 => Standard library function
 => user defined function
@@ -564,6 +670,7 @@ fun sum(){
 
 
 Kotlin Parametrized Function and Return value :---------------------------------
+
 Function are also takes parameter as argument and return value.Kotlin functions are defined using Pascal notation.
 
 fun main(args: Array<String>){  
@@ -574,6 +681,12 @@ fun sum(number1: Int, number2:Int): Int{
     val add = number1+number2  
     return add  
 }
+
+
+
+
+
+
 
 
 

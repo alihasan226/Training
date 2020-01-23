@@ -11,7 +11,7 @@ class User {
     var user_id:Int=0
     var created_by_user_id:Int=0
     var phoneNumber:String?=null
-    var limit:Float=0.toFloat()
+    var balance:Float=0.toFloat()
     var exposure:String?=null
     var auth_token:String?=null
 
