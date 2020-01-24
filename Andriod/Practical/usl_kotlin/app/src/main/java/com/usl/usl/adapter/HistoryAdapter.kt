@@ -29,10 +29,10 @@ class HistoryAdapter(var historyActivity: HistoryActivity,var historyList: Array
 
     override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
         holder.binding!!.tvGameName.text = historyList[position].game_name.toString()
-        holder.binding!!.tvmTotalAmount.text = ":      " + String.format("%.1f",historyList[position].m_total?.toDouble().toString())
-        holder.binding!!.tvdTotalAmount.text = ":      " + String.format("%.1f",historyList[position].d_total?.toDouble().toString())
-        holder.binding!!.tvhTotalAmount.text = ":      " + String.format("%.1f",historyList[position].h_total?.toDouble().toString())
-        holder.binding!!.tvTotalAmount.text = ":      " + String.format("%.1f",historyList[position].grand_total?.toDouble().toString())
+        holder.binding!!.tvmTotalAmount.text = ":      " + String.format("%.1f",historyList[position].m_total?.toFloat())
+        holder.binding!!.tvdTotalAmount.text = ":      " + String.format("%.1f",historyList[position].d_total?.toFloat())
+        holder.binding!!.tvhTotalAmount.text = ":      " + String.format("%.1f",historyList[position].h_total?.toFloat())
+        holder.binding!!.tvTotalAmount.text = ":      " + String.format("%.1f",historyList[position].grand_total?.toFloat())
 
         val gameDate: List<String> = historyList[position].updated_at?.substring(0, 10)!!.split("-")
         var newGameDate = ""

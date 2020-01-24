@@ -3,12 +3,12 @@
 Kotlin is a cross-platform, statically types general purpose programming language with type interface. Kotlin is designed to interoperated fully with Java and the JVM version of its standard
 library depends on the java class Library but type interface allows its syntex to be more concise.Kotilin mainly targets the JVM but also compiles to JavaScript or native code.
 
-On 7 May 2019 Google announced that the kotlin programming language is  nor preferred language for Android app developers.
+On 7 May 2017 Google announced that the kotlin programming language is  nor preferred language for Android app development.
 Since the release of Android Studio 3.0 in October 2017 Kotlin has been included as an alternative to standard Java Compiler.
 The Android Kotlin compiler lets the user choose betwen targeting java 6 or java 8 compatibility bytecode.
 
 
-The name comes from Kotlin Island near Petersburg Andrey Breslav mentioned that the team decided to name it after an island just like Java was named after the indonesian with htis version.
+The name comes from Kotlin Island near Petersburg Andrey Breslav mentioned that the team decided to name it after an island just like Java was named after the indonesian with this version.
 
 At Google I/O 2017 Google announced first-class support for kotilin on Android.
 
@@ -24,22 +24,22 @@ java code, allowing companies to make a gradual migration from java to Kotlin.
 
 2) Kotlin variable declarations and parameter lists have data type come after the variable name ( and with a colon separator) similar to pascal and typeScript.
 
-3) Variable in kotlin can be immutable decared with val keywork  or nutable declared with the var keyword.
+3) Variable in kotlin can be immutable declared with val keyword  or mutable declared with the var keyword.
 
 5) class member are public by  default and classes themselves are final by defult meaning that creating a derived class is disabled unless the base class is declared with the open keyword.
 
-6) In addition to the classes and methods (called member functions in kotlin)  of object-oriented programming also support procedural programming with the use of unctions. Kotlin functions
+6) In addition to the classes and methods (called member functions in kotlin)  of object-oriented programming also support procedural programming with the use of functions. Kotlin functions
 (and constructor) support deault arguments, variable-length argument list named arguments and overloading by unique signature. Class member functions are virtual.
 
 
 
-Kotlin is a statically -typed general purpose programming language. It is widely used to develop android applications.
-It runs on JVM and can be used anywhere java is used today. It can used to develop Android apps, server-sire apps and much more.
+Kotlin is a statically - typed general purpose programming language. It is widely used to develop Android Applications.
+It runs on JVM and can be used anywhere java is used today. It can used to develop Android apps, server-side apps and much more.
 
 
 Features of Kotlin :----------------------
 
-Conside :- Kotlin reduces wrting the extra codes. this makes kotlin more concise.
+Conside :- Kotlin reduces writing the extra codes. this makes kotlin more concise.
 
 Null-Safety :- kotlin is null safety language. Kotlin aimes to eliminated the NullPointerException (null reference) from the code.Interperable.
 
@@ -78,6 +78,9 @@ args in this case is the  name of the single argument to the function
 
 so it passes the command line argument into the starting function of an application.
 
+   	----------::  It can be omitted if your program does not need to accept command line argument   ::--------------------
+
+
 
 
 fun main(args: Array<String>){
@@ -86,6 +89,20 @@ fun main(args: Array<String>){
     val name=82
     println("You Entered : $stringInput size : ${stringInput.length}")
 }
+
+
+
+
+if you insist on using plain editor and the command line you need to compile your kotlin code before running it. Assuming that your Kotlin file is called program.kt
+
+	kotlinc program.kt -include-runtime -d program.jar
+
+
+
+
+
+
+
 
 
 
@@ -99,6 +116,9 @@ Kotlin variable is declared using keyword var and val.
 
 var language="Java"
 val salary=30000
+
+however you cannot change the type of a variable: number can only ever refer to Int values and message can only ever refer to String values so both number ="Test"  and message=3 are illegal and will syntax errors.
+
  
 
 var is like a general variable and can be assigned multiple times and is known as the mutable variable in Kotlin.
@@ -140,12 +160,50 @@ It is not mecessary to initialize variable at the time of its declaration. Varia
 
 
 
-val => val keyword work same as the var keyword but with one key difference the variable is read-only /nonmutable. The use of val islike declaring a new variable in Java with the final keyword.
+The terminology is that var declares a mutable variable and the val declares a read-only or assign-once variable so both kinds are called variable.
+ new variable in Java with the final keyword.
+
+
+
+Constants :-------------------------
+If you have a value that is truly constant and the value is a string or a primitive type that is known at compile time you can declare an actual constant instead.
+
+const val x = 2
+
+
+
+CamelCase :----------------------------
+Camel case is the practice of captilizing the first latter of each word in a series and then removing spaces , numbers, underscores, hyphens and other special sharacters.
+
+Basic Camel Case Capitalization Rule :-----------------
+1) First letter is capilalized
+2) One or more letters in that word are also CamelCase
+3) The word does not end on a capitalized letter CamelCasE
+4) No two capitalisedletters shall follow directly each other: CamelCAse
+5) No number in that word at any place CamelCase1more
+6) No dot under_score or dash within the word only letters Camel_Case
+7) Noforeign letters in it 
+
+
+Lower Camel Case :---------------------
+
+theFirstLetterNotCapilalizedAndEachWordThroughoutIs
+thereAreNoHyphensOrSpacesInThisCamelCase
+
+
+Snake Case ;----------------------------
+Snake case is the pratice of wrting compund word or pharse that are separated by an underscores instead of by spaces. It is often used by programmers to write names and sometimes for filenames.  It is also very commonly used in Wikipedia URL..
+
+
+
+
+
+
 
 
 
 lateinit =>
-lateinit means late initialization. If you d not want to initialize a variable in the constructor instead you want to initialize it later on and if you can guarntee the initialization before using it then declare that variable tih lateinit keyword.It not allocate memory until initialization.
+lateinit means late initialization. If you dot not want to initialize a variable in the constructor instead you want to initialize it later on and if you can guarntee the initialization before using it then declare that variable this lateinit keyword.It not allocate memory until initialization.
 
 
 you cannot use val for lateinit variable as it will be initialized later on. Also you must guarntee that you are initilizing the variable before using the variable otherwise it will throw exception at runtime. You cannot use lateinit for primitive like int, long etc.
@@ -202,7 +260,11 @@ val flag=ture
 
 
 
+
+
 Array :---------------------------------
+
+Aray is collection of similar data types either of Int, String etc. Array in kotlins mutable in nature with fixed size which means we can perform both read and write operations on element of array
 
 Arrays in kotlin are represented by the Array class. Array are created using library function arrayOf()  and Array() constructor.
 
@@ -228,6 +290,18 @@ Creating array using Array() constructor takes two arguments in Array() construc
 
 val array=Array(5,{i - > i*2 } )
 
+Constrcutor of Array :---------------------------------
+Array constructor id declared with specified size and init function. The init functions is used to returns the elment of array with their index.
+
+Array(size:Int, init:(Int) -> T)
+
+Kotlin Array can be created using arrayOf(),intArrayOf(),charArrayOf(),booleanArrayOf(), longArrayOf(), shortArrayOf(),byteArrayOf() functions.
+
+
+
+
+
+
 
 
 
@@ -237,7 +311,7 @@ String class represents array of char types.String are immutable which means the
 val ch:charArrayOf('h','e','l','l','o')
 val st=String(ch)
 
-Unlike Java Kotlin dosnot require a new keyword to instantiate an object of a String class. AString can be simply declared within double quotes("  ")  known as excaped string or triple quotes("""  """) known as raw string.
+Unlike Java Kotlin dosnot require a new keyword to instantiate an object of a String class. A String can be simply declared within double quotes("  ")  known as excaped string or triple quotes("""  """) known as raw string.
 
 
 Kotlin String Property :----------------------------
@@ -263,7 +337,7 @@ String declaration :
 val text="Hello World"
 
 Types of String :--------------------
-There re two different types of String in kotlin.
+There are two different types of String in kotlin.
 
 1) Excaped String 
 Ecaped String is declared within double quotes (" ") and may contain escape characters like '\n','\t','\b'
@@ -289,9 +363,10 @@ val text1 ="""
 
 
 String Equality :-------------------------------------
+
 In Kotlin string equality comparision are done on the basis of structural equality (==) and referential equality (===)
 
-In Structural equality two  objects have separate instances in memmory but contain same value.
+In Structural equality two  objects have separate instances in memory but contain same value.
 Referential equality specifies that two different reference point the same instacne in memory
 
 fun main(args:Array<String>){
@@ -316,6 +391,146 @@ Let's see an example of referential equality to check different reference contai
     println(str1===str2)  
     println(str1!==str2)  
     }  
+
+
+
+Structural Equality  ( == ) :----------------------------
+
+== operator in kotlin only compare the data or variable, whereas in java or other language == is generally used to compare the reference. The negation counterpart of == in kotlin is != which is used to compare if both the value are not equal to each other.
+
+
+Referential Equality ( === ) :-------------------------
+=== operator is used to compare the reference of two  variable or object. It will only be true if both the object and variable pointing to  the same object
+
+For values which are represented as primitive types at runtime  the === equality check is equivalent to the == check.
+
+
+val int1=10
+val int 2=10
+
+println(int1==int2)
+println(int1===int2)
+println(int1.equal(int2))
+
+all the will print truw because primitive datatypes only checks the value in case of === also.
+
+
+
+
+
+
+
+
+
+
+
+
+Kotlin Exception Handing  :-------------------------------------------------
+Exception is a runtime problem which occurs in the program and leans to program termination. This may be occurs dure to running out of memoryspace , array out + bond, condition like divided by zero.
+
+
+Exception Handling is a texhnique which handles the runtime problems and maintains the flow of program execution.
+In Kotlin all exception classes are descendant of class throwable.
+
+Four Different Keyword used in exception handling :-------------------
+try
+catch
+finally
+throw
+
+
+try  :  block contains set of statement which might generates an exception. Ot must be follows by either catch or finally both.
+
+catch  :  catch block is used to catch the exception thrown try block.
+
+finally block always executes whether exception is handled or not. So it is used to execute important code statement.
+
+throw keyword is used to throw an exception explicitly.
+
+
+Kotlin Unchecked Exception
+
+Unchecked exception is that exception which is thrown due to mistakes in our code. This exception type extends RuntimeException class. The Unchecked exception is checked at run time. Following are some example of unchecked exception:
+
+    ArithmeticException: thrown when we divide a number by zero.
+    ArrayIndexOutOfBoundExceptions: thrown when an array has been tried to access with incorrect index value.
+    SecurityException: thrown by the security manager to indicate a security violation.
+    NullPointerException: thrown when invoking a method or property on a null object.
+
+Checked Exception in Java
+
+Checked exception is checked at compile time. This exception type extends the Throwable class.
+
+Syntax of try with catch block
+
+    try{    
+   
+    
+    }catch(e: SomeException){  
+
+
+    
+Example  =>
+fun main(args: Array<String>){  
+    try {  
+        val data = 20 / 0  //may throw exception  
+    } catch (e: ArithmeticException) {  
+        println(e)  
+    }  
+    println("code below exception...")  
+}
+    }
+
+
+
+Kotlin Nested try-catch block :------------------------
+We can also able to use nested try blcok whenever required try catch blcok is such block in which onr try catch block is implmented into another try blcok.
+
+The requirement of nested try catch block is arises when a block  fo code generated an exception and within that block another code statement also generates another exception
+
+
+try    
+{    
+    // code block   
+    try    
+    {    
+        // code block   
+    }    
+    catch(e: SomeException)    
+    {    
+    }    
+}    
+catch(e: SomeException)    
+{    
+} 
+
+
+
+Kotlin finally Block :-----------------------------
+Kotlin finally block such block which is always executed whether execution is handled or not. So it is used to execute important code statement'
+
+
+
+Kotlin throw keyword
+
+Kotlin throw keyword is used to throw an explicit exception. It is used to throw a custom exception.
+
+To throw an exception object we will use the throw-expression.
+
+fun main(args: Array<String>) {  
+    validate(15)  
+    println("code after validation check...")  
+}  
+fun validate(age: Int) {  
+    if (age < 18)  
+        throw ArithmeticException("under age")  
+    else  
+        println("eligible for drive")  
+} 
+
+
+
+
 
 
 

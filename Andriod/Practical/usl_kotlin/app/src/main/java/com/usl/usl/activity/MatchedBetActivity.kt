@@ -25,7 +25,6 @@ import java.util.*
 
 class MatchedBetActivity : RegisterAbstractActivity() , View.OnClickListener {
 
-
     @BindView(R.id.toolbar)
     lateinit var toolbar: View
     @BindView(R.id.tvNoSheet)

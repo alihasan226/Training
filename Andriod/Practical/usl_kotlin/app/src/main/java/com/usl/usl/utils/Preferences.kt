@@ -26,7 +26,7 @@ class Preferences {
     private val HCOUNTER = "hCounter"
     private var instance: Preferences? = null
 
-    constructor(context: Context) {
+    constructor(context: Context?) {
         _context = context
         pref = _context!!.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
         editor = pref!!.edit()
@@ -143,33 +143,24 @@ class Preferences {
     }
 
 
-    fun storeHashMap(
-        jsonMap: HashMap<Int?, String?>?,
-        Key: String?
-    ) {
+    fun storeHashMap(jsonMap: HashMap<Int?, String?>?, Key: String?) {
         val jsonString = Gson().toJson(jsonMap)
-        val sharedPreferences =
-            _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
+        val sharedPreferences = _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(Key, jsonString)
         editor.apply()
     }
 
-    fun getHashMap(Key: String?): HashMap<Int, String>? {
-        val sharedPreferences =
-            _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
-        val defValue = Gson().toJson(HashMap<Int, String>())
+    fun getHashMap(Key: String?): HashMap<Int?, String?>? {
+        val sharedPreferences = _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
+        val defValue = Gson().toJson(HashMap<Int?, String?>())
         val json = sharedPreferences.getString(Key, defValue)
-        val token: TypeToken<HashMap<Int?, String?>?> =
-            object : TypeToken<HashMap<Int?, String?>?>() {}
-        return Gson().fromJson<HashMap<Int, String>>(json, token.type)
+        val token: TypeToken<HashMap<Int?, String?>?> = object : TypeToken<HashMap<Int?, String?>?>() {}
+        return Gson().fromJson<HashMap<Int?, String?>>(json, token.type)
     }
 
 
-    fun storeSheet(
-        jsonMap: HashMap<Any, Any>?,
-        Key: String?
-    ) {
+    fun storeSheet(jsonMap: HashMap<Any, Any>?, Key: String?) {
         val jsonString = Gson().toJson(jsonMap)
         val sharedPreferences =
             _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
@@ -190,26 +181,20 @@ class Preferences {
     }
 
 
-    fun storeNewSheet(
-        jsonMap: HashMap<Int, String>,
-        Key: String?
-    ) {
+    fun storeNewSheet(jsonMap: HashMap<Int, String>, Key: String?) {
         val jsonString = Gson().toJson(jsonMap)
-        val sharedPreferences =
-            _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
+        val sharedPreferences =_context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(Key, jsonString)
         editor.apply()
     }
 
-    fun getNewSheet(Key: String?): HashMap<Int, String>? {
-        val sharedPreferences =
-            _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
-        val defValue = Gson().toJson(HashMap<Int, String>())
+    fun getNewSheet(Key: String?): HashMap<Int?, String?>? {
+        val sharedPreferences = _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
+        val defValue = Gson().toJson(HashMap<Int?, String?>())
         val json = sharedPreferences.getString(Key, defValue)
-        val token: TypeToken<HashMap<Int?, String?>?> =
-            object : TypeToken<HashMap<Int?, String?>?>() {}
-        return Gson().fromJson<HashMap<Int, String>>(json, token.type)
+        val token: TypeToken<HashMap<Int?, String?>?> = object : TypeToken<HashMap<Int?, String?>?>() {}
+        return Gson().fromJson<HashMap<Int?, String?>>(json, token.type)
     }
 
 }

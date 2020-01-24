@@ -61,7 +61,9 @@ class AccountActivity :RegisterAbstractActivity(), View.OnClickListener {
     private fun apiAccount(){
         if (ConnectivityReceiver().isConnected()) {
             //progressDialog!!.show()
-
+            appUser = LocalRepositories().getAppUser(applicationContext)!!
+            appUser.type="my"
+            LocalRepositories().saveAppUser(applicationContext,appUser)
             ApiCallService.action(applicationContext,ACTION_ACCOUNT)
         } else {
             Toast.makeText(this, "Please Check Your Internet", Toast.LENGTH_SHORT).show()

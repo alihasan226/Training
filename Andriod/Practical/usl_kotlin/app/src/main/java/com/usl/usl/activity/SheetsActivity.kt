@@ -89,7 +89,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
             }
             rvSheetData!!.adapter=sheetDataAdapter
         }else{
-            Helper().alert(applicationContext,response.message,"USL")
+            Helper().alert(this,response.message,"USL")
         }
     }
 
@@ -97,7 +97,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
         if (ConnectivityReceiver().isConnected()) {
             //progressDialog!!.show()
             appUser = LocalRepositories().getAppUser(applicationContext)!!
-            appUser.submitSheet.put("id",Preferences(applicationContext).getInstance(this)?.getsheetId().toString())
+            appUser.submitSheet.put("id",Preferences(applicationContext).getInstance(this)?.getsheetId()!!)
             LocalRepositories().saveAppUser(applicationContext, appUser)
             ApiCallService.action(applicationContext,ACTION_SHEETCOLLECTION)
         } else {
@@ -130,7 +130,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
             apigetSheets()
             Toast.makeText(applicationContext, response.message, Toast.LENGTH_SHORT).show()
         } else {
-            Helper().alert(this@SheetsActivity, response.message, "USL")
+            Helper().alert(this, response.message, "USL")
         }
     }
 

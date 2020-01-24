@@ -6,8 +6,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ApiCallBack<T>: Cv(),Callback<T>{
+class ApiCallBack<T>: Callback<T>{
 
+    var cv = Cv()
     var t: T? = null
     fun ApiCallBack(t: T) {
         this.t = t
@@ -18,12 +19,12 @@ class ApiCallBack<T>: Cv(),Callback<T>{
             val body: T? = response.body()
             EventBus.getDefault().post(body)
         } else {
-            EventBus.getDefault().post(super.TIMEOUT)
+            EventBus.getDefault().post(cv.TIMEOUT)
         }
     }
 
     override fun onFailure(call: Call<T>?, t: Throwable?) {
-        EventBus.getDefault().post(super.TIMEOUT)
+        EventBus.getDefault().post(cv.TIMEOUT)
     }
 
 }

@@ -16,10 +16,7 @@ import com.usl.usl.apps.ConnectivityReceiver
 import com.usl.usl.apps.RegisterAbstractActivity
 import com.usl.usl.network.ApiCallService
 import com.usl.usl.network.response.user.UserResponsee
-import com.usl.usl.utils.AppUser
-import com.usl.usl.utils.Helper
-import com.usl.usl.utils.LocalRepositories
-import com.usl.usl.utils.Preferences
+import com.usl.usl.utils.*
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
 
@@ -35,7 +32,7 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
     @BindView(R.id.etConfirmPassword)
     lateinit var etConfirmPassword:EditText
     var appUser=AppUser()
-    val ACTION_RESETPASSWORD:String="reset_password"
+    var cv = Cv()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +54,7 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
         if(validation()){
             appUser = LocalRepositories().getAppUser(applicationContext)!!
             val user: MutableMap<String,String> = HashMap<String,String>()
-            user.put("user",Preferences(applicationContext).getInstance(applicationContext)!!.getId().toString())
+            user.put("id",Preferences(applicationContext).getInstance(applicationContext)!!.getId().toString())
             user.put("password", etPassword.text.toString())
             user.put("password_confirmation",etConfirmPassword.text.toString())
             appUser.reset.put("user", user)
@@ -66,9 +63,9 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
             val isConnected: Boolean = ConnectivityReceiver().isConnected()
             if (isConnected) {
                 //progressDialog.show()
-                ApiCallService.action(this@ResetPasswordActivity,ACTION_RESETPASSWORD)
+                ApiCallService.action(this@ResetPasswordActivity,cv.ACTION_RESETPASSWORD)
             } else {
-                Helper().alert(this@ResetPasswordActivity, "No Internet Connection", "USL")
+                Helper().alert(this, "No Internet Connection", "USL")
             }
         }
     }
@@ -90,7 +87,7 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
             startActivity(intent)
             finish()
         } else {
-            Helper().alert(this@ResetPasswordActivity, response.message, "USL")
+            Helper().alert(this, response.message, "USL")
         }
     }
 

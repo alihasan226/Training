@@ -1,10 +1,9 @@
-package com.usl.usl.network.response.usersheets
+package com.usl.usl.network.response.sheets
 
 import java.util.*
+import kotlin.collections.HashMap
 
 class Sheet {
-    var deletable:Boolean?=null
-    var game_name:String?=null
     var id:Int?=null
     var game_id:Int?=null
     var cell_amounts:HashMap<Any,Any>?=null
@@ -18,8 +17,8 @@ class Sheet {
     var submitted_to_id:Objects?=null
     var merged_sheets:List<Objects>?=null
     var level:Objects?=null
-    var updated_at:String?=null
     var created_at:String?=null
+    var updated_at:String?=null
     var status:String?=null
     var submitted_level_two_sheet_to_admin:Boolean?=null
     var cutting_type:Objects?=null
@@ -28,4 +27,6 @@ class Sheet {
     var commission_3:Objects?=null
     var custom_cutting:Boolean?=null
     var editable:Boolean?=null
+    var deletable:Boolean?=null
+    var resulted:Boolean?=null
 }

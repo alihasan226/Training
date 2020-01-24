@@ -152,7 +152,7 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
             }
             upcomingGames(listGameDate, listGameName, listGameId)
         } else {
-            Helper().alert(this@LandingPageActivity, response.message, "USL")
+            Helper().alert(this, response.message, "USL")
         }
     }
 
@@ -215,9 +215,7 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
             R.id.ivLogOut -> AlertDialog.Builder(this@LandingPageActivity)
                 .setTitle("Logout")
                 .setMessage("Are you sure want to Logout?")
-                .setPositiveButton(
-                    "Ok"
-                ) { dialogInterface: DialogInterface?, i: Int ->
+                .setPositiveButton("Ok") { dialogInterface: DialogInterface?, i: Int ->
                     Preferences(applicationContext).getInstance(applicationContext)?.setId(0)
                     Preferences(applicationContext).getInstance(applicationContext)?.setUserID("")
                     Preferences(applicationContext).getInstance(applicationContext)?.setPassword("")

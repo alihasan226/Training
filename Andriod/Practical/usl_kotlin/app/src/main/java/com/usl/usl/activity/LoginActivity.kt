@@ -69,7 +69,7 @@ class LoginActivity : RegisterAbstractActivity(){
                     //myProgressDialog.show()
                     ApiCallService.action(this@LoginActivity,ACTION_LOGIN)
                 } else {
-                    Helper().alert(this@LoginActivity, "No Internet Connection", "USL")
+                    Helper().alert(this, "No Internet Connection", "USL")
                 }
             }
             else -> {
@@ -79,6 +79,7 @@ class LoginActivity : RegisterAbstractActivity(){
 
     @Subscribe
     fun user(response: UserResponsee){
+        //myProgressDialog.dismiss()
         if(response.status==200){
             appUser.id = response.data?.user?.id.toString()
             appUser.name = response.data?.user?.name.toString()
@@ -95,7 +96,7 @@ class LoginActivity : RegisterAbstractActivity(){
             val intent=Intent(applicationContext,ResetPasswordActivity::class.java)
             startActivity(intent)
         }else{
-            Helper().alert(applicationContext,response.message,"USL")
+            Helper().alert(this,response.message,"USL")
         }
     }
 
@@ -129,7 +130,7 @@ class LoginActivity : RegisterAbstractActivity(){
 
     @Subscribe
     fun timeout(msg: String?) {
-        //progressDialog.dismiss()
+        //myProgressDialog.dismiss()
         Helper().alert(this, msg, "USL")
     }
 

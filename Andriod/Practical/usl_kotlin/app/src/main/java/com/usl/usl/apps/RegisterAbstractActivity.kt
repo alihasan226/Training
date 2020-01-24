@@ -13,7 +13,6 @@ abstract class RegisterAbstractActivity: AppCompatActivity() {
         ButterKnife.bind(this)
     }
 
-
     override fun onResume() {
         super.onResume()
         EventBus.getDefault().register(this)

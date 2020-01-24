@@ -28,10 +28,10 @@ class MatchedBetAdapter(var matchedBetActivity: MatchedBetActivity,var saveGameL
 
     override fun onBindViewHolder(holder: MatchedBetAdapter.ViewHolder, position: Int) {
         holder.binding!!.tvGameName.text = saveGameList[position].game_name.toString()
-        holder.binding!!.tvmTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].m_total?.toDouble())
-        holder.binding!!.tvdTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].d_total?.toDouble())
-        holder.binding!!.tvhTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].h_total?.toDouble())
-        holder.binding!!.tvTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].grand_total?.toDouble())
+        holder.binding!!.tvmTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].m_total?.toFloat())
+        holder.binding!!.tvdTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].d_total?.toFloat())
+        holder.binding!!.tvhTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].h_total?.toFloat())
+        holder.binding!!.tvTotalAmount.text = ":      " + String.format("%.1f",saveGameList[position].grand_total?.toFloat())
 
         val gameDate: List<String> = saveGameList[position].created_at?.substring(0, 10)!!.split("-")
         var newGameDate = ""
@@ -42,6 +42,7 @@ class MatchedBetAdapter(var matchedBetActivity: MatchedBetActivity,var saveGameL
                 newGameDate + "-" + gameDate[i]
             }
         }
+
         newGameDate = "$newGameDate   " +saveGameList[position].created_at?.substring(11,16)
         holder.binding!!.tvGameDate.text = newGameDate
 

@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.usl.usl.BuildConfig
 import com.usl.usl.network.Api
+import com.usl.usl.utils.Cv
 import com.usl.usl.utils.Preferences
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -14,8 +15,8 @@ import java.util.concurrent.TimeUnit
 
 class ThisApp : Application() {
 
+    var cv = Cv()
 
-    var BASE_URL:String="http://192.168.1.51:3001/"
     operator fun get(ctx: Context): ThisApp? {
         return ctx.applicationContext as ThisApp
     }
@@ -27,7 +28,6 @@ class ThisApp : Application() {
         }
     }
 
-
     private var api: Api? = null
     var str = ""
 
@@ -37,12 +37,10 @@ class ThisApp : Application() {
         api = createApi()
     }
 
-
     @Synchronized
     fun getInstance(): ThisApp? {
         return mInstance
     }
-
 
     private fun createApi(): Api? {
         val interceptor = HttpLoggingInterceptor()
@@ -68,15 +66,11 @@ class ThisApp : Application() {
             client.addInterceptor(interceptor)
         }
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(cv.BASE_URL)
             .client(client.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(Api::class.java)
     }
 
-
 }
-
-//192.168.1.51 local
-//68.183.92.181 Production

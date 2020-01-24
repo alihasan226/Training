@@ -15,33 +15,31 @@ import android.widget.RelativeLayout
 @Suppress("DEPRECATION")
 class MyProgressDialog {
 
-    var dialog:Dialog
+    val dialog:Dialog
     private var progressBar: ProgressBar? = null
 
     constructor(context: Context?) {
         dialog = Dialog(context!!)
         dialog.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
+
         val relativeLayout = RelativeLayout(context)
-        val layoutParams = RelativeLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
-        )
+        val layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+
         relativeLayout.layoutParams = layoutParams
         progressBar = ProgressBar(context)
-        val layoutParams_progress = RelativeLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
-        )
+
+        val layoutParams_progress = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
         layoutParams_progress.addRule(RelativeLayout.CENTER_IN_PARENT)
-        val linearlayoutParams_progress = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
-        )
+
+        val linearlayoutParams_progress = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+
         linearlayoutParams_progress.gravity = Gravity.CENTER
         progressBar!!.setLayoutParams(layoutParams_progress)
         relativeLayout.addView(progressBar)
         dialog.window!!.setContentView(relativeLayout, layoutParams)
-        dialog.window!!.setBackgroundDrawable(
-            ColorDrawable(Color.TRANSPARENT)
-        )
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     fun show() {
