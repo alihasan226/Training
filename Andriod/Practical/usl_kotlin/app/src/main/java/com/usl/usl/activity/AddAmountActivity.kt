@@ -53,6 +53,8 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
     var H_TOTAL:Float=0.0f
     var GRAND_TOTAL:Float=0.0f
     var bundle: Bundle? = null
+    var progressDialog: MyProgressDialog? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +62,9 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
         bundle = Bundle()
         bundle = intent.extras
         settoolbar()
+        progressDialog = MyProgressDialog(this)
+        progressDialog!!.setCancelable(true)
+        progressDialog!!.setCanceledOnTouchOutside(true)
         viewPagerItem.adapter = ViewPagerAdapter(supportFragmentManager, bundle)
         tabLayout.setupWithViewPager(viewPagerItem)
         clearPreferences()
@@ -203,6 +208,7 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
     private fun apiSendSheet(){
         if(apihashMap.size>0){
             if(ConnectivityReceiver().isConnected()){
+                progressDialog!!.show()
                 appUser = LocalRepositories().getAppUser(applicationContext)!!
                 val sheet = HashMap<String,Any>()
                 sheet.put("game_id",Preferences(applicationContext).getInstance(applicationContext)?.getGameId()?.toInt()!!)
@@ -225,6 +231,7 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     private fun apiUpdateSheet(){
             if(ConnectivityReceiver().isConnected()){
+                progressDialog!!.show()
                 appUser = LocalRepositories().getAppUser(applicationContext)!!
                 val sheet:HashMap<String,Any> = HashMap<String,Any>()
                 sheet.put("cell_amounts",apihashMap)
@@ -243,7 +250,7 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     @Subscribe
     fun getSeetResponse(response: SheetResponse) {
-        //progressDialog.dismiss()
+        progressDialog!!.dismiss()
         if (response.status == 201 || response.status == 200) {
             Preferences(applicationContext).getInstance(applicationContext)?.setLimit(response.data?.balance?.toFloat())
             Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
@@ -254,12 +261,6 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
         } else {
             Helper().alert(this, response.message, "USL")
         }
-    }
-
-    @Subscribe
-    fun timeout(msg: String?) {
-        //progressDialog!!.dismiss()
-        Helper().alert(this, msg, "USL")
     }
 
     fun clearPreferences() {
@@ -273,4 +274,11 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
         Preferences(applicationContext).getInstance(applicationContext)?.storeHashMap(dSection, "DColumn")
         Preferences(applicationContext).getInstance(applicationContext)?.storeHashMap(hSection, "HColumn")
     }
+
+    @Subscribe
+    fun timeout(msg: String?) {
+        progressDialog!!.dismiss()
+        Helper().alert(this, msg, "USL")
+    }
+
 }

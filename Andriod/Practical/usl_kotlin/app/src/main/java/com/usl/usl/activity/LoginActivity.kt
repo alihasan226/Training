@@ -130,7 +130,7 @@ class LoginActivity : RegisterAbstractActivity(){
 
     @Subscribe
     fun timeout(msg: String?) {
-        //myProgressDialog.dismiss()
+        myProgressDialog.dismiss()
         Helper().alert(this, msg, "USL")
     }
 

@@ -33,7 +33,6 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
     lateinit var etConfirmPassword:EditText
     var appUser=AppUser()
     var progressDialog: MyProgressDialog? = null
-
     var cv = Cv()
 
     override fun onCreate(savedInstanceState: Bundle?) {

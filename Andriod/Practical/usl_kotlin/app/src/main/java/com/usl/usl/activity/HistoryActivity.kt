@@ -35,7 +35,6 @@ class HistoryActivity : RegisterAbstractActivity() , View.OnClickListener {
     lateinit var tvHistory: TextView
     var appUser = AppUser()
     var progressDialog: MyProgressDialog? = null
-
     var linearLayoutManager: LinearLayoutManager? = null
     var historyList=ArrayList<Sheet>()
     var historyAdapter: HistoryAdapter? = null
