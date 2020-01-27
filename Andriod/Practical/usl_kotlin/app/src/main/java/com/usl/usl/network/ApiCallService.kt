@@ -40,25 +40,25 @@ class ApiCallService: IntentService{
         if (cv.ACTION_LOGIN == action) {
             api!!.login(appUser!!.login)!!.enqueue(ApiCallBack<UserResponsee?>())
         }else if(cv.ACTION_RESETPASSWORD==action){
-            api!!.reset_password(appUser!!.reset)!!.enqueue(ApiCallBack<UserResponsee?>())
+            api!!.resetPassword(appUser!!.reset)!!.enqueue(ApiCallBack<UserResponsee?>())
         }else if(cv.ACTION_UPCOMINGGAME==action){
             api!!.game()!!.enqueue(ApiCallBack<UpcomingGameResponse?>())
         }else if(cv.ACTION_ACCOUNT==action){
             api!!.account(appUser!!.type)!!.enqueue(ApiCallBack<AccountResponse?>())
         }else if(cv.ACTION_HISTORY==action){
-            api!!.user_sheets(appUser!!.sheet_type)!!.enqueue(ApiCallBack<UserSheetResponse?>())
+            api!!.userSheets(appUser!!.sheet_type)!!.enqueue(ApiCallBack<UserSheetResponse?>())
         }else if(cv.ACTION_MATCHEDBET==action){
-            api!!.user_sheets(appUser!!.sheet_type)!!.enqueue(ApiCallBack<UserSheetResponse?>())
+            api!!.userSheets(appUser!!.sheet_type)!!.enqueue(ApiCallBack<UserSheetResponse?>())
         }else if(cv.ACTION_SENDSHEET==action){
             api!!.sheets(appUser!!.sheets)!!.enqueue(ApiCallBack<SheetResponse?>())
         }else if(cv.ACTION_UPDATESHEET==action){
-            api!!.update_sheets(appUser!!.sheets)!!.enqueue(ApiCallBack<SheetResponse?>())
+            api!!.updateSheets(appUser!!.sheets)!!.enqueue(ApiCallBack<SheetResponse?>())
         }else if(cv.ACTION_GETSHEETS==action){
-            api!!.user_sheets()!!.enqueue(ApiCallBack<UserSheetResponse?>())
+            api!!.userSheets()!!.enqueue(ApiCallBack<UserSheetResponse?>())
         }else if(cv.ACTION_SHEETCOLLECTION==action){
-            api!!.sheets_update(appUser!!.submitSheet)!!.enqueue(ApiCallBack<SheetUpdateResponse?>())
+            api!!.sheetsUpdate(appUser!!.submitSheet)!!.enqueue(ApiCallBack<SheetUpdateResponse?>())
         }else if(cv.ACTION_SHEETDELETE==action){
-            api!!.sheets_delete(Preferences(this).getInstance(this)?.getsheetId()!!)!!.enqueue(ApiCallBack<SheetUpdateResponse?>())
+            api!!.sheetsDelete(Preferences(this).getInstance(this)?.getsheetId()!!)!!.enqueue(ApiCallBack<SheetUpdateResponse?>())
         }
     }
 

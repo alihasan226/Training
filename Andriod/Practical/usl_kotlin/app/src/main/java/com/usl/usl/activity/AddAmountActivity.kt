@@ -31,9 +31,9 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
     lateinit var viewPagerItem:ViewPager
     @BindView(R.id.tablayout)
     lateinit var tabLayout:TabLayout
-    lateinit var btn_submit:Button
+    lateinit var btnSubmit:Button
     var appUser = AppUser()
-    var cv = Cv()
+    private var cv = Cv()
 
     var mSection = HashMap<Int?, String?>()
     var dSection = HashMap<Int?, String?>()
@@ -66,20 +66,20 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
     }
 
 
-    fun settoolbar(){
+    private fun settoolbar(){
         tvHeading=toolbar.findViewById(R.id.tvHeading)
-        tvHeading.setText("Add Amount")
+        tvHeading.text="Add Amount"
         ivBack=toolbar.findViewById(R.id.ivBack)
         ivBack.setImageResource(R.drawable.ic_arrow_back)
         ivBack.setOnClickListener(this)
-        btn_submit=toolbar.findViewById(R.id.btn_Submit)
-        btn_submit.visibility=View.VISIBLE
+        btnSubmit=toolbar.findViewById(R.id.btn_Submit)
+        btnSubmit.visibility=View.VISIBLE
         if (bundle != null) {
             if (bundle!!.getString("GETSHEET")=="sheet_get") {
-                btn_submit.text="Update"
+                btnSubmit.text="Update"
             }
         }
-        btn_submit.setOnClickListener(this)
+        btnSubmit.setOnClickListener(this)
     }
 
 
@@ -204,7 +204,7 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
         if(apihashMap.size>0){
             if(ConnectivityReceiver().isConnected()){
                 appUser = LocalRepositories().getAppUser(applicationContext)!!
-                val sheet:HashMap<String,Any> = HashMap<String,Any>()
+                val sheet = HashMap<String,Any>()
                 sheet.put("game_id",Preferences(applicationContext).getInstance(applicationContext)?.getGameId()?.toInt()!!)
                 sheet.put("cell_amounts",apihashMap)
                 sheet.put("sheet_type","Sheet")

@@ -21,12 +21,12 @@ import java.util.*
 
 class SheetsDataAdapter(var sheetsActivity: SheetsActivity, var saveGameList: ArrayList<Sheet>, var listener: (View,Int,String) -> Unit) : RecyclerView.Adapter<SheetsDataAdapter.ViewHolder>() {
 
-    var mHashMap = HashMap<Int, String>()
-    var dHashMap = HashMap<Int, String>()
-    var hHashMap = HashMap<Int, String>()
-    var hashMap =  HashMap<String, String>()
-    var sheetValue = ArrayList<String>()
-    var sheetPosition = ArrayList<String>()
+    private var mHashMap = HashMap<Int, String>()
+    private var dHashMap = HashMap<Int, String>()
+    private var hHashMap = HashMap<Int, String>()
+    private var hashMap =  HashMap<String, String>()
+    private var sheetValue = ArrayList<String>()
+    private var sheetPosition = ArrayList<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SheetsDataAdapter.ViewHolder {
         var view=LayoutInflater.from(sheetsActivity).inflate(R.layout.row_sheetdata,parent,false)

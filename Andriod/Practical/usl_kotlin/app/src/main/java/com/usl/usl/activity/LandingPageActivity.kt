@@ -62,12 +62,12 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
     @BindView(R.id.llContactUs)
     lateinit var llContactUs: LinearLayout
 
-    var listGameName=ArrayList<String>()
-    var listGameId=ArrayList<Int>()
-    val listGameDate=ArrayList<String>()
+    private var listGameName=ArrayList<String>()
+    private var listGameId=ArrayList<Int>()
+    private val listGameDate=ArrayList<String>()
     var appUser = AppUser()
 
-    val dateFormat: DateFormat = SimpleDateFormat("HH:mm")
+    private val dateFormat: DateFormat = SimpleDateFormat("HH:mm")
     val calendar = Calendar.getInstance()
     var mTime: String? = null
     var mHour:Int= 0
@@ -95,7 +95,7 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
         drawerLayout.addDrawerListener(toggle!!)
         toggle!!.syncState()
 
-        navigation.setOnClickListener { view: View? ->
+        navigation.setOnClickListener {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                 drawerLayout.closeDrawer(GravityCompat.START)
             } else {
@@ -187,7 +187,6 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
         }
     }
 
-
     override fun layoutId(): Int {
         return R.layout.activity_landing_page
     }
@@ -201,15 +200,10 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
     override fun onClick(view: View?) {
         when (view!!.id) {
             R.id.llSheet -> startActivity(Intent(this@LandingPageActivity,SheetsActivity::class.java))
-
             R.id.llMatchedBet -> startActivity(Intent(this@LandingPageActivity,MatchedBetActivity::class.java))
-
             R.id.llAccount -> startActivity(Intent(this@LandingPageActivity,AccountActivity::class.java))
-
             R.id.llHistory -> startActivity(Intent(this@LandingPageActivity,HistoryActivity::class.java))
-
             R.id.llContactUs -> startActivity(Intent(this@LandingPageActivity, ContactUsActivity::class.java))
-
             R.id.ivLogOut -> AlertDialog.Builder(this@LandingPageActivity)
                 .setTitle("Logout")
                 .setMessage("Are you sure want to Logout?")

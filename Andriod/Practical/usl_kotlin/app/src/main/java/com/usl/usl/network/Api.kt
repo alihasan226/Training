@@ -14,23 +14,23 @@ interface Api {
     @POST("api/login")
     fun login(@Body map: HashMap<Any,Any>): Call<UserResponsee?>?
     @PATCH("api/reset_password")
-    fun reset_password(@Body map: HashMap<Any,Any>): Call<UserResponsee?>?
+    fun resetPassword(@Body map: HashMap<Any,Any>): Call<UserResponsee?>?
     @GET("api/upcoming_games")
     fun game(): Call<UpcomingGameResponse?>?
     @GET("accounts")
     fun account(@Query("type") type:String?): Call<AccountResponse?>?
     @GET("sheets")
-    fun user_sheets(@Query("sheets_type") sheetTypes: String?): Call<UserSheetResponse?>?
+    fun userSheets(@Query("sheets_type") sheetTypes: String?): Call<UserSheetResponse?>?
     @POST("sheets")
     fun sheets(@Body map: HashMap<Any,Any>): Call<SheetResponse?>?
     @PUT("api/sheets")
-    fun update_sheets(@Body map: HashMap<Any,Any>): Call<SheetResponse?>?
+    fun updateSheets(@Body map: HashMap<Any,Any>): Call<SheetResponse?>?
     @GET("sheets")
-    fun user_sheets(): Call<UserSheetResponse?>?
+    fun userSheets(): Call<UserSheetResponse?>?
     @PATCH("agent_sheet_submit")
-    fun sheets_update(@Body map: HashMap<Any, Any>): Call<SheetUpdateResponse?>?
+    fun sheetsUpdate(@Body map: HashMap<Any, Any>): Call<SheetUpdateResponse?>?
     @DELETE("sheets/{id}")
-    fun sheets_delete(@Path("id") id: Int): Call<SheetUpdateResponse?>?
+    fun sheetsDelete(@Path("id") id: Int): Call<SheetUpdateResponse?>?
 
    /*@GET("sheets")
     fun user_sheets(@Query("sheets_type") sheetTypes: String?): Call<UserSheetResponse?>?*/
