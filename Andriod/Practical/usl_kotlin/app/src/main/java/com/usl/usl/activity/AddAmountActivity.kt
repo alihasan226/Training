@@ -76,7 +76,7 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
         btn_submit.visibility=View.VISIBLE
         if (bundle != null) {
             if (bundle!!.getString("GETSHEET")=="sheet_get") {
-                btn_submit.setText("Update")
+                btn_submit.text="Update"
             }
         }
         btn_submit.setOnClickListener(this)

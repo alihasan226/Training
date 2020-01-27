@@ -1,7 +1,6 @@
-12:08 PM 1/18/2020 Android Storage :----
+12:08 PM 1/18/2020 Android Storage :--------------------------------------------------------
 
-
-1) Internal Storage  => is the app private storage
+1) Internal Storage  => is the app Private Storage
 
 2) External Storage is the publically accessing storage area
 
@@ -9,14 +8,14 @@ External Storage in Android means the public storage and means internal storage 
 
 Internal Storage means app private Storage.
 
-the image are stored in the external storage or the app public storage where any app can save load and manage files.The images are publically available and thus not in internal storage by
+the image are stored in the external storage or the App public storage where any app can save load and manage files.The images are publically available and thus not in internal storage by
 developer definiton.
 
 
 => Difference between internal Storage, External Storage
 
 1) Internal Storage : is storage that is not accessible by the user except via installed apps (or by rooting their device) Example data/data/app_packageName
-The internal storage should only be used for application data ( preferences, files and setting, sound or image media for app to work).
+The internal storage should only be used for application data ( Preferences, Files and Setting, sound or image media for app to work).
 
 External Storage has two types :-
 
@@ -50,9 +49,46 @@ Other apps cannot access files stored within internal storage. This makes intern
 
 
 
+Data and file Storage overview :---------------------------------------------------
+Android uses a file system that is similar to disk systems on the other platforms. The system provides several options for you to save your app data:
+
+=> App-specific storage : Store files that are meant for your app's use only either indedicated directories within an internal storage volum or different dedicated directories within external storage. Use the directories within internal storage to save sensitive information that other apps shouldn't access.
+
+=> Shared Storage : Store file that your app intends to share with other apps including media documents and other files.
+
+=> Preferences : Store private primitive data in key-value pairs
+=> Databases : Store strcutured data in a private database using the Room persistence library.
 
 
-User-space Drivers :-----------------------------------------
+
+To Access the Application data from External Storage :-----------------------------------------
+
+val externalStorageVolumes: Array<out File> = ContextCompat.getExternalFilesDirs(applicationContext, null)
+            val primaryExternalStorage = externalStorageVolumes[0]
+            val path = applicationContext.getExternalFilesDir(null)?.getAbsolutePath();
+            Log.d("Files", "Path: $path")
+            val f = File(path)
+            val file = f.listFiles()
+            Log.d("Files", "Size: " + file.size)
+            for (i in file.indices) { //here populate your listview
+                Log.d("Files", "FileName:" + file[i].name)
+            }
+
+
+
+
+
+
+
+
+
+To Get the Data from the Shared Storage of Android Phone :-------------------------------------------------
+
+
+
+
+	User-space Drivers :-----------------------------------------
+
 To allow app developers to resgister new device drivers with the framework, Android Things introduces the concept of a user driver. User drivers are components registered from with in
 apps that extending Android framework services. They allow any application to inject hardware events into the framework that other apps can using the standard Android APIs.
 
@@ -61,8 +97,9 @@ apps that extending Android framework services. They allow any application to in
 
 
 
-Benefits :-------------------------
-in many apps using peripheral I/O to communicate directly with external hardware devices is sufficient. However ther are some benefits to integrating your hardware with the rest for the
+	Benefits :-------------------------
+
+In many apps using peripheral I/O to communicate directly with external hardware devices is sufficient. However ther are some benefits to integrating your hardware with the rest for the
 Android Framework:
 
 1) Portability
@@ -71,7 +108,7 @@ Android Framework:
 
 
 
-Device driver types :------------------
+	Device driver types :------------------
 
 1) Location - GNSS satellite constellation such as GPS provide high accuracy physical location information to apps. Integration the location results from receiver device with a user driver allow
 the framework to connect that data with other location sources such as Wifi and Google's FusedLocation provider.

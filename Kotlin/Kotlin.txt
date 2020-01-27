@@ -1,7 +1,116 @@
+10:13 24-01-2020  Safe calls (?) Null checks (!!)  :--------------------------------------------------
+
+Kotlin's type system is aimed at eliminating the danger of null referenes from code.
+One of the most common pitfalls in many programming language inclusing java is that accessing a member of a null reference will result in a null reference exception. In java this would be the equivalent of a NullPointerException.
+
+Kotlin's type system is aimed to eliminating NullPointerException'f from our code. The only possible cause of NPE's may be:
+=> An expilit call to throw NullPointerException()
+=> Usage of a !! operator that is described below
+
+
+var s:String = "abc"
+a = null  // compilation error
+
+In Kotlin the type system distinguish between references that can hodl null (nullable references) and those that can not (not-null references). a regular variable of type String can not hold null:
+
+
+To sllow nulls we can declare aa variable as nullable string written String?:
+
+var b : String?="abc"
+b=null
+print(b)
+
+Now if you call amethod or access a property on a it's guarnteed not to cause an NPE, so you can safely say:
+
+
+This operator is used to explicitly tell the compiler that the property is not null and if it is null please throw a null pointer exception (NPE)
+
+nullableVariable !!.someMethodCall()
+
+this code will work fine if nullableVariable is not null else it ti throw an NPE.
+
+
+
+Difference  :-----------------------------
+
+=> The basic difference while using ? and !! is if you want to separate a normal flow of var property having a 'non-null' value with 'null' value flow use ?
+
+=> But if you are sure that the var property value is not null use !! instead of ?
+
+Also ? can be used to return or throw a different kind of execeptions but !! will only throw an NPE.
+
+
+
+Elvis Operator :-------------------------------
+When we have a nullable reference r we can say if r is not null it otherwise use some non-null value x:
+
+val l=b?.length?:-1
+
+if the expression to left of ?: is not null the elvis operator returns it returns the expression to the right.  Note that the right-hand expression is evaluated only if the left-hand side is null.
+
+
+The !! Operator   ( not-null assertion operator ):------------------------------ 
+
+The third option is for NPE lovers the not-null assertion (!!) converts any values to a non-null type and throw an exception if the value is null.
+This operator is used to explicitly tell the compiler that the property is not null and if it's null please throw a null pointer exception(NPE)
+
+nullableVariable!!.somemethodCall()
+
+this code will work fine if nullableVariable is not null else it will throw an NPE.
+
+
+
+=> Declaring 2D Array in Kotlin and Its Operation :------------------------------
+
+fun main(args : Array<String>){
+    var ar_size:Int=readLine()!!.toInt()
+    var array = Array(3){IntArray (3)}
+    for(i in 0..ar_size-1){
+        for(j in 0..ar_size-1){
+            array[i][j]=readLine()!!.toInt()
+        }
+    }
+
+    for(i in 0..ar_size-1){
+        for(j in 0..ar_size-1){
+            print("  "+array[i][j]!!.toString())
+        }
+        println()
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1:10 PM 1/21/2020
 
 Kotlin is a cross-platform, statically types general purpose programming language with type interface. Kotlin is designed to interoperated fully with Java and the JVM version of its standard
-library depends on the java class Library but type interface allows its syntex to be more concise.Kotilin mainly targets the JVM but also compiles to JavaScript or native code.
+library depends on the java class Library but type interface allows its syntex to be more concise.Kotlin mainly targets the JVM but also compiles to JavaScript or native code.
 
 On 7 May 2017 Google announced that the kotlin programming language is  nor preferred language for Android app development.
 Since the release of Android Studio 3.0 in October 2017 Kotlin has been included as an alternative to standard Java Compiler.
@@ -10,9 +119,9 @@ The Android Kotlin compiler lets the user choose betwen targeting java 6 or java
 
 The name comes from Kotlin Island near Petersburg Andrey Breslav mentioned that the team decided to name it after an island just like Java was named after the indonesian with this version.
 
-At Google I/O 2017 Google announced first-class support for kotilin on Android.
+At Google I/O 2017 Google announced first-class support for kotlin on Android.
 
-Kotlin v1.2 was released on 28 November 2017 Sharing code between Jvm and JavaScript platform feature was newely added to this release.
+Kotlin v1.2 was released on 28 November 2017 Sharing code between JVM and JavaScript platform feature was newely added to this release.
 
 
 => Designed
@@ -33,7 +142,7 @@ java code, allowing companies to make a gradual migration from java to Kotlin.
 
 
 
-Kotlin is a statically - typed general purpose programming language. It is widely used to develop Android Applications.
+Kotlin is a statically - Typed general purpose programming language. It is widely used to develop Android Applications.
 It runs on JVM and can be used anywhere java is used today. It can used to develop Android apps, server-side apps and much more.
 
 
@@ -111,7 +220,7 @@ Kotlin Variable :---------------------------
 
 Variable refers to a memory location.it is used to stored data. the data of variable can be changed and used depending on condition or information passed to program.
 
-Varaible Declaration :-
+Variable Declaration :-
 Kotlin variable is declared using keyword var and val.
 
 var language="Java"
@@ -306,12 +415,13 @@ Kotlin Array can be created using arrayOf(),intArrayOf(),charArrayOf(),booleanAr
 
 
 String :-------------------------------------------------
+
 String class represents array of char types.String are immutable which means the length and elments cannot be changed after their creation.
 
 val ch:charArrayOf('h','e','l','l','o')
 val st=String(ch)
 
-Unlike Java Kotlin dosnot require a new keyword to instantiate an object of a String class. A String can be simply declared within double quotes("  ")  known as excaped string or triple quotes("""  """) known as raw string.
+Unlike Java Kotlin doesnot require a new keyword to instantiate an object of a String class. A String can be simply declared within double quotes("  ")  known as Escaped string or triple quotes("""  """) known as Raw string.
 
 
 Kotlin String Property :----------------------------
@@ -323,10 +433,10 @@ lastIndex:Int	It returns the index of last character from char sequence.
 String Elements :-------------------------------------
 
 The characters which are present in string are known as elments of string. Elment of string are accessed by indexing operation string[index]. String's index value starts from 0 and ends at one less than the size of string string[string.length-1].
-Index 0represent first element index 1 represent second element and so on.
+Index 0 represent first element index 1 represent second element and so on.
 
 String templates :---------------------------------
-String template expression is a piece of code which is evaluated and its result is returned into string. Both string type (escaped and raw string) contain template expression. String templates start with a dollar $ which either a variable name or an arbitarary expression in curly braces.
+String template expression is a piece of code which is evaluated and its result is returned into string. Both String type (escaped and raw string) contain template expression. String templates start with a dollar $ which either a variable name or an arbitarary expression in curly braces.
 
 
 
@@ -426,10 +536,11 @@ all the will print truw because primitive datatypes only checks the value in cas
 
 
 Kotlin Exception Handing  :-------------------------------------------------
-Exception is a runtime problem which occurs in the program and leans to program termination. This may be occurs dure to running out of memoryspace , array out + bond, condition like divided by zero.
+
+Exception is a runtime problem which occurs in the program and leans to program termination. This may be occurs due to running out of memoryspace , array out + bond, condition like divided by zero.
 
 
-Exception Handling is a texhnique which handles the runtime problems and maintains the flow of program execution.
+Exception Handling is a technique which handles the runtime problems and maintains the flow of program execution.
 In Kotlin all exception classes are descendant of class throwable.
 
 Four Different Keyword used in exception handling :-------------------
@@ -1155,5 +1266,7 @@ fun main(args: Array<String>) {
 val derived = Derived()  
     derived.foo()   
 } 
+
+
 
 

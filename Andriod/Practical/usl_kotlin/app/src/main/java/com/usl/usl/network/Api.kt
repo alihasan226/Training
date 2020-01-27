@@ -11,11 +11,11 @@ import retrofit2.http.*
 
 interface Api {
 
-    @POST("login")
+    @POST("api/login")
     fun login(@Body map: HashMap<Any,Any>): Call<UserResponsee?>?
-    @PATCH("reset_password")
+    @PATCH("api/reset_password")
     fun reset_password(@Body map: HashMap<Any,Any>): Call<UserResponsee?>?
-    @GET("upcoming_games")
+    @GET("api/upcoming_games")
     fun game(): Call<UpcomingGameResponse?>?
     @GET("accounts")
     fun account(@Query("type") type:String?): Call<AccountResponse?>?
@@ -23,7 +23,7 @@ interface Api {
     fun user_sheets(@Query("sheets_type") sheetTypes: String?): Call<UserSheetResponse?>?
     @POST("sheets")
     fun sheets(@Body map: HashMap<Any,Any>): Call<SheetResponse?>?
-    @PUT("sheets")
+    @PUT("api/sheets")
     fun update_sheets(@Body map: HashMap<Any,Any>): Call<SheetResponse?>?
     @GET("sheets")
     fun user_sheets(): Call<UserSheetResponse?>?

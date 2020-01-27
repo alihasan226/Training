@@ -35,8 +35,7 @@ import kotlin.collections.ArrayList
 class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
 
 
-    @BindView(R.id.toolbar)
-    lateinit var toolar: View
+
     var toggle: ActionBarDrawerToggle? = null
     @BindView(R.id.ivLogOut)
     lateinit var ivLogOut: ImageView
@@ -90,8 +89,7 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
         llContactUs.setOnClickListener(this)
 
 
-        gridLayoutManager =
-            GridLayoutManager(this@LandingPageActivity, 2, GridLayoutManager.VERTICAL, false)
+        gridLayoutManager = GridLayoutManager(this@LandingPageActivity, 2, GridLayoutManager.VERTICAL, false)
         rvGame.layoutManager = gridLayoutManager
         toggle = ActionBarDrawerToggle(this, drawerLayout,R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawerLayout.addDrawerListener(toggle!!)
