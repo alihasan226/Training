@@ -57,7 +57,7 @@ class HistoryActivity : RegisterAbstractActivity() , View.OnClickListener {
 
     private fun apiHistory(){
         if (ConnectivityReceiver().isConnected()) {
-            //progressDialog!!.show()
+            progressDialog!!.show()
             appUser = LocalRepositories().getAppUser(applicationContext)!!
             appUser.sheet_type = "history"
             LocalRepositories().saveAppUser(applicationContext, appUser)
@@ -107,7 +107,7 @@ class HistoryActivity : RegisterAbstractActivity() , View.OnClickListener {
 
     @Subscribe
     fun timeout(msg: String?) {
-        //progressDialog.dismiss()
+        progressDialog!!.dismiss()
         Helper().alert(this, msg, "USL")
     }
 }

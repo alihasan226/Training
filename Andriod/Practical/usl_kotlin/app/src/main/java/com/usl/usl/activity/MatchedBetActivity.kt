@@ -59,7 +59,7 @@ class MatchedBetActivity : RegisterAbstractActivity() , View.OnClickListener {
 
     fun apiMatchedBet() {
         if (ConnectivityReceiver().isConnected()) {
-            //progressDialog!!.show()
+            progressDialog!!.show()
             appUser.sheet_type = "ready_for_collection"
             LocalRepositories().saveAppUser(applicationContext, appUser)
             ApiCallService.action(applicationContext,ACTION_MATCHEDBET)
@@ -109,7 +109,7 @@ class MatchedBetActivity : RegisterAbstractActivity() , View.OnClickListener {
 
     @Subscribe
     fun timeout(msg: String?) {
-        //progressDialog!!.dismiss()
+        progressDialog!!.dismiss()
         Helper().alert(this, msg, "USL")
     }
 }

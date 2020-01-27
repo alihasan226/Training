@@ -22,10 +22,7 @@ import com.usl.usl.apps.ConnectivityReceiver
 import com.usl.usl.apps.RegisterAbstractActivity
 import com.usl.usl.network.ApiCallService
 import com.usl.usl.network.response.upcominggame.UpcomingGameResponse
-import com.usl.usl.utils.AppUser
-import com.usl.usl.utils.Helper
-import com.usl.usl.utils.LocalRepositories
-import com.usl.usl.utils.Preferences
+import com.usl.usl.utils.*
 import org.greenrobot.eventbus.Subscribe
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -33,7 +30,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
-
 
 
     var toggle: ActionBarDrawerToggle? = null
@@ -65,6 +61,8 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
     private var listGameName=ArrayList<String>()
     private var listGameId=ArrayList<Int>()
     private val listGameDate=ArrayList<String>()
+    lateinit var progressDialog: MyProgressDialog
+
     var appUser = AppUser()
 
     private val dateFormat: DateFormat = SimpleDateFormat("HH:mm")
@@ -81,6 +79,9 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
         ButterKnife.bind(this)
 
         LocalRepositories().saveAppUser(applicationContext, appUser)
+        progressDialog= MyProgressDialog(this)
+        progressDialog.setCancelable(true)
+        progressDialog.setCanceledOnTouchOutside(true)
         llSheet.setOnClickListener(this)
         ivLogOut.setOnClickListener(this)
         llMatchedBet.setOnClickListener(this)
@@ -108,7 +109,7 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
 
     private fun apiUpcominggame(){
         if (ConnectivityReceiver().isConnected()) {
-            //progressDialog.show()
+            progressDialog.show()
             ApiCallService.action(applicationContext,ACTION_UPCOMINGGAME)
         } else {
             Toast.makeText(this, "Please check your internet.", Toast.LENGTH_SHORT).show()
@@ -133,7 +134,7 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
 
     @Subscribe
     fun upcominggame(response: UpcomingGameResponse) {
-        //progressDialog.dismiss()
+        progressDialog.dismiss()
         if (response.status === 200) {
             if (response.games!!.size > 0) {
                 for (i in 0 until response.games!!.size) {
@@ -193,7 +194,7 @@ class LandingPageActivity : RegisterAbstractActivity() ,View.OnClickListener{
 
     @Subscribe
     fun timeout(msg: String?) {
-        //progressDialog.dismiss()
+        progressDialog.dismiss()
         Helper().alert(this, msg, "USL")
     }
 

@@ -62,7 +62,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     private fun apigetSheets() {
         if (ConnectivityReceiver().isConnected()) {
-            //progressDialog!!.show()
+            progressDialog!!.show()
             ApiCallService.action(applicationContext,ACTION_GETSHEETS)
         } else {
             Toast.makeText(this, "Please check your internet.", Toast.LENGTH_SHORT).show()
@@ -71,6 +71,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     @Subscribe
     fun usersheetresponse(response:UserSheetResponse){
+        progressDialog!!.dismiss()
         if(response.status==200){
             if(response.data?.sheets?.size!! >0){
                 tvNoSheet.visibility = View.GONE
@@ -95,7 +96,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     private fun apiSheetCollection(){
         if (ConnectivityReceiver().isConnected()) {
-            //progressDialog!!.show()
+            progressDialog!!.show()
             appUser = LocalRepositories().getAppUser(applicationContext)!!
             appUser.submitSheet.put("id",Preferences(applicationContext).getInstance(this)?.getsheetId()!!)
             LocalRepositories().saveAppUser(applicationContext, appUser)
@@ -107,7 +108,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     private fun apiSheetDelete() {
         if (ConnectivityReceiver().isConnected()) {
-            //progressDialog!!.show()
+            progressDialog!!.show()
             ApiCallService.action(applicationContext,ACTION_SHEETDELETE)
         } else {
             Toast.makeText(this, "Please Check Your Internet", Toast.LENGTH_SHORT).show()
@@ -157,7 +158,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     @Subscribe
     fun timeout(msg: String?) {
-        //progressDialog!!.dismiss()
+        progressDialog!!.dismiss()
         Helper().alert(this, msg, "USL")
     }
 

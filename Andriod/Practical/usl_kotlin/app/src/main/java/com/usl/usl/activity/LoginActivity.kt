@@ -39,7 +39,7 @@ class LoginActivity : RegisterAbstractActivity(){
         ButterKnife.bind(this);
         settoolbar();
         LocalRepositories().saveAppUser(applicationContext, appUser)
-        myProgressDialog= MyProgressDialog(context = applicationContext)
+        myProgressDialog= MyProgressDialog(this)
         myProgressDialog.setCancelable(true)
         myProgressDialog.setCanceledOnTouchOutside(true)
 
@@ -66,7 +66,7 @@ class LoginActivity : RegisterAbstractActivity(){
                 Preferences(applicationContext).getInstance(applicationContext)!!.setPassword(etPassword.text.toString())
                 val isConnected: Boolean = ConnectivityReceiver().isConnected()
                 if (isConnected) {
-                    //myProgressDialog.show()
+                    myProgressDialog.show()
                     ApiCallService.action(this@LoginActivity,ACTION_LOGIN)
                 } else {
                     Helper().alert(this, "No Internet Connection", "USL")
@@ -79,7 +79,7 @@ class LoginActivity : RegisterAbstractActivity(){
 
     @Subscribe
     fun user(response: UserResponsee){
-        //myProgressDialog.dismiss()
+        myProgressDialog.dismiss()
         if(response.status==200){
             appUser.id = response.data?.user?.id.toString()
             appUser.name = response.data?.user?.name.toString()

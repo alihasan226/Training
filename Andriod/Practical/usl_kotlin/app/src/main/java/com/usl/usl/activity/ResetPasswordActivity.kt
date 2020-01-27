@@ -32,12 +32,17 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
     @BindView(R.id.etConfirmPassword)
     lateinit var etConfirmPassword:EditText
     var appUser=AppUser()
+    var progressDialog: MyProgressDialog? = null
+
     var cv = Cv()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ButterKnife.bind(this)
         settoolbar()
+        progressDialog = MyProgressDialog(this)
+        progressDialog!!.setCancelable(true)
+        progressDialog!!.setCanceledOnTouchOutside(true)
     }
 
     private fun settoolbar(){
@@ -62,7 +67,7 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
             Preferences(applicationContext).getInstance(applicationContext)!!.setPassword(etConfirmPassword.text.toString())
             val isConnected: Boolean = ConnectivityReceiver().isConnected()
             if (isConnected) {
-                //progressDialog.show()
+                progressDialog!!.show()
                 ApiCallService.action(this@ResetPasswordActivity,cv.ACTION_RESETPASSWORD)
             } else {
                 Helper().alert(this, "No Internet Connection", "USL")
@@ -73,6 +78,7 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     @Subscribe
     fun reserPassword(response:UserResponsee){
+        progressDialog!!.dismiss()
         if (response.status=== 200) {
             appUser.id = response.data?.user?.id.toString()
             appUser.name = response.data?.user?.name.toString()
@@ -121,6 +127,12 @@ class ResetPasswordActivity : RegisterAbstractActivity(), View.OnClickListener {
 
             }
         }
+    }
+
+    @Subscribe
+    fun timeout(msg: String?) {
+        progressDialog!!.dismiss()
+        Helper().alert(this, msg, "USL")
     }
 
 }

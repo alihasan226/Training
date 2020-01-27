@@ -74,3 +74,7 @@ class MyProgressDialog {
     }
 
 }
+
+/*
+android.view.WindowManager$BadTokenException: Unable to add window -- token null is not valid; is your activity running?
+ */

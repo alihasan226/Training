@@ -60,7 +60,7 @@ class AccountActivity :RegisterAbstractActivity(), View.OnClickListener {
 
     private fun apiAccount(){
         if (ConnectivityReceiver().isConnected()) {
-            //progressDialog!!.show()
+            progressDialog!!.show()
             appUser = LocalRepositories().getAppUser(applicationContext)!!
             appUser.type="my"
             LocalRepositories().saveAppUser(applicationContext,appUser)
@@ -111,7 +111,7 @@ class AccountActivity :RegisterAbstractActivity(), View.OnClickListener {
 
     @Subscribe
     fun timeout(msg: String?) {
-        //progressDialog!!.dismiss()
+        progressDialog!!.dismiss()
         Helper().alert(this, msg, "USL")
     }
 }
