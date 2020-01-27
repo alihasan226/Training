@@ -1100,6 +1100,95 @@ class SheetViewActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
 
+        for (i in 0..9) {
+            for (j in 0..9) {
+                if (j == 0) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow1 += MCount[i][j]
+                    }
+                } else if (j == 1) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow2 += MCount[i][j]
+                    }
+                } else if (j == 2) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow3 += MCount[i][j]
+                    }
+                } else if (j == 3) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow4 += MCount[i][j]
+                    }
+                } else if (j == 4) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow5 += MCount[i][j]
+                    }
+                } else if (j == 5) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow6 += MCount[i][j]
+                    }
+                } else if (j == 6) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow7 += MCount[i][j]
+                    }
+                } else if (j == 7) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow8 += MCount[i][j]
+                    }
+                } else if (j == 8) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow9 += MCount[i][j]
+                    }
+                } else if (j == 9) {
+                    if (MCount[i][j] > 0.0) {
+                        mRow10 += MCount[i][j]
+                    }
+                }
+            }
+            dSection += DCount[i]
+            hSection += HCount[i]
+        }
+
+        if (mRow1 > 0.0f) {
+            tvRow1.text = String.format("%.1f", mRow1.toString().toDouble())
+        }
+        if (mRow2 > 0.0f) {
+            tvRow2.text = String.format("%.1f", mRow2.toString().toDouble())
+        }
+        if (mRow3 > 0.0f) {
+            tvRow3.text = String.format("%.1f", mRow3.toString().toDouble())
+        }
+        if (mRow4 > 0.0f) {
+            tvRow4.text = String.format("%.1f", mRow4.toString().toDouble())
+        }
+        if (mRow5 > 0.0f) {
+            tvRow5.text = String.format("%.1f", mRow5.toString().toDouble())
+        }
+        if (mRow6 > 0.0f) {
+            tvRow6.text = String.format("%.1f", mRow6.toString().toDouble())
+        }
+        if (mRow7 > 0.0f) {
+            tvRow7.text = String.format("%.1f", mRow7.toString().toDouble())
+        }
+        if (mRow8 > 0.0f) {
+            tvRow8.text = String.format("%.1f", mRow8.toString().toDouble())
+        }
+        if (mRow9 > 0.0f) {
+            tvRow9.text = String.format("%.1f", mRow9.toString().toDouble())
+        }
+        if (mRow10 > 0.0f) {
+            tvRow10.text = String.format("%.1f", mRow10.toString().toDouble())
+        }
+
+        tvRow11.text = String.format("%.1f", dSection.toString().toDouble())
+        tvRow12.text = String.format("%.1f", hSection.toString().toDouble())
+
+        tvMTotal.text = String.format("%.1f", (mRow1 + mRow2 + mRow3 + mRow4 + mRow5 + mRow6 + mRow7 + mRow8 + mRow9 + mRow10).toString().toDouble()
+        )
+        tvDHTotal.text = String.format("%.1f",(tvRow11.text.toString().toFloat() + tvRow12.text.toString().toFloat()).toString().toDouble()
+        )
+        tvGrandTotal.text = String.format("%.1f", (tvMTotal.text.toString().toFloat() + tvDHTotal.text.toString().toFloat()).toString().toDouble()
+        )
+
     }
 
 
