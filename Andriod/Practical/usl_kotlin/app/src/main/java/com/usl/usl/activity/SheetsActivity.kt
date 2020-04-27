@@ -22,7 +22,6 @@ import org.greenrobot.eventbus.Subscribe
 
 class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
 
-
     @BindView(R.id.toolbar)
     lateinit var toolbar: View
     @BindView(R.id.tvNoSheet)
@@ -42,8 +41,6 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
     val ACTION_SHEETCOLLECTION:String="sheet_collection"
     val ACTION_SHEETDELETE:String="sheet_delete"
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ButterKnife.bind(this)
@@ -56,9 +53,7 @@ class SheetsActivity : RegisterAbstractActivity(), View.OnClickListener {
         rvSheetData!!.layoutManager = linearLayoutManager
 
         apigetSheets()
-
     }
-
 
     private fun apigetSheets() {
         if (ConnectivityReceiver().isConnected()) {

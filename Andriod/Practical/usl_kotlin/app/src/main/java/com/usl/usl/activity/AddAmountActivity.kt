@@ -24,14 +24,14 @@ import java.util.*
 class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
 
     @BindView(R.id.toolbar)
-    lateinit var toolbar:View
-    lateinit var tvHeading:TextView
-    lateinit var ivBack:ImageView
+    lateinit var toolbar : View
+    lateinit var tvHeading : TextView
+    lateinit var ivBack : ImageView
     @BindView(R.id.viewpagerAddItem)
-    lateinit var viewPagerItem:ViewPager
+    lateinit var viewPagerItem : ViewPager
     @BindView(R.id.tablayout)
-    lateinit var tabLayout:TabLayout
-    lateinit var btnSubmit:Button
+    lateinit var tabLayout : TabLayout
+    lateinit var btnSubmit : Button
     var appUser = AppUser()
     private var cv = Cv()
 
@@ -43,17 +43,17 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
     var d1Section = HashMap<Int?, String?>()
     var h1Section = HashMap<Int?, String?>()
     var apihashMap = HashMap<String, Float>()
-    var x:Int = 1
-    var y:Int = 1
-    var M_COUNT=Array(10){FloatArray(10)}
-    var D_COUNT=FloatArray(10)
-    var H_COUNT=FloatArray(10)
-    var M_TOTAL:Float=0.0f
-    var D_TOTAL:Float=0.0f
-    var H_TOTAL:Float=0.0f
-    var GRAND_TOTAL:Float=0.0f
-    var bundle: Bundle? = null
-    var progressDialog: MyProgressDialog? = null
+    var x : Int = 1
+    var y : Int = 1
+    var M_COUNT = Array(10){FloatArray(10)}
+    var D_COUNT = FloatArray(10)
+    var H_COUNT = FloatArray(10)
+    var M_TOTAL : Float=0.0f
+    var D_TOTAL : Float=0.0f
+    var H_TOTAL : Float=0.0f
+    var GRAND_TOTAL : Float=0.0f
+    var bundle : Bundle? = null
+    var progressDialog : MyProgressDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -196,7 +196,7 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
             }
         }
 
-        GRAND_TOTAL=M_TOTAL+D_TOTAL+H_TOTAL
+        GRAND_TOTAL = M_TOTAL + D_TOTAL + H_TOTAL
 
         if (bundle != null && bundle!!.getString("GETSHEET")=="sheet_get") {
             apiUpdateSheet()
@@ -280,5 +280,4 @@ class AddAmountActivity : RegisterAbstractActivity(), View.OnClickListener {
         progressDialog!!.dismiss()
         Helper().alert(this, msg, "USL")
     }
-
 }

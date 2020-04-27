@@ -1,3 +1,8 @@
+Ali Hasan
+
+
+
+
 10:13 24-01-2020  Safe calls (?) Null checks (!!)  :--------------------------------------------------
 
 Kotlin's type system is aimed at eliminating the danger of null referenes from code.

@@ -162,8 +162,7 @@ class Preferences {
 
     fun storeSheet(jsonMap: HashMap<Any, Any>?, Key: String?) {
         val jsonString = Gson().toJson(jsonMap)
-        val sharedPreferences =
-            _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
+        val sharedPreferences = _context!!.getSharedPreferences(Key, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(Key, jsonString)
         editor.apply()

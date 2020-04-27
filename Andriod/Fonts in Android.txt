@@ -87,7 +87,7 @@ you can specify the tooltip text in a View by calling setTooltipText() method. y
 
 <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
-        android:tooltipText="Send an email" />
+       s
 
 
 2) To specify the tooltip text in code use setTooltipText(CharSequence) method

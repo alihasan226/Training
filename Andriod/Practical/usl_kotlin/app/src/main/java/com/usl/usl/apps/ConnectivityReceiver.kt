@@ -10,8 +10,6 @@ class ConnectivityReceiver: BroadcastReceiver() {
 
     val connectivityReceiverListener: ConnectivityReceiverListener? = null
 
-
-
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
